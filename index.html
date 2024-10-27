@@ -112,7 +112,9 @@
             position: relative;
             overflow: hidden;
         }
-        .service-item button:hover {
+
+        /* Animación en hover y efecto en dispositivos móviles */
+        .service-item button:hover, .service-item button:active {
             color: #ffd700;
             transform: scale(1.2);
         }
@@ -130,7 +132,7 @@
             transition: left 0.5s;
         }
 
-        .service-item button:hover::after {
+        .service-item button:hover::after, .service-item button:active::after {
             left: 100%;
         }
 
@@ -171,6 +173,13 @@
             color: #fff;
             text-align: center;
             padding: 15px;
+        }
+
+        /* Ajuste para dispositivos móviles */
+        @media (hover: none) and (pointer: coarse) {
+            .service-item button:active {
+                transform: scale(1.2); /* Efecto al tocar en móviles */
+            }
         }
     </style>
     <script>
