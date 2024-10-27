@@ -108,10 +108,31 @@
             cursor: pointer;
             font-size: 1.5em;
             margin-top: 10px;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         .service-item button:hover {
             color: #ffd700;
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+        }
+
+        /* Efecto de brillo */
+        .service-item button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: skewX(-45deg);
+            transition: left 0.5s;
+        }
+
+        .service-item button:hover::after {
+            left: 100%;
         }
 
         /* Sección de contacto */
@@ -179,14 +200,12 @@
 <body>
 
     <!-- Encabezado y menú de navegación -->
-  <header>
-    <h1>D&H Soluciones SAS</h1>
-   <p>Soluciones Integrales en Ingeniería y Tecnología</p>
-    <p>NIT 901807265-8</p>
-    
-</header>
-
-
+    <header>
+        <h1>D&H Soluciones SAS</h1>
+        <p>Soluciones Integrales en Ingeniería y Tecnología</p>
+        <p>NIT 901807265-8</p>
+       
+    </header>
     <nav>
         <a onclick="toggleAboutSection()">Nosotros</a>
         <a href="#services">Servicios</a>
@@ -213,37 +232,37 @@
         <div class="service-container">
             <div class="service-item">
                 <h3>Cuartos Fríos</h3>
-                <button onclick="toggleText('cuartosFrios')"><i class="fas fa-thermometer-half"></i></button>
+                <button onclick="toggleText('cuartosFrios')"><i class="fas fa-thermometer-half"></i> Ver Más</button>
                 <p id="cuartosFrios">Instalación y mantenimiento de cuartos fríos para aplicaciones industriales. Nos especializamos en asegurar eficiencia y durabilidad en cada proyecto.</p>
             </div>
             <div class="service-item">
                 <h3>Plantas Eléctricas</h3>
-                <button onclick="toggleText('plantasElectricas')"><i class="fas fa-bolt"></i></button>
+                <button onclick="toggleText('plantasElectricas')"><i class="fas fa-bolt"></i> Ver Más</button>
                 <p id="plantasElectricas">Soluciones de soporte técnico y mantenimiento para plantas de energía. Aseguramos la continuidad y seguridad de la operación de tus instalaciones.</p>
             </div>
             <div class="service-item">
                 <h3>Motobombas</h3>
-                <button onclick="toggleText('motobombas')"><i class="fas fa-water"></i></button>
+                <button onclick="toggleText('motobombas')"><i class="fas fa-water"></i> Ver Más</button>
                 <p id="motobombas">Mantenimiento y reparación de motobombas para uso industrial y comercial, garantizando un óptimo rendimiento y durabilidad.</p>
             </div>
             <div class="service-item">
                 <h3>Cableado Estructurado</h3>
-                <button onclick="toggleText('cableado')"><i class="fas fa-network-wired"></i></button>
+                <button onclick="toggleText('cableado')"><i class="fas fa-network-wired"></i> Ver Más</button>
                 <p id="cableado">Instalación de sistemas de cableado estructurado y conectividad, optimizados para soportar las demandas tecnológicas actuales y futuras.</p>
             </div>
             <div class="service-item">
                 <h3>Aires Acondicionados</h3>
-                <button onclick="toggleText('aires')"><i class="fas fa-snowflake"></i></button>
+                <button onclick="toggleText('aires')"><i class="fas fa-snowflake"></i> Ver Más</button>
                 <p id="aires">Soporte y mantenimiento para sistemas de aire acondicionado en diversas aplicaciones, asegurando un rendimiento óptimo.</p>
             </div>
             <div class="service-item">
                 <h3>Congeladores</h3>
-                <button onclick="toggleText('congeladores')"><i class="fas fa-icicles"></i></button>
+                <button onclick="toggleText('congeladores')"><i class="fas fa-icicles"></i> Ver Más</button>
                 <p id="congeladores">Reparación y soporte para congeladores industriales. Garantizamos eficiencia y cumplimiento de normas de conservación.</p>
             </div>
             <div class="service-item">
                 <h3>CCTV</h3>
-                <button onclick="toggleText('cctv')"><i class="fas fa-video"></i></button>
+                <button onclick="toggleText('cctv')"><i class="fas fa-video"></i> Ver Más</button>
                 <p id="cctv">Instalación y soporte de sistemas de vigilancia CCTV para la seguridad de tus instalaciones.</p>
             </div>
         </div>
@@ -276,5 +295,6 @@
 
 </body>
 </html>
+
 
 
