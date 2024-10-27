@@ -88,13 +88,14 @@
             border-radius: 8px;
             text-align: center;
             position: relative;
-            opacity: 0; /* Oculto inicialmente */
-            transform: translateY(20px); /* Animación desde abajo */
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: transform 0.3s ease-in-out;
+            /* Inicia en una posición desplazada */
+            transform: translateY(40px);
+            opacity: 0;
         }
-        .service-item.visible {
+        .service-item.show {
             opacity: 1;
-            transform: translateY(0); /* Vuelve a su posición original */
+            transform: translateY(0);
         }
         .service-item h3 {
             color: #002f4b;
@@ -194,22 +195,25 @@
             text.style.display = (text.style.display === "none" || text.style.display === "") ? "block" : "none";
         }
 
-        // Intersection Observer para animar los botones cuando aparecen en pantalla
+        // Detecta desplazamiento y agrega animación a los botones
         document.addEventListener("DOMContentLoaded", () => {
             const serviceItems = document.querySelectorAll(".service-item");
 
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target); // Deja de observar el elemento después de animarlo
+            function animateOnScroll() {
+                serviceItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    // Si el elemento está en la pantalla, muestra la animación
+                    if (itemTop < windowHeight - 100) {
+                        item.classList.add("show");
                     }
                 });
-            }, { threshold: 0.1 });
+            }
 
-            serviceItems.forEach(item => {
-                observer.observe(item);
-            });
+            // Ejecutar al cargar y cada vez que se hace scroll
+            animateOnScroll();
+            window.addEventListener("scroll", animateOnScroll);
         });
     </script>
 </head>
