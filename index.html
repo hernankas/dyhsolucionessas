@@ -88,10 +88,13 @@
             border-radius: 8px;
             text-align: center;
             position: relative;
-            transition: transform 0.3s;
+            opacity: 0; /* Oculto inicialmente */
+            transform: translateY(20px); /* Animación desde abajo */
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        .service-item:hover {
-            transform: scale(1.05);
+        .service-item.visible {
+            opacity: 1;
+            transform: translateY(0); /* Vuelve a su posición original */
         }
         .service-item h3 {
             color: #002f4b;
@@ -113,12 +116,6 @@
             overflow: hidden;
         }
 
-        /* Animación en hover y efecto en dispositivos móviles */
-        .service-item button:hover, .service-item button:active {
-            color: #ffd700;
-            transform: scale(1.2);
-        }
-
         /* Efecto de brillo */
         .service-item button::after {
             content: '';
@@ -132,7 +129,7 @@
             transition: left 0.5s;
         }
 
-        .service-item button:hover::after, .service-item button:active::after {
+        .service-item button:hover::after {
             left: 100%;
         }
 
@@ -174,13 +171,6 @@
             text-align: center;
             padding: 15px;
         }
-
-        /* Ajuste para dispositivos móviles */
-        @media (hover: none) and (pointer: coarse) {
-            .service-item button:active {
-                transform: scale(1.2); /* Efecto al tocar en móviles */
-            }
-        }
     </style>
     <script>
         // Función para mostrar/ocultar la sección "Nosotros"
@@ -203,6 +193,24 @@
             // Alternar visibilidad del texto seleccionado
             text.style.display = (text.style.display === "none" || text.style.display === "") ? "block" : "none";
         }
+
+        // Intersection Observer para animar los botones cuando aparecen en pantalla
+        document.addEventListener("DOMContentLoaded", () => {
+            const serviceItems = document.querySelectorAll(".service-item");
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target); // Deja de observar el elemento después de animarlo
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            serviceItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
     </script>
 </head>
 <body>
@@ -302,7 +310,6 @@
 
 </body>
 </html>
-
 
 
 
