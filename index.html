@@ -127,7 +127,7 @@
             font-size: 1em;
             color: #004d99;
             animation: slide 0.8s infinite alternate;
-            margin-right: 8px;
+            margin-left: 8px;
         }
 
         @keyframes slide {
@@ -135,7 +135,7 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(-5px);
+                transform: translateX(5px);
             }
         }
     </style>
@@ -184,8 +184,8 @@
             serviceItems.forEach(item => {
                 const arrow = document.createElement("span");
                 arrow.className = "animated-arrow";
-                arrow.innerHTML = "⬅️";
-                item.querySelector("button").prepend(arrow);
+                arrow.innerHTML = "➡️";
+                item.querySelector("button").appendChild(arrow);
             });
         });
     </script>
@@ -261,4 +261,17 @@
             <label for="name">Nombre:</label>
             <input type="text" id="name" name="name" required>
             <label for="email">Correo Electrónico:</label>
-           
+            <input type="email" id="email" name="email" required>
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 D&H Soluciones SAS - Todos los derechos reservados</p>
+    </footer>
+
+</body>
+</html>
