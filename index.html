@@ -127,7 +127,7 @@
             font-size: 1em;
             color: #004d99;
             animation: slide 0.8s infinite alternate;
-            margin-right: 8px; /* Ajuste para que la flecha esté a la izquierda del ícono */
+            margin-right: 8px;
         }
 
         @keyframes slide {
@@ -180,12 +180,12 @@
             animateOnScroll();
             window.addEventListener("scroll", animateOnScroll);
 
-            // Inserta una flecha animada a la izquierda de cada ícono en el botón de servicio
+            // Inserta una flecha animada junto a cada botón de servicio
             serviceItems.forEach(item => {
                 const arrow = document.createElement("span");
                 arrow.className = "animated-arrow";
-                arrow.innerHTML = "➡️"; // Flecha apuntando a la derecha
-                item.querySelector("button").prepend(arrow); // Agrega la flecha antes del ícono
+                arrow.innerHTML = "➡️";
+                item.querySelector("button").prepend(arrow);
             });
         });
     </script>
@@ -216,14 +216,14 @@
     <section id="services" class="services">
         <h2>Nuestros Servicios</h2>
         <div class="service-container">
-           <div class="service-item">
-    <h3>Cuartos Fríos</h3>
-    <button onclick="toggleText('cuartosFrios')"><i class="fas fa-thermometer-half"></i></button>
-    <p id="cuartosFrios">
-        <img src="11.jpg" alt="Rack de almacenamiento en cuarto frío" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-        Instalación y mantenimiento de cuartos fríos para aplicaciones industriales. Nos especializamos en asegurar eficiencia y durabilidad en cada proyecto.
-    </p>
-</div>
+            <div class="service-item">
+                <h3>Cuartos Fríos</h3>
+                <button onclick="toggleText('cuartosFrios')"><i class="fas fa-thermometer-half"></i></button>
+                <p id="cuartosFrios">
+                    <img src="11.jpg" alt="Rack de almacenamiento en cuarto frío" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+                    Instalación y mantenimiento de cuartos fríos para aplicaciones industriales. Nos especializamos en asegurar eficiencia y durabilidad en cada proyecto.
+                </p>
+            </div>
             <div class="service-item">
                 <h3>Plantas Eléctricas</h3>
                 <button onclick="toggleText('plantasElectricas')"><i class="fas fa-bolt"></i></button>
