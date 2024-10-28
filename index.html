@@ -127,7 +127,7 @@
             font-size: 1em;
             color: #004d99;
             animation: slide 0.8s infinite alternate;
-            margin-left: 8px;
+            margin-right: 8px; /* Ajuste para que la flecha esté a la izquierda del ícono */
         }
 
         @keyframes slide {
@@ -135,7 +135,7 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(5px);
+                transform: translateX(-5px);
             }
         }
     </style>
@@ -180,12 +180,12 @@
             animateOnScroll();
             window.addEventListener("scroll", animateOnScroll);
 
-            // Inserta una flecha animada junto a cada botón de servicio
+            // Inserta una flecha animada a la izquierda de cada ícono en el botón de servicio
             serviceItems.forEach(item => {
                 const arrow = document.createElement("span");
                 arrow.className = "animated-arrow";
-                arrow.innerHTML = "➡️";
-                item.querySelector("button").appendChild(arrow);
+                arrow.innerHTML = "➡️"; // Flecha apuntando a la derecha
+                item.querySelector("button").prepend(arrow); // Agrega la flecha antes del ícono
             });
         });
     </script>
