@@ -90,9 +90,11 @@
             text-align: center;
             position: relative;
             transition: transform 0.3s ease-in-out;
-            /* Inicia en una posición desplazada */
             transform: translateY(40px);
             opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .service-item.show {
             opacity: 1;
@@ -116,82 +118,24 @@
             transition: color 0.3s, transform 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
         }
 
-        /* Efecto de brillo */
-        .service-item button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: skewX(-45deg);
-            transition: left 0.5s;
-        }
-
-        .service-item button:hover::after {
-            left: 100%;
-        }
-
-        /* Sección de contacto */
-        .contact {
-            background-color: #004d99;
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        .contact form {
-            max-width: 500px;
-            margin: auto;
-        }
-        .contact label, .contact input, .contact textarea {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        .contact input, .contact textarea {
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-        }
-        .contact button {
-            background-color: #ffd700;
-            color: #004d99;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* Pie de página */
-        footer {
-            background-color: #002f4b;
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-        }
-
-        /* Flecha animada */
+        /* Estilo para la flecha animada lateral */
         .animated-arrow {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2em;
+            font-size: 1.5em;
             color: #004d99;
-            animation: bounce 1s infinite alternate;
-            cursor: pointer;
+            animation: slide 0.8s infinite alternate;
+            margin-left: 8px;
         }
 
-        @keyframes bounce {
+        @keyframes slide {
             0% {
-                transform: translateX(-50%) translateY(0);
+                transform: translateX(0);
             }
             100% {
-                transform: translateX(-50%) translateY(-10px);
+                transform: translateX(5px);
             }
         }
     </style>
@@ -217,7 +161,6 @@
             text.style.display = (text.style.display === "none" || text.style.display === "") ? "block" : "none";
         }
 
-        // Detecta desplazamiento y agrega animación a los botones
         document.addEventListener("DOMContentLoaded", () => {
             const serviceItems = document.querySelectorAll(".service-item");
 
@@ -237,15 +180,13 @@
             animateOnScroll();
             window.addEventListener("scroll", animateOnScroll);
 
-            // Inserta la flecha animada en la sección de servicios
-            const servicesSection = document.querySelector("#services");
-            const arrow = document.createElement("div");
-            arrow.className = "animated-arrow";
-            arrow.innerHTML = "⬇️";
-            arrow.title = "Haz clic en un servicio para desplegar más información";
-
-            // Añade la flecha al inicio de la sección de servicios
-            servicesSection.insertBefore(arrow, servicesSection.firstChild);
+            // Inserta una flecha animada junto a cada botón de servicio
+            serviceItems.forEach(item => {
+                const arrow = document.createElement("span");
+                arrow.className = "animated-arrow";
+                arrow.innerHTML = "➡️";
+                item.querySelector("button").appendChild(arrow);
+            });
         });
     </script>
 </head>
