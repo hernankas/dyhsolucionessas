@@ -4,18 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
+    <style>
+        /* Fondo azul y centrado de elementos */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #007bff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Contenedor del formulario */
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Estilo para el título y los campos */
+        .login-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Botón de enviar */
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Enlace al reporte técnico */
+        .login-container a {
+            display: block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Iniciar Sesión</h2>
-    <form action="login.php" method="POST">
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" required><br>
-        
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required><br>
-        
-        <input type="submit" value="Iniciar Sesión">
-    </form>
-    <a href="reporte_tecnico.html">Ir a Reporte Técnico</a> <!-- Enlace a reporte técnico -->
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form action="login.php" method="POST">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <input type="submit" value="Iniciar Sesión">
+        </form>
+        <a href="reporte_tecnico.html">Ir a Reporte Técnico</a>
+    </div>
 </body>
 </html>
