@@ -39,16 +39,16 @@
             width: 100%;
             margin-top: 10px;
         }
+        #campoOtros {
+            display: none; /* Campo escondido por defecto */
+        }
     </style>
     <script>
+        // Función que muestra o esconde el campo "Especifique el Equipo"
         function mostrarCampoOtros() {
             const tipoEquipo = document.getElementById('equipo').value;
             const campoOtros = document.getElementById('campoOtros');
-            if (tipoEquipo === 'otros') {
-                campoOtros.style.display = 'block';
-            } else {
-                campoOtros.style.display = 'none';
-            }
+            campoOtros.style.display = (tipoEquipo === 'otros') ? 'block' : 'none';
         }
     </script>
 </head>
@@ -78,7 +78,7 @@
             <option value="otros">Otros</option>
         </select>
 
-        <div id="campoOtros" style="display: none;">
+        <div id="campoOtros">
             <label for="equipo_otro">Especifique el Equipo:</label>
             <input type="text" id="equipo_otro" name="equipo_otro">
         </div>
