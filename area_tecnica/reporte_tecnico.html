@@ -22,7 +22,7 @@
             width: 100%;
             max-width: 500px;
         }
-        input, textarea {
+        input, select, textarea {
             width: 100%;
             margin-top: 10px;
             padding: 10px;
@@ -40,15 +40,48 @@
             margin-top: 10px;
         }
     </style>
+    <script>
+        function mostrarCampoOtros() {
+            const tipoEquipo = document.getElementById('equipo').value;
+            const campoOtros = document.getElementById('campoOtros');
+            if (tipoEquipo === 'otros') {
+                campoOtros.style.display = 'block';
+            } else {
+                campoOtros.style.display = 'none';
+            }
+        }
+    </script>
 </head>
 <body>
     <form action="generar_pdf.php" method="post">
         <h2>Reporte Técnico</h2>
+        
         <label for="cliente">Nombre del Cliente:</label>
         <input type="text" id="cliente" name="cliente" required>
+        
+        <label for="tecnico">Nombre del Técnico:</label>
+        <input type="text" id="tecnico" name="tecnico" required>
+
+        <label for="fecha">Fecha de Revisión:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <label for="ubicacion">Ubicación del Equipo:</label>
+        <input type="text" id="ubicacion" name="ubicacion" required>
 
         <label for="equipo">Tipo de Equipo:</label>
-        <input type="text" id="equipo" name="equipo" required>
+        <select id="equipo" name="equipo" onchange="mostrarCampoOtros()" required>
+            <option value="">Seleccione una opción</option>
+            <option value="cuartos_frios">Cuartos Fríos</option>
+            <option value="planta_electrica">Planta Eléctrica</option>
+            <option value="electrobomba">Electrobomba</option>
+            <option value="rack">Rack</option>
+            <option value="otros">Otros</option>
+        </select>
+
+        <div id="campoOtros" style="display: none;">
+            <label for="equipo_otro">Especifique el Equipo:</label>
+            <input type="text" id="equipo_otro" name="equipo_otro">
+        </div>
 
         <label for="descripcion">Descripción del Problema:</label>
         <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
@@ -56,10 +89,21 @@
         <label for="solucion">Solución Realizada:</label>
         <textarea id="solucion" name="solucion" rows="4" required></textarea>
 
+        <label for="estado">Estado General del Equipo:</label>
+        <select id="estado" name="estado" required>
+            <option value="">Seleccione el estado</option>
+            <option value="operativo">Operativo</option>
+            <option value="en_reparacion">En reparación</option>
+            <option value="fuera_de_servicio">Fuera de servicio</option>
+        </select>
+
+        <label for="observaciones">Observaciones Adicionales:</label>
+        <textarea id="observaciones" name="observaciones" rows="4"></textarea>
+
         <label for="firma">Firma del Técnico:</label>
         <input type="text" id="firma" name="firma" required>
 
         <button type="submit">Generar PDF</button>
     </form>
 </body>
-</html>
+    </html>
