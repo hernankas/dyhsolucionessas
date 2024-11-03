@@ -8,18 +8,18 @@ $pdf->SetAuthor('Nombre del Técnico');
 $pdf->SetTitle('Reporte Técnico');
 
 // Configurar márgenes extremadamente pequeños
-$pdf->SetMargins(5, 5, 5); // Márgenes muy pequeños para aprovechar el espacio
+$pdf->SetMargins(5, 5, 5); // Márgenes mínimos
 $pdf->SetHeaderMargin(5);  // Margen pequeño para el encabezado
 $pdf->SetFooterMargin(5);  // Margen pequeño para el pie de página
 
-// Salto de página automático con un margen inferior más pequeño
+// Salto de página automático
 $pdf->SetAutoPageBreak(TRUE, 5);
 
 // Agregar una página
 $pdf->AddPage();
 
-// Configurar fuente más pequeña
-$pdf->SetFont('helvetica', '', 8); // Tamaño de letra más pequeño
+// Configurar fuente
+$pdf->SetFont('helvetica', '', 9); // Tamaño de fuente reducido
 
 // Contenido del encabezado de la empresa
 $empresa = "
@@ -45,7 +45,7 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Contenido del reporte técnico ajustado para que se vea completo en una página
+// Contenido del reporte técnico ajustado para que se vea completo
 $html = "
 <style>
     h2 {
@@ -58,7 +58,7 @@ $html = "
         padding: 5px; /* Reducir padding para ahorrar espacio */
     }
     p {
-        font-size: 8px; /* Fuente más pequeña para que quepa más texto */
+        font-size: 9px; /* Fuente más pequeña para que quepa más texto */
         line-height: 1.2; /* Espaciado entre líneas ajustado */
         margin-bottom: 5px; /* Menor espacio entre párrafos */
     }
