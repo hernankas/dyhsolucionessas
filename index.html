@@ -294,6 +294,30 @@
             var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
         })();
     </script>
+<section id="reporte-tecnico" style="display:none; background-color: #f8f9fa; padding: 40px; border-radius: 10px; max-width: 800px; margin: 20px auto;">
+    <h2 style="text-align: center; color: #004d99; margin-bottom: 20px;">Generar Reporte Técnico</h2>
+    <form id="reporteForm" style="display: flex; flex-direction: column; gap: 15px;">
+        <div>
+            <label for="nombre" style="font-weight: bold; color: #333;">Nombre del Técnico:</label>
+            <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        </div>
+        <div>
+            <label for="cliente" style="font-weight: bold; color: #333;">Nombre del Cliente:</label>
+            <input type="text" id="cliente" name="cliente" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        </div>
+        <div>
+            <label for="descripcion" style="font-weight: bold; color: #333;">Descripción del Problema:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+        </div>
+        <div>
+            <label for="solucion" style="font-weight: bold; color: #333;">Solución Aplicada:</label>
+            <textarea id="solucion" name="solucion" rows="4" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+        </div>
+        <div style="text-align: center;">
+            <button type="button" onclick="generarPDF()" style="background-color: #004d99; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Generar PDF</button>
+        </div>
+    </form>
+</section>
 
 </body>
 </html>
