@@ -58,6 +58,9 @@
     <div class="container">
         <h2>Generar Reporte Técnico</h2>
         <form id="reporteForm">
+            <label for="consecutivo">Consecutivo de Reporte:</label>
+            <input type="text" id="consecutivo" name="consecutivo" readonly>
+            
             <label for="nombre">Nombre del Técnico:</label>
             <input type="text" id="nombre" name="nombre" required>
             
@@ -80,6 +83,18 @@
         </form>
     </div>
     <script>
+        // Función para obtener el consecutivo
+        function obtenerConsecutivo() {
+            let consecutivo = localStorage.getItem('consecutivo');
+            if (!consecutivo) {
+                consecutivo = 1; // Comenzar en 1 si no existe
+            } else {
+                consecutivo = parseInt(consecutivo) + 1; // Aumentar el consecutivo
+            }
+            localStorage.setItem('consecutivo', consecutivo); // Guardar el nuevo consecutivo
+            return consecutivo;
+        }
+
         function generarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -90,6 +105,10 @@
             const fechaReporte = document.getElementById("fecha").value;
             const observaciones = document.getElementById("observaciones").value;
 
+            // Obtener y mostrar el consecutivo
+            const consecutivo = obtenerConsecutivo();
+            document.getElementById("consecutivo").value = consecutivo; // Mostrar el consecutivo en el formulario
+
             // Encabezado del PDF
             doc.setFontSize(16);
             doc.text("D&H Soluciones SAS", 10, 10);
@@ -99,35 +118,38 @@
 
             // Sección de datos
             doc.setFontSize(12);
-            doc.text("Nombre del Técnico:", 10, 35);
-            doc.text(nombre, 60, 35);
-            doc.text("Nombre del Cliente:", 10, 45);
-            doc.text(cliente, 60, 45);
-            doc.text("Fecha del Reporte:", 10, 55);
-            doc.text(fechaReporte, 60, 55);
+            doc.text("Consecutivo de Reporte:", 10, 35);
+            doc.text(consecutivo.toString(), 80, 35);
+            doc.text("Nombre del Técnico:", 10, 45);
+            doc.text(nombre, 60, 45);
+            doc.text("Nombre del Cliente:", 10, 55);
+            doc.text(cliente, 60, 55);
+            doc.text("Fecha del Reporte:", 10, 65);
+            doc.text(fechaReporte, 60, 65);
 
             // Sección de Descripción del Problema
             doc.setFontSize(12);
-            doc.text("Descripción del Problema:", 10, 65);
+            doc.text("Descripción del Problema:", 10, 75);
             doc.setFont("helvetica", "normal");
-            doc.text(descripcion, 10, 75, { maxWidth: 190 });
+            doc.text(descripcion, 10, 85, { maxWidth: 190 });
 
             // Sección de Solución Aplicada
             doc.setFontSize(12);
-            doc.text("Solución Aplicada:", 10, 95);
+            doc.text("Solución Aplicada:", 10, 105);
             doc.setFont("helvetica", "normal");
-            doc.text(solucion, 10, 105, { maxWidth: 190 });
+            doc.text(solucion, 10, 115, { maxWidth: 190 });
 
             // Sección de Observaciones
             doc.setFontSize(12);
-            doc.text("Observaciones Adicionales:", 10, 125);
+            doc.text("Observaciones Adicionales:", 10, 135);
             doc.setFont("helvetica", "normal");
-            doc.text(observaciones, 10, 135, { maxWidth: 190 });
+            doc.text(observaciones, 10, 145, { maxWidth: 190 });
 
             // Tabla para presentar la información
             doc.autoTable({
                 head: [['Item', 'Detalles']],
                 body: [
+                    ['Consecutivo', consecutivo],
                     ['Técnico', nombre],
                     ['Cliente', cliente],
                     ['Fecha', fechaReporte],
@@ -135,7 +157,7 @@
                     ['Solución', solucion],
                     ['Observaciones', observaciones]
                 ],
-                startY: 150,
+                startY: 160,
                 theme: 'grid',
                 styles: { cellPadding: 2, fontSize: 10 },
                 headStyles: { fillColor: [0, 77, 153] },
@@ -150,6 +172,11 @@
             // Guardar el PDF
             doc.save("reporte_tecnico.pdf");
         }
+
+        // Inicializar el consecutivo en la carga de la página
+        window.onload = function() {
+            document.getElementById("consecutivo").value = obtenerConsecutivo();
+        };
     </script>
 </body>
 </html>
