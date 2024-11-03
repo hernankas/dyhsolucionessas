@@ -37,6 +37,10 @@ $html = "
         font-size: 20px;
         margin-bottom: 20px;
     }
+    .container {
+        border: 1px solid #000;
+        padding: 10px;
+    }
     p {
         font-size: 12px;
         line-height: 1.5;
@@ -47,18 +51,21 @@ $html = "
     }
 </style>
 
-<h2>Reporte Técnico</h2>
+<div class='container'>
+    <h2>Reporte Técnico</h2>
 
-<p><strong>Nombre del Cliente:</strong> $cliente</p>
-<p><strong>Nombre del Técnico:</strong> $tecnico</p>
-<p><strong>Fecha de Revisión:</strong> $fecha</p>
-<p><strong>Ubicación del Equipo:</strong> $ubicacion</p>
-<p><strong>Tipo de Equipo:</strong> $equipo" . ($equipo === 'otros' ? " - $equipo_otro" : "") . "</p>
-<p><strong>Descripción del Problema:</strong><br/> $descripcion</p>
-<p><strong>Solución Realizada:</strong><br/> $solucion</p>
-<p><strong>Estado General del Equipo:</strong> $estado</p>
-<p><strong>Observaciones Adicionales:</strong><br/> $observaciones</p>
-<p><strong>Firma del Técnico:</strong> $firma</p>
+    <p><strong>Nombre del Cliente:</strong> $cliente</p>
+    <p><strong>Nombre del Técnico:</strong> $tecnico</p>
+    <p><strong>Fecha de Revisión:</strong> $fecha</p>
+    <p><strong>Ubicación del Equipo:</strong> $ubicacion</p>
+    <p><strong>Tipo de Equipo:</strong> $equipo" . ($equipo === 'otros' ? " - $equipo_otro" : "") . "</p>
+
+    <p><strong>Descripción del Problema:</strong><br/> $descripcion</p>
+    <p><strong>Solución Realizada:</strong><br/> $solucion</p>
+    <p><strong>Estado General del Equipo:</strong> $estado</p>
+    <p><strong>Observaciones Adicionales:</strong><br/> $observaciones</p>
+    <p><strong>Firma del Técnico:</strong> $firma</p>
+</div>
 ";
 
 // Escribir contenido HTML en el PDF
