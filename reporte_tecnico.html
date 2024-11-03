@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Reporte Técnico - D&H Soluciones SAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Técnico</title>
     <style>
+        /* Estilos del formulario */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
@@ -23,26 +24,30 @@
             max-width: 1000px;
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: 30% 1fr; /* Ajuste para reducir la distancia */
+            gap: 10px;  /* Mantener un espacio pequeño entre los campos */
         }
         h2 {
             grid-column: span 2;
             text-align: center;
             color: #004d99;
-            margin-bottom: 20px;
+            margin-bottom: 0;  /* Sin margen para pegar el cuadro */
             font-size: 24px;
         }
         label {
             font-weight: bold;
+            margin-bottom: 5px; 
+            display: flex;
+            align-items: center;
         }
         input, textarea, select {
             width: 100%;
-            padding: 10px;
+            padding: 5px;  
             border-radius: 5px;
             border: 1px solid #ccc;
             font-size: 14px;
             background-color: #f0f0f0;
+            margin-bottom: 5px; 
         }
         textarea {
             grid-column: span 2;
@@ -77,78 +82,60 @@
             margin-top: 10px;
         }
     </style>
+    <!-- Importar las bibliotecas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.23/dist/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h2>Generar Reporte Técnico</h2>
-
+    <!-- Contenedor del formulario -->
+    <div class="container" id="formulario">
+        <h2>Reporte Técnico</h2>
+        
         <label for="orden">Número de Orden:</label>
-        <input type="text" id="orden" name="orden" required> <!-- Campo editable -->
-
+        <input type="text" id="orden" name="orden" value="N/A">
+        
         <label for="cliente">Nombre del Cliente:</label>
-        <input type="text" id="cliente" name="cliente" required>
-
+        <input type="text" id="cliente" name="cliente" value="N/A">
+        
         <label for="tipoServicio">Tipo de Servicio:</label>
-        <select id="tipoServicio" name="tipoServicio" required>
-            <option value="correctivo">Mantenimiento Correctivo</option>
-            <option value="preventivo">Mantenimiento Preventivo</option>
-            <option value="revision">Revisión</option>
-            <option value="pruebas">Pruebas</option>
-            <option value="otro">Otro</option>
-        </select>
-
+        <input type="text" id="tipoServicio" name="tipoServicio" value="Correctivo">
+        
         <label for="equipo">Descripción del Equipo:</label>
-        <input type="text" id="equipo" name="equipo" required>
-
+        <input type="text" id="equipo" name="equipo" value="N/A">
+        
         <label for="marca">Marca:</label>
-        <input type="text" id="marca" name="marca" required>
-
+        <input type="text" id="marca" name="marca" value="N/A">
+        
         <label for="modelo">Modelo:</label>
-        <input type="text" id="modelo" name="modelo" required>
-
+        <input type="text" id="modelo" name="modelo" value="N/A">
+        
         <label for="serie">Serie:</label>
-        <input type="text" id="serie" name="serie" required>
-
-        <label for="voltaje">Voltaje (V1, V2, V3):</label>
-        <div style="display: flex; gap: 10px;">
-            <input type="text" id="voltajeV1" name="voltajeV1" placeholder="Voltaje V1" required>
-            <input type="text" id="voltajeV2" name="voltajeV2" placeholder="Voltaje V2" required>
-            <input type="text" id="voltajeV3" name="voltajeV3" placeholder="Voltaje V3" required>
-        </div>
-
-        <label for="amperaje">Amperaje (L1, L2, L3):</label>
-        <div style="display: flex; gap: 10px;">
-            <input type="text" id="amperajeL1" name="amperajeL1" placeholder="Amperaje L1" required>
-            <input type="text" id="amperajeL2" name="amperajeL2" placeholder="Amperaje L2" required>
-            <input type="text" id="amperajeL3" name="amperajeL3" placeholder="Amperaje L3" required>
-        </div>
-
-        <label for="horaInicio">Hora Inicial:</label>
-        <input type="time" id="horaInicio" name="horaInicio" required>
-
-        <label for="horaFin">Hora Final:</label>
-        <input type="time" id="horaFin" name="horaFin" required>
-
+        <input type="text" id="serie" name="serie" value="N/A">
+        
+        <label for="voltajeV1">Voltaje V1:</label>
+        <input type="text" id="voltajeV1" name="voltajeV1" value="N/A">
+        
+        <label for="amperajeL1">Amperaje L1:</label>
+        <input type="text" id="amperajeL1" name="amperajeL1" value="N/A">
+        
         <label for="actividades">Descripción de Actividades Realizadas:</label>
-        <textarea id="actividades" name="actividades" rows="5" required></textarea>
-
+        <textarea id="actividades" name="actividades">N/A</textarea>
+        
         <label for="fecha">Fecha del Reporte:</label>
-        <input type="date" id="fecha" name="fecha" required>
-
-        <label for="nombreTecnico">Nombre del Técnico:</label>
-        <input type="text" id="nombreTecnico" name="nombreTecnico" required>
-
+        <input type="text" id="fecha" name="fecha" value="N/A">
+        
+        <!-- Firma del cliente -->
         <label for="signature-pad">Firma del Cliente:</label>
         <canvas id="signature-pad"></canvas>
         <button type="button" id="clear-signature">Limpiar Firma</button>
 
-        <button type="button" onclick="generarPDF()">Generar PDF</button>
+        <!-- Botón para generar PDF -->
+        <button onclick="generarPDF()">Generar PDF</button>
     </div>
 
     <script>
+        // Inicializar firma
         const canvas = document.getElementById('signature-pad');
         const signaturePad = new SignaturePad(canvas);
 
@@ -156,90 +143,37 @@
             signaturePad.clear();
         });
 
-       function generarPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('p', 'mm', 'a4');
+        function generarPDF() {
+            const { jsPDF } = window.jspdf;
 
-    // Obtener los valores del formulario
-    const orden = document.getElementById("orden").value || "N/A";
-    const cliente = document.getElementById("cliente").value || "N/A";
-    const tipoServicio = document.getElementById("tipoServicio").value || "N/A";
-    const equipo = document.getElementById("equipo").value || "N/A";
-    const marca = document.getElementById("marca").value || "N/A";
-    const modelo = document.getElementById("modelo").value || "N/A";
-    const serie = document.getElementById("serie").value || "N/A";
-    const voltajeV1 = document.getElementById("voltajeV1").value || "N/A";
-    const voltajeV2 = document.getElementById("voltajeV2").value || "N/A";
-    const voltajeV3 = document.getElementById("voltajeV3").value || "N/A";
-    const amperajeL1 = document.getElementById("amperajeL1").value || "N/A";
-    const amperajeL2 = document.getElementById("amperajeL2").value || "N/A";
-    const amperajeL3 = document.getElementById("amperajeL3").value || "N/A";
-    const horaInicio = document.getElementById("horaInicio").value || "N/A";
-    const horaFin = document.getElementById("horaFin").value || "N/A";
-    const actividades = document.getElementById("actividades").value || "N/A";
-    const fecha = document.getElementById("fecha").value || "N/A";
-    const nombreTecnico = document.getElementById("nombreTecnico").value || "N/A";
+            // Crear nuevo PDF
+            const pdf = new jsPDF();
 
-    // Encabezado con los datos de la empresa
-    doc.setFontSize(16);
-    doc.setTextColor(33, 150, 243); // Azul similar al de la imagen
-    doc.text("D&H Soluciones SAS", 105, 20, null, null, 'center'); // Nombre de la empresa
-    doc.setFontSize(10);
-    doc.setTextColor(0, 0, 0); // Negro
-    doc.text("NIT: 901807265-8", 105, 26, null, null, 'center'); // NIT de la empresa
-    doc.text("Teléfono: +57 312 3456789", 105, 30, null, null, 'center'); // Teléfono de contacto
-    doc.text("Dirección: Calle 123 #45-67, Medellín, Colombia", 105, 34, null, null, 'center'); // Dirección
+            // Encabezado de la empresa
+            pdf.setFontSize(18);
+            pdf.text("Nombre de la Empresa", 10, 10);
+            pdf.setFontSize(12);
+            pdf.text("Dirección de la Empresa", 10, 20);
+            pdf.text("Teléfono: (XXX) XXX-XXXX", 10, 30);
+            pdf.text("Email: contacto@empresa.com", 10, 40);
 
-    // Título del formulario
-    doc.setFontSize(16);
-    doc.setTextColor(33, 150, 243); // Azul similar al de la imagen
-    doc.text("Generar Reporte Técnico", 105, 50, null, null, 'center');
+            // Captura la pantalla del formulario como imagen
+            html2canvas(document.querySelector("#formulario")).then(canvas => {
+                const imgData = canvas.toDataURL('image/png'); 
+                
+                // Ajuste para que el reporte esté pegado al encabezado
+                const startY = 41; // Ajustado para que el reporte esté más cerca
+                pdf.addImage(imgData, 'PNG', 0, startY); 
 
-    // Crear una tabla con más espacio en la columna derecha
-    doc.autoTable({
-        startY: 60,
-        head: [['Campo', 'Valor']],
-        body: [
-            ['Número de Orden', orden],
-            ['Nombre del Cliente', cliente],
-            ['Tipo de Servicio', tipoServicio],
-            ['Descripción del Equipo', equipo],
-            ['Marca', marca],
-            ['Modelo', modelo],
-            ['Serie', serie],
-            ['Voltaje (V1, V2, V3)', `${voltajeV1} V, ${voltajeV2} V, ${voltajeV3} V`],
-            ['Amperaje (L1, L2, L3)', `${amperajeL1} A, ${amperajeL2} A, ${amperajeL3} A`],
-            ['Hora Inicial', horaInicio],
-            ['Hora Final', horaFin],
-            ['Descripción de Actividades Realizadas', actividades], // Aquí agrandamos el espacio
-            ['Fecha del Reporte', fecha],
-            ['Nombre del Técnico', nombreTecnico],
-        ],
-        theme: 'grid', // Estilo tipo tabla
-        styles: { fontSize: 10, cellPadding: 3, halign: 'left' },
-        headStyles: { fillColor: [33, 150, 243] }, // Color de la cabecera azul
-        columnStyles: {
-            0: { cellWidth: 50 }, // Ajuste para la columna izquierda
-            1: { cellWidth: 130 }, // Ajuste para la columna derecha
-        },
-        bodyStyles: {
-            10: { cellHeight: 40 }, // Sección "Descripción de Actividades Realizadas"
-        },
-    });
+                // Añadir la firma si existe
+                if (!signaturePad.isEmpty()) {
+                    const signatureImage = signaturePad.toDataURL();
+                    pdf.addImage(signatureImage, 'PNG', 15, canvas.height + startY + 10, 50, 25); 
+                }
 
-    // Firma del cliente
-    if (!signaturePad.isEmpty()) {
-        const signatureImage = signaturePad.toDataURL();
-        doc.text("Firma del Cliente:", 14, doc.lastAutoTable.finalY + 10);
-        doc.addImage(signatureImage, 'PNG', 14, doc.lastAutoTable.finalY + 15, 50, 25);
-    } else {
-        doc.text("Firma del Cliente: No se ha proporcionado firma.", 14, doc.lastAutoTable.finalY + 10);
-    }
-
-    // Guardar el PDF
-    doc.save(`reporte_tecnico_${orden}_${cliente}.pdf`);
-}
-
+                pdf.save("reporte_tecnico.pdf"); // Guardar el PDF
+            });
+        }
     </script>
 </body>
 </html>
