@@ -7,19 +7,19 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nombre del Técnico');
 $pdf->SetTitle('Reporte Técnico');
 
-// Configurar márgenes: izquierda, arriba, derecha
-$pdf->SetMargins(5, 5, 5); // Márgenes muy pequeños
-$pdf->SetHeaderMargin(0);  // Sin margen para el encabezado
-$pdf->SetFooterMargin(0);  // Sin margen para el pie de página
+// Configurar márgenes muy pequeños y desactivar los márgenes por defecto de encabezado/pie
+$pdf->SetMargins(5, 5, 5); // Márgenes mínimos
+$pdf->SetHeaderMargin(0);
+$pdf->SetFooterMargin(0);
 
-// Deshabilitar salto de página automático
-$pdf->SetAutoPageBreak(TRUE, 5);
+// Desactivar salto de página automático
+$pdf->SetAutoPageBreak(FALSE, 0); // Para evitar saltos de página no deseados
 
 // Agregar una página
 $pdf->AddPage();
 
 // Configurar fuente
-$pdf->SetFont('helvetica', '', 10); // Tamaño de letra más pequeño
+$pdf->SetFont('helvetica', '', 10);
 
 // Contenido del encabezado de la empresa
 $empresa = "
@@ -29,13 +29,13 @@ $empresa = "
 <p style='font-size: 9px; margin: 0px;'>Email: contacto@empresa.com</p>
 ";
 
-// Escribir el contenido del encabezado en el PDF sin espacio entre elementos
+// Escribir el contenido del encabezado sin espacio innecesario
 $pdf->writeHTML($empresa, true, false, true, false, '');
 
-// Eliminar cualquier salto innecesario antes del título
-$pdf->Ln(1); // Solo 1mm de espacio entre encabezado y título
+// Forzar un pequeño espacio entre encabezado y el reporte técnico (1 mm)
+$pdf->Ln(1);
 
-// Agregar el título del reporte técnico
+// Contenido del título del reporte técnico
 $reporteTitulo = "
 <h2 style='font-size: 12px; text-align: center; margin: 0px;'>Reporte Técnico</h2>
 ";
@@ -54,13 +54,14 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Contenido del reporte técnico
+// Contenido del reporte técnico sin márgenes y controlando el espaciado
 $html = "
 <style>
     p {
-        font-size: 9px; 
-        line-height: 1.2;
-        margin: 0px; /* Sin margen inferior para evitar espacio */
+        font-size: 9px;
+        line-height: 1.2; 
+        margin: 0px; /* Sin márgenes para evitar espacios extra */
+        padding: 0px;
     }
     strong {
         font-weight: bold;
