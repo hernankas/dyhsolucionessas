@@ -258,6 +258,24 @@
             </div>
             
     </section>
+<section id="reporte-tecnico">
+    <h2>Generar Reporte Técnico</h2>
+    <form id="reporteForm">
+        <label for="nombre">Nombre del Técnico:</label>
+        <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+        
+        <label for="cliente">Nombre del Cliente:</label>
+        <input type="text" id="cliente" name="cliente" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+        
+        <label for="descripcion">Descripción del Problema:</label>
+        <textarea id="descripcion" name="descripcion" rows="4" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;"></textarea>
+        
+        <label for="solucion">Solución Aplicada:</label>
+        <textarea id="solucion" name="solucion" rows="4" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;"></textarea>
+        
+        <button type="button" onclick="generarPDF()" style="background-color: #ffd700; color: #004d99; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Generar PDF</button>
+    </form>
+</section>
 
     <!-- Sección de Contacto -->
     <section id="contact" class="contact" style="background-color: #004d99; color: #fff; padding: 40px 20px; text-align: center;">
