@@ -86,7 +86,7 @@
         <h2>Generar Reporte Técnico</h2>
 
         <label for="orden">Número de Orden:</label>
-        <input type="text" id="orden" name="orden" readonly>
+        <input type="text" id="orden" name="orden" required> <!-- Campo editable -->
 
         <label for="cliente">Nombre del Cliente:</label>
         <input type="text" id="cliente" name="cliente" required>
@@ -180,14 +180,24 @@
     const fecha = document.getElementById("fecha").value || "N/A";
     const nombreTecnico = document.getElementById("nombreTecnico").value || "N/A";
 
+    // Encabezado con los datos de la empresa
+    doc.setFontSize(16);
+    doc.setTextColor(33, 150, 243); // Azul similar al de la imagen
+    doc.text("D&H Soluciones SAS", 105, 20, null, null, 'center'); // Nombre de la empresa
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0); // Negro
+    doc.text("NIT: 901807265-8", 105, 26, null, null, 'center'); // NIT de la empresa
+    doc.text("Teléfono: +57 312 3456789", 105, 30, null, null, 'center'); // Teléfono de contacto
+    doc.text("Dirección: Calle 123 #45-67, Medellín, Colombia", 105, 34, null, null, 'center'); // Dirección
+
     // Título del formulario
     doc.setFontSize(16);
     doc.setTextColor(33, 150, 243); // Azul similar al de la imagen
-    doc.text("Generar Reporte Técnico", 105, 20, null, null, 'center');
+    doc.text("Generar Reporte Técnico", 105, 50, null, null, 'center');
 
-    // Crear una tabla para cada campo con dos columnas (Etiqueta - Valor)
+    // Crear una tabla con más espacio en la columna derecha
     doc.autoTable({
-        startY: 30,
+        startY: 60,
         head: [['Campo', 'Valor']],
         body: [
             ['Número de Orden', orden],
@@ -201,13 +211,20 @@
             ['Amperaje (L1, L2, L3)', `${amperajeL1} A, ${amperajeL2} A, ${amperajeL3} A`],
             ['Hora Inicial', horaInicio],
             ['Hora Final', horaFin],
-            ['Descripción de Actividades Realizadas', actividades],
+            ['Descripción de Actividades Realizadas', actividades], // Aquí agrandamos el espacio
             ['Fecha del Reporte', fecha],
             ['Nombre del Técnico', nombreTecnico],
         ],
         theme: 'grid', // Estilo tipo tabla
-        styles: { fontSize: 10, halign: 'left', cellPadding: 3 },
+        styles: { fontSize: 10, cellPadding: 3, halign: 'left' },
         headStyles: { fillColor: [33, 150, 243] }, // Color de la cabecera azul
+        columnStyles: {
+            0: { cellWidth: 50 }, // Ajuste para la columna izquierda
+            1: { cellWidth: 130 }, // Ajuste para la columna derecha
+        },
+        bodyStyles: {
+            10: { cellHeight: 40 }, // Sección "Descripción de Actividades Realizadas"
+        },
     });
 
     // Firma del cliente
@@ -223,8 +240,8 @@
     doc.save(`reporte_tecnico_${orden}_${cliente}.pdf`);
 }
 
-
     </script>
 </body>
 </html>
+
 
