@@ -7,10 +7,10 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nombre del Técnico');
 $pdf->SetTitle('Reporte Técnico');
 
-// Configurar márgenes extremadamente pequeños
+// Configurar márgenes pequeños
 $pdf->SetMargins(5, 5, 5); // Márgenes mínimos
-$pdf->SetHeaderMargin(5);  // Margen pequeño para el encabezado
-$pdf->SetFooterMargin(5);  // Margen pequeño para el pie de página
+$pdf->SetHeaderMargin(5);  
+$pdf->SetFooterMargin(5);  
 
 // Salto de página automático
 $pdf->SetAutoPageBreak(TRUE, 5);
@@ -19,18 +19,24 @@ $pdf->SetAutoPageBreak(TRUE, 5);
 $pdf->AddPage();
 
 // Configurar fuente
-$pdf->SetFont('helvetica', '', 9); // Tamaño de fuente reducido
+$pdf->SetFont('helvetica', '', 9); 
 
-// Contenido del encabezado de la empresa
+// Contenido del encabezado de la empresa, sin espacio adicional entre líneas
 $empresa = "
-<h2 style='font-size: 12px;'>Nombre de la Empresa</h2>
-<p style='font-size: 10px;'>Dirección de la Empresa</p>
-<p style='font-size: 10px;'>Teléfono: (XXX) XXX-XXXX</p>
-<p style='font-size: 10px;'>Email: contacto@empresa.com</p>
+<h2 style='font-size: 12px; margin-bottom: 2px;'>Nombre de la Empresa</h2>
+<p style='font-size: 10px; margin-bottom: 2px;'>Dirección de la Empresa</p>
+<p style='font-size: 10px; margin-bottom: 2px;'>Teléfono: (XXX) XXX-XXXX</p>
+<p style='font-size: 10px; margin-bottom: 2px;'>Email: contacto@empresa.com</p>
 ";
 
-// Escribir el contenido del encabezado en el PDF
+// Escribir el contenido del encabezado en el PDF, sin dejar espacio extra
 $pdf->writeHTML($empresa, true, false, true, false, '');
+
+// Agregar el título del reporte técnico inmediatamente después del encabezado
+$reporteTitulo = "
+<h2 style='font-size: 12px; text-align: center;'>Reporte Técnico</h2>
+";
+$pdf->writeHTML($reporteTitulo, true, false, true, false, '');
 
 // Obtener datos del formulario
 $cliente = $_POST['cliente'];
@@ -45,22 +51,21 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Contenido del reporte técnico ajustado para que se vea completo
+// Contenido del reporte técnico
 $html = "
 <style>
     h2 {
-        text-align: center;
-        font-size: 12px; /* Tamaño de letra más pequeño */
+        font-size: 12px; 
         margin-bottom: 10px;
     }
     .container {
         border: 1px solid #000;
-        padding: 5px; /* Reducir padding para ahorrar espacio */
+        padding: 5px; 
     }
     p {
-        font-size: 9px; /* Fuente más pequeña para que quepa más texto */
-        line-height: 1.2; /* Espaciado entre líneas ajustado */
-        margin-bottom: 5px; /* Menor espacio entre párrafos */
+        font-size: 9px; 
+        line-height: 1.2; 
+        margin-bottom: 5px;
     }
     strong {
         font-weight: bold;
@@ -68,7 +73,6 @@ $html = "
 </style>
 
 <div class='container'>
-    <h2>Reporte Técnico</h2>
     <p><strong>Nombre del Cliente:</strong> $cliente</p>
     <p><strong>Nombre del Técnico:</strong> $tecnico</p>
     <p><strong>Fecha de Revisión:</strong> $fecha</p>
