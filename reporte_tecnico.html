@@ -168,13 +168,7 @@
                 return;
             }
 
-            // Obtener la fecha actual para generar el número de reporte
-            const fechaActual = new Date();
-            const fechaFormato = fechaActual.getFullYear() + '' +
-                                 (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '' +
-                                 fechaActual.getDate().toString().padStart(2, '0');
-            document.getElementById("orden").value = fechaFormato;
-
+            // Obtener los valores del formulario
             const orden = document.getElementById("orden").value;
             const cliente = document.getElementById("cliente").value;
             const tipoServicio = document.getElementById("tipoServicio").value;
@@ -264,8 +258,8 @@
             });
 
             doc.addPassword({
-                userPassword: dyhsoluciones,
-                ownerPassword: 9536,
+                userPassword: password,
+                ownerPassword: password,
                 permissions: {
                     printing: 'highResolution',
                     modifying: false,
