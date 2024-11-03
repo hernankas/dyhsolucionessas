@@ -20,20 +20,21 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
-            max-width: 800px;
+            max-width: 1000px;
             width: 100%;
-            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
         h2 {
+            grid-column: span 2;
             text-align: center;
             color: #004d99;
             margin-bottom: 20px;
             font-size: 24px;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        label {
+            font-weight: bold;
         }
         input, textarea, select {
             width: 100%;
@@ -41,6 +42,10 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             font-size: 14px;
+        }
+        textarea {
+            grid-column: span 2;
+            resize: vertical;
         }
         button {
             background-color: #004d99;
@@ -50,91 +55,118 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            grid-column: span 2;
+        }
+        #signature-pad {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            grid-column: span 2;
+            width: 100%;
+            height: 150px;
+        }
+        #clear-signature {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.23/dist/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Generar Reporte Técnico</h2>
-        <form id="reporteForm">
-            <label for="cliente">Nombre del Cliente:</label>
-            <input type="text" id="cliente" name="cliente" required>
 
-            <label for="tipoServicio">Tipo de Servicio:</label>
-            <select id="tipoServicio" name="tipoServicio" required>
-                <option value="correctivo">Mantenimiento Correctivo</option>
-                <option value="preventivo">Mantenimiento Preventivo</option>
-                <option value="revision">Revisión</option>
-                <option value="pruebas">Pruebas</option>
-                <option value="otro">Otro</option>
-            </select>
+        <label for="orden">Número de Orden:</label>
+        <input type="text" id="orden" name="orden" required>
 
-            <label for="tipoAplicacion">Tipo de Aplicación:</label>
-            <select id="tipoAplicacion" name="tipoAplicacion" required>
-                <option value="cuarto_frio">Cuarto Frio</option>
-                <option value="aire_acondicionado">Aire Acondicionado</option>
-                <option value="nevera">Nevera</option>
-                <option value="chiller">Chiller</option>
-                <option value="otro">Otro</option>
-            </select>
+        <label for="cliente">Nombre del Cliente:</label>
+        <input type="text" id="cliente" name="cliente" required>
 
-            <label for="equipo">Descripción del Equipo:</label>
-            <textarea id="equipo" name="equipo" rows="2" required></textarea>
+        <label for="tipoServicio">Tipo de Servicio:</label>
+        <select id="tipoServicio" name="tipoServicio" required>
+            <option value="correctivo">Mantenimiento Correctivo</option>
+            <option value="preventivo">Mantenimiento Preventivo</option>
+            <option value="revision">Revisión</option>
+            <option value="pruebas">Pruebas</option>
+            <option value="otro">Otro</option>
+        </select>
 
-            <label for="marca">Marca:</label>
-            <input type="text" id="marca" name="marca" required>
+        <label for="equipo">Descripción del Equipo:</label>
+        <input type="text" id="equipo" name="equipo" required>
 
-            <label for="modelo">Modelo:</label>
-            <input type="text" id="modelo" name="modelo" required>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" required>
 
-            <label for="serie">Serie:</label>
-            <input type="text" id="serie" name="serie" required>
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" required>
 
-            <label for="voltaje">Voltaje (V1, V2, V3):</label>
+        <label for="serie">Serie:</label>
+        <input type="text" id="serie" name="serie" required>
+
+        <label for="voltaje">Voltaje (V1, V2, V3):</label>
+        <div style="display: flex; gap: 10px;">
             <input type="text" id="voltajeV1" name="voltajeV1" placeholder="Voltaje V1" required>
             <input type="text" id="voltajeV2" name="voltajeV2" placeholder="Voltaje V2" required>
             <input type="text" id="voltajeV3" name="voltajeV3" placeholder="Voltaje V3" required>
+        </div>
 
-            <label for="amperaje">Amperaje (L1, L2, L3):</label>
+        <label for="amperaje">Amperaje (L1, L2, L3):</label>
+        <div style="display: flex; gap: 10px;">
             <input type="text" id="amperajeL1" name="amperajeL1" placeholder="Amperaje L1" required>
             <input type="text" id="amperajeL2" name="amperajeL2" placeholder="Amperaje L2" required>
             <input type="text" id="amperajeL3" name="amperajeL3" placeholder="Amperaje L3" required>
+        </div>
 
-            <label for="presionSuccion">Presión Succión:</label>
-            <input type="text" id="presionSuccion" name="presionSuccion" required>
+        <label for="actividades">Descripción de Actividades Realizadas:</label>
+        <textarea id="actividades" name="actividades" rows="4" required></textarea>
 
-            <label for="presionDescarga">Presión Descarga:</label>
-            <input type="text" id="presionDescarga" name="presionDescarga" required>
+        <label for="fecha">Fecha del Reporte:</label>
+        <input type="date" id="fecha" name="fecha" required>
 
-            <label for="tempCuarto">Temperatura Cuarto:</label>
-            <input type="text" id="tempCuarto" name="tempCuarto" required>
+        <label for="nombreTecnico">Nombre del Técnico:</label>
+        <input type="text" id="nombreTecnico" name="nombreTecnico" required>
 
-            <label for="tempSuministro">Temperatura Suministro:</label>
-            <input type="text" id="tempSuministro" name="tempSuministro" required>
+        <label for="signature-pad">Firma del Cliente:</label>
+        <canvas id="signature-pad"></canvas>
+        <button type="button" id="clear-signature">Limpiar Firma</button>
 
-            <label for="actividades">Descripción de Actividades Realizadas:</label>
-            <textarea id="actividades" name="actividades" rows="4" required></textarea>
-
-            <label for="fecha">Fecha del Reporte:</label>
-            <input type="date" id="fecha" name="fecha" required>
-
-            <label for="firma">Nombre del Técnico:</label>
-            <input type="text" id="firma" name="firma" required>
-
-            <button type="button" onclick="generarPDF()">Generar PDF</button>
-        </form>
+        <button type="button" onclick="generarPDF()">Generar PDF</button>
     </div>
 
     <script>
+        const canvas = document.getElementById('signature-pad');
+        const signaturePad = new SignaturePad(canvas);
+
+        document.getElementById('clear-signature').addEventListener('click', function () {
+            signaturePad.clear();
+        });
+
         function generarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Obtener los valores del formulario
+            // Información de la empresa
+            const empresaInfo = [
+                ["D&H Soluciones SAS"],
+                ["NIT: 123456789"],
+                ["Teléfono: +57 312 3456789"],
+                ["Dirección: Calle 123 #45-67, Medellín, Colombia"]
+            ];
+
+            doc.autoTable({
+                body: empresaInfo,
+                styles: { fontSize: 10, cellPadding: 3, halign: 'center' },
+            });
+
+            const orden = document.getElementById("orden").value;
             const cliente = document.getElementById("cliente").value;
             const tipoServicio = document.getElementById("tipoServicio").value;
-            const tipoAplicacion = document.getElementById("tipoAplicacion").value;
             const equipo = document.getElementById("equipo").value;
             const marca = document.getElementById("marca").value;
             const modelo = document.getElementById("modelo").value;
@@ -145,52 +177,58 @@
             const amperajeL1 = document.getElementById("amperajeL1").value;
             const amperajeL2 = document.getElementById("amperajeL2").value;
             const amperajeL3 = document.getElementById("amperajeL3").value;
-            const presionSuccion = document.getElementById("presionSuccion").value;
-            const presionDescarga = document.getElementById("presionDescarga").value;
-            const tempCuarto = document.getElementById("tempCuarto").value;
-            const tempSuministro = document.getElementById("tempSuministro").value;
             const actividades = document.getElementById("actividades").value;
             const fecha = document.getElementById("fecha").value;
-            const firma = document.getElementById("firma").value;
+            const nombreTecnico = document.getElementById("nombreTecnico").value;
 
-            // Título y encabezado del reporte
-            doc.setFontSize(16);
-            doc.text("REPORTE DE SERVICIO", 10, 20);
-            doc.setFontSize(12);
-            doc.text(`Fecha: ${fecha}`, 150, 20);
+            const orderInfo = [
+                ["ORDEN DE TRABAJO No", orden],
+                ["FECHA", fecha],
+                ["CLIENTE", cliente],
+                ["TIPO SERVICIO", tipoServicio]
+            ];
 
-            // Información del cliente y equipo
-            doc.setFontSize(10);
-            doc.text(`Cliente: ${cliente}`, 10, 40);
-            doc.text(`Tipo de Servicio: ${tipoServicio}`, 10, 50);
-            doc.text(`Tipo de Aplicación: ${tipoAplicacion}`, 10, 60);
-            doc.text(`Equipo: ${equipo}`, 10, 70);
-            doc.text(`Marca: ${marca}   Modelo: ${modelo}   Serie: ${serie}`, 10, 80);
+            doc.autoTable({
+                body: orderInfo,
+                styles: { fontSize: 10, cellPadding: 3, halign: 'left' },
+                startY: doc.previousAutoTable.finalY + 10,
+            });
 
-            // Voltaje y Amperaje
-            doc.text(`Voltaje: V1 ${voltajeV1}V, V2 ${voltajeV2}V, V3 ${voltajeV3}V`, 10, 90);
-            doc.text(`Amperaje: L1 ${amperajeL1}A, L2 ${amperajeL2}A, L3 ${amperajeL3}A`, 10, 100);
+            // Información del equipo
+            const equipmentInfo = [
+                ["EQUIPO", equipo],
+                ["MARCA", marca],
+                ["MODELO", modelo],
+                ["SERIE", serie],
+                ["VOLTAGE", `V1: ${voltajeV1} V  V2: ${voltajeV2} V  V3: ${voltajeV3} V`],
+                ["AMPERAJE", `L1: ${amperajeL1} A  L2: ${amperajeL2} A  L3: ${amperajeL3} A`]
+            ];
 
-            // Presiones y temperaturas
-            doc.text(`Presión Succión: ${presionSuccion}`, 10, 110);
-            doc.text(`Presión Descarga: ${presionDescarga}`, 10, 120);
-            doc.text(`Temperatura Cuarto: ${tempCuarto}`, 10, 130);
-            doc.text(`Temperatura Suministro: ${tempSuministro}`, 10, 140);
+            doc.autoTable({
+                body: equipmentInfo,
+                styles: { fontSize: 10, cellPadding: 3, halign: 'left' },
+                startY: doc.previousAutoTable.finalY + 10,
+            });
 
-            // Descripción de actividades realizadas
-            doc.text("Actividades Realizadas:", 10, 150);
-            doc.text(actividades, 10, 160, { maxWidth: 180 });
+            // Actividades realizadas
+            doc.text("Actividades Realizadas:", 14, doc.previousAutoTable.finalY + 20);
+            doc.text(actividades, 14, doc.previousAutoTable.finalY + 30, { maxWidth: 180 });
 
-            // Firma del técnico
-            doc.text(`Técnico Responsable: ${firma}`, 10, 190);
+            // Firma del cliente
+            if (!signaturePad.isEmpty()) {
+                const signatureImage = signaturePad.toDataURL();
+                doc.text("Firma del Cliente:", 14, doc.previousAutoTable.finalY + 50);
+                doc.addImage(signatureImage, 'PNG', 14, doc.previousAutoTable.finalY + 60, 50, 25);
+            } else {
+                doc.text("Firma del Cliente: No se ha proporcionado firma.", 14, doc.previousAutoTable.finalY + 50);
+            }
 
             // Guardar el PDF
-            doc.save(`reporte_tecnico_${cliente}_${fecha}.pdf`);
+            doc.save(`reporte_tecnico_${orden}_${cliente}.pdf`);
         }
     </script>
 </body>
 </html>
-
 
 
 
