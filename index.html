@@ -189,6 +189,19 @@
                 item.querySelector("button").prepend(arrow);
             });
         });
+
+        // Función para solicitar contraseña antes de acceder al reporte técnico
+        function requestPassword() {
+            const password = prompt("Por favor, ingrese la contraseña para acceder al reporte técnico:");
+            
+            // Verifica la contraseña
+            if (password === "tu_contraseña_segura") { // Cambia "tu_contraseña_segura" por la contraseña real
+                window.location.href = "reporte_tecnico.html"; // Redirige al reporte si la contraseña es correcta
+            } else {
+                alert("Contraseña incorrecta. Inténtelo de nuevo.");
+            }
+        }
+
     </script>
 </head>
 <body>
@@ -203,8 +216,8 @@
         <a onclick="toggleAboutSection()">Nosotros</a>
         <a href="#services">Servicios</a>
         <a href="#contact">Contacto</a>
-      <a href="reporte_tecnico.html" target="_blank">Reporte Técnico</a>
-
+        <!-- Modificamos este enlace para que invoque la función requestPassword -->
+        <a onclick="requestPassword()">Reporte Técnico</a>
     </nav>
 
     <!-- Sección de Nosotros -->
@@ -296,4 +309,3 @@
 
 </body>
 </html>
-
