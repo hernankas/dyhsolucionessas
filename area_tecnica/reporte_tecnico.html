@@ -1,109 +1,48 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte Técnico</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f8ff;
-        }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-        }
-        input, select, textarea {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #004d99;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-        #campoOtros {
-            display: none; /* Campo escondido por defecto */
-        }
-    </style>
-    <script>
-        // Función que muestra o esconde el campo "Especifique el Equipo"
-        function mostrarCampoOtros() {
-            const tipoEquipo = document.getElementById('equipo').value;
-            const campoOtros = document.getElementById('campoOtros');
-            campoOtros.style.display = (tipoEquipo === 'otros') ? 'block' : 'none';
-        }
-    </script>
-</head>
-<body>
-    <form action="generar_pdf.php" method="post">
-        <h2>Reporte Técnico</h2>
-        
-        <label for="cliente">Nombre del Cliente:</label>
-        <input type="text" id="cliente" name="cliente" required>
-        
-        <label for="tecnico">Nombre del Técnico:</label>
-        <input type="text" id="tecnico" name="tecnico" required>
+<?php
+require_once('tcpdf/tcpdf.php'); // Asegúrate de que la ruta sea correcta
 
-        <label for="fecha">Fecha de Revisión:</label>
-        <input type="date" id="fecha" name="fecha" required>
+// Crear nuevo documento PDF
+$pdf = new TCPDF();
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetAuthor('Nombre del Técnico');
+$pdf->SetTitle('Reporte Técnico');
+$pdf->SetMargins(15, 15, 15); // Márgenes: izquierda, arriba, derecha
+$pdf->SetAutoPageBreak(TRUE, 20); // Salto de página automático
 
-        <label for="ubicacion">Ubicación del Equipo:</label>
-        <input type="text" id="ubicacion" name="ubicacion" required>
+// Agregar una página
+$pdf->AddPage();
 
-        <label for="equipo">Tipo de Equipo:</label>
-        <select id="equipo" name="equipo" onchange="mostrarCampoOtros()" required>
-            <option value="">Seleccione una opción</option>
-            <option value="cuartos_frios">Cuartos Fríos</option>
-            <option value="planta_electrica">Planta Eléctrica</option>
-            <option value="electrobomba">Electrobomba</option>
-            <option value="rack">Rack</option>
-            <option value="otros">Otros</option>
-        </select>
+// Obtener datos del formulario
+$cliente = $_POST['cliente'];
+$tecnico = $_POST['tecnico'];
+$fecha = $_POST['fecha'];
+$ubicacion = $_POST['ubicacion'];
+$equipo = $_POST['equipo'];
+$equipo_otro = isset($_POST['equipo_otro']) ? $_POST['equipo_otro'] : '';
+$descripcion = $_POST['descripcion'];
+$solucion = $_POST['solucion'];
+$estado = $_POST['estado'];
+$observaciones = $_POST['observaciones'];
+$firma = $_POST['firma'];
 
-        <div id="campoOtros">
-            <label for="equipo_otro">Especifique el Equipo:</label>
-            <input type="text" id="equipo_otro" name="equipo_otro">
-        </div>
+// Contenido del PDF
+$html = "
+<h2>Reporte Técnico</h2>
+<p><strong>Nombre del Cliente:</strong> $cliente</p>
+<p><strong>Nombre del Técnico:</strong> $tecnico</p>
+<p><strong>Fecha de Revisión:</strong> $fecha</p>
+<p><strong>Ubicación del Equipo:</strong> $ubicacion</p>
+<p><strong>Tipo de Equipo:</strong> $equipo" . ($equipo === 'otros' ? " - $equipo_otro" : "") . "</p>
+<p><strong>Descripción del Problema:</strong><br/> $descripcion</p>
+<p><strong>Solución Realizada:</strong><br/> $solucion</p>
+<p><strong>Estado General del Equipo:</strong> $estado</p>
+<p><strong>Observaciones Adicionales:</strong><br/> $observaciones</p>
+<p><strong>Firma del Técnico:</strong> $firma</p>
+";
 
-        <label for="descripcion">Descripción del Problema:</label>
-        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+// Escribir contenido HTML en el PDF
+$pdf->writeHTML($html, true, false, true, false, '');
 
-        <label for="solucion">Solución Realizada:</label>
-        <textarea id="solucion" name="solucion" rows="4" required></textarea>
-
-        <label for="estado">Estado General del Equipo:</label>
-        <select id="estado" name="estado" required>
-            <option value="">Seleccione el estado</option>
-            <option value="operativo">Operativo</option>
-            <option value="en_reparacion">En reparación</option>
-            <option value="fuera_de_servicio">Fuera de servicio</option>
-        </select>
-
-        <label for="observaciones">Observaciones Adicionales:</label>
-        <textarea id="observaciones" name="observaciones" rows="4"></textarea>
-
-        <label for="firma">Firma del Técnico:</label>
-        <input type="text" id="firma" name="firma" required>
-
-        <button type="submit">Generar PDF</button>
-    </form>
-</body>
-            </html>
+// Cerrar y enviar el PDF al navegador
+$pdf->Output('reporte_tecnico.pdf', 'I'); // 'I' para mostrar en el navegador
+?>
