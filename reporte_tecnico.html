@@ -154,43 +154,32 @@
             doc.text("Reporte Técnico", 10, 20);
             doc.line(10, 25, 200, 25);
 
-            // Datos del reporte
-            doc.setFontSize(12);
-            doc.text("Reporte Número:", 10, 35);
-            doc.text(consecutivo.toString(), 60, 35);
-            doc.text("Nombre del Cliente:", 10, 45);
-            doc.text(cliente, 60, 45);
-            doc.text("Fecha del Reporte:", 10, 55);
-            doc.text(fechaReporte, 60, 55);
-
-            // Tipo de Servicio
-            doc.text("Tipo de Servicio:", 10, 65);
-            let tipoTexto = "";
-            if (tipoServicio === "preventivo") tipoTexto = "Mantenimiento Preventivo";
-            if (tipoServicio === "correctivo") tipoTexto = "Mantenimiento Correctivo";
-            if (tipoServicio === "revision") tipoTexto = "Revisión";
-            doc.text(tipoTexto, 60, 65);
-
-            // Descripción del Problema
-            doc.text("Descripción del Problema:", 10, 75);
-            doc.text(descripcion, 10, 85, { maxWidth: 190 });
-
-            // Solución Aplicada
-            doc.text("Solución Aplicada:", 10, 105);
-            doc.text(solucion, 10, 115, { maxWidth: 190 });
+            // Datos en formato de tabla
+            doc.autoTable({
+                head: [['Campo', 'Detalles']],
+                body: [
+                    ['Reporte Número', consecutivo.toString()],
+                    ['Nombre del Cliente', cliente],
+                    ['Fecha del Reporte', fechaReporte],
+                    ['Tipo de Servicio', tipoServicio === "preventivo" ? "Mantenimiento Preventivo" : (tipoServicio === "correctivo" ? "Mantenimiento Correctivo" : "Revisión")],
+                    ['Descripción del Problema', descripcion],
+                    ['Solución Aplicada', solucion],
+                    ['Nombre del Técnico', nombre]
+                ],
+                startY: 30,
+                theme: 'grid',
+                styles: { fontSize: 12, cellPadding: 5 },
+                headStyles: { fillColor: [0, 77, 153], textColor: [255, 255, 255] }
+            });
 
             // Firma del Cliente
-            doc.text("Firma del Cliente:", 10, 135);
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
-                doc.addImage(signatureImage, 'PNG', 10, 140, 50, 25); // Añade la firma al PDF
+                doc.text("Firma del Cliente:", 10, doc.lastAutoTable.finalY + 10);
+                doc.addImage(signatureImage, 'PNG', 10, doc.lastAutoTable.finalY + 15, 50, 25);
             } else {
-                doc.text("No se ha proporcionado firma.", 60, 135);
+                doc.text("Firma del Cliente: No se ha proporcionado firma.", 10, doc.lastAutoTable.finalY + 10);
             }
-
-            // Nombre del Técnico
-            doc.text("Nombre del Técnico:", 10, 175);
-            doc.text(nombre, 60, 175);
 
             // Pie de página
             const fecha = new Date().toLocaleDateString();
