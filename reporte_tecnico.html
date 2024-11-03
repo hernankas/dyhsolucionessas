@@ -181,7 +181,7 @@
 
         async function generarPDF() {
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
 
             const nombre = document.getElementById("nombre").value;
             const cliente = document.getElementById("cliente").value;
@@ -208,50 +208,48 @@
             const consecutivo = await obtenerConsecutivo();
             document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo;
 
-            doc.setFontSize(16);
-            doc.text("D&H Soluciones SAS", 10, 10);
+            // Personalización del PDF para reflejar el formato
             doc.setFontSize(12);
-            doc.text("Reporte Técnico", 10, 20);
-            doc.line(10, 25, 200, 25);
+            doc.text(`Reporte Técnico - D&H Soluciones SAS`, 40, 50);
+            doc.setFontSize(10);
+            doc.text(`Reporte Número: ${consecutivo}`, 40, 70);
+            doc.text(`Nombre del Cliente: ${cliente}`, 40, 85);
+            doc.text(`Fecha del Reporte: ${fechaReporte}`, 40, 100);
 
-            doc.text("Reporte Número: " + consecutivo, 12, 37);
-            doc.text("Nombre del Cliente: " + cliente, 12, 47);
-            doc.text("Fecha del Reporte: " + fechaReporte, 12, 57);
-            let tipoTexto = tipoServicio === "preventivo" ? "Mantenimiento Preventivo" : tipoServicio === "correctivo" ? "Mantenimiento Correctivo" : "Revisión";
-            doc.text("Tipo de Servicio: " + tipoTexto, 12, 67);
+            // Tipo de servicio
+            doc.text(`Tipo de Servicio: ${tipoServicio}`, 40, 120);
 
-            doc.text("Descripción del Equipo: " + equipoDescripcion, 12, 77);
-            doc.text("Marca: " + marca + "    Modelo: " + modelo + "    Serie: " + serie, 12, 87);
-            doc.text("Voltaje: V1 " + voltajeV1 + "V, V2 " + voltajeV2 + "V, V3 " + voltajeV3 + "V", 12, 97);
-            doc.text("Amperaje: L1 " + amperajeL1 + "A, L2 " + amperajeL2 + "A, L3 " + amperajeL3 + "A", 12, 107);
+            // Información del equipo
+            doc.setFontSize(10);
+            doc.text("Información del Equipo", 40, 140);
+            doc.text(`Descripción: ${equipoDescripcion}`, 40, 160);
+            doc.text(`Marca: ${marca}   Modelo: ${modelo}   Serie: ${serie}`, 40, 175);
+            doc.text(`Voltaje: V1 ${voltajeV1} V, V2 ${voltajeV2} V, V3 ${voltajeV3} V`, 40, 190);
+            doc.text(`Amperaje: L1 ${amperajeL1} A, L2 ${amperajeL2} A, L3 ${amperajeL3} A`, 40, 205);
 
-            doc.text("Actividades Realizadas:", 12, 117);
-            doc.text(actividades, 12, 127, { maxWidth: 185 });
+            // Actividades y verificaciones
+            doc.text(`Actividades y Verificaciones: ${actividades}`, 40, 225);
 
-            doc.text("Descripción del Problema:", 12, 137);
-            doc.text(descripcion, 12, 147, { maxWidth: 185 });
+            // Descripción del problema y solución aplicada
+            doc.text(`Descripción del Problema: ${descripcion}`, 40, 260, { maxWidth: 500 });
+            doc.text(`Solución Aplicada: ${solucion}`, 40, 300, { maxWidth: 500 });
 
-            doc.text("Solución Aplicada:", 12, 157);
-            doc.text(solucion, 12, 167, { maxWidth: 185 });
+            // Tiempos de inicio y fin
+            doc.text(`Hora de Inicio: ${inicio}  -  Hora de Fin: ${fin}`, 40, 340);
 
-            doc.text("Hora de Inicio: " + inicio, 12, 177);
-            doc.text("Hora de Fin: " + fin, 12, 187);
-
+            // Firma del cliente
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
-                doc.text("Firma del Cliente:", 12, 197);
-                doc.addImage(signatureImage, 'PNG', 12, 202, 50, 25);
+                doc.text("Firma del Cliente:", 40, 370);
+                doc.addImage(signatureImage, 'PNG', 40, 380, 150, 50);
             } else {
-                doc.text("Firma del Cliente: No se ha proporcionado firma.", 12, 197);
+                doc.text("Firma del Cliente: No se ha proporcionado firma.", 40, 370);
             }
 
-            doc.text("Nombre del Técnico: " + nombre, 12, 240);
+            // Nombre del técnico
+            doc.text(`Nombre del Técnico: ${nombre}`, 40, 450);
 
-            const fecha = new Date().toLocaleDateString();
-            doc.setFontSize(10);
-            doc.text("Generado el: " + fecha, 10, doc.internal.pageSize.height - 10);
-
-            doc.save("reporte_tecnico_" + consecutivo + ".pdf");
+            doc.save(`reporte_tecnico_${consecutivo}.pdf`);
         }
 
         window.onload = async function() {
@@ -261,5 +259,6 @@
     </script>
 </body>
 </html>
+
 
 
