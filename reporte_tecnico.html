@@ -189,70 +189,44 @@
             doc.text("Reporte Técnico", 10, 20);
             doc.line(10, 25, 200, 25);
 
-            // Recuadros para cada sección
-            doc.setLineWidth(0.5);
-
             // Número de Reporte
-            doc.rect(10, 30, 190, 10);  // Dibujar recuadro
             doc.text("Reporte Número: " + consecutivo, 12, 37);
 
             // Nombre del Cliente
-            doc.rect(10, 45, 190, 10);  // Dibujar recuadro
-            doc.text("Nombre del Cliente: " + cliente, 12, 52);
+            doc.text("Nombre del Cliente: " + cliente, 12, 47);
 
             // Fecha del Reporte
-            doc.rect(10, 60, 190, 10);  // Dibujar recuadro
-            doc.text("Fecha del Reporte: " + fechaReporte, 12, 67);
+            doc.text("Fecha del Reporte: " + fechaReporte, 12, 57);
 
             // Tipo de Servicio
-            doc.rect(10, 75, 190, 10);  // Dibujar recuadro
-            let tipoTexto = "";
-            if (tipoServicio === "preventivo") tipoTexto = "Mantenimiento Preventivo";
-            if (tipoServicio === "correctivo") tipoTexto = "Mantenimiento Correctivo";
-            if (tipoServicio === "revision") tipoTexto = "Revisión";
-            doc.text("Tipo de Servicio: " + tipoTexto, 12, 82);
+            let tipoTexto = tipoServicio === "preventivo" ? "Mantenimiento Preventivo" : tipoServicio === "correctivo" ? "Mantenimiento Correctivo" : "Revisión";
+            doc.text("Tipo de Servicio: " + tipoTexto, 12, 67);
 
-            // Información del equipo
-            doc.rect(10, 90, 190, 10);  // Recuadro Descripción del equipo
-            doc.text("Descripción del Equipo: " + equipoDescripcion, 12, 97);
-
-            doc.rect(10, 105, 190, 10);  // Recuadro Marca
-            doc.text("Marca: " + marca, 12, 112);
-
-            doc.rect(10, 120, 190, 10);  // Recuadro Modelo
-            doc.text("Modelo: " + modelo, 12, 127);
-
-            doc.rect(10, 135, 190, 10);  // Recuadro Serie
-            doc.text("Serie: " + serie, 12, 142);
-
-            doc.rect(10, 150, 190, 10);  // Recuadro Voltajes
-            doc.text("Voltaje (V1, V2, V3): " + voltajeV1 + "V, " + voltajeV2 + "V, " + voltajeV3 + "V", 12, 157);
-
-            doc.rect(10, 165, 190, 10);  // Recuadro Amperajes
-            doc.text("Amperaje (L1, L2, L3): " + amperajeL1 + "A, " + amperajeL2 + "A, " + amperajeL3 + "A", 12, 172);
+            // Información del equipo en formato horizontal
+            doc.text("Descripción del Equipo: " + equipoDescripcion, 12, 77);
+            doc.text("Marca: " + marca + "    Modelo: " + modelo + "    Serie: " + serie, 12, 87);
+            doc.text("Voltaje: V1 " + voltajeV1 + "V, V2 " + voltajeV2 + "V, V3 " + voltajeV3 + "V", 12, 97);
+            doc.text("Amperaje: L1 " + amperajeL1 + "A, L2 " + amperajeL2 + "A, L3 " + amperajeL3 + "A", 12, 107);
 
             // Descripción del Problema
-            doc.rect(10, 180, 190, 20);  // Recuadro grande para Descripción del Problema
-            doc.text("Descripción del Problema:", 12, 187);
-            doc.text(descripcion, 12, 195, { maxWidth: 185 });
+            doc.text("Descripción del Problema:", 12, 117);
+            doc.text(descripcion, 12, 127, { maxWidth: 185 });
 
             // Solución Aplicada
-            doc.rect(10, 205, 190, 20);  // Recuadro grande para Solución Aplicada
-            doc.text("Solución Aplicada:", 12, 212);
-            doc.text(solucion, 12, 220, { maxWidth: 185 });
+            doc.text("Solución Aplicada:", 12, 137);
+            doc.text(solucion, 12, 147, { maxWidth: 185 });
 
             // Firma del Cliente
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
-                doc.text("Firma del Cliente:", 12, 240);
-                doc.addImage(signatureImage, 'PNG', 12, 245, 50, 25);
+                doc.text("Firma del Cliente:", 12, 160);
+                doc.addImage(signatureImage, 'PNG', 12, 165, 50, 25);
             } else {
-                doc.text("Firma del Cliente: No se ha proporcionado firma.", 12, 240);
+                doc.text("Firma del Cliente: No se ha proporcionado firma.", 12, 160);
             }
 
             // Nombre del Técnico
-            doc.rect(10, 275, 190, 10);  // Dibujar recuadro
-            doc.text("Nombre del Técnico: " + nombre, 12, 282);
+            doc.text("Nombre del Técnico: " + nombre, 12, 200);
 
             // Pie de página
             const fecha = new Date().toLocaleDateString();
