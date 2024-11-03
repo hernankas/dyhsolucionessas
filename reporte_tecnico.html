@@ -22,12 +22,12 @@
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
             max-width: 800px;
             width: 100%;
+            overflow-y: auto;
         }
-        h2 {
+        h2, h3 {
             text-align: center;
             color: #004d99;
             margin-bottom: 20px;
-            font-size: 24px;
         }
         form {
             display: flex;
@@ -65,6 +65,21 @@
             cursor: pointer;
             margin-top: 10px;
         }
+        .time-inputs {
+            display: flex;
+            justify-content: space-between;
+        }
+        .time-inputs input {
+            width: 48%;
+        }
+        .section-title {
+            background-color: #004d99;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
@@ -86,8 +101,7 @@
                 <option value="revision">Revisión</option>
             </select>
 
-            <!-- Información del equipo -->
-            <h3>Información del Equipo</h3>
+            <h3 class="section-title">Información del Equipo</h3>
             <label for="equipoDescripcion">Descripción del Equipo:</label>
             <textarea id="equipoDescripcion" name="equipoDescripcion" rows="2" required></textarea>
 
@@ -110,11 +124,25 @@
             <input type="text" id="amperajeL2" name="amperajeL2" placeholder="Amperaje L2" required>
             <input type="text" id="amperajeL3" name="amperajeL3" placeholder="Amperaje L3" required>
 
+            <h3 class="section-title">Actividades y Verificaciones</h3>
+            <textarea id="actividades" name="actividades" placeholder="Describa las actividades de mantenimiento realizadas y las verificaciones." rows="4" required></textarea>
+
             <label for="descripcion">Descripción del Problema:</label>
             <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
 
             <label for="solucion">Solución Aplicada:</label>
             <textarea id="solucion" name="solucion" rows="4" required></textarea>
+
+            <div class="time-inputs">
+                <div>
+                    <label for="inicio">Hora de Inicio:</label>
+                    <input type="time" id="inicio" name="inicio" required>
+                </div>
+                <div>
+                    <label for="fin">Hora de Fin:</label>
+                    <input type="time" id="fin" name="fin" required>
+                </div>
+            </div>
 
             <label for="fecha">Fecha del Reporte:</label>
             <input type="date" id="fecha" name="fecha" required>
@@ -131,16 +159,13 @@
     </div>
 
     <script>
-        // Inicializar la firma
         const canvas = document.getElementById('signature-pad');
         const signaturePad = new SignaturePad(canvas);
 
-        // Limpiar la firma
         document.getElementById('clear-signature').addEventListener('click', function () {
             signaturePad.clear();
         });
 
-        // Función para obtener el número de reporte
         async function obtenerConsecutivo() {
             return new Promise((resolve) => {
                 let consecutivo = localStorage.getItem('consecutivo');
@@ -158,15 +183,14 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Obtener los valores del formulario
             const nombre = document.getElementById("nombre").value;
             const cliente = document.getElementById("cliente").value;
             const tipoServicio = document.getElementById("tipoServicio").value;
             const descripcion = document.getElementById("descripcion").value;
             const solucion = document.getElementById("solucion").value;
             const fechaReporte = document.getElementById("fecha").value;
+            const actividades = document.getElementById("actividades").value;
 
-            // Información del equipo
             const equipoDescripcion = document.getElementById("equipoDescripcion").value;
             const marca = document.getElementById("marca").value;
             const modelo = document.getElementById("modelo").value;
@@ -178,66 +202,58 @@
             const amperajeL2 = document.getElementById("amperajeL2").value;
             const amperajeL3 = document.getElementById("amperajeL3").value;
 
-            // Obtener el número de reporte desde la simulación
+            const inicio = document.getElementById("inicio").value;
+            const fin = document.getElementById("fin").value;
+
             const consecutivo = await obtenerConsecutivo();
             document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo;
 
-            // Encabezado del PDF
             doc.setFontSize(16);
             doc.text("D&H Soluciones SAS", 10, 10);
             doc.setFontSize(12);
             doc.text("Reporte Técnico", 10, 20);
             doc.line(10, 25, 200, 25);
 
-            // Número de Reporte
             doc.text("Reporte Número: " + consecutivo, 12, 37);
-
-            // Nombre del Cliente
             doc.text("Nombre del Cliente: " + cliente, 12, 47);
-
-            // Fecha del Reporte
             doc.text("Fecha del Reporte: " + fechaReporte, 12, 57);
-
-            // Tipo de Servicio
             let tipoTexto = tipoServicio === "preventivo" ? "Mantenimiento Preventivo" : tipoServicio === "correctivo" ? "Mantenimiento Correctivo" : "Revisión";
             doc.text("Tipo de Servicio: " + tipoTexto, 12, 67);
 
-            // Información del equipo en formato horizontal
             doc.text("Descripción del Equipo: " + equipoDescripcion, 12, 77);
             doc.text("Marca: " + marca + "    Modelo: " + modelo + "    Serie: " + serie, 12, 87);
             doc.text("Voltaje: V1 " + voltajeV1 + "V, V2 " + voltajeV2 + "V, V3 " + voltajeV3 + "V", 12, 97);
             doc.text("Amperaje: L1 " + amperajeL1 + "A, L2 " + amperajeL2 + "A, L3 " + amperajeL3 + "A", 12, 107);
 
-            // Descripción del Problema
-            doc.text("Descripción del Problema:", 12, 117);
-            doc.text(descripcion, 12, 127, { maxWidth: 185 });
+            doc.text("Actividades Realizadas:", 12, 117);
+            doc.text(actividades, 12, 127, { maxWidth: 185 });
 
-            // Solución Aplicada
-            doc.text("Solución Aplicada:", 12, 137);
-            doc.text(solucion, 12, 147, { maxWidth: 185 });
+            doc.text("Descripción del Problema:", 12, 137);
+            doc.text(descripcion, 12, 147, { maxWidth: 185 });
 
-            // Firma del Cliente
+            doc.text("Solución Aplicada:", 12, 157);
+            doc.text(solucion, 12, 167, { maxWidth: 185 });
+
+            doc.text("Hora de Inicio: " + inicio, 12, 177);
+            doc.text("Hora de Fin: " + fin, 12, 187);
+
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
-                doc.text("Firma del Cliente:", 12, 160);
-                doc.addImage(signatureImage, 'PNG', 12, 165, 50, 25);
+                doc.text("Firma del Cliente:", 12, 197);
+                doc.addImage(signatureImage, 'PNG', 12, 202, 50, 25);
             } else {
-                doc.text("Firma del Cliente: No se ha proporcionado firma.", 12, 160);
+                doc.text("Firma del Cliente: No se ha proporcionado firma.", 12, 197);
             }
 
-            // Nombre del Técnico
-            doc.text("Nombre del Técnico: " + nombre, 12, 200);
+            doc.text("Nombre del Técnico: " + nombre, 12, 240);
 
-            // Pie de página
             const fecha = new Date().toLocaleDateString();
             doc.setFontSize(10);
             doc.text("Generado el: " + fecha, 10, doc.internal.pageSize.height - 10);
 
-            // Guardar el PDF
             doc.save("reporte_tecnico_" + consecutivo + ".pdf");
         }
 
-        // Inicializar el consecutivo cuando la página se carga
         window.onload = async function() {
             const consecutivo = await obtenerConsecutivo();
             document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo;
@@ -245,4 +261,5 @@
     </script>
 </body>
 </html>
+
 
