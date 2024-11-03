@@ -9,12 +9,28 @@ $pdf->SetTitle('Reporte Técnico');
 
 // Configurar márgenes: izquierda, arriba, derecha
 $pdf->SetMargins(15, 15, 15);
+$pdf->SetHeaderMargin(10);  // Margen para el encabezado
+$pdf->SetFooterMargin(10);  // Margen para el pie de página
 
 // Salto de página automático
 $pdf->SetAutoPageBreak(TRUE, 20);
 
 // Agregar una página
 $pdf->AddPage();
+
+// Configurar fuente
+$pdf->SetFont('helvetica', '', 12);
+
+// Contenido del encabezado de la empresa
+$empresa = "
+<h2>Nombre de la Empresa</h2>
+<p>Dirección de la Empresa</p>
+<p>Teléfono: (XXX) XXX-XXXX</p>
+<p>Email: contacto@empresa.com</p>
+";
+
+// Escribir el contenido del encabezado en el PDF
+$pdf->writeHTML($empresa, true, false, true, false, '');
 
 // Obtener datos del formulario
 $cliente = $_POST['cliente'];
@@ -29,12 +45,12 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Contenido del PDF
+// Contenido del reporte técnico
 $html = "
 <style>
     h2 {
         text-align: center;
-        font-size: 20px;
+        font-size: 18px;
         margin-bottom: 20px;
     }
     .container {
@@ -53,13 +69,11 @@ $html = "
 
 <div class='container'>
     <h2>Reporte Técnico</h2>
-
     <p><strong>Nombre del Cliente:</strong> $cliente</p>
     <p><strong>Nombre del Técnico:</strong> $tecnico</p>
     <p><strong>Fecha de Revisión:</strong> $fecha</p>
     <p><strong>Ubicación del Equipo:</strong> $ubicacion</p>
     <p><strong>Tipo de Equipo:</strong> $equipo" . ($equipo === 'otros' ? " - $equipo_otro" : "") . "</p>
-
     <p><strong>Descripción del Problema:</strong><br/> $descripcion</p>
     <p><strong>Solución Realizada:</strong><br/> $solucion</p>
     <p><strong>Estado General del Equipo:</strong> $estado</p>
