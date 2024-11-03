@@ -4,107 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte Técnico</title>
+    <title>Reporte Técnico - D&H Soluciones SAS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f0f8ff;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #004d99;
+            margin-bottom: 20px;
         }
         form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        input, select, textarea {
+        input, textarea {
             width: 100%;
-            margin-top: 10px;
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
         button {
             background-color: #004d99;
-            color: #fff;
-            padding: 10px;
+            color: white;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-        #campoOtros {
-            display: none; /* Campo escondido por defecto */
         }
     </style>
-    <script>
-        // Función que muestra o esconde el campo "Especifique el Equipo"
-        function mostrarCampoOtros() {
-            const tipoEquipo = document.getElementById('equipo').value;
-            const campoOtros = document.getElementById('campoOtros');
-            campoOtros.style.display = (tipoEquipo === 'otros') ? 'block' : 'none';
-        }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <form action="generar_pdf.php" method="post">
-        <h2>Reporte Técnico</h2>
-        
-        <label for="cliente">Nombre del Cliente:</label>
-        <input type="text" id="cliente" name="cliente" required>
-        
-        <label for="tecnico">Nombre del Técnico:</label>
-        <input type="text" id="tecnico" name="tecnico" required>
+    <div class="container">
+        <h2>Generar Reporte Técnico</h2>
+        <form id="reporteForm">
+            <label for="nombre">Nombre del Técnico:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="cliente">Nombre del Cliente:</label>
+            <input type="text" id="cliente" name="cliente" required>
+            
+            <label for="descripcion">Descripción del Problema:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+            
+            <label for="solucion">Solución Aplicada:</label>
+            <textarea id="solucion" name="solucion" rows="4" required></textarea>
+            
+            <button type="button" onclick="generarPDF()">Generar PDF</button>
+        </form>
+    </div>
+    <script>
+        function generarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const nombre = document.getElementById("nombre").value;
+            const cliente = document.getElementById("cliente").value;
+            const descripcion = document.getElementById("descripcion").value;
+            const solucion = document.getElementById("solucion").value;
 
-        <label for="fecha">Fecha de Revisión:</label>
-        <input type="date" id="fecha" name="fecha" required>
+            doc.setFontSize(16);
+            doc.text("Reporte Técnico", 10, 10);
+            doc.setFontSize(12);
+            doc.text("Nombre del Técnico: " + nombre, 10, 30);
+            doc.text("Nombre del Cliente: " + cliente, 10, 40);
+            doc.text("Descripción del Problema:", 10, 50);
+            doc.text(descripcion, 10, 60);
+            doc.text("Solución Aplicada:", 10, 80);
+            doc.text(solucion, 10, 90);
 
-        <label for="ubicacion">Ubicación del Equipo:</label>
-        <input type="text" id="ubicacion" name="ubicacion" required>
-
-        <label for="equipo">Tipo de Equipo:</label>
-        <select id="equipo" name="equipo" onchange="mostrarCampoOtros()" required>
-            <option value="">Seleccione una opción</option>
-            <option value="cuartos_frios">Cuartos Fríos</option>
-            <option value="planta_electrica">Planta Eléctrica</option>
-            <option value="electrobomba">Electrobomba</option>
-            <option value="rack">Rack</option>
-            <option value="otros">Otros</option>
-        </select>
-
-        <div id="campoOtros">
-            <label for="equipo_otro">Especifique el Equipo:</label>
-            <input type="text" id="equipo_otro" name="equipo_otro">
-        </div>
-
-        <label for="descripcion">Descripción del Problema:</label>
-        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-
-        <label for="solucion">Solución Realizada:</label>
-        <textarea id="solucion" name="solucion" rows="4" required></textarea>
-
-        <label for="estado">Estado General del Equipo:</label>
-        <select id="estado" name="estado" required>
-            <option value="">Seleccione el estado</option>
-            <option value="operativo">Operativo</option>
-            <option value="en_reparacion">En reparación</option>
-            <option value="fuera_de_servicio">Fuera de servicio</option>
-        </select>
-
-        <label for="observaciones">Observaciones Adicionales:</label>
-        <textarea id="observaciones" name="observaciones" rows="4"></textarea>
-
-        <label for="firma">Firma del Técnico:</label>
-        <input type="text" id="firma" name="firma" required>
-
-        <button type="submit">Generar PDF</button>
-    </form>
+            doc.save("reporte_tecnico.pdf");
+        }
+    </script>
 </body>
-            </html>
+</html>
