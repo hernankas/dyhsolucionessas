@@ -1,5 +1,5 @@
 <?php
-require_once('tcpdf/tcpdf.php'); // Asegúrate de que la ruta sea correcta
+require_once('tcpdf/tcpdf.php');
 
 // Crear nuevo documento PDF
 $pdf = new TCPDF();
@@ -7,34 +7,37 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nombre del Técnico');
 $pdf->SetTitle('Reporte Técnico');
 
-// Configurar márgenes pequeños
-$pdf->SetMargins(5, 5, 5); // Márgenes mínimos
-$pdf->SetHeaderMargin(5);  
-$pdf->SetFooterMargin(5);  
+// Configurar márgenes: izquierda, arriba, derecha
+$pdf->SetMargins(5, 5, 5); // Márgenes muy pequeños
+$pdf->SetHeaderMargin(0);  // Sin margen para el encabezado
+$pdf->SetFooterMargin(0);  // Sin margen para el pie de página
 
-// Salto de página automático
+// Deshabilitar salto de página automático
 $pdf->SetAutoPageBreak(TRUE, 5);
 
 // Agregar una página
 $pdf->AddPage();
 
 // Configurar fuente
-$pdf->SetFont('helvetica', '', 9); 
+$pdf->SetFont('helvetica', '', 10); // Tamaño de letra más pequeño
 
-// Contenido del encabezado de la empresa, sin espacio adicional entre líneas
+// Contenido del encabezado de la empresa
 $empresa = "
-<h2 style='font-size: 12px; margin-bottom: 2px;'>Nombre de la Empresa</h2>
-<p style='font-size: 10px; margin-bottom: 2px;'>Dirección de la Empresa</p>
-<p style='font-size: 10px; margin-bottom: 2px;'>Teléfono: (XXX) XXX-XXXX</p>
-<p style='font-size: 10px; margin-bottom: 2px;'>Email: contacto@empresa.com</p>
+<h2 style='font-size: 10px; margin: 0px;'>Nombre de la Empresa</h2>
+<p style='font-size: 9px; margin: 0px;'>Dirección de la Empresa</p>
+<p style='font-size: 9px; margin: 0px;'>Teléfono: (XXX) XXX-XXXX</p>
+<p style='font-size: 9px; margin: 0px;'>Email: contacto@empresa.com</p>
 ";
 
-// Escribir el contenido del encabezado en el PDF, sin dejar espacio extra
+// Escribir el contenido del encabezado en el PDF sin espacio entre elementos
 $pdf->writeHTML($empresa, true, false, true, false, '');
 
-// Agregar el título del reporte técnico inmediatamente después del encabezado
+// Eliminar cualquier salto innecesario antes del título
+$pdf->Ln(1); // Solo 1mm de espacio entre encabezado y título
+
+// Agregar el título del reporte técnico
 $reporteTitulo = "
-<h2 style='font-size: 12px; text-align: center;'>Reporte Técnico</h2>
+<h2 style='font-size: 12px; text-align: center; margin: 0px;'>Reporte Técnico</h2>
 ";
 $pdf->writeHTML($reporteTitulo, true, false, true, false, '');
 
@@ -54,25 +57,17 @@ $firma = $_POST['firma'];
 // Contenido del reporte técnico
 $html = "
 <style>
-    h2 {
-        font-size: 12px; 
-        margin-bottom: 10px;
-    }
-    .container {
-        border: 1px solid #000;
-        padding: 5px; 
-    }
     p {
         font-size: 9px; 
-        line-height: 1.2; 
-        margin-bottom: 5px;
+        line-height: 1.2;
+        margin: 0px; /* Sin margen inferior para evitar espacio */
     }
     strong {
         font-weight: bold;
     }
 </style>
 
-<div class='container'>
+<div>
     <p><strong>Nombre del Cliente:</strong> $cliente</p>
     <p><strong>Nombre del Técnico:</strong> $tecnico</p>
     <p><strong>Fecha de Revisión:</strong> $fecha</p>
