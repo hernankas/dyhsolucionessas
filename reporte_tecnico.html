@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -79,18 +78,55 @@
             const descripcion = document.getElementById("descripcion").value;
             const solucion = document.getElementById("solucion").value;
 
-            doc.setFontSize(16);
-            doc.text("Reporte Técnico", 10, 10);
-            doc.setFontSize(12);
-            doc.text("Nombre del Técnico: " + nombre, 10, 30);
-            doc.text("Nombre del Cliente: " + cliente, 10, 40);
-            doc.text("Descripción del Problema:", 10, 50);
-            doc.text(descripcion, 10, 60);
-            doc.text("Solución Aplicada:", 10, 80);
-            doc.text(solucion, 10, 90);
+            // Estilo general
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(20);
+            doc.setTextColor(0, 77, 153);
+            doc.text("D&H Soluciones SAS", 10, 20);
 
+            // Encabezado
+            doc.setFontSize(16);
+            doc.setTextColor(40);
+            doc.text("Reporte Técnico", 10, 30);
+
+            // Subtítulos
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 0, 0);
+
+            // Información del técnico
+            doc.text("Nombre del Técnico:", 10, 40);
+            doc.setFont("helvetica", "bold");
+            doc.text(nombre, 60, 40);
+
+            // Información del cliente
+            doc.setFont("helvetica", "normal");
+            doc.text("Nombre del Cliente:", 10, 50);
+            doc.setFont("helvetica", "bold");
+            doc.text(cliente, 60, 50);
+
+            // Descripción del problema
+            doc.setFont("helvetica", "normal");
+            doc.text("Descripción del Problema:", 10, 60);
+            doc.setFont("helvetica", "bold");
+            doc.text(descripcion, 10, 70, { maxWidth: 180 });
+
+            // Solución aplicada
+            doc.setFont("helvetica", "normal");
+            doc.text("Solución Aplicada:", 10, 90);
+            doc.setFont("helvetica", "bold");
+            doc.text(solucion, 10, 100, { maxWidth: 180 });
+
+            // Pie de página
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(150);
+            doc.text("Este reporte fue generado el " + new Date().toLocaleDateString(), 10, 280);
+
+            // Guardar el PDF
             doc.save("reporte_tecnico.pdf");
         }
     </script>
 </body>
 </html>
+
