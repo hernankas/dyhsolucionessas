@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte Técnico - D&H Soluciones SAS</title>
     <style>
         body {
@@ -67,7 +67,6 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 </head>
 <body>
@@ -86,6 +85,30 @@
                 <option value="correctivo">Mantenimiento Correctivo</option>
                 <option value="revision">Revisión</option>
             </select>
+
+            <!-- Información del equipo -->
+            <h3>Información del Equipo</h3>
+            <label for="equipoDescripcion">Descripción del Equipo:</label>
+            <textarea id="equipoDescripcion" name="equipoDescripcion" rows="2" required></textarea>
+
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" required>
+
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" name="modelo" required>
+
+            <label for="serie">Serie:</label>
+            <input type="text" id="serie" name="serie" required>
+
+            <label for="voltaje">Voltaje (V1, V2, V3):</label>
+            <input type="text" id="voltajeV1" name="voltajeV1" placeholder="Voltaje V1" required>
+            <input type="text" id="voltajeV2" name="voltajeV2" placeholder="Voltaje V2" required>
+            <input type="text" id="voltajeV3" name="voltajeV3" placeholder="Voltaje V3" required>
+
+            <label for="amperaje">Amperaje (L1, L2, L3):</label>
+            <input type="text" id="amperajeL1" name="amperajeL1" placeholder="Amperaje L1" required>
+            <input type="text" id="amperajeL2" name="amperajeL2" placeholder="Amperaje L2" required>
+            <input type="text" id="amperajeL3" name="amperajeL3" placeholder="Amperaje L3" required>
 
             <label for="descripcion">Descripción del Problema:</label>
             <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
@@ -143,6 +166,18 @@
             const solucion = document.getElementById("solucion").value;
             const fechaReporte = document.getElementById("fecha").value;
 
+            // Información del equipo
+            const equipoDescripcion = document.getElementById("equipoDescripcion").value;
+            const marca = document.getElementById("marca").value;
+            const modelo = document.getElementById("modelo").value;
+            const serie = document.getElementById("serie").value;
+            const voltajeV1 = document.getElementById("voltajeV1").value;
+            const voltajeV2 = document.getElementById("voltajeV2").value;
+            const voltajeV3 = document.getElementById("voltajeV3").value;
+            const amperajeL1 = document.getElementById("amperajeL1").value;
+            const amperajeL2 = document.getElementById("amperajeL2").value;
+            const amperajeL3 = document.getElementById("amperajeL3").value;
+
             // Obtener el número de reporte desde la simulación
             const consecutivo = await obtenerConsecutivo();
             document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo;
@@ -154,32 +189,70 @@
             doc.text("Reporte Técnico", 10, 20);
             doc.line(10, 25, 200, 25);
 
-            // Datos en formato de tabla
-            doc.autoTable({
-                head: [['Campo', 'Detalles']],
-                body: [
-                    ['Reporte Número', consecutivo.toString()],
-                    ['Nombre del Cliente', cliente],
-                    ['Fecha del Reporte', fechaReporte],
-                    ['Tipo de Servicio', tipoServicio === "preventivo" ? "Mantenimiento Preventivo" : (tipoServicio === "correctivo" ? "Mantenimiento Correctivo" : "Revisión")],
-                    ['Descripción del Problema', descripcion],
-                    ['Solución Aplicada', solucion],
-                    ['Nombre del Técnico', nombre]
-                ],
-                startY: 30,
-                theme: 'grid',
-                styles: { fontSize: 12, cellPadding: 5 },
-                headStyles: { fillColor: [0, 77, 153], textColor: [255, 255, 255] }
-            });
+            // Recuadros para cada sección
+            doc.setLineWidth(0.5);
+
+            // Número de Reporte
+            doc.rect(10, 30, 190, 10);  // Dibujar recuadro
+            doc.text("Reporte Número: " + consecutivo, 12, 37);
+
+            // Nombre del Cliente
+            doc.rect(10, 45, 190, 10);  // Dibujar recuadro
+            doc.text("Nombre del Cliente: " + cliente, 12, 52);
+
+            // Fecha del Reporte
+            doc.rect(10, 60, 190, 10);  // Dibujar recuadro
+            doc.text("Fecha del Reporte: " + fechaReporte, 12, 67);
+
+            // Tipo de Servicio
+            doc.rect(10, 75, 190, 10);  // Dibujar recuadro
+            let tipoTexto = "";
+            if (tipoServicio === "preventivo") tipoTexto = "Mantenimiento Preventivo";
+            if (tipoServicio === "correctivo") tipoTexto = "Mantenimiento Correctivo";
+            if (tipoServicio === "revision") tipoTexto = "Revisión";
+            doc.text("Tipo de Servicio: " + tipoTexto, 12, 82);
+
+            // Información del equipo
+            doc.rect(10, 90, 190, 10);  // Recuadro Descripción del equipo
+            doc.text("Descripción del Equipo: " + equipoDescripcion, 12, 97);
+
+            doc.rect(10, 105, 190, 10);  // Recuadro Marca
+            doc.text("Marca: " + marca, 12, 112);
+
+            doc.rect(10, 120, 190, 10);  // Recuadro Modelo
+            doc.text("Modelo: " + modelo, 12, 127);
+
+            doc.rect(10, 135, 190, 10);  // Recuadro Serie
+            doc.text("Serie: " + serie, 12, 142);
+
+            doc.rect(10, 150, 190, 10);  // Recuadro Voltajes
+            doc.text("Voltaje (V1, V2, V3): " + voltajeV1 + "V, " + voltajeV2 + "V, " + voltajeV3 + "V", 12, 157);
+
+            doc.rect(10, 165, 190, 10);  // Recuadro Amperajes
+            doc.text("Amperaje (L1, L2, L3): " + amperajeL1 + "A, " + amperajeL2 + "A, " + amperajeL3 + "A", 12, 172);
+
+            // Descripción del Problema
+            doc.rect(10, 180, 190, 20);  // Recuadro grande para Descripción del Problema
+            doc.text("Descripción del Problema:", 12, 187);
+            doc.text(descripcion, 12, 195, { maxWidth: 185 });
+
+            // Solución Aplicada
+            doc.rect(10, 205, 190, 20);  // Recuadro grande para Solución Aplicada
+            doc.text("Solución Aplicada:", 12, 212);
+            doc.text(solucion, 12, 220, { maxWidth: 185 });
 
             // Firma del Cliente
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
-                doc.text("Firma del Cliente:", 10, doc.lastAutoTable.finalY + 10);
-                doc.addImage(signatureImage, 'PNG', 10, doc.lastAutoTable.finalY + 15, 50, 25);
+                doc.text("Firma del Cliente:", 12, 240);
+                doc.addImage(signatureImage, 'PNG', 12, 245, 50, 25);
             } else {
-                doc.text("Firma del Cliente: No se ha proporcionado firma.", 10, doc.lastAutoTable.finalY + 10);
+                doc.text("Firma del Cliente: No se ha proporcionado firma.", 12, 240);
             }
+
+            // Nombre del Técnico
+            doc.rect(10, 275, 190, 10);  // Dibujar recuadro
+            doc.text("Nombre del Técnico: " + nombre, 12, 282);
 
             // Pie de página
             const fecha = new Date().toLocaleDateString();
@@ -198,3 +271,4 @@
     </script>
 </body>
 </html>
+
