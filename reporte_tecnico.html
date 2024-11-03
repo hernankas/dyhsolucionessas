@@ -60,16 +60,23 @@
         <form id="reporteForm">
             <label for="consecutivo">Reporte Número:</label>
             <input type="text" id="consecutivo" name="consecutivo" readonly>
-            
+
             <label for="nombre">Nombre del Técnico:</label>
             <input type="text" id="nombre" name="nombre" required>
-            
+
             <label for="cliente">Nombre del Cliente:</label>
             <input type="text" id="cliente" name="cliente" required>
-            
+
+            <label for="tipoServicio">Tipo de Servicio:</label>
+            <select id="tipoServicio" name="tipoServicio" required>
+                <option value="preventivo">Mantenimiento Preventivo</option>
+                <option value="correctivo">Mantenimiento Correctivo</option>
+                <option value="revision">Revisión</option>
+            </select>
+
             <label for="descripcion">Descripción del Problema:</label>
             <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-            
+
             <label for="solucion">Solución Aplicada:</label>
             <textarea id="solucion" name="solucion" rows="4" required></textarea>
 
@@ -78,45 +85,52 @@
 
             <label for="observaciones">Observaciones Adicionales:</label>
             <textarea id="observaciones" name="observaciones" rows="3" placeholder="Escriba observaciones aquí..."></textarea>
-            
+
             <button type="button" onclick="generarPDF()">Generar PDF</button>
         </form>
     </div>
     <script>
-        // Función para obtener el consecutivo
-        function obtenerConsecutivo() {
-            let consecutivo = localStorage.getItem('consecutivo');
-            if (!consecutivo) {
-                consecutivo = 1; // Comenzar en 1 si no existe
-            } else {
-                consecutivo = parseInt(consecutivo) + 1; // Aumentar el consecutivo
-            }
-            localStorage.setItem('consecutivo', consecutivo); // Guardar el nuevo consecutivo
-            return consecutivo;
+        // Función para obtener el número de reporte
+        async function obtenerConsecutivo() {
+            // Simulación de obtener un consecutivo del servidor
+            // Puedes reemplazar esto con una llamada real a un servidor si lo necesitas
+            return new Promise((resolve) => {
+                let consecutivo = localStorage.getItem('consecutivo');
+                if (!consecutivo) {
+                    consecutivo = 1;
+                } else {
+                    consecutivo = parseInt(consecutivo) + 1;
+                }
+                localStorage.setItem('consecutivo', consecutivo);
+                resolve(consecutivo);
+            });
         }
 
-        function generarPDF() {
+        async function generarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+
+            // Obtener los valores del formulario
             const nombre = document.getElementById("nombre").value;
             const cliente = document.getElementById("cliente").value;
+            const tipoServicio = document.getElementById("tipoServicio").value;
             const descripcion = document.getElementById("descripcion").value;
             const solucion = document.getElementById("solucion").value;
             const fechaReporte = document.getElementById("fecha").value;
             const observaciones = document.getElementById("observaciones").value;
 
-            // Obtener y mostrar el consecutivo
-            const consecutivo = obtenerConsecutivo();
-            document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo; // Mostrar el consecutivo en el formulario
+            // Obtener el número de reporte desde la simulación
+            const consecutivo = await obtenerConsecutivo();
+            document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo;
 
             // Encabezado del PDF
             doc.setFontSize(16);
             doc.text("D&H Soluciones SAS", 10, 10);
             doc.setFontSize(12);
             doc.text("Reporte Técnico", 10, 20);
-            doc.line(10, 25, 200, 25); // Línea horizontal para separar
+            doc.line(10, 25, 200, 25);
 
-            // Sección de datos
+            // Datos del reporte
             doc.setFontSize(12);
             doc.text("Reporte Número:", 10, 35);
             doc.text(consecutivo.toString(), 60, 35);
@@ -127,42 +141,25 @@
             doc.text("Fecha del Reporte:", 10, 65);
             doc.text(fechaReporte, 60, 65);
 
-            // Sección de Descripción del Problema
-            doc.setFontSize(12);
-            doc.text("Descripción del Problema:", 10, 75);
-            doc.setFont("helvetica", "normal");
-            doc.text(descripcion, 10, 85, { maxWidth: 190 });
+            // Tipo de Servicio
+            doc.text("Tipo de Servicio:", 10, 75);
+            let tipoTexto = "";
+            if (tipoServicio === "preventivo") tipoTexto = "Mantenimiento Preventivo";
+            if (tipoServicio === "correctivo") tipoTexto = "Mantenimiento Correctivo";
+            if (tipoServicio === "revision") tipoTexto = "Revisión";
+            doc.text(tipoTexto, 60, 75);
 
-            // Sección de Solución Aplicada
-            doc.setFontSize(12);
-            doc.text("Solución Aplicada:", 10, 105);
-            doc.setFont("helvetica", "normal");
-            doc.text(solucion, 10, 115, { maxWidth: 190 });
+            // Descripción del Problema
+            doc.text("Descripción del Problema:", 10, 85);
+            doc.text(descripcion, 10, 95, { maxWidth: 190 });
 
-            // Sección de Observaciones
-            doc.setFontSize(12);
-            doc.text("Observaciones Adicionales:", 10, 135);
-            doc.setFont("helvetica", "normal");
-            doc.text(observaciones, 10, 145, { maxWidth: 190 });
+            // Solución Aplicada
+            doc.text("Solución Aplicada:", 10, 115);
+            doc.text(solucion, 10, 125, { maxWidth: 190 });
 
-            // Tabla para presentar la información
-            doc.autoTable({
-                head: [['Item', 'Detalles']],
-                body: [
-                    ['Consecutivo', consecutivo],
-                    ['Técnico', nombre],
-                    ['Cliente', cliente],
-                    ['Fecha', fechaReporte],
-                    ['Problema', descripcion],
-                    ['Solución', solucion],
-                    ['Observaciones', observaciones]
-                ],
-                startY: 160,
-                theme: 'grid',
-                styles: { cellPadding: 2, fontSize: 10 },
-                headStyles: { fillColor: [0, 77, 153] },
-                margin: { top: 10 }
-            });
+            // Observaciones
+            doc.text("Observaciones Adicionales:", 10, 145);
+            doc.text(observaciones, 10, 155, { maxWidth: 190 });
 
             // Pie de página
             const fecha = new Date().toLocaleDateString();
@@ -173,10 +170,12 @@
             doc.save("reporte_tecnico_" + consecutivo + ".pdf");
         }
 
-        // Inicializar el consecutivo en la carga de la página
-        window.onload = function() {
-            document.getElementById("consecutivo").value = "Reporte Número: " + obtenerConsecutivo();
+        // Inicializar el consecutivo cuando la página se carga
+        window.onload = async function() {
+            const consecutivo = await obtenerConsecutivo();
+            document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo;
         };
     </script>
 </body>
 </html>
+
