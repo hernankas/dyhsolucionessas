@@ -42,10 +42,12 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             font-size: 14px;
+            background-color: #f0f0f0;
         }
         textarea {
             grid-column: span 2;
             resize: vertical;
+            min-height: 80px;
         }
         button {
             background-color: #004d99;
@@ -63,6 +65,7 @@
             grid-column: span 2;
             width: 100%;
             height: 150px;
+            background-color: #fff;
         }
         #clear-signature {
             background-color: red;
@@ -83,7 +86,7 @@
         <h2>Generar Reporte Técnico</h2>
 
         <label for="orden">Número de Orden:</label>
-        <input type="text" id="orden" name="orden" required>
+        <input type="text" id="orden" name="orden" readonly>
 
         <label for="cliente">Nombre del Cliente:</label>
         <input type="text" id="cliente" name="cliente" required>
@@ -123,8 +126,14 @@
             <input type="text" id="amperajeL3" name="amperajeL3" placeholder="Amperaje L3" required>
         </div>
 
+        <label for="horaInicio">Hora Inicial:</label>
+        <input type="time" id="horaInicio" name="horaInicio" required>
+
+        <label for="horaFin">Hora Final:</label>
+        <input type="time" id="horaFin" name="horaFin" required>
+
         <label for="actividades">Descripción de Actividades Realizadas:</label>
-        <textarea id="actividades" name="actividades" rows="4" required></textarea>
+        <textarea id="actividades" name="actividades" rows="5" required></textarea>
 
         <label for="fecha">Fecha del Reporte:</label>
         <input type="date" id="fecha" name="fecha" required>
@@ -151,18 +160,12 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Información de la empresa
-            const empresaInfo = [
-                ["D&H Soluciones SAS"],
-                ["NIT: 123456789"],
-                ["Teléfono: +57 312 3456789"],
-                ["Dirección: Calle 123 #45-67, Medellín, Colombia"]
-            ];
-
-            doc.autoTable({
-                body: empresaInfo,
-                styles: { fontSize: 10, cellPadding: 3, halign: 'center' },
-            });
+            // Obtener la fecha actual para generar el número de reporte
+            const fechaActual = new Date();
+            const fechaFormato = fechaActual.getFullYear() + '' +
+                                 (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '' +
+                                 fechaActual.getDate().toString().padStart(2, '0');
+            document.getElementById("orden").value = fechaFormato;
 
             const orden = document.getElementById("orden").value;
             const cliente = document.getElementById("cliente").value;
@@ -177,9 +180,24 @@
             const amperajeL1 = document.getElementById("amperajeL1").value;
             const amperajeL2 = document.getElementById("amperajeL2").value;
             const amperajeL3 = document.getElementById("amperajeL3").value;
+            const horaInicio = document.getElementById("horaInicio").value;
+            const horaFin = document.getElementById("horaFin").value;
             const actividades = document.getElementById("actividades").value;
             const fecha = document.getElementById("fecha").value;
             const nombreTecnico = document.getElementById("nombreTecnico").value;
+
+            // Información de la empresa
+            const empresaInfo = [
+                ["D&H Soluciones SAS"],
+                ["NIT: 123456789"],
+                ["Teléfono: +57 312 3456789"],
+                ["Dirección: Calle 123 #45-67, Medellín, Colombia"]
+            ];
+
+            doc.autoTable({
+                body: empresaInfo,
+                styles: { fontSize: 10, cellPadding: 3, halign: 'center' },
+            });
 
             const orderInfo = [
                 ["ORDEN DE TRABAJO No", orden],
@@ -201,7 +219,9 @@
                 ["MODELO", modelo],
                 ["SERIE", serie],
                 ["VOLTAGE", `V1: ${voltajeV1} V  V2: ${voltajeV2} V  V3: ${voltajeV3} V`],
-                ["AMPERAJE", `L1: ${amperajeL1} A  L2: ${amperajeL2} A  L3: ${amperajeL3} A`]
+                ["AMPERAJE", `L1: ${amperajeL1} A  L2: ${amperajeL2} A  L3: ${amperajeL3} A`],
+                ["HORA INICIO", horaInicio],
+                ["HORA FIN", horaFin]
             ];
 
             doc.autoTable({
@@ -223,12 +243,12 @@
                 doc.text("Firma del Cliente: No se ha proporcionado firma.", 14, doc.previousAutoTable.finalY + 50);
             }
 
+            // Firma del técnico
+            doc.text("Firma del Técnico: " + nombreTecnico, 14, doc.previousAutoTable.finalY + 90);
+
             // Guardar el PDF
             doc.save(`reporte_tecnico_${orden}_${cliente}.pdf`);
         }
     </script>
 </body>
 </html>
-
-
-
