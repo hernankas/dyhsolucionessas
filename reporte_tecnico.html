@@ -58,7 +58,7 @@
     <div class="container">
         <h2>Generar Reporte Técnico</h2>
         <form id="reporteForm">
-            <label for="consecutivo">Consecutivo de Reporte:</label>
+            <label for="consecutivo">Reporte Número:</label>
             <input type="text" id="consecutivo" name="consecutivo" readonly>
             
             <label for="nombre">Nombre del Técnico:</label>
@@ -107,7 +107,7 @@
 
             // Obtener y mostrar el consecutivo
             const consecutivo = obtenerConsecutivo();
-            document.getElementById("consecutivo").value = consecutivo; // Mostrar el consecutivo en el formulario
+            document.getElementById("consecutivo").value = "Reporte Número: " + consecutivo; // Mostrar el consecutivo en el formulario
 
             // Encabezado del PDF
             doc.setFontSize(16);
@@ -118,8 +118,8 @@
 
             // Sección de datos
             doc.setFontSize(12);
-            doc.text("Consecutivo de Reporte:", 10, 35);
-            doc.text(consecutivo.toString(), 80, 35);
+            doc.text("Reporte Número:", 10, 35);
+            doc.text(consecutivo.toString(), 60, 35);
             doc.text("Nombre del Técnico:", 10, 45);
             doc.text(nombre, 60, 45);
             doc.text("Nombre del Cliente:", 10, 55);
@@ -170,16 +170,13 @@
             doc.text("Generado el: " + fecha, 10, doc.internal.pageSize.height - 10);
 
             // Guardar el PDF
-            doc.save("reporte_tecnico.pdf");
+            doc.save("reporte_tecnico_" + consecutivo + ".pdf");
         }
 
         // Inicializar el consecutivo en la carga de la página
         window.onload = function() {
-            document.getElementById("consecutivo").value = obtenerConsecutivo();
+            document.getElementById("consecutivo").value = "Reporte Número: " + obtenerConsecutivo();
         };
     </script>
 </body>
 </html>
-
-
-
