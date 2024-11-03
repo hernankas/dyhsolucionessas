@@ -34,7 +34,7 @@
             flex-direction: column;
             gap: 15px;
         }
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 10px;
             border-radius: 5px;
@@ -69,6 +69,12 @@
             
             <label for="solucion">Solución Aplicada:</label>
             <textarea id="solucion" name="solucion" rows="4" required></textarea>
+
+            <label for="fecha">Fecha del Reporte:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="observaciones">Observaciones Adicionales:</label>
+            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Escriba observaciones aquí..."></textarea>
             
             <button type="button" onclick="generarPDF()">Generar PDF</button>
         </form>
@@ -81,6 +87,8 @@
             const cliente = document.getElementById("cliente").value;
             const descripcion = document.getElementById("descripcion").value;
             const solucion = document.getElementById("solucion").value;
+            const fechaReporte = document.getElementById("fecha").value;
+            const observaciones = document.getElementById("observaciones").value;
 
             // Encabezado del PDF
             doc.setFontSize(16);
@@ -95,18 +103,26 @@
             doc.text(nombre, 60, 35);
             doc.text("Nombre del Cliente:", 10, 45);
             doc.text(cliente, 60, 45);
+            doc.text("Fecha del Reporte:", 10, 55);
+            doc.text(fechaReporte, 60, 55);
 
             // Sección de Descripción del Problema
             doc.setFontSize(12);
-            doc.text("Descripción del Problema:", 10, 55);
+            doc.text("Descripción del Problema:", 10, 65);
             doc.setFont("helvetica", "normal");
-            doc.text(descripcion, 10, 65, { maxWidth: 190 });
+            doc.text(descripcion, 10, 75, { maxWidth: 190 });
 
             // Sección de Solución Aplicada
             doc.setFontSize(12);
-            doc.text("Solución Aplicada:", 10, 85);
+            doc.text("Solución Aplicada:", 10, 95);
             doc.setFont("helvetica", "normal");
-            doc.text(solucion, 10, 95, { maxWidth: 190 });
+            doc.text(solucion, 10, 105, { maxWidth: 190 });
+
+            // Sección de Observaciones
+            doc.setFontSize(12);
+            doc.text("Observaciones Adicionales:", 10, 125);
+            doc.setFont("helvetica", "normal");
+            doc.text(observaciones, 10, 135, { maxWidth: 190 });
 
             // Tabla para presentar la información
             doc.autoTable({
@@ -114,10 +130,12 @@
                 body: [
                     ['Técnico', nombre],
                     ['Cliente', cliente],
+                    ['Fecha', fechaReporte],
                     ['Problema', descripcion],
-                    ['Solución', solucion]
+                    ['Solución', solucion],
+                    ['Observaciones', observaciones]
                 ],
-                startY: 110,
+                startY: 150,
                 theme: 'grid',
                 styles: { cellPadding: 2, fontSize: 10 },
                 headStyles: { fillColor: [0, 77, 153] },
