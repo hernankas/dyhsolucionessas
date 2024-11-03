@@ -156,93 +156,89 @@
             signaturePad.clear();
         });
 
-        function generarPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+       function generarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
 
-            // Obtener los valores del formulario
-            const orden = document.getElementById("orden").value;
-            const cliente = document.getElementById("cliente").value;
-            const tipoServicio = document.getElementById("tipoServicio").value;
-            const equipo = document.getElementById("equipo").value;
-            const marca = document.getElementById("marca").value;
-            const modelo = document.getElementById("modelo").value;
-            const serie = document.getElementById("serie").value;
-            const voltajeV1 = document.getElementById("voltajeV1").value;
-            const voltajeV2 = document.getElementById("voltajeV2").value;
-            const voltajeV3 = document.getElementById("voltajeV3").value;
-            const amperajeL1 = document.getElementById("amperajeL1").value;
-            const amperajeL2 = document.getElementById("amperajeL2").value;
-            const amperajeL3 = document.getElementById("amperajeL3").value;
-            const horaInicio = document.getElementById("horaInicio").value;
-            const horaFin = document.getElementById("horaFin").value;
-            const actividades = document.getElementById("actividades").value;
-            const fecha = document.getElementById("fecha").value;
-            const nombreTecnico = document.getElementById("nombreTecnico").value;
+    // Obtener los valores del formulario
+    const orden = document.getElementById("orden").value || "N/A";
+    const cliente = document.getElementById("cliente").value || "N/A";
+    const tipoServicio = document.getElementById("tipoServicio").value || "N/A";
+    const equipo = document.getElementById("equipo").value || "N/A";
+    const marca = document.getElementById("marca").value || "N/A";
+    const modelo = document.getElementById("modelo").value || "N/A";
+    const serie = document.getElementById("serie").value || "N/A";
+    const voltajeV1 = document.getElementById("voltajeV1").value || "N/A";
+    const voltajeV2 = document.getElementById("voltajeV2").value || "N/A";
+    const voltajeV3 = document.getElementById("voltajeV3").value || "N/A";
+    const amperajeL1 = document.getElementById("amperajeL1").value || "N/A";
+    const amperajeL2 = document.getElementById("amperajeL2").value || "N/A";
+    const amperajeL3 = document.getElementById("amperajeL3").value || "N/A";
+    const horaInicio = document.getElementById("horaInicio").value || "N/A";
+    const horaFin = document.getElementById("horaFin").value || "N/A";
+    const actividades = document.getElementById("actividades").value || "N/A";
+    const fecha = document.getElementById("fecha").value || "N/A";
+    const nombreTecnico = document.getElementById("nombreTecnico").value || "N/A";
 
-            // Información de la empresa
-            const empresaInfo = [
-                ["D&H Soluciones SAS"],
-                ["NIT: 123456789"],
-                ["Teléfono: +57 312 3456789"],
-                ["Dirección: Calle 123 #45-67, Medellín, Colombia"]
-            ];
+    // Título de la empresa
+    doc.setFontSize(16);
+    doc.text("D&H Soluciones SAS", 105, 20, null, null, 'center');
+    doc.setFontSize(10);
+    doc.text("NIT: 123456789", 105, 26, null, null, 'center');
+    doc.text("Teléfono: +57 312 3456789", 105, 30, null, null, 'center');
+    doc.text("Dirección: Calle 123 #45-67, Medellín, Colombia", 105, 34, null, null, 'center');
 
-            doc.autoTable({
-                body: empresaInfo,
-                styles: { fontSize: 10, cellPadding: 3, halign: 'center' },
-            });
+    // Orden de trabajo y fecha
+    doc.setFontSize(12);
+    doc.text("ORDEN DE TRABAJO No: " + orden, 14, 50);
+    doc.text("Fecha: " + fecha, 150, 50);
 
-            const orderInfo = [
-                ["ORDEN DE TRABAJO No", orden],
-                ["FECHA", fecha],
-                ["CLIENTE", cliente],
-                ["TIPO SERVICIO", tipoServicio]
-            ];
+    // Cliente y tipo de servicio
+    doc.text("Cliente: " + cliente, 14, 60);
+    doc.text("Tipo de Servicio: " + tipoServicio, 150, 60);
 
-            doc.autoTable({
-                body: orderInfo,
-                styles: { fontSize: 10, cellPadding: 3, halign: 'left' },
-                startY: doc.previousAutoTable.finalY + 10,
-            });
+    // Información del equipo
+    doc.setFontSize(12);
+    doc.text("Información del Equipo", 14, 70);
+    doc.setLineWidth(0.5);
+    doc.line(14, 72, 200, 72); // Línea divisoria
 
-            // Información del equipo
-            const equipmentInfo = [
-                ["EQUIPO", equipo],
-                ["MARCA", marca],
-                ["MODELO", modelo],
-                ["SERIE", serie],
-                ["VOLTAGE", `V1: ${voltajeV1} V  V2: ${voltajeV2} V  V3: ${voltajeV3} V`],
-                ["AMPERAJE", `L1: ${amperajeL1} A  L2: ${amperajeL2} A  L3: ${amperajeL3} A`],
-                ["HORA INICIO", horaInicio],
-                ["HORA FIN", horaFin]
-            ];
+    doc.setFontSize(10);
+    doc.text("Equipo: " + equipo, 14, 80);
+    doc.text("Marca: " + marca, 14, 85);
+    doc.text("Modelo: " + modelo, 14, 90);
+    doc.text("Serie: " + serie, 14, 95);
 
-            doc.autoTable({
-                body: equipmentInfo,
-                styles: { fontSize: 10, cellPadding: 3, halign: 'left' },
-                startY: doc.previousAutoTable.finalY + 10,
-            });
+    // Voltaje y Amperaje
+    doc.text("Voltaje (V1, V2, V3): " + voltajeV1 + " V, " + voltajeV2 + " V, " + voltajeV3 + " V", 14, 105);
+    doc.text("Amperaje (L1, L2, L3): " + amperajeL1 + " A, " + amperajeL2 + " A, " + amperajeL3 + " A", 14, 110);
 
-            // Actividades realizadas
-            doc.text("Actividades Realizadas:", 14, doc.previousAutoTable.finalY + 20);
-            doc.text(actividades, 14, doc.previousAutoTable.finalY + 30, { maxWidth: 180 });
+    // Horas
+    doc.text("Hora Inicial: " + horaInicio, 14, 120);
+    doc.text("Hora Final: " + horaFin, 150, 120);
 
-            // Firma del cliente
-            if (!signaturePad.isEmpty()) {
-                const signatureImage = signaturePad.toDataURL();
-                doc.text("Firma del Cliente:", 14, doc.previousAutoTable.finalY + 50);
-                doc.addImage(signatureImage, 'PNG', 14, doc.previousAutoTable.finalY + 60, 50, 25);
-            } else {
-                doc.text("Firma del Cliente: No se ha proporcionado firma.", 14, doc.previousAutoTable.finalY + 50);
-            }
+    // Descripción de actividades
+    doc.setFontSize(12);
+    doc.text("Descripción de Actividades Realizadas:", 14, 130);
+    doc.setFontSize(10);
+    doc.text(actividades, 14, 135, { maxWidth: 180 });
 
-            // Firma del técnico
-            doc.text("Firma del Técnico: " + nombreTecnico, 14, doc.previousAutoTable.finalY + 90);
+    // Firma del cliente
+    if (!signaturePad.isEmpty()) {
+        const signatureImage = signaturePad.toDataURL();
+        doc.text("Firma del Cliente:", 14, 170);
+        doc.addImage(signatureImage, 'PNG', 14, 175, 50, 25);
+    } else {
+        doc.text("Firma del Cliente: No se ha proporcionado firma.", 14, 170);
+    }
 
-            // Guardar el PDF
-            doc.save(`reporte_tecnico_${orden}_${cliente}.pdf`);
-        }
+    // Firma del técnico
+    doc.text("Firma del Técnico: " + nombreTecnico, 14, 210);
+
+    // Guardar el PDF
+    doc.save(`reporte_tecnico_${orden}_${cliente}.pdf`);
+}
+
     </script>
 </body>
 </html>
