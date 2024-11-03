@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> D&H Soluciones SAS</title>
+    <title>Reporte Técnico - D&H Soluciones SAS</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
@@ -19,7 +19,7 @@
             background-color: white;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
             max-width: 800px;
             width: 100%;
         }
@@ -27,6 +27,7 @@
             text-align: center;
             color: #004d99;
             margin-bottom: 20px;
+            font-size: 24px;
         }
         form {
             display: flex;
@@ -38,6 +39,7 @@
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            font-size: 14px;
         }
         button {
             background-color: #004d99;
@@ -46,14 +48,48 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+        }
+        /* Estilos para el PDF */
+        .pdf-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .pdf-header img {
+            width: 100px; /* Ajusta el tamaño del logo aquí */
+            margin-bottom: 10px;
+        }
+        .pdf-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #004d99;
+            border-radius: 5px;
+            background-color: #e9f5ff;
+        }
+        .pdf-section h3 {
+            margin: 0;
+            color: #004d99;
+        }
+        .pdf-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .pdf-table th, .pdf-table td {
+            border: 1px solid #004d99;
+            padding: 8px;
+            text-align: left;
+        }
+        .pdf-table th {
+            background-color: #004d99;
+            color: white;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Generar Reporte Técnico 
-        D&HSOLUCIONES SAS</h2>
+        <h2>Generar Reporte Técnico</h2>
         <form id="reporteForm">
             <label for="nombre">Nombre del Técnico:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -79,51 +115,52 @@
             const descripcion = document.getElementById("descripcion").value;
             const solucion = document.getElementById("solucion").value;
 
-            // Estilo general
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(20);
-            doc.setTextColor(0, 77, 153);
-            doc.text("D&H Soluciones SAS", 10, 20);
-
-            // Encabezado
+            // Encabezado del PDF
             doc.setFontSize(16);
-            doc.setTextColor(40);
-            doc.text("Reporte Técnico 
-                     D&HSOLUCIONES", 10, 30);
-
-            // Subtítulos
+            doc.text("D&H Soluciones SAS", 10, 10);
             doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(0, 0, 0);
+            doc.text("Reporte Técnico", 10, 20);
+            doc.line(10, 25, 200, 25); // Línea horizontal para separar
 
-            // Información del técnico
-            doc.text("Nombre del Técnico:", 10, 40);
-            doc.setFont("helvetica", "bold");
-            doc.text(nombre, 60, 40);
+            // Sección de datos
+            doc.setFontSize(12);
+            doc.text("Nombre del Técnico:", 10, 35);
+            doc.text(nombre, 60, 35);
+            doc.text("Nombre del Cliente:", 10, 45);
+            doc.text(cliente, 60, 45);
 
-            // Información del cliente
+            // Sección de Descripción del Problema
+            doc.setFontSize(12);
+            doc.text("Descripción del Problema:", 10, 55);
             doc.setFont("helvetica", "normal");
-            doc.text("Nombre del Cliente:", 10, 50);
-            doc.setFont("helvetica", "bold");
-            doc.text(cliente, 60, 50);
+            doc.text(descripcion, 10, 65, { maxWidth: 190 });
 
-            // Descripción del problema
+            // Sección de Solución Aplicada
+            doc.setFontSize(12);
+            doc.text("Solución Aplicada:", 10, 85);
             doc.setFont("helvetica", "normal");
-            doc.text("Descripción del Problema:", 10, 60);
-            doc.setFont("helvetica", "bold");
-            doc.text(descripcion, 10, 70, { maxWidth: 180 });
+            doc.text(solucion, 10, 95, { maxWidth: 190 });
 
-            // Solución aplicada
-            doc.setFont("helvetica", "normal");
-            doc.text("Solución Aplicada:", 10, 90);
-            doc.setFont("helvetica", "bold");
-            doc.text(solucion, 10, 100, { maxWidth: 180 });
+            // Tabla para presentar la información
+            doc.autoTable({
+                head: [['Item', 'Detalles']],
+                body: [
+                    ['Técnico', nombre],
+                    ['Cliente', cliente],
+                    ['Problema', descripcion],
+                    ['Solución', solucion]
+                ],
+                startY: 110,
+                theme: 'grid',
+                styles: { cellPadding: 2, fontSize: 10 },
+                headStyles: { fillColor: [0, 77, 153] },
+                margin: { top: 10 }
+            });
 
             // Pie de página
+            const fecha = new Date().toLocaleDateString();
             doc.setFontSize(10);
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(150);
-            doc.text("Este reporte fue generado el " + new Date().toLocaleDateString(), 10, 280);
+            doc.text("Generado el: " + fecha, 10, doc.internal.pageSize.height - 10);
 
             // Guardar el PDF
             doc.save("reporte_tecnico.pdf");
@@ -131,5 +168,6 @@
     </script>
 </body>
 </html>
+
 
 
