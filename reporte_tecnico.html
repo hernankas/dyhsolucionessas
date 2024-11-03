@@ -160,6 +160,14 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
+            // Pedir al usuario una contraseña antes de generar el PDF
+            const password = prompt("Por favor, ingrese una contraseña para proteger el archivo PDF:");
+
+            if (!password) {
+                alert("Por favor, ingrese una contraseña válida.");
+                return;
+            }
+
             // Obtener la fecha actual para generar el número de reporte
             const fechaActual = new Date();
             const fechaFormato = fechaActual.getFullYear() + '' +
@@ -245,6 +253,26 @@
 
             // Firma del técnico
             doc.text("Firma del Técnico: " + nombreTecnico, 14, doc.previousAutoTable.finalY + 90);
+
+            // Proteger el archivo con la contraseña proporcionada
+            doc.setProperties({
+                title: `Reporte Técnico - ${cliente}`,
+                subject: 'Reporte Técnico generado por D&H Soluciones SAS',
+                author: 'D&H Soluciones SAS',
+                keywords: 'reporte técnico, pdf, D&H Soluciones',
+                creator: 'D&H Soluciones SAS',
+            });
+
+            doc.addPassword({
+                userPassword: dyhsoluciones,
+                ownerPassword: 9536,
+                permissions: {
+                    printing: 'highResolution',
+                    modifying: false,
+                    copying: false,
+                    annotating: true,
+                }
+            });
 
             // Guardar el PDF
             doc.save(`reporte_tecnico_${orden}_${cliente}.pdf`);
