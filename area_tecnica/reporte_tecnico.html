@@ -7,13 +7,9 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nombre del Técnico');
 $pdf->SetTitle('Reporte Técnico');
 
-// Configurar márgenes muy pequeños y desactivar los márgenes por defecto de encabezado/pie
-$pdf->SetMargins(5, 5, 5); // Márgenes mínimos
-$pdf->SetHeaderMargin(0);
-$pdf->SetFooterMargin(0);
-
-// Desactivar salto de página automático
-$pdf->SetAutoPageBreak(FALSE, 0); // Para evitar saltos de página no deseados
+// Configurar márgenes pequeños y sin encabezados ni pies automáticos
+$pdf->SetMargins(5, 5, 5); 
+$pdf->SetAutoPageBreak(FALSE, 0); // Desactivar salto automático de página
 
 // Agregar una página
 $pdf->AddPage();
@@ -21,25 +17,24 @@ $pdf->AddPage();
 // Configurar fuente
 $pdf->SetFont('helvetica', '', 10);
 
-// Contenido del encabezado de la empresa
+// Contenido del encabezado de la empresa con márgenes controlados
 $empresa = "
-<h2 style='font-size: 10px; margin: 0px;'>Nombre de la Empresa</h2>
-<p style='font-size: 9px; margin: 0px;'>Dirección de la Empresa</p>
-<p style='font-size: 9px; margin: 0px;'>Teléfono: (XXX) XXX-XXXX</p>
-<p style='font-size: 9px; margin: 0px;'>Email: contacto@empresa.com</p>
+<h2 style='font-size: 10px; margin: 0;'>Nombre de la Empresa</h2>
+<p style='font-size: 9px; margin: 0;'>Dirección de la Empresa</p>
+<p style='font-size: 9px; margin: 0;'>Teléfono: (XXX) XXX-XXXX</p>
+<p style='font-size: 9px; margin: 0;'>Email: contacto@empresa.com</p>
 ";
 
-// Escribir el contenido del encabezado sin espacio innecesario
+// Escribir el contenido del encabezado sin ningún tipo de espacio innecesario
 $pdf->writeHTML($empresa, true, false, true, false, '');
 
-// Forzar un pequeño espacio entre encabezado y el reporte técnico (1 mm)
-$pdf->Ln(1);
+// Título del reporte
+$pdf->SetFont('helvetica', 'B', 12);
+$pdf->Ln(3); // Añadir un pequeño espacio entre el encabezado y el título
+$pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
 
-// Contenido del título del reporte técnico
-$reporteTitulo = "
-<h2 style='font-size: 12px; text-align: center; margin: 0px;'>Reporte Técnico</h2>
-";
-$pdf->writeHTML($reporteTitulo, true, false, true, false, '');
+// Volver a fuente normal
+$pdf->SetFont('helvetica', '', 10);
 
 // Obtener datos del formulario
 $cliente = $_POST['cliente'];
@@ -54,37 +49,23 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Contenido del reporte técnico sin márgenes y controlando el espaciado
-$html = "
-<style>
-    p {
-        font-size: 9px;
-        line-height: 1.2; 
-        margin: 0px; /* Sin márgenes para evitar espacios extra */
-        padding: 0px;
-    }
-    strong {
-        font-weight: bold;
-    }
-</style>
-
-<div>
-    <p><strong>Nombre del Cliente:</strong> $cliente</p>
-    <p><strong>Nombre del Técnico:</strong> $tecnico</p>
-    <p><strong>Fecha de Revisión:</strong> $fecha</p>
-    <p><strong>Ubicación del Equipo:</strong> $ubicacion</p>
-    <p><strong>Tipo de Equipo:</strong> $equipo" . ($equipo === 'otros' ? " - $equipo_otro" : "") . "</p>
-    <p><strong>Descripción del Problema:</strong><br/> $descripcion</p>
-    <p><strong>Solución Realizada:</strong><br/> $solucion</p>
-    <p><strong>Estado General del Equipo:</strong> $estado</p>
-    <p><strong>Observaciones Adicionales:</strong><br/> $observaciones</p>
-    <p><strong>Firma del Técnico:</strong> $firma</p>
-</div>
+// Contenido del reporte técnico con espaciado controlado
+$reporte = "
+<p><strong>Nombre del Cliente:</strong> $cliente</p>
+<p><strong>Nombre del Técnico:</strong> $tecnico</p>
+<p><strong>Fecha de Revisión:</strong> $fecha</p>
+<p><strong>Ubicación del Equipo:</strong> $ubicacion</p>
+<p><strong>Tipo de Equipo:</strong> $equipo" . ($equipo === 'otros' ? " - $equipo_otro" : "") . "</p>
+<p><strong>Descripción del Problema:</strong><br/> $descripcion</p>
+<p><strong>Solución Realizada:</strong><br/> $solucion</p>
+<p><strong>Estado General del Equipo:</strong> $estado</p>
+<p><strong>Observaciones Adicionales:</strong><br/> $observaciones</p>
+<p><strong>Firma del Técnico:</strong> $firma</p>
 ";
 
-// Escribir contenido HTML en el PDF
-$pdf->writeHTML($html, true, false, true, false, '');
+// Escribir contenido en el PDF con control total de espaciado
+$pdf->writeHTML($reporte, true, false, true, false, '');
 
-// Cerrar y enviar el PDF al navegador
-$pdf->Output('reporte_tecnico.pdf', 'I'); // 'I' para mostrar en el navegador
+// Enviar el PDF al navegador
+$pdf->Output('reporte_tecnico.pdf', 'I');
 ?>
