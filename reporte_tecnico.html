@@ -20,7 +20,7 @@
             background-color: white;
             padding: 10px;
             border-radius: 10px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: none; /* Eliminar sombra */
             max-width: 700px;
             width: 100%;
             display: grid;
@@ -83,7 +83,6 @@
             cursor: pointer;
             margin-top: 5px;
         }
-        /* Ajustar el espacio entre campos en la misma línea */
         .field-group {
             display: flex;
             justify-content: space-between;
@@ -127,49 +126,53 @@
         <label for="serie">Serie:</label>
         <input type="text" id="serie" name="serie" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
-        <label for="voltajeV1">Voltaje V1:</label>
-        <input type="text" id="voltajeV1" name="voltajeV1" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        <!-- Campo de voltajes (V1, V2, V3) en la misma línea con 3 caracteres -->
+        <div class="field-group">
+            <div>
+                <label for="voltajeV1">V1:</label>
+                <input type="text" id="voltajeV1" name="voltajeV1" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="voltajeV2">V2:</label>
+                <input type="text" id="voltajeV2" name="voltajeV2" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="voltajeV3">V3:</label>
+                <input type="text" id="voltajeV3" name="voltajeV3" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+        </div>
         
-        <label for="amperajeL1">Amperaje L1:</label>
-        <input type="text" id="amperajeL1" name="amperajeL1" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        <!-- Campo de amperajes (L1, L2, L3) en la misma línea con 3 caracteres -->
+        <div class="field-group">
+            <div>
+                <label for="amperajeL1">L1:</label>
+                <input type="text" id="amperajeL1" name="amperajeL1" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="amperajeL2">L2:</label>
+                <input type="text" id="amperajeL2" name="amperajeL2" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="amperajeL3">L3:</label>
+                <input type="text" id="amperajeL3" name="amperajeL3" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+        </div>
 
-        <!-- Nuevo campo: Técnico Responsable -->
-        <label for="tecnico">Técnico Responsable:</label>
-        <input type="text" id="tecnico" name="tecnico" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
-
+        <!-- Campo de diagnóstico y descripción de actividades -->
         <label for="diagnostico">Diagnóstico:</label>
         <textarea id="diagnostico" name="diagnostico" onfocus="clearDefault(this)" onblur="restoreDefault(this)">N/A</textarea>
 
         <label for="actividades">Descripción de Actividades Realizadas:</label>
         <textarea id="actividades" name="actividades" onfocus="clearDefault(this)" onblur="restoreDefault(this)">N/A</textarea>
 
-        <!-- Ajuste de Fecha y Hora en la misma línea -->
-        <div class="field-group">
-            <div>
-                <label for="fecha_inicial">Fecha Inicial:</label>
-                <input type="date" id="fecha_inicial" name="fecha_inicial">
-            </div>
-            <div>
-                <label for="hora_inicial">Hora Inicial:</label>
-                <input type="time" id="hora_inicial" name="hora_inicial">
-            </div>
-        </div>
-        
-        <div class="field-group">
-            <div>
-                <label for="fecha_final">Fecha Final:</label>
-                <input type="date" id="fecha_final" name="fecha_final">
-            </div>
-            <div>
-                <label for="hora_final">Hora Final:</label>
-                <input type="time" id="hora_final" name="hora_final">
-            </div>
-        </div>
-
         <!-- Firma del cliente -->
         <label for="signature-pad">Firma del Cliente:</label>
         <canvas id="signature-pad"></canvas>
         <button type="button" id="clear-signature">Limpiar Firma</button>
+
+        <!-- Nuevo campo: Técnico Responsable después de la firma -->
+        <label for="tecnico">Técnico Responsable:</label>
+        <input type="text" id="tecnico" name="tecnico" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
 
         <!-- Botón para generar PDF -->
         <button onclick="generarPDF()">Generar PDF</button>
@@ -204,8 +207,8 @@
             // Crear nuevo PDF
             const pdf = new jsPDF();
 
-            // Márgenes para impresión
-            const margin = 20;  // Márgenes laterales más grandes para impresión
+            // Márgenes reducidas para impresión
+            const margin = 10;  // Márgenes laterales reducidas
             const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
 
             // Encabezado de la empresa
@@ -237,3 +240,4 @@
     </script>
 </body>
 </html>
+
