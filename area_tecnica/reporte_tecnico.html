@@ -6,22 +6,24 @@ $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 12);
 
-// Encabezado de la Empresa
+// **Colocar manualmente el encabezado en la parte superior usando coordenadas absolutas**
+$pdf->SetXY(10, 10); // Posicionar el primer elemento en la coordenada X=10, Y=10
 $pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
+$pdf->SetXY(10, 20); // Mover a la siguiente línea
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(0, 8, 'Dirección de la Empresa', 0, 1, 'C');
-$pdf->Cell(0, 8, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
+$pdf->Cell(0, 8, 'Direccion de la Empresa', 0, 1, 'C');
+$pdf->SetXY(10, 30);
+$pdf->Cell(0, 8, 'Telefono: (XXX) XXX-XXXX', 0, 1, 'C');
+$pdf->SetXY(10, 40);
 $pdf->Cell(0, 8, 'Email: contacto@empresa.com', 0, 1, 'C');
 
-// **Ajustar el espaciado eliminando cualquier espacio innecesario**
-$pdf->Ln(2);  // Reducir el espacio a solo 2 unidades antes del título
-
-// Título del reporte
+// **Posicionar el título del reporte sin márgenes grandes**
+$pdf->SetXY(10, 50); // Aquí puedes ajustar para eliminar cualquier espacio indeseado
 $pdf->SetFont('Arial', 'B', 14);
 $pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
 
-// Espacio antes de los datos
-$pdf->Ln(5);  // Mantener un espacio de 5 unidades antes del contenido
+// **Posicionar el contenido del reporte**
+$pdf->SetXY(10, 65);  // Espacio controlado antes del contenido
 
 // Volver a la fuente normal
 $pdf->SetFont('Arial', '', 10);
