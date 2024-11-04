@@ -1,12 +1,12 @@
 <?php
 require('fpdf/fpdf.php');
 
-// Crear nuevo documento PDF
+// Crear un nuevo PDF con FPDF
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 12);
 
-// Encabezado
+// Encabezado de la Empresa
 $pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 10, 'Direccion de la Empresa', 0, 1, 'C');
@@ -26,7 +26,7 @@ $pdf->Ln(5);
 // Volver a la fuente normal
 $pdf->SetFont('Arial', '', 10);
 
-// Obtener datos del formulario
+// Obtener los datos del formulario
 $cliente = $_POST['cliente'];
 $tecnico = $_POST['tecnico'];
 $fecha = $_POST['fecha'];
@@ -39,7 +39,7 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Escribir los detalles del reporte en celdas controladas
+// Mostrar los datos en celdas con bordes
 $pdf->Cell(50, 10, 'Nombre del Cliente:', 1);
 $pdf->Cell(0, 10, $cliente, 1, 1);
 $pdf->Cell(50, 10, 'Nombre del Técnico:', 1);
@@ -51,7 +51,7 @@ $pdf->Cell(0, 10, $ubicacion, 1, 1);
 $pdf->Cell(50, 10, 'Tipo de Equipo:', 1);
 $pdf->Cell(0, 10, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 1, 1);
 
-// Ajustar celdas largas con MultiCell
+// Usar MultiCell para el texto más largo
 $pdf->Cell(50, 10, 'Descripción del Problema:', 1);
 $pdf->MultiCell(0, 10, $descripcion, 1);
 $pdf->Cell(50, 10, 'Solución Realizada:', 1);
@@ -63,6 +63,6 @@ $pdf->MultiCell(0, 10, $observaciones, 1);
 $pdf->Cell(50, 10, 'Firma del Técnico:', 1);
 $pdf->Cell(0, 10, $firma, 1, 1);
 
-// Enviar el PDF al navegador
+// Generar el PDF en el navegador
 $pdf->Output();
 ?>
