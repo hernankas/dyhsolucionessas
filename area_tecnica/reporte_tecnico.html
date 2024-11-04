@@ -4,65 +4,83 @@ require('fpdf/fpdf.php');
 // Crear un nuevo PDF con FPDF
 $pdf = new FPDF();
 $pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 12);
-
-// Establecer el encabezado de la Empresa en posiciones fijas
-$pdf->SetXY(10, 10); // Posicionar el texto en la parte superior izquierda con coordenadas X=10, Y=10
-$pdf->Cell(190, 10, 'Nombre de la Empresa', 0, 1, 'C'); // Celda con ancho de 190 para centrado perfecto
-$pdf->SetXY(10, 20); // Posicionar el siguiente elemento manualmente
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(190, 8, 'Dirección de la Empresa', 0, 1, 'C');
-$pdf->SetXY(10, 30);
-$pdf->Cell(190, 8, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
-$pdf->SetXY(10, 40);
-$pdf->Cell(190, 8, 'Email: contacto@empresa.com', 0, 1, 'C');
-
-// Control manual del espaciado antes del título
-$pdf->SetXY(10, 50); // Posicionamos el título manualmente, sin depender de márgenes automáticos
 $pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(190, 10, 'Reporte Técnico', 0, 1, 'C');
 
-// Ahora empezamos con los datos del formulario, controlando cada posición
-$pdf->SetXY(10, 65); // Posicionar los datos del reporte
+// Encabezado de la Empresa
+$pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(0, 10, 'Dirección de la Empresa', 0, 1, 'C');
+$pdf->Cell(0, 10, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
+$pdf->Cell(0, 10, 'Email: contacto@empresa.com', 0, 1, 'C');
 
-// Obtener los datos del formulario
-$cliente = $_POST['cliente'];
-$tecnico = $_POST['tecnico'];
-$fecha = $_POST['fecha'];
-$ubicacion = $_POST['ubicacion'];
-$equipo = $_POST['equipo'];
-$equipo_otro = isset($_POST['equipo_otro']) ? $_POST['equipo_otro'] : '';
-$descripcion = $_POST['descripcion'];
-$solucion = $_POST['solucion'];
-$estado = $_POST['estado'];
-$observaciones = $_POST['observaciones'];
-$firma = $_POST['firma'];
+// Espacio antes del título
+$pdf->Ln(10);
 
-// Mostrar los datos en celdas sin ningún salto de línea automático
-$pdf->SetFont('Arial', '', 10);
+// Título del reporte
+$pdf->SetFont('Arial', 'B', 16);
+$pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
 
-// Control manual del posicionamiento y celdas
-$pdf->Cell(50, 10, 'Nombre del Cliente:', 1);
+// Volver a la fuente normal
+$pdf->SetFont('Arial', '', 12);
+
+// Obtener los datos del formulario (simulados aquí con valores de ejemplo)
+$cliente = 'Juan Pérez';
+$tecnico = 'Carlos López';
+$fecha = '2023-11-05';
+$ubicacion = 'Edificio Principal, Oficina 301';
+$equipo = 'Computadora';
+$equipo_otro = 'Monitor';
+$descripcion = 'El equipo no enciende, posible problema en la fuente de poder.';
+$solucion = 'Se reemplazó la fuente de poder y se probó el correcto encendido del equipo.';
+$estado = 'Funcional';
+$observaciones = 'Se recomienda monitorear el equipo durante las próximas semanas.';
+$firma = 'Carlos López';
+
+// Estructurar los datos en un formato más sencillo y controlado
+$pdf->Ln(5); // Espacio antes de los datos
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Nombre del Cliente:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, $cliente, 1, 1);
-$pdf->Cell(50, 10, 'Nombre del Técnico:', 1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Nombre del Técnico:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, $tecnico, 1, 1);
-$pdf->Cell(50, 10, 'Fecha de Revisión:', 1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Fecha de Revisión:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, $fecha, 1, 1);
-$pdf->Cell(50, 10, 'Ubicación del Equipo:', 1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Ubicación del Equipo:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, $ubicacion, 1, 1);
-$pdf->Cell(50, 10, 'Tipo de Equipo:', 1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Tipo de Equipo:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 1, 1);
 
-// Ajuste de las celdas con MultiCell para textos largos
-$pdf->Cell(50, 10, 'Descripción del Problema:', 1);
+// Añadir las secciones de descripción y solución
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Descripción del Problema:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->MultiCell(0, 10, $descripcion, 1);
-$pdf->Cell(50, 10, 'Solución Realizada:', 1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Solución Realizada:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->MultiCell(0, 10, $solucion, 1);
-$pdf->Cell(50, 10, 'Estado General del Equipo:', 1);
+
+// Mostrar el estado, observaciones y la firma
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Estado General del Equipo:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, $estado, 1, 1);
-$pdf->Cell(50, 10, 'Observaciones Adicionales:', 1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Observaciones Adicionales:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->MultiCell(0, 10, $observaciones, 1);
-$pdf->Cell(50, 10, 'Firma del Técnico:', 1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(60, 10, 'Firma del Técnico:', 1);
+$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, $firma, 1, 1);
 
 // Generar el PDF en el navegador
