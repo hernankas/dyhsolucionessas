@@ -7,9 +7,8 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nombre del Técnico');
 $pdf->SetTitle('Reporte Técnico');
 
-// Configurar márgenes pequeños y sin encabezados ni pies automáticos
+// Configurar márgenes pequeños
 $pdf->SetMargins(5, 5, 5); 
-$pdf->SetAutoPageBreak(FALSE, 0); // Desactivar salto automático de página
 
 // Agregar una página
 $pdf->AddPage();
@@ -17,20 +16,17 @@ $pdf->AddPage();
 // Configurar fuente
 $pdf->SetFont('helvetica', '', 10);
 
-// Contenido del encabezado de la empresa con márgenes controlados
-$empresa = "
-<h2 style='font-size: 10px; margin: 0;'>Nombre de la Empresa</h2>
-<p style='font-size: 9px; margin: 0;'>Dirección de la Empresa</p>
-<p style='font-size: 9px; margin: 0;'>Teléfono: (XXX) XXX-XXXX</p>
-<p style='font-size: 9px; margin: 0;'>Email: contacto@empresa.com</p>
-";
+// Contenido del encabezado de la empresa usando `Cell()` para controlar completamente las posiciones
+$pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'L');
+$pdf->Cell(0, 8, 'Dirección de la Empresa', 0, 1, 'L');
+$pdf->Cell(0, 8, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'L');
+$pdf->Cell(0, 8, 'Email: contacto@empresa.com', 0, 1, 'L');
 
-// Escribir el contenido del encabezado sin ningún tipo de espacio innecesario
-$pdf->writeHTML($empresa, true, false, true, false, '');
+// Añadir un pequeño espacio antes del título
+$pdf->Ln(5);
 
 // Título del reporte
 $pdf->SetFont('helvetica', 'B', 12);
-$pdf->Ln(3); // Añadir un pequeño espacio entre el encabezado y el título
 $pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
 
 // Volver a fuente normal
@@ -49,23 +45,24 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Contenido del reporte técnico con espaciado controlado
-$reporte = "
-<p><strong>Nombre del Cliente:</strong> $cliente</p>
-<p><strong>Nombre del Técnico:</strong> $tecnico</p>
-<p><strong>Fecha de Revisión:</strong> $fecha</p>
-<p><strong>Ubicación del Equipo:</strong> $ubicacion</p>
-<p><strong>Tipo de Equipo:</strong> $equipo" . ($equipo === 'otros' ? " - $equipo_otro" : "") . "</p>
-<p><strong>Descripción del Problema:</strong><br/> $descripcion</p>
-<p><strong>Solución Realizada:</strong><br/> $solucion</p>
-<p><strong>Estado General del Equipo:</strong> $estado</p>
-<p><strong>Observaciones Adicionales:</strong><br/> $observaciones</p>
-<p><strong>Firma del Técnico:</strong> $firma</p>
-";
+// Escribir los detalles del reporte
+$pdf->Ln(5);
+$pdf->Cell(0, 8, 'Nombre del Cliente: ' . $cliente, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Nombre del Técnico: ' . $tecnico, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Fecha de Revisión: ' . $fecha, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Ubicación del Equipo: ' . $ubicacion, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Tipo de Equipo: ' . $equipo, 0, 1, 'L');
 
-// Escribir contenido en el PDF con control total de espaciado
-$pdf->writeHTML($reporte, true, false, true, false, '');
+if($equipo === 'otros') {
+    $pdf->Cell(0, 8, 'Descripción de otro equipo: ' . $equipo_otro, 0, 1, 'L');
+}
 
-// Enviar el PDF al navegador
+$pdf->Cell(0, 8, 'Descripción del Problema: ' . $descripcion, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Solución Realizada: ' . $solucion, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Estado General del Equipo: ' . $estado, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Observaciones Adicionales: ' . $observaciones, 0, 1, 'L');
+$pdf->Cell(0, 8, 'Firma del Técnico: ' . $firma, 0, 1, 'L');
+
+// Cerrar y enviar el PDF al navegador
 $pdf->Output('reporte_tecnico.pdf', 'I');
 ?>
