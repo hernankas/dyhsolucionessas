@@ -86,13 +86,13 @@
         .field-group {
             display: flex;
             justify-content: space-between;
+            gap: 10px; /* Espacio entre los campos */
         }
         .field-group div {
-            flex: 1;
-            margin-right: 5px;
+            flex: 1; /* Los campos se ajustan proporcionalmente */
         }
-        .field-group div:last-child {
-            margin-right: 0;
+        .field-group div label {
+            display: block;
         }
     </style>
     <!-- Importar las bibliotecas -->
@@ -108,11 +108,26 @@
         <label for="orden">Número de Orden:</label>
         <input type="text" id="orden" name="orden" value="N/A" maxlength="6" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
-        <label for="cliente">Nombre del Cliente:</label>
-        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
-        
-        <label for="tipoServicio">Tipo de Servicio:</label>
-        <input type="text" id="tipoServicio" name="tipoServicio" value="Correctivo" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+     <label for="cliente">Nombre del Cliente:</label>
+<div class="field-group">
+    <div style="flex: 2;">
+        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
+    </div>
+    <div style="flex: 1; display: flex; align-items: center;">
+        <span style="margin-right: 5px; white-space: nowrap;">NIT</span> <!-- La palabra "NIT" antes del cuadro -->
+        <input type="text" id="nit" name="nit" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 70%;">
+    </div>
+</div>
+
+
+    <label for="tipoServicio">Tipo de Servicio:</label>
+<select id="tipoServicio" name="tipoServicio" style="width: 180px;">
+    <option value="Preventivo">Mantenimiento Preventivo</option>
+    <option value="Correctivo" selected>Mantenimiento Correctivo</option>
+    <option value="Revision">Revisión</option>
+</select>
+
+
         
         <label for="equipo">Descripción del Equipo:</label>
         <input type="text" id="equipo" name="equipo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
@@ -240,4 +255,5 @@
     </script>
 </body>
 </html>
+
 
