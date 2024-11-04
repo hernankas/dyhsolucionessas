@@ -18,68 +18,82 @@
         }
         .container {
             background-color: white;
-            padding: 20px;  /* Reducir padding */
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
-            max-width: 700px;  /* Reducir el ancho del formulario */
+            max-width: 700px;
             width: 100%;
             display: grid;
             grid-template-columns: 30% 1fr;
-            gap: 5px;  /* Reducir el espacio entre los campos */
+            gap: 3px;
         }
         h2 {
             grid-column: span 2;
             text-align: center;
             color: #004d99;
-            margin-bottom: 10px;  /* Reducir margen */
-            font-size: 18px;  /* Reducir tamaño de fuente */
+            margin-bottom: 5px;
+            font-size: 18px;
         }
         label {
             font-weight: bold;
-            margin-bottom: 2px;  /* Reducir márgenes */
-            display: flex;
-            align-items: center;
+            margin-bottom: 2px;
+            font-size: 12px;
         }
         input, textarea, select {
             width: 100%;
-            padding: 5px;  
+            padding: 3px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            font-size: 12px;  /* Reducir tamaño de fuente */
+            font-size: 11px;
             background-color: #f0f0f0;
-            margin-bottom: 5px; 
+            margin-bottom: 3px;
         }
         textarea {
             grid-column: span 2;
             resize: vertical;
-            min-height: 60px;  /* Reducir altura mínima del textarea */
+            min-height: 50px;
         }
         button {
             background-color: #004d99;
             color: white;
-            padding: 10px;
+            padding: 8px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;  /* Reducir tamaño de fuente */
+            font-size: 14px;
             grid-column: span 2;
+        }
+        #orden {
+            width: 80px; /* Ajustar el tamaño para 6 caracteres */
         }
         #signature-pad {
             border: 1px solid #ccc;
             border-radius: 5px;
             grid-column: span 2;
             width: 100%;
-            height: 100px;  /* Reducir altura de la firma */
+            height: 80px;
             background-color: #fff;
         }
         #clear-signature {
             background-color: red;
             color: white;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 5px;
+        }
+        /* Ajustar el espacio entre campos en la misma línea */
+        .field-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .field-group div {
+            flex: 1;
+            margin-right: 5px;
+        }
+        .field-group div:last-child {
+            margin-right: 0;
         }
     </style>
     <!-- Importar las bibliotecas -->
@@ -93,38 +107,65 @@
         <h2>Reporte Técnico</h2>
         
         <label for="orden">Número de Orden:</label>
-        <input type="text" id="orden" name="orden" value="N/A">
+        <input type="text" id="orden" name="orden" value="N/A" maxlength="6" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="cliente">Nombre del Cliente:</label>
-        <input type="text" id="cliente" name="cliente" value="N/A">
+        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="tipoServicio">Tipo de Servicio:</label>
-        <input type="text" id="tipoServicio" name="tipoServicio" value="Correctivo">
+        <input type="text" id="tipoServicio" name="tipoServicio" value="Correctivo" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="equipo">Descripción del Equipo:</label>
-        <input type="text" id="equipo" name="equipo" value="N/A">
+        <input type="text" id="equipo" name="equipo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="marca">Marca:</label>
-        <input type="text" id="marca" name="marca" value="N/A">
+        <input type="text" id="marca" name="marca" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="modelo">Modelo:</label>
-        <input type="text" id="modelo" name="modelo" value="N/A">
+        <input type="text" id="modelo" name="modelo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="serie">Serie:</label>
-        <input type="text" id="serie" name="serie" value="N/A">
+        <input type="text" id="serie" name="serie" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="voltajeV1">Voltaje V1:</label>
-        <input type="text" id="voltajeV1" name="voltajeV1" value="N/A">
+        <input type="text" id="voltajeV1" name="voltajeV1" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
         <label for="amperajeL1">Amperaje L1:</label>
-        <input type="text" id="amperajeL1" name="amperajeL1" value="N/A">
-        
+        <input type="text" id="amperajeL1" name="amperajeL1" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+
+        <!-- Nuevo campo: Técnico Responsable -->
+        <label for="tecnico">Técnico Responsable:</label>
+        <input type="text" id="tecnico" name="tecnico" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+
+        <label for="diagnostico">Diagnóstico:</label>
+        <textarea id="diagnostico" name="diagnostico" onfocus="clearDefault(this)" onblur="restoreDefault(this)">N/A</textarea>
+
         <label for="actividades">Descripción de Actividades Realizadas:</label>
-        <textarea id="actividades" name="actividades">N/A</textarea>
+        <textarea id="actividades" name="actividades" onfocus="clearDefault(this)" onblur="restoreDefault(this)">N/A</textarea>
+
+        <!-- Ajuste de Fecha y Hora en la misma línea -->
+        <div class="field-group">
+            <div>
+                <label for="fecha_inicial">Fecha Inicial:</label>
+                <input type="date" id="fecha_inicial" name="fecha_inicial">
+            </div>
+            <div>
+                <label for="hora_inicial">Hora Inicial:</label>
+                <input type="time" id="hora_inicial" name="hora_inicial">
+            </div>
+        </div>
         
-        <label for="fecha">Fecha del Reporte:</label>
-        <input type="text" id="fecha" name="fecha" value="N/A">
-        
+        <div class="field-group">
+            <div>
+                <label for="fecha_final">Fecha Final:</label>
+                <input type="date" id="fecha_final" name="fecha_final">
+            </div>
+            <div>
+                <label for="hora_final">Hora Final:</label>
+                <input type="time" id="hora_final" name="hora_final">
+            </div>
+        </div>
+
         <!-- Firma del cliente -->
         <label for="signature-pad">Firma del Cliente:</label>
         <canvas id="signature-pad"></canvas>
@@ -143,40 +184,51 @@
             signaturePad.clear();
         });
 
+        // Función para eliminar el valor por defecto "N/A"
+        function clearDefault(el) {
+            if (el.value === "N/A") {
+                el.value = ""; // Limpiar el campo cuando recibe foco
+            }
+        }
+
+        // Función para restaurar "N/A" si el campo queda vacío
+        function restoreDefault(el) {
+            if (el.value.trim() === "") {
+                el.value = "N/A"; // Restaurar "N/A" si el campo queda vacío
+            }
+        }
+
         function generarPDF() {
             const { jsPDF } = window.jspdf;
 
             // Crear nuevo PDF
             const pdf = new jsPDF();
 
+            // Márgenes para impresión
+            const margin = 20;  // Márgenes laterales más grandes para impresión
+            const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
+
             // Encabezado de la empresa
             pdf.setFontSize(18);
-            pdf.text("Nombre de la Empresa", 10, 10);
+            pdf.text("Nombre de la Empresa", margin, 10);
             pdf.setFontSize(12);
-            pdf.text("Dirección de la Empresa", 10, 17);
-            pdf.text("Teléfono: (XXX) XXX-XXXX", 10, 24);
-            pdf.text("Email: contacto@empresa.com", 10, 30);
+            pdf.text("Dirección de la Empresa", margin, 17);
+            pdf.text("Teléfono: (XXX) XXX-XXXX", margin, 24);
+            pdf.text("Email: contacto@empresa.com", margin, 30);
 
             // Captura la pantalla del formulario como imagen
             html2canvas(document.querySelector("#formulario")).then(canvas => {
-                const imgData = canvas.toDataURL('image/png'); 
-                
-                // Ajuste para pegar más el reporte al encabezado
-                const startY = 33; // Aún más pegado
-                const pageWidth = pdf.internal.pageSize.getWidth();
+                const imgData = canvas.toDataURL('image/png');
                 const imgWidth = pageWidth;
                 const imgHeight = canvas.height * imgWidth / canvas.width;
 
-                if (imgHeight > pdf.internal.pageSize.getHeight()) {
-                    pdf.addImage(imgData, 'PNG', 0, startY, imgWidth, pdf.internal.pageSize.getHeight() - startY);
-                } else {
-                    pdf.addImage(imgData, 'PNG', 0, startY, imgWidth, imgHeight);
-                }
+                // Añadir imagen con el ajuste de márgenes
+                pdf.addImage(imgData, 'PNG', margin, 35, imgWidth, imgHeight);
 
                 // Añadir la firma si existe
                 if (!signaturePad.isEmpty()) {
                     const signatureImage = signaturePad.toDataURL();
-                    pdf.addImage(signatureImage, 'PNG', 15, canvas.height + startY + 10, 50, 25); 
+                    pdf.addImage(signatureImage, 'PNG', margin + 5, imgHeight + 45, 100, 50);
                 }
 
                 pdf.save("reporte_tecnico.pdf"); // Guardar el PDF
@@ -185,5 +237,3 @@
     </script>
 </body>
 </html>
-
-
