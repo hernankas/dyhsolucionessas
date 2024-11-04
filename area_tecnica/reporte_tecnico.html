@@ -9,19 +9,19 @@ $pdf->SetFont('Arial', 'B', 12);
 // Encabezado de la Empresa
 $pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(0, 10, 'Direccion de la Empresa', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Telefono: (XXX) XXX-XXXX', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Email: contacto@empresa.com', 0, 1, 'C');
+$pdf->Cell(0, 8, 'Dirección de la Empresa', 0, 1, 'C');
+$pdf->Cell(0, 8, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
+$pdf->Cell(0, 8, 'Email: contacto@empresa.com', 0, 1, 'C');
 
-// Espacio antes del título
-$pdf->Ln(10);
+// **Ajustar el espaciado eliminando cualquier espacio innecesario**
+$pdf->Ln(2);  // Reducir el espacio a solo 2 unidades antes del título
 
 // Título del reporte
 $pdf->SetFont('Arial', 'B', 14);
 $pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
 
 // Espacio antes de los datos
-$pdf->Ln(5);
+$pdf->Ln(5);  // Mantener un espacio de 5 unidades antes del contenido
 
 // Volver a la fuente normal
 $pdf->SetFont('Arial', '', 10);
