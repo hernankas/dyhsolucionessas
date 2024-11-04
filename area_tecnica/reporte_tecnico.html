@@ -6,27 +6,24 @@ $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 12);
 
-// **Colocar manualmente el encabezado en la parte superior usando coordenadas absolutas**
-$pdf->SetXY(10, 10); // Posicionar el primer elemento en la coordenada X=10, Y=10
-$pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
-$pdf->SetXY(10, 20); // Mover a la siguiente línea
+// Establecer el encabezado de la Empresa en posiciones fijas
+$pdf->SetXY(10, 10); // Posicionar el texto en la parte superior izquierda con coordenadas X=10, Y=10
+$pdf->Cell(190, 10, 'Nombre de la Empresa', 0, 1, 'C'); // Celda con ancho de 190 para centrado perfecto
+$pdf->SetXY(10, 20); // Posicionar el siguiente elemento manualmente
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(0, 8, 'Direccion de la Empresa', 0, 1, 'C');
+$pdf->Cell(190, 8, 'Dirección de la Empresa', 0, 1, 'C');
 $pdf->SetXY(10, 30);
-$pdf->Cell(0, 8, 'Telefono: (XXX) XXX-XXXX', 0, 1, 'C');
+$pdf->Cell(190, 8, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
 $pdf->SetXY(10, 40);
-$pdf->Cell(0, 8, 'Email: contacto@empresa.com', 0, 1, 'C');
+$pdf->Cell(190, 8, 'Email: contacto@empresa.com', 0, 1, 'C');
 
-// **Posicionar el título del reporte sin márgenes grandes**
-$pdf->SetXY(10, 50); // Aquí puedes ajustar para eliminar cualquier espacio indeseado
+// Control manual del espaciado antes del título
+$pdf->SetXY(10, 50); // Posicionamos el título manualmente, sin depender de márgenes automáticos
 $pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
+$pdf->Cell(190, 10, 'Reporte Técnico', 0, 1, 'C');
 
-// **Posicionar el contenido del reporte**
-$pdf->SetXY(10, 65);  // Espacio controlado antes del contenido
-
-// Volver a la fuente normal
-$pdf->SetFont('Arial', '', 10);
+// Ahora empezamos con los datos del formulario, controlando cada posición
+$pdf->SetXY(10, 65); // Posicionar los datos del reporte
 
 // Obtener los datos del formulario
 $cliente = $_POST['cliente'];
@@ -41,7 +38,10 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Mostrar los datos en celdas con bordes
+// Mostrar los datos en celdas sin ningún salto de línea automático
+$pdf->SetFont('Arial', '', 10);
+
+// Control manual del posicionamiento y celdas
 $pdf->Cell(50, 10, 'Nombre del Cliente:', 1);
 $pdf->Cell(0, 10, $cliente, 1, 1);
 $pdf->Cell(50, 10, 'Nombre del Técnico:', 1);
@@ -53,7 +53,7 @@ $pdf->Cell(0, 10, $ubicacion, 1, 1);
 $pdf->Cell(50, 10, 'Tipo de Equipo:', 1);
 $pdf->Cell(0, 10, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 1, 1);
 
-// Usar MultiCell para el texto más largo
+// Ajuste de las celdas con MultiCell para textos largos
 $pdf->Cell(50, 10, 'Descripción del Problema:', 1);
 $pdf->MultiCell(0, 10, $descripcion, 1);
 $pdf->Cell(50, 10, 'Solución Realizada:', 1);
