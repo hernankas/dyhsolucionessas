@@ -7,8 +7,9 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nombre del Técnico');
 $pdf->SetTitle('Reporte Técnico');
 
-// Configurar márgenes pequeños
-$pdf->SetMargins(10, 10, 10); 
+// Desactivar márgenes automáticos y configurar manualmente los márgenes
+$pdf->SetMargins(10, 10, 10);
+$pdf->SetAutoPageBreak(FALSE, 0); // Desactivar el salto automático de página
 
 // Agregar una página
 $pdf->AddPage();
@@ -16,26 +17,23 @@ $pdf->AddPage();
 // Configurar fuente
 $pdf->SetFont('helvetica', '', 10);
 
-// Encabezado bonito con bordes y alineación
-$pdf->SetFillColor(230, 230, 230); // Color de fondo gris claro
-$pdf->SetTextColor(0, 0, 0); // Texto negro
+// Encabezado (nombre de la empresa) sin espacios grandes
+$pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
+$pdf->Cell(0, 8, 'Dirección de la Empresa', 0, 1, 'C');
+$pdf->Cell(0, 8, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
+$pdf->Cell(0, 8, 'Email: contacto@empresa.com', 0, 1, 'C');
 
-$pdf->Cell(0, 10, 'Nombre de la Empresa', 1, 1, 'C', 1);
-$pdf->Cell(0, 8, 'Dirección de la Empresa', 1, 1, 'C', 0);
-$pdf->Cell(0, 8, 'Teléfono: (XXX) XXX-XXXX', 1, 1, 'C', 0);
-$pdf->Cell(0, 8, 'Email: contacto@empresa.com', 1, 1, 'C', 0);
-
-// Añadir un pequeño espacio antes del título
+// Espacio controlado
 $pdf->Ln(5);
 
 // Título del reporte
 $pdf->SetFont('helvetica', 'B', 14);
 $pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
 
-// Volver a fuente normal
+// Volver a la fuente normal para el contenido
 $pdf->SetFont('helvetica', '', 10);
 
-// Obtener datos del formulario
+// Obtener los datos del formulario
 $cliente = $_POST['cliente'];
 $tecnico = $_POST['tecnico'];
 $fecha = $_POST['fecha'];
@@ -48,61 +46,38 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Añadir contenido con bordes
-$pdf->Ln(5); // Espacio antes del contenido
-$pdf->SetFillColor(255, 255, 255); // Fondo blanco para las celdas
-$pdf->SetTextColor(0, 0, 0); // Texto negro
+// Usar `Cell()` para controlar las posiciones de los textos y asegurarse de que no haya espacios grandes
+$pdf->Ln(5);
+$pdf->Cell(50, 8, 'Nombre del Cliente:', 0, 0, 'L');
+$pdf->Cell(0, 8, $cliente, 0, 1, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Nombre del Cliente:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(0, 8, $cliente, 1, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Nombre del Técnico:', 0, 0, 'L');
+$pdf->Cell(0, 8, $tecnico, 0, 1, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Nombre del Técnico:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(0, 8, $tecnico, 1, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Fecha de Revisión:', 0, 0, 'L');
+$pdf->Cell(0, 8, $fecha, 0, 1, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Fecha de Revisión:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(0, 8, $fecha, 1, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Ubicación del Equipo:', 0, 0, 'L');
+$pdf->Cell(0, 8, $ubicacion, 0, 1, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Ubicación del Equipo:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(0, 8, $ubicacion, 1, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Tipo de Equipo:', 0, 0, 'L');
+$pdf->Cell(0, 8, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 0, 1, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Tipo de Equipo:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(0, 8, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 1, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Descripción del Problema:', 0, 1, 'L');
+$pdf->MultiCell(0, 8, $descripcion, 0, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Descripción del Problema:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->MultiCell(0, 8, $descripcion, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Solución Realizada:', 0, 1, 'L');
+$pdf->MultiCell(0, 8, $solucion, 0, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Solución Realizada:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->MultiCell(0, 8, $solucion, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Estado General del Equipo:', 0, 0, 'L');
+$pdf->Cell(0, 8, $estado, 0, 1, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Estado General del Equipo:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(0, 8, $estado, 1, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Observaciones Adicionales:', 0, 1, 'L');
+$pdf->MultiCell(0, 8, $observaciones, 0, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Observaciones Adicionales:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->MultiCell(0, 8, $observaciones, 1, 'L', 0);
+$pdf->Cell(50, 8, 'Firma del Técnico:', 0, 0, 'L');
+$pdf->Cell(0, 8, $firma, 0, 1, 'L');
 
-$pdf->SetFont('helvetica', 'B', 10);
-$pdf->Cell(50, 8, 'Firma del Técnico:', 1, 0, 'L', 1);
-$pdf->SetFont('helvetica', '', 10);
-$pdf->Cell(0, 8, $firma, 1, 1, 'L', 0);
-
-// Cerrar y enviar el PDF al navegador
+// Enviar el PDF al navegador
 $pdf->Output('reporte_tecnico.pdf', 'I');
 ?>
