@@ -119,16 +119,29 @@
     </div>
 </div>
 
+<div style="display: inline-block; width: 48%; vertical-align: top;">
+    <label for="tipoServicio" style="display: inline-block; margin-bottom: 5px;">Tipo de Servicio:</label>
+    <select id="tipoServicio" name="tipoServicio" style="width: 100%;">
+        <option value="Preventivo">Mantenimiento Preventivo</option>
+        <option value="Correctivo" selected>Mantenimiento Correctivo</option>
+        <option value="Revision">Revisión</option>
+    </select>
+</div>
 
-    <label for="tipoServicio">Tipo de Servicio:</label>
-<select id="tipoServicio" name="tipoServicio" style="width: 180px;">
-    <option value="Preventivo">Mantenimiento Preventivo</option>
-    <option value="Correctivo" selected>Mantenimiento Correctivo</option>
-    <option value="Revision">Revisión</option>
-</select>
+<div style="display: inline-block; width: 48%; vertical-align: top;">
+    <label for="tEquipo" style="display: inline-block; margin-bottom: 5px;">T. EQUIPO:</label>
+    <select id="tEquipo" name="tEquipo" style="width: 100%;">
+        <option value="AIRE ACONDICIONADO">AIRE ACONDICIONADO</option>
+        <option value="CUARTO FRIO">CUARTO FRIO</option>
+        <option value="RACK">RACK</option>
+        <option value="NEVERA">NEVERA</option>
+        <option value="PLANTA ELECTRICA">PLANTA ELÉCTRICA</option>
+        <option value="ELECTRO BOMBA">ELECTRO BOMBA</option>
+        <option value="OTROS">OTROS</option>
+    </select>
+</div>
 
 
-        
         <label for="equipo">Descripción del Equipo:</label>
         <input type="text" id="equipo" name="equipo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
@@ -255,5 +268,4 @@
     </script>
 </body>
 </html>
-
 
