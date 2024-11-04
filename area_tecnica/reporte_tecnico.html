@@ -1,39 +1,32 @@
 <?php
-require_once('tcpdf/tcpdf.php');
+require('fpdf/fpdf.php');
 
 // Crear nuevo documento PDF
-$pdf = new TCPDF();
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nombre del Técnico');
-$pdf->SetTitle('Reporte Técnico');
-
-// Desactivar márgenes automáticos y configurar manualmente los márgenes
-$pdf->SetMargins(10, 10, 10);
-$pdf->SetAutoPageBreak(FALSE, 0); // Desactivar el salto automático de página
-
-// Agregar una página
+$pdf = new FPDF();
 $pdf->AddPage();
+$pdf->SetFont('Arial', 'B', 12);
 
-// Configurar fuente
-$pdf->SetFont('helvetica', '', 10);
-
-// Encabezado (nombre de la empresa) sin espacios grandes
+// Encabezado
 $pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
-$pdf->Cell(0, 8, 'Dirección de la Empresa', 0, 1, 'C');
-$pdf->Cell(0, 8, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
-$pdf->Cell(0, 8, 'Email: contacto@empresa.com', 0, 1, 'C');
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(0, 10, 'Direccion de la Empresa', 0, 1, 'C');
+$pdf->Cell(0, 10, 'Telefono: (XXX) XXX-XXXX', 0, 1, 'C');
+$pdf->Cell(0, 10, 'Email: contacto@empresa.com', 0, 1, 'C');
 
-// Espacio controlado
-$pdf->Ln(5);
+// Espacio antes del título
+$pdf->Ln(10);
 
 // Título del reporte
-$pdf->SetFont('helvetica', 'B', 14);
+$pdf->SetFont('Arial', 'B', 14);
 $pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
 
-// Volver a la fuente normal para el contenido
-$pdf->SetFont('helvetica', '', 10);
+// Espacio antes de los datos
+$pdf->Ln(5);
 
-// Obtener los datos del formulario
+// Volver a la fuente normal
+$pdf->SetFont('Arial', '', 10);
+
+// Obtener datos del formulario
 $cliente = $_POST['cliente'];
 $tecnico = $_POST['tecnico'];
 $fecha = $_POST['fecha'];
@@ -46,38 +39,30 @@ $estado = $_POST['estado'];
 $observaciones = $_POST['observaciones'];
 $firma = $_POST['firma'];
 
-// Usar `Cell()` para controlar las posiciones de los textos y asegurarse de que no haya espacios grandes
-$pdf->Ln(5);
-$pdf->Cell(50, 8, 'Nombre del Cliente:', 0, 0, 'L');
-$pdf->Cell(0, 8, $cliente, 0, 1, 'L');
+// Escribir los detalles del reporte en celdas controladas
+$pdf->Cell(50, 10, 'Nombre del Cliente:', 1);
+$pdf->Cell(0, 10, $cliente, 1, 1);
+$pdf->Cell(50, 10, 'Nombre del Técnico:', 1);
+$pdf->Cell(0, 10, $tecnico, 1, 1);
+$pdf->Cell(50, 10, 'Fecha de Revisión:', 1);
+$pdf->Cell(0, 10, $fecha, 1, 1);
+$pdf->Cell(50, 10, 'Ubicación del Equipo:', 1);
+$pdf->Cell(0, 10, $ubicacion, 1, 1);
+$pdf->Cell(50, 10, 'Tipo de Equipo:', 1);
+$pdf->Cell(0, 10, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 1, 1);
 
-$pdf->Cell(50, 8, 'Nombre del Técnico:', 0, 0, 'L');
-$pdf->Cell(0, 8, $tecnico, 0, 1, 'L');
-
-$pdf->Cell(50, 8, 'Fecha de Revisión:', 0, 0, 'L');
-$pdf->Cell(0, 8, $fecha, 0, 1, 'L');
-
-$pdf->Cell(50, 8, 'Ubicación del Equipo:', 0, 0, 'L');
-$pdf->Cell(0, 8, $ubicacion, 0, 1, 'L');
-
-$pdf->Cell(50, 8, 'Tipo de Equipo:', 0, 0, 'L');
-$pdf->Cell(0, 8, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 0, 1, 'L');
-
-$pdf->Cell(50, 8, 'Descripción del Problema:', 0, 1, 'L');
-$pdf->MultiCell(0, 8, $descripcion, 0, 'L');
-
-$pdf->Cell(50, 8, 'Solución Realizada:', 0, 1, 'L');
-$pdf->MultiCell(0, 8, $solucion, 0, 'L');
-
-$pdf->Cell(50, 8, 'Estado General del Equipo:', 0, 0, 'L');
-$pdf->Cell(0, 8, $estado, 0, 1, 'L');
-
-$pdf->Cell(50, 8, 'Observaciones Adicionales:', 0, 1, 'L');
-$pdf->MultiCell(0, 8, $observaciones, 0, 'L');
-
-$pdf->Cell(50, 8, 'Firma del Técnico:', 0, 0, 'L');
-$pdf->Cell(0, 8, $firma, 0, 1, 'L');
+// Ajustar celdas largas con MultiCell
+$pdf->Cell(50, 10, 'Descripción del Problema:', 1);
+$pdf->MultiCell(0, 10, $descripcion, 1);
+$pdf->Cell(50, 10, 'Solución Realizada:', 1);
+$pdf->MultiCell(0, 10, $solucion, 1);
+$pdf->Cell(50, 10, 'Estado General del Equipo:', 1);
+$pdf->Cell(0, 10, $estado, 1, 1);
+$pdf->Cell(50, 10, 'Observaciones Adicionales:', 1);
+$pdf->MultiCell(0, 10, $observaciones, 1);
+$pdf->Cell(50, 10, 'Firma del Técnico:', 1);
+$pdf->Cell(0, 10, $firma, 1, 1);
 
 // Enviar el PDF al navegador
-$pdf->Output('reporte_tecnico.pdf', 'I');
+$pdf->Output();
 ?>
