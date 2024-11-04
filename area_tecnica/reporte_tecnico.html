@@ -1,88 +1,255 @@
-<?php
-require('fpdf/fpdf.php');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Técnico</title>
+    <style>
+        /* Estilos del formulario */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: none; /* Eliminar sombra */
+            max-width: 700px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 30% 1fr;
+            gap: 3px;
+        }
+        h2 {
+            grid-column: span 2;
+            text-align: center;
+            color: #004d99;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 2px;
+            font-size: 12px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 3px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 11px;
+            background-color: #f0f0f0;
+            margin-bottom: 3px;
+        }
+        textarea {
+            grid-column: span 2;
+            resize: vertical;
+            min-height: 50px;
+        }
+        button {
+            background-color: #004d99;
+            color: white;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            grid-column: span 2;
+        }
+        #orden {
+            width: 80px; /* Ajustar el tamaño para 6 caracteres */
+        }
+        #signature-pad {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            grid-column: span 2;
+            width: 100%;
+            height: 80px;
+            background-color: #fff;
+        }
+        #clear-signature {
+            background-color: red;
+            color: white;
+            padding: 4px 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .field-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .field-group div {
+            flex: 1;
+            margin-right: 5px;
+        }
+        .field-group div:last-child {
+            margin-right: 0;
+        }
+    </style>
+    <!-- Importar las bibliotecas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <!-- Contenedor del formulario -->
+    <div class="container" id="formulario">
+        <h2>Reporte Técnico</h2>
+        
+        <label for="orden">Número de Orden:</label>
+        <input type="text" id="orden" name="orden" value="N/A" maxlength="6" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        
+        <label for="cliente">Nombre del Cliente:</label>
+        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        
+        <!-- Menú desplegable para Tipo de Servicio -->
+        <label for="tipoServicio">Tipo de Servicio:</label>
+        <select id="tipoServicio" name="tipoServicio">
+            <option value="Mantenimiento Preventivo">Mantenimiento Preventivo</option>
+            <option value="Mantenimiento Correctivo">Mantenimiento Correctivo</option>
+            <option value="Revisión">Revisión</option>
+        </select>
+        
+        <label for="equipo">Descripción del Equipo:</label>
+        <input type="text" id="equipo" name="equipo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        
+        <label for="serie">Serie:</label>
+        <input type="text" id="serie" name="serie" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+        
+        <!-- Campo de voltajes (V1, V2, V3) en la misma línea con 3 caracteres -->
+        <div class="field-group">
+            <div>
+                <label for="voltajeV1">V1:</label>
+                <input type="text" id="voltajeV1" name="voltajeV1" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="voltajeV2">V2:</label>
+                <input type="text" id="voltajeV2" name="voltajeV2" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="voltajeV3">V3:</label>
+                <input type="text" id="voltajeV3" name="voltajeV3" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+        </div>
+        
+        <!-- Campo de amperajes (L1, L2, L3) en la misma línea con 3 caracteres -->
+        <div class="field-group">
+            <div>
+                <label for="amperajeL1">L1:</label>
+                <input type="text" id="amperajeL1" name="amperajeL1" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="amperajeL2">L2:</label>
+                <input type="text" id="amperajeL2" name="amperajeL2" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+            <div>
+                <label for="amperajeL3">L3:</label>
+                <input type="text" id="amperajeL3" name="amperajeL3" value="N/A" maxlength="3" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
+            </div>
+        </div>
 
-// Crear un nuevo PDF con FPDF
-$pdf = new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 14);
+        <!-- Campo de diagnóstico y descripción de actividades -->
+        <label for="diagnostico">Diagnóstico:</label>
+        <textarea id="diagnostico" name="diagnostico" onfocus="clearDefault(this)" onblur="restoreDefault(this)">N/A</textarea>
 
-// Encabezado de la Empresa
-$pdf->Cell(0, 10, 'Nombre de la Empresa', 0, 1, 'C');
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, 'Dirección de la Empresa', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Teléfono: (XXX) XXX-XXXX', 0, 1, 'C');
-$pdf->Cell(0, 10, 'Email: contacto@empresa.com', 0, 1, 'C');
+        <label for="actividades">Descripción de Actividades Realizadas:</label>
+        <textarea id="actividades" name="actividades" onfocus="clearDefault(this)" onblur="restoreDefault(this)">N/A</textarea>
 
-// Espacio antes del título
-$pdf->Ln(10);
+        <!-- Firma del cliente -->
+        <label for="signature-pad">Firma del Cliente:</label>
+        <canvas id="signature-pad"></canvas>
+        <button type="button" id="clear-signature">Limpiar Firma</button>
 
-// Título del reporte
-$pdf->SetFont('Arial', 'B', 16);
-$pdf->Cell(0, 10, 'Reporte Técnico', 0, 1, 'C');
+        <!-- Nuevo campo: Técnico Responsable después de la firma -->
+        <label for="tecnico">Técnico Responsable:</label>
+        <input type="text" id="tecnico" name="tecnico" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
 
-// Volver a la fuente normal
-$pdf->SetFont('Arial', '', 12);
+        <!-- Botón para generar PDF -->
+        <button onclick="generarPDF()">Generar PDF</button>
+    </div>
 
-// Obtener los datos del formulario (simulados aquí con valores de ejemplo)
-$cliente = 'Juan Pérez';
-$tecnico = 'Carlos López';
-$fecha = '2023-11-05';
-$ubicacion = 'Edificio Principal, Oficina 301';
-$equipo = 'Computadora';
-$equipo_otro = 'Monitor';
-$descripcion = 'El equipo no enciende, posible problema en la fuente de poder.';
-$solucion = 'Se reemplazó la fuente de poder y se probó el correcto encendido del equipo.';
-$estado = 'Funcional';
-$observaciones = 'Se recomienda monitorear el equipo durante las próximas semanas.';
-$firma = 'Carlos López';
+    <script>
+        // Inicializar firma
+        const canvas = document.getElementById('signature-pad');
+        const signaturePad = new SignaturePad(canvas);
 
-// Estructurar los datos en un formato más sencillo y controlado
-$pdf->Ln(5); // Espacio antes de los datos
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Nombre del Cliente:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, $cliente, 1, 1);
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Nombre del Técnico:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, $tecnico, 1, 1);
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Fecha de Revisión:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, $fecha, 1, 1);
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Ubicación del Equipo:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, $ubicacion, 1, 1);
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Tipo de Equipo:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, $equipo . ($equipo === 'otros' ? " - $equipo_otro" : ''), 1, 1);
+        document.getElementById('clear-signature').addEventListener('click', function () {
+            signaturePad.clear();
+        });
 
-// Añadir las secciones de descripción y solución
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Descripción del Problema:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->MultiCell(0, 10, $descripcion, 1);
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Solución Realizada:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->MultiCell(0, 10, $solucion, 1);
+        // Función para eliminar el valor por defecto "N/A"
+        function clearDefault(el) {
+            if (el.value === "N/A") {
+                el.value = ""; // Limpiar el campo cuando recibe foco
+            }
+        }
 
-// Mostrar el estado, observaciones y la firma
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Estado General del Equipo:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, $estado, 1, 1);
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Observaciones Adicionales:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->MultiCell(0, 10, $observaciones, 1);
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, 'Firma del Técnico:', 1);
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, $firma, 1, 1);
+        // Función para restaurar "N/A" si el campo queda vacío
+        function restoreDefault(el) {
+            if (el.value.trim() === "") {
+                el.value = "N/A"; // Restaurar "N/A" si el campo queda vacío
+            }
+        }
 
-// Generar el PDF en el navegador
-$pdf->Output();
-?>
+        function generarPDF() {
+            const { jsPDF } = window.jspdf;
+
+            // Crear nuevo PDF
+            const pdf = new jsPDF();
+
+            // Márgenes reducidas para impresión
+            const margin = 10;  // Márgenes laterales reducidas
+            const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
+
+            // Ocultar el botón de limpiar firma
+            document.getElementById('clear-signature').style.display = 'none'; // Ocultar antes de generar el PDF
+
+            // Encabezado de la empresa
+            pdf.setFontSize(18);
+            pdf.text("Nombre de la Empresa", margin, 10);
+            pdf.setFontSize(12);
+            pdf.text("Dirección de la Empresa", margin, 17);
+            pdf.text("Teléfono: (XXX) XXX-XXXX", margin, 24);
+            pdf.text("Email: contacto@empresa.com", margin, 30);
+
+            // Captura la pantalla del formulario como imagen
+            html2canvas(document.querySelector("#formulario")).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = pageWidth;
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+
+                // Añadir imagen con el ajuste de márgenes
+                pdf.addImage(imgData, 'PNG', margin, 35, imgWidth, imgHeight);
+
+                // Añadir la firma si existe
+                if (!signaturePad.isEmpty()) {
+                    const signatureImage = signaturePad.toDataURL();
+                    pdf.addImage(signatureImage, 'PNG', margin + 5, imgHeight + 45, 100, 50);
+                }
+
+                // Guardar el PDF
+                pdf.save("reporte_tecnico.pdf");
+
+                // Volver a mostrar el botón de limpiar firma después de generar el PDF
+                document.getElementById('clear-signature').style.display = ''; 
+            });
+        }
+    </script>
+</body>
+</html>
+
