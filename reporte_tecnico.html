@@ -153,18 +153,18 @@
             pdf.setFontSize(18);
             pdf.text("Nombre de la Empresa", 10, 10);
             pdf.setFontSize(12);
-            pdf.text("Dirección de la Empresa", 10, 20);
-            pdf.text("Teléfono: (XXX) XXX-XXXX", 10, 30);
-            pdf.text("Email: contacto@empresa.com", 10, 40);
+            pdf.text("Dirección de la Empresa", 10, 17);
+            pdf.text("Teléfono: (XXX) XXX-XXXX", 10, 24);
+            pdf.text("Email: contacto@empresa.com", 10, 31);
 
             // Captura la pantalla del formulario como imagen
             html2canvas(document.querySelector("#formulario")).then(canvas => {
                 const imgData = canvas.toDataURL('image/png'); 
                 
                 // Ajuste para que el reporte esté pegado al encabezado
-                const startY = 41; // Ajustado para que el reporte esté más cerca
-                pdf.addImage(imgData, 'PNG', 0, startY); 
-
+                const startY = 32; // Ajustado para que el reporte esté más cerca
+                pdf.addImage(imgData, 'PNG', 0, startY, 210, 0); // Anchura del PDF ajustada
+                
                 // Añadir la firma si existe
                 if (!signaturePad.isEmpty()) {
                     const signatureImage = signaturePad.toDataURL();
