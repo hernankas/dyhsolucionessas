@@ -16,17 +16,26 @@
             align-items: center;
             height: 100vh;
         }
+
         .container {
             background-color: white;
             padding: 10px;
             border-radius: 10px;
-            box-shadow: none; /* Eliminar sombra */
-            max-width: 700px;
+            box-shadow: none;
+            max-width: 100%; /* Ajuste para móviles */
             width: 100%;
             display: grid;
-            grid-template-columns: 30% 1fr;
+            grid-template-columns: 1fr; /* Columna única en móviles */
             gap: 3px;
         }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 30% 1fr; /* Volver a dos columnas en pantallas grandes */
+                max-width: 700px;
+            }
+        }
+
         h2 {
             grid-column: span 2;
             text-align: center;
@@ -34,11 +43,13 @@
             margin-bottom: 5px;
             font-size: 18px;
         }
+
         label {
             font-weight: bold;
             margin-bottom: 2px;
             font-size: 12px;
         }
+
         input, textarea, select {
             width: 100%;
             padding: 3px;
@@ -48,11 +59,13 @@
             background-color: #f0f0f0;
             margin-bottom: 3px;
         }
+
         textarea {
             grid-column: span 2;
             resize: vertical;
             min-height: 50px;
         }
+
         button {
             background-color: #004d99;
             color: white;
@@ -63,9 +76,11 @@
             font-size: 14px;
             grid-column: span 2;
         }
+
         #orden {
             width: 80px; /* Ajustar el tamaño para 6 caracteres */
         }
+
         #signature-pad {
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -74,6 +89,13 @@
             height: 80px;
             background-color: #fff;
         }
+
+        #signature-pad {
+            width: 100%; /* Ajustar a pantallas pequeñas */
+            height: auto;
+            max-height: 150px; /* Limitar la altura */
+        }
+
         #clear-signature {
             background-color: red;
             color: white;
@@ -83,17 +105,29 @@
             cursor: pointer;
             margin-top: 5px;
         }
+
         .field-group {
             display: flex;
             justify-content: space-between;
             gap: 10px; /* Espacio entre los campos */
         }
+
         .field-group div {
             flex: 1; /* Los campos se ajustan proporcionalmente */
         }
+
         .field-group div label {
             display: block;
         }
+
+        @media (max-width: 600px) {
+            .field-group {
+                flex-direction: column; /* Colocar en columnas en pantallas pequeñas */
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
     </style>
     <!-- Importar las bibliotecas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -120,13 +154,13 @@
 </div>
 
 
-<label for="cliente">Nombre del Cliente:</label>
+<label for="cliente">Direccion Cliente:</label>
 <div class="field-group">
     <div style="flex: 2;">
-        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 60%;">
+        <input type="text" id="Direccion cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 60%;">
     </div>
     <div style="flex: 1; display: flex; align-items: center;">
-        <span style="margin-right: 5px; white-space: nowrap;">NIT</span> <!-- La palabra "NIT" antes del cuadro -->
+        <span style="margin-right: 5px; white-space: nowrap;">tel:</span> <!-- La palabra "TEL:" antes del cuadro -->
         <input type="text" id="nit" name="nit" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
     </div>
 </div>
@@ -281,5 +315,6 @@
     </script>
 </body>
 </html>
+
 
 
