@@ -277,41 +277,45 @@
         }
 
         function generarPDF() {
-            const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;
 
-            // Crear nuevo PDF
-            const pdf = new jsPDF();
+    // Crear nuevo PDF
+    const pdf = new jsPDF();
 
-            // Márgenes reducidas para impresión
-            const margin = 10;  // Márgenes laterales reducidas
-            const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
+    // Márgenes reducidas para impresión
+    const margin = 10;  // Márgenes laterales reducidas
+    const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
 
-            // Encabezado de la empresa
-            pdf.setFontSize(18);
-            pdf.text("Nombre de la Empresa", margin, 10);
-            pdf.setFontSize(12);
-            pdf.text("Dirección de la Empresa", margin, 17);
-            pdf.text("Teléfono: (XXX) XXX-XXXX", margin, 24);
-            pdf.text("Email: contacto@empresa.com", margin, 30);
+    // Encabezado de la empresa
+    pdf.setFontSize(18);
+    pdf.text("Nombre de la Empresa", margin, 10);
+    pdf.setFontSize(12);
+    pdf.text("Dirección de la Empresa", margin, 17);
+    pdf.text("Teléfono: (XXX) XXX-XXXX", margin, 24);
+    pdf.text("Email: contacto@empresa.com", margin, 30);
 
-            // Captura la pantalla del formulario como imagen
-            html2canvas(document.querySelector("#formulario")).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const imgWidth = pageWidth;
-                const imgHeight = canvas.height * imgWidth / canvas.width;
+    // Captura la pantalla del formulario como imagen
+    html2canvas(document.querySelector("#formulario"), {
+        scale: window.devicePixelRatio // Ajusta la escala según la densidad de píxeles del dispositivo
+    }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const imgWidth = pageWidth;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
 
-                // Añadir imagen con el ajuste de márgenes
-                pdf.addImage(imgData, 'PNG', margin, 35, imgWidth, imgHeight);
+        // Añadir imagen con el ajuste de márgenes
+        pdf.addImage(imgData, 'PNG', margin, 35, imgWidth, imgHeight);
 
-                // Añadir la firma si existe
-                if (!signaturePad.isEmpty()) {
-                    const signatureImage = signaturePad.toDataURL();
-                    pdf.addImage(signatureImage, 'PNG', margin + 5, imgHeight + 45, 100, 50);
-                }
-
-                pdf.save("reporte_tecnico.pdf"); // Guardar el PDF
-            });
+        // Añadir la firma si existe
+        if (!signaturePad.isEmpty()) {
+            const signatureImage = signaturePad.toDataURL();
+            pdf.addImage(signatureImage, 'PNG', margin + 5, imgHeight + 45, 100, 50);
         }
+
+        pdf.save("reporte_tecnico.pdf"); // Guardar el PDF
+    });
+}
+
+
     </script>
 </body>
 </html>
