@@ -13,8 +13,8 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start; /* Cambiado de center a flex-start */
+            min-height: 100vh; /* Usar min-height en lugar de height */
         }
 
         .container {
@@ -90,12 +90,6 @@
             background-color: #fff;
         }
 
-        #signature-pad {
-            width: 100%; /* Ajustar a pantallas pequeñas */
-            height: auto;
-            max-height: 150px; /* Limitar la altura */
-        }
-
         #clear-signature {
             background-color: red;
             color: white;
@@ -127,8 +121,6 @@
             }
         }
     </style>
-</head>
-    </style>
     <!-- Importar las bibliotecas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
@@ -142,52 +134,49 @@
         <label for="orden">Número de Orden:</label>
         <input type="text" id="orden" name="orden" value="N/A" maxlength="6" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
-     <label for="cliente">Nombre del Cliente:</label>
-<div class="field-group">
-    <div style="flex: 2;">
-        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
-    </div>
-    <div style="flex: 1; display: flex; align-items: center;">
-        <span style="margin-right: 5px; white-space: nowrap;">NIT</span> <!-- La palabra "NIT" antes del cuadro -->
-        <input type="text" id="nit" name="nit" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 70%;">
-    </div>
-</div>
+        <label for="cliente">Nombre del Cliente:</label>
+        <div class="field-group">
+            <div style="flex: 2;">
+                <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
+            </div>
+            <div style="flex: 1; display: flex; align-items: center;">
+                <span style="margin-right: 5px; white-space: nowrap;">NIT</span>
+                <input type="text" id="nit" name="nit" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 70%;">
+            </div>
+        </div>
 
+        <label for="Direccion cliente">Direccion Cliente:</label>
+        <div class="field-group">
+            <div style="flex: 2;">
+                <input type="text" id="Direccion cliente" name="Direccion cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 60%;">
+            </div>
+            <div style="flex: 1; display: flex; align-items: center;">
+                <span style="margin-right: 5px; white-space: nowrap;">tel:</span>
+                <input type="text" id="tel" name="tel" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
+            </div>
+        </div>
 
-<label for="cliente">Direccion Cliente:</label>
-<div class="field-group">
-    <div style="flex: 2;">
-        <input type="text" id="Direccion cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 60%;">
-    </div>
-    <div style="flex: 1; display: flex; align-items: center;">
-        <span style="margin-right: 5px; white-space: nowrap;">tel:</span> <!-- La palabra "TEL:" antes del cuadro -->
-        <input type="text" id="nit" name="nit" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
-    </div>
-</div>
+        <div style="display: inline-block; width: 48%; vertical-align: top;">
+            <label for="tipoServicio" style="display: inline-block; margin-bottom: 5px;">Tipo de Servicio:</label>
+            <select id="tipoServicio" name="tipoServicio" style="width: 60%; min-width: 220px;">
+                <option value="Preventivo">Mantenimiento Preventivo</option>
+                <option value="Correctivo" selected>Mantenimiento Correctivo</option>
+                <option value="Revision">Revisión</option>
+            </select>
+        </div>
 
-
-
-<div style="display: inline-block; width: 48%; vertical-align: top;">
-    <label for="tipoServicio" style="display: inline-block; margin-bottom: 5px;">Tipo de Servicio:</label>
-    <select id="tipoServicio" name="tipoServicio" style="width: 60%; min-width: 220px;">
-        <option value="Preventivo">Mantenimiento Preventivo</option>
-        <option value="Correctivo" selected>Mantenimiento Correctivo</option>
-        <option value="Revision">Revisión</option>
-    </select>
-</div>
-
-<div style="display: inline-block; width: 48%; vertical-align: top;">
-    <label for="tEquipo" style="display: inline-block; margin-bottom: 5px;">T. EQUIPO:</label>
-    <select id="tEquipo" name="tEquipo" style="width: 100%;">
-        <option value="AIRE ACONDICIONADO">AIRE ACONDICIONADO</option>
-        <option value="CUARTO FRIO">CUARTO FRIO</option>
-        <option value="RACK">RACK</option>
-        <option value="NEVERA">NEVERA</option>
-        <option value="PLANTA ELECTRICA">PLANTA ELÉCTRICA</option>
-        <option value="ELECTRO BOMBA">ELECTRO BOMBA</option>
-        <option value="OTROS">OTROS</option>
-    </select>
-</div>
+        <div style="display: inline-block; width: 48%; vertical-align: top;">
+            <label for="tEquipo" style="display: inline-block; margin-bottom: 5px;">T. EQUIPO:</label>
+            <select id="tEquipo" name="tEquipo" style="width: 100%;">
+                <option value="AIRE ACONDICIONADO">AIRE ACONDICIONADO</option>
+                <option value="CUARTO FRIO">CUARTO FRIO</option>
+                <option value="RACK">RACK</option>
+                <option value="NEVERA">NEVERA</option>
+                <option value="PLANTA ELECTRICA">PLANTA ELÉCTRICA</option>
+                <option value="ELECTRO BOMBA">ELECTRO BOMBA</option>
+                <option value="OTROS">OTROS</option>
+            </select>
+        </div>
 
         <label for="equipo">Descripción del Equipo:</label>
         <input type="text" id="equipo" name="equipo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
@@ -256,11 +245,26 @@
     <script>
         // Inicializar firma
         const canvas = document.getElementById('signature-pad');
-        const signaturePad = new SignaturePad(canvas);
+        const signaturePad = new SignaturePad(canvas, {
+            minWidth: 0.5,
+            maxWidth: 2.5,
+            throttle: 16
+        });
 
         document.getElementById('clear-signature').addEventListener('click', function () {
             signaturePad.clear();
         });
+
+        // Ajustar el tamaño del canvas al tamaño de la pantalla
+        function resizeCanvas() {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas(); // Llamada inicial para ajustar el tamaño al cargar
 
         // Función para eliminar el valor por defecto "N/A"
         function clearDefault(el) {
@@ -277,46 +281,43 @@
         }
 
         function generarPDF() {
-    const { jsPDF } = window.jspdf;
+            const { jsPDF } = window.jspdf;
 
-    // Crear nuevo PDF
-    const pdf = new jsPDF();
+            // Crear nuevo PDF
+            const pdf = new jsPDF();
 
-    // Márgenes reducidas para impresión
-    const margin = 10;  // Márgenes laterales reducidas
-    const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
+            // Márgenes reducidas para impresión
+            const margin = 10;  
+            const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
 
-    // Encabezado de la empresa
-    pdf.setFontSize(18);
-    pdf.text("Nombre de la Empresa", margin, 10);
-    pdf.setFontSize(12);
-    pdf.text("Dirección de la Empresa", margin, 17);
-    pdf.text("Teléfono: (XXX) XXX-XXXX", margin, 24);
-    pdf.text("Email: contacto@empresa.com", margin, 30);
+            // Encabezado de la empresa
+            pdf.setFontSize(18);
+            pdf.text("Nombre de la Empresa", margin, 10);
+            pdf.setFontSize(12);
+            pdf.text("Dirección de la Empresa", margin, 17);
+            pdf.text("Teléfono: (XXX) XXX-XXXX", margin, 24);
+            pdf.text("Email: contacto@empresa.com", margin, 30);
 
-    // Captura la pantalla del formulario como imagen
-    html2canvas(document.querySelector("#formulario"), {
-        scale: window.devicePixelRatio // Ajusta la escala según la densidad de píxeles del dispositivo
-    }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const imgWidth = pageWidth;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
+            // Captura la pantalla del formulario como imagen
+            html2canvas(document.querySelector("#formulario"), {
+                scale: window.devicePixelRatio // Ajusta la escala según la densidad de píxeles del dispositivo
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = pageWidth;
+                const imgHeight = canvas.height * imgWidth / canvas.width;
 
-        // Añadir imagen con el ajuste de márgenes
-        pdf.addImage(imgData, 'PNG', margin, 35, imgWidth, imgHeight);
+                // Añadir imagen con el ajuste de márgenes
+                pdf.addImage(imgData, 'PNG', margin, 35, imgWidth, imgHeight);
 
-        // Añadir la firma si existe
-        if (!signaturePad.isEmpty()) {
-            const signatureImage = signaturePad.toDataURL();
-            pdf.addImage(signatureImage, 'PNG', margin + 5, imgHeight + 45, 100, 50);
+                // Añadir la firma si existe
+                if (!signaturePad.isEmpty()) {
+                    const signatureImage = signaturePad.toDataURL();
+                    pdf.addImage(signatureImage, 'PNG', margin + 5, imgHeight + 45, 100, 50);
+                }
+
+                pdf.save("reporte_tecnico.pdf"); // Guardar el PDF
+            });
         }
-
-        pdf.save("reporte_tecnico.pdf"); // Guardar el PDF
-    });
-}
-
-
     </script>
 </body>
 </html>
-
