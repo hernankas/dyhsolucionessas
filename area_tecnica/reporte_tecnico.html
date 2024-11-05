@@ -86,13 +86,13 @@
         .field-group {
             display: flex;
             justify-content: space-between;
+            gap: 10px; /* Espacio entre los campos */
         }
         .field-group div {
-            flex: 1;
-            margin-right: 5px;
+            flex: 1; /* Los campos se ajustan proporcionalmente */
         }
-        .field-group div:last-child {
-            margin-right: 0;
+        .field-group div label {
+            display: block;
         }
     </style>
     <!-- Importar las bibliotecas -->
@@ -108,17 +108,53 @@
         <label for="orden">Número de Orden:</label>
         <input type="text" id="orden" name="orden" value="N/A" maxlength="6" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
-        <label for="cliente">Nombre del Cliente:</label>
-        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
-        
-        <!-- Menú desplegable para Tipo de Servicio -->
-        <label for="tipoServicio">Tipo de Servicio:</label>
-        <select id="tipoServicio" name="tipoServicio">
-            <option value="Mantenimiento Preventivo">Mantenimiento Preventivo</option>
-            <option value="Mantenimiento Correctivo">Mantenimiento Correctivo</option>
-            <option value="Revisión">Revisión</option>
-        </select>
-        
+     <label for="cliente">Nombre del Cliente:</label>
+<div class="field-group">
+    <div style="flex: 2;">
+        <input type="text" id="cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
+    </div>
+    <div style="flex: 1; display: flex; align-items: center;">
+        <span style="margin-right: 5px; white-space: nowrap;">NIT</span> <!-- La palabra "NIT" antes del cuadro -->
+        <input type="text" id="nit" name="nit" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 70%;">
+    </div>
+</div>
+
+
+<label for="cliente">Direccion Cliente:</label>
+<div class="field-group">
+    <div style="flex: 2;">
+        <input type="text" id="Direccion cliente" name="cliente" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 60%;">
+    </div>
+    <div style="flex: 1; display: flex; align-items: center;">
+        <span style="margin-right: 5px; white-space: nowrap;">tel:</span> <!-- La palabra "TEL:" antes del cuadro -->
+        <input type="text" id="nit" name="nit" value="N/A" maxlength="15" onfocus="clearDefault(this)" onblur="restoreDefault(this)" style="width: 100%;">
+    </div>
+</div>
+
+
+
+<div style="display: inline-block; width: 48%; vertical-align: top;">
+    <label for="tipoServicio" style="display: inline-block; margin-bottom: 5px;">Tipo de Servicio:</label>
+    <select id="tipoServicio" name="tipoServicio" style="width: 60%; min-width: 220px;">
+        <option value="Preventivo">Mantenimiento Preventivo</option>
+        <option value="Correctivo" selected>Mantenimiento Correctivo</option>
+        <option value="Revision">Revisión</option>
+    </select>
+</div>
+
+<div style="display: inline-block; width: 48%; vertical-align: top;">
+    <label for="tEquipo" style="display: inline-block; margin-bottom: 5px;">T. EQUIPO:</label>
+    <select id="tEquipo" name="tEquipo" style="width: 100%;">
+        <option value="AIRE ACONDICIONADO">AIRE ACONDICIONADO</option>
+        <option value="CUARTO FRIO">CUARTO FRIO</option>
+        <option value="RACK">RACK</option>
+        <option value="NEVERA">NEVERA</option>
+        <option value="PLANTA ELECTRICA">PLANTA ELÉCTRICA</option>
+        <option value="ELECTRO BOMBA">ELECTRO BOMBA</option>
+        <option value="OTROS">OTROS</option>
+    </select>
+</div>
+
         <label for="equipo">Descripción del Equipo:</label>
         <input type="text" id="equipo" name="equipo" value="N/A" onfocus="clearDefault(this)" onblur="restoreDefault(this)">
         
@@ -216,9 +252,6 @@
             const margin = 10;  // Márgenes laterales reducidas
             const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
 
-            // Ocultar el botón de limpiar firma
-            document.getElementById('clear-signature').style.display = 'none'; // Ocultar antes de generar el PDF
-
             // Encabezado de la empresa
             pdf.setFontSize(18);
             pdf.text("Nombre de la Empresa", margin, 10);
@@ -242,11 +275,7 @@
                     pdf.addImage(signatureImage, 'PNG', margin + 5, imgHeight + 45, 100, 50);
                 }
 
-                // Guardar el PDF
-                pdf.save("reporte_tecnico.pdf");
-
-                // Volver a mostrar el botón de limpiar firma después de generar el PDF
-                document.getElementById('clear-signature').style.display = ''; 
+                pdf.save("reporte_tecnico.pdf"); // Guardar el PDF
             });
         }
     </script>
