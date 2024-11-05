@@ -280,7 +280,8 @@
             }
         }
 
-   function generarPDF() {
+
+        function generarPDF() {
     const { jsPDF } = window.jspdf;
 
     // Crear nuevo PDF
@@ -304,19 +305,23 @@
     signaturePadElement.style.visibility = 'hidden';  // Ocultamos el recuadro de firma
     clearSignatureButton.style.visibility = 'hidden'; // Ocultamos el botón "Limpiar Firma"
 
-    // Asegurarse de que el contenedor esté ajustado al tamaño completo
+    // Asegurar que html2canvas captura todo el contenido
     const formularioElement = document.querySelector("#formulario");
+    const originalWidth = formularioElement.style.width;
     const originalHeight = formularioElement.style.height;
-    formularioElement.style.height = 'auto';  // Ajustar para capturar todo el contenido
+    
+    formularioElement.style.width = '800px'; // Forzar un ancho mayor para capturar correctamente en móviles
+    formularioElement.style.height = 'auto'; // Asegurar que la altura completa sea capturada
 
     // Captura la pantalla del formulario completo
     html2canvas(formularioElement, {
-        scale: window.devicePixelRatio,  // Ajusta la escala según la densidad de píxeles del dispositivo
+        scale: 2,  // Doblar la escala para obtener mejor resolución
         useCORS: true,  // Evita problemas de CORS si hay recursos externos
-        scrollY: 0  // Ignora el desplazamiento de la ventana
+        scrollY: 0  // Capturar todo sin depender del scroll
     }).then(canvas => {
         signaturePadElement.style.visibility = 'visible';  // Volver a mostrar el recuadro de firma
         clearSignatureButton.style.visibility = 'visible'; // Volver a mostrar el botón "Limpiar Firma"
+        formularioElement.style.width = originalWidth;  // Restaurar el ancho original del formulario
         formularioElement.style.height = originalHeight;  // Restaurar la altura original del formulario
 
         const imgData = canvas.toDataURL('image/png');
