@@ -306,7 +306,7 @@
 
     // Captura la pantalla del formulario como imagen sin la firma
     html2canvas(document.querySelector("#formulario"), {
-        scale: window.devicePixelRatio // Ajusta la escala según la densidad de píxeles del dispositivo
+    scale: window.devicePixelRatio // Ajusta la escala según la densidad de píxeles del dispositivo
     }).then(canvas => {
         signaturePadElement.style.visibility = 'visible';  // Volver a mostrar el recuadro de firma
         clearSignatureButton.style.visibility = 'visible'; // Volver a mostrar el botón "Limpiar Firma"
