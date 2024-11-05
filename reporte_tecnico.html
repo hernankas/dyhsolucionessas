@@ -280,14 +280,14 @@
             }
         }
 
-    function generarPDF() {
+   function generarPDF() {
     const { jsPDF } = window.jspdf;
 
     // Crear nuevo PDF
     const pdf = new jsPDF();
 
     // Márgenes reducidas para impresión
-    const margin = 10;  
+    const margin = 10;
     const pageWidth = pdf.internal.pageSize.getWidth() - 2 * margin;
 
     // Encabezado de la empresa
@@ -304,12 +304,20 @@
     signaturePadElement.style.visibility = 'hidden';  // Ocultamos el recuadro de firma
     clearSignatureButton.style.visibility = 'hidden'; // Ocultamos el botón "Limpiar Firma"
 
-    // Captura la pantalla del formulario como imagen sin la firma
-    html2canvas(document.querySelector("#formulario"), {
-    scale: window.devicePixelRatio // Ajusta la escala según la densidad de píxeles del dispositivo
+    // Asegurarse de que el contenedor esté ajustado al tamaño completo
+    const formularioElement = document.querySelector("#formulario");
+    const originalHeight = formularioElement.style.height;
+    formularioElement.style.height = 'auto';  // Ajustar para capturar todo el contenido
+
+    // Captura la pantalla del formulario completo
+    html2canvas(formularioElement, {
+        scale: window.devicePixelRatio,  // Ajusta la escala según la densidad de píxeles del dispositivo
+        useCORS: true,  // Evita problemas de CORS si hay recursos externos
+        scrollY: 0  // Ignora el desplazamiento de la ventana
     }).then(canvas => {
         signaturePadElement.style.visibility = 'visible';  // Volver a mostrar el recuadro de firma
         clearSignatureButton.style.visibility = 'visible'; // Volver a mostrar el botón "Limpiar Firma"
+        formularioElement.style.height = originalHeight;  // Restaurar la altura original del formulario
 
         const imgData = canvas.toDataURL('image/png');
         const imgWidth = pageWidth;
