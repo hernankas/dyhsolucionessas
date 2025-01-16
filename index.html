@@ -224,13 +224,11 @@
     <section id="about" class="about-section">
         <h2>Nosotros</h2>
         <div class="about-content">
-            <p>D&H Soluciones SAS nació con el propósito de ofrecer servicios técnicos especializados en ingeniería y tecnología, con un enfoque en la excelencia y la innovación. Nos dedicamos a proporcionar soluciones a medida para satisfacer las necesidades de nuestros clientes, asegurando la continuidad operativa de sus equipos y sistemas.</p>
-            <p><strong>Nuestra misión:</strong> Brindar soluciones integrales que optimicen los procesos industriales y tecnológicos mediante un servicio profesional, eficiente y personalizado.</p>
-            <p><strong>Nuestra visión:</strong> Ser una empresa líder en el sector, reconocida por su compromiso con la calidad, la innovación y la satisfacción del cliente, contribuyendo al desarrollo tecnológico y económico de la región.</p>
+            <p>D&H Soluciones SAS nació con el propósito de ofrecer servicios técnicos especializados en ingeniería y tecnología...</p>
         </div>
     </section>
 
-    <!-- Sección de Servicios -->
+   <!-- Sección de Servicios -->
     <section id="services" class="services">
         <h2>Nuestros Servicios</h2>
         <div class="service-container">
@@ -245,21 +243,69 @@
             <div class="service-item">
                 <h3>Plantas Eléctricas</h3>
                 <img src="planta.jpg" alt="Planta eléctrica industrial" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('plantasElectricas')"><i class="fas fa-plug"></i></button>
+                <button onclick="toggleText('plantasElectricas')"><i class="fas fa-bolt"></i></button>
                 <p id="plantasElectricas">
-                    Contamos con equipos especializados en el mantenimiento de plantas eléctricas para garantizar el suministro de energía ininterrumpido en tus instalaciones. Nos encargamos de la instalación, puesta en marcha y mantenimiento preventivo de plantas de diferentes capacidades.
+                    Soluciones de soporte técnico y mantenimiento para plantas de energía. Aseguramos la continuidad y seguridad de la operación de tus instalaciones.
                 </p>
             </div>
             <div class="service-item">
-                <h3>Electrónica Industrial</h3>
-                <img src="electronic.jpg" alt="Circuitos electrónicos industriales" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('electronicaIndustrial')"><i class="fas fa-cogs"></i></button>
-                <p id="electronicaIndustrial">
-                    Ofrecemos mantenimiento y asesoría en componentes electrónicos industriales, garantizando la optimización de circuitos y sistemas para mejorar el rendimiento de maquinaria industrial. Especialistas en reparaciones y ajustes para evitar paradas no programadas.
-                </p>
+                <h3>Electrobombas</h3>
+                <img src="8.jpg" alt="Electrobombas" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+                <button onclick="toggleText('motobombas')"><i class="fas fa-water"></i></button>
+                <p id="motobombas">Mantenimiento y reparación de electrobombas para uso industrial y comercial, garantizando un óptimo rendimiento y durabilidad.</p>
+            </div>
+            <div class="service-item">
+                <h3>Cableado Estructurado</h3>
+                <img src="9.jpg" alt="Cableado estructurado " style="width: 100%; border-radius: 8px; margin-top: 10px;">
+                <button onclick="toggleText('cableado')"><i class="fas fa-network-wired"></i></button>
+                <p id="cableado">Instalación de sistemas de cableado estructurado y conectividad, optimizados para soportar las demandas tecnológicas actuales y futuras.</p>
+            </div>
+            <div class="service-item">
+                <h3>Aires Acondicionados</h3>
+                <img src="7.jpg" alt="Aires acondicionados" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+                <button onclick="toggleText('aires')"><i class="fas fa-snowflake"></i></button>
+                <p id="aires">Soporte y mantenimiento para sistemas de aire acondicionado en diversas aplicaciones, asegurando un rendimiento óptimo.</p>
+            </div>
+            <div class="service-item">
+                <h3>Congeladores</h3>
+                <button onclick="toggleText('congeladores')"><i class="fas fa-icicles"></i></button>
+                <p id="congeladores">Reparación y soporte para congeladores industriales. Garantizamos eficiencia y cumplimiento de normas de conservación.</p>
             </div>
         </div>
     </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contact" class="contact" style="background-color: #004d99; color: #fff; padding: 40px 20px; text-align: center;">
+        <h2>Contáctanos</h2>
+        <p>Estamos aquí para ayudarte. Llena el formulario para recibir más información sobre nuestros servicios.</p>
+        <form action="https://formspree.io/f/your-link-here" method="post" style="max-width: 500px; margin: auto; text-align: left;">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+            
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+            
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;"></textarea>
+            
+            <button type="submit" style="background-color: #ffd700; color: #004d99; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Botón flotante de WhatsApp -->
+    <script type="text/javascript">
+        (function () {
+            var options = {
+                whatsapp: "+573212252409", // Reemplaza con tu número de WhatsApp
+                call_to_action: "Chatea con nosotros", // Texto del botón
+                position: "right", // Posición del botón flotante
+            };
+            var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+            s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        })();
+    </script>
 
 </body>
 </html>
