@@ -108,7 +108,7 @@
         <canvas id="signature-pad"></canvas>
         <button type="button" id="clear-signature">Limpiar Firma</button>
 
-        <button onclick="generarPDF()">Generar PDF</button>
+        <button onclick="generarPDF()" id="generarPDF">Generar PDF</button>
     </div>
 
     <script>
@@ -163,6 +163,11 @@
 
             pdf.save("reporte_tecnico.pdf");
         }
+
+        // Ocultar el botón "Generar PDF" en el PDF
+        const generarPDFButton = document.getElementById('generarPDF');
+        generarPDFButton.style.display = 'block';
     </script>
 </body>
 </html>
+
