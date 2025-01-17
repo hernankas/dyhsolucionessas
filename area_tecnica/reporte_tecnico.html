@@ -135,6 +135,9 @@
             const lineHeight = 10; // Espaciado entre líneas
             let y = 15; // Posición inicial más cerca del borde superior
 
+            const generarPDFButton = document.getElementById('generarPDF');
+            generarPDFButton.style.display = 'none'; // Oculta el botón temporalmente
+
             pdf.setFontSize(16);
             pdf.text("Reporte Técnico", 10, y);
             y += lineHeight * 2;
@@ -162,11 +165,9 @@
             }
 
             pdf.save("reporte_tecnico.pdf");
-        }
 
-        // Ocultar el botón "Generar PDF" en el PDF
-        const generarPDFButton = document.getElementById('generarPDF');
-        generarPDFButton.style.display = 'block';
+            generarPDFButton.style.display = 'block'; // Restaura el botón después de generar el PDF
+        }
     </script>
 </body>
 </html>
