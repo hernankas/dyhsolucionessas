@@ -133,7 +133,7 @@
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
             const lineHeight = 10; // Espaciado entre líneas
-            let y = 10; // Posición inicial
+            let y = 15; // Posición inicial más cerca del borde superior
 
             pdf.setFontSize(16);
             pdf.text("Reporte Técnico", 10, y);
@@ -157,7 +157,8 @@
 
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
-                pdf.addImage(signatureImage, 'PNG', 10, y, 50, 20);
+                pdf.addImage(signatureImage, 'PNG', 10, y, 50, 30);
+                y += 40; // Ajustar espacio después de la firma
             }
 
             pdf.save("reporte_tecnico.pdf");
