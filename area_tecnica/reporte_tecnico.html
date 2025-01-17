@@ -132,22 +132,32 @@
         function generarPDF() {
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
+            const lineHeight = 10; // Espaciado entre líneas
+            let y = 10; // Posición inicial
 
             pdf.setFontSize(16);
-            pdf.text("Reporte Técnico", 10, 15);
+            pdf.text("Reporte Técnico", 10, y);
+            y += lineHeight * 2;
 
             pdf.setFontSize(12);
-            pdf.text("Número de Orden: " + document.getElementById('orden').value, 10, 30);
-            pdf.text("Nombre del Cliente: " + document.getElementById('cliente').value, 10, 40);
-            pdf.text("Dirección Cliente: " + document.getElementById('direccion').value, 10, 50);
-            pdf.text("Tipo de Servicio: " + document.getElementById('tipoServicio').value, 10, 60);
-            pdf.text("Descripción del Equipo: " + document.getElementById('equipo').value, 10, 70);
-            pdf.text("Diagnóstico:", 10, 80);
-            pdf.text(document.getElementById('diagnostico').value, 10, 90, { maxWidth: 190 });
+            pdf.text("Número de Orden: " + document.getElementById('orden').value, 10, y);
+            y += lineHeight;
+            pdf.text("Nombre del Cliente: " + document.getElementById('cliente').value, 10, y);
+            y += lineHeight;
+            pdf.text("Dirección Cliente: " + document.getElementById('direccion').value, 10, y);
+            y += lineHeight;
+            pdf.text("Tipo de Servicio: " + document.getElementById('tipoServicio').value, 10, y);
+            y += lineHeight;
+            pdf.text("Descripción del Equipo: " + document.getElementById('equipo').value, 10, y);
+            y += lineHeight;
+            pdf.text("Diagnóstico:", 10, y);
+            y += lineHeight;
+            pdf.text(document.getElementById('diagnostico').value, 10, y, { maxWidth: 190 });
+            y += lineHeight * 3;
 
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
-                pdf.addImage(signatureImage, 'PNG', 10, 100, 50, 20);
+                pdf.addImage(signatureImage, 'PNG', 10, y, 50, 20);
             }
 
             pdf.save("reporte_tecnico.pdf");
@@ -155,6 +165,3 @@
     </script>
 </body>
 </html>
-
-
-
