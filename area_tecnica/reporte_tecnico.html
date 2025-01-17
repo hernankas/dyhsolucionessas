@@ -21,10 +21,27 @@
             max-width: 800px;
         }
 
-        h2 {
+        .header {
             text-align: center;
-            color: #004d99;
             margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            color: #004d99;
+            margin: 0;
+        }
+
+        .header h2 {
+            font-size: 16px;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
         }
 
         label {
@@ -80,6 +97,12 @@
 </head>
 <body>
     <div class="container" id="formulario">
+        <div class="header">
+            <h1>D&H Soluciones SAS</h1>
+            <h2>Soluciones Integrales en Ingeniería y Tecnología</h2>
+            <p>NIT 901807265-8</p>
+        </div>
+
         <h2>Reporte Técnico</h2>
 
         <label for="orden">Número de Orden:</label>
@@ -139,6 +162,16 @@
             generarPDFButton.style.display = 'none'; // Oculta el botón temporalmente
 
             pdf.setFontSize(16);
+            pdf.text("D&H Soluciones SAS", 10, y);
+            y += lineHeight;
+            pdf.setFontSize(14);
+            pdf.text("Soluciones Integrales en Ingeniería y Tecnología", 10, y);
+            y += lineHeight;
+            pdf.setFontSize(12);
+            pdf.text("NIT 901807265-8", 10, y);
+            y += lineHeight * 2;
+
+            pdf.setFontSize(16);
             pdf.text("Reporte Técnico", 10, y);
             y += lineHeight * 2;
 
@@ -171,4 +204,5 @@
     </script>
 </body>
 </html>
+
 
