@@ -161,6 +161,7 @@
             const generarPDFButton = document.getElementById('generarPDF');
             generarPDFButton.style.display = 'none'; // Oculta el botón temporalmente
 
+            // Encabezado
             pdf.setFontSize(16);
             pdf.text("D&H Soluciones SAS", 10, y);
             y += lineHeight;
@@ -171,10 +172,12 @@
             pdf.text("NIT 901807265-8", 10, y);
             y += lineHeight * 2;
 
+            // Título del reporte
             pdf.setFontSize(16);
             pdf.text("Reporte Técnico", 10, y);
             y += lineHeight * 2;
 
+            // Contenido del reporte
             pdf.setFontSize(12);
             pdf.text("Número de Orden: " + document.getElementById('orden').value, 10, y);
             y += lineHeight;
@@ -191,6 +194,7 @@
             pdf.text(document.getElementById('diagnostico').value, 10, y, { maxWidth: 190 });
             y += lineHeight * 3;
 
+            // Firma
             if (!signaturePad.isEmpty()) {
                 const signatureImage = signaturePad.toDataURL();
                 pdf.addImage(signatureImage, 'PNG', 10, y, 50, 30);
@@ -204,5 +208,6 @@
     </script>
 </body>
 </html>
+
 
 
