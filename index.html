@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&H Soluciones SAS - NIT 901807265-8 - Soluciones Integrales en Ingeniería y Tecnología</title>
+    <title>C&G Refri Industrial S.A.S - NIT 901715160-8 - Soluciones Integrales en Refrigeración</title>
     <!-- Enlace a la biblioteca de Font Awesome -->
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Estilos básicos */
@@ -66,241 +65,93 @@
             color: #002f4b;
         }
 
-        /* Estilos para la sección de servicios */
-        .services {
+        /* Estilos para la sección de contacto */
+        .contact {
+            background-color: #004d99;
+            color: #fff;
             padding: 40px 20px;
             text-align: center;
-            background-color: #f0f8ff;
-            position: relative;
         }
-        .services h2 {
-            color: #004d99;
-            margin-bottom: 20px;
+
+        .contact form {
+            max-width: 500px;
+            margin: auto;
+            text-align: left;
         }
-        .service-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .service-item {
-            flex: 1 1 200px;
-            background-color: #cce4ff;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s ease-in-out;
-            transform: translateY(40px);
-            opacity: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .service-item.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .service-item h3 {
-            color: #002f4b;
-        }
-        .service-item p {
-            display: none;
-            margin-top: 10px;
-            color: #333;
-        }
-        .service-item button {
-            background-color: transparent;
-            color: #004d99;
+
+        .contact input,
+        .contact textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border-radius: 5px;
             border: none;
-            cursor: pointer;
-            font-size: 2em;
-            margin-top: 10px;
-            transition: color 0.3s, transform 0.3s;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
         }
 
-        /* Estilo para la flecha animada lateral */
-        .animated-arrow {
-            font-size: 1em;
+        .contact button {
+            background-color: #ffd700;
             color: #004d99;
-            animation: slide 0.8s infinite alternate;
-            margin-right: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        @keyframes slide {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-5px);
-            }
+        .contact button:hover {
+            background-color: #ffc107;
         }
     </style>
-    <script>
-        // Función para mostrar/ocultar la sección "Nosotros"
-        function toggleAboutSection() {
-            const aboutSection = document.getElementById("about");
-            aboutSection.style.display = (aboutSection.style.display === "none" || aboutSection.style.display === "") ? "block" : "none";
-        }
-
-        // Función para alternar la visibilidad del texto de servicios
-        function toggleText(id) {
-            const text = document.getElementById(id);
-
-            // Cerrar todos los demás textos
-            document.querySelectorAll('.service-item p').forEach(p => {
-                if (p.id !== id) {
-                    p.style.display = 'none';
-                }
-            });
-
-            // Alternar visibilidad del texto seleccionado
-            text.style.display = (text.style.display === "none" || text.style.display === "") ? "block" : "none";
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const serviceItems = document.querySelectorAll(".service-item");
-
-            function animateOnScroll() {
-                serviceItems.forEach(item => {
-                    const itemTop = item.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-
-                    // Si el elemento está en la pantalla, muestra la animación
-                    if (itemTop < windowHeight - 100) {
-                        item.classList.add("show");
-                    }
-                });
-            }
-
-            // Ejecutar al cargar y cada vez que se hace scroll
-            animateOnScroll();
-            window.addEventListener("scroll", animateOnScroll);
-
-            // Inserta una flecha animada junto a cada botón de servicio
-            serviceItems.forEach(item => {
-                const arrow = document.createElement("span");
-                arrow.className = "animated-arrow";
-                arrow.innerHTML = "➡️";
-                item.querySelector("button").prepend(arrow);
-            });
-        });
-
-        // Función para solicitar contraseña antes de acceder al reporte técnico
-        function requestPassword() {
-            const password = prompt("Por favor, ingrese la contraseña para acceder al reporte técnico:");
-            
-            // Verifica la contraseña
-            if (password === "9536080") { // Cambia "tu_contraseña_segura" por la contraseña real
-                window.location.href = "reporte_tecnico.html"; // Redirige al reporte si la contraseña es correcta
-            } else {
-                alert("Contraseña incorrecta. Inténtelo de nuevo.");
-            }
-        }
-
-    </script>
 </head>
 <body>
 
     <!-- Encabezado y menú de navegación -->
     <header>
-        <h1>D&H Soluciones SAS</h1>
-        <p>Soluciones Integrales en Ingeniería y Tecnología</p>
-        <p>NIT 901807265-8</p>
+        <h1>C&G Refri Industrial S.A.S</h1>
+        <p>Soluciones Integrales en Refrigeración</p>
+        <p>NIT: 901715160-8</p>
     </header>
     <nav>
         <a onclick="toggleAboutSection()">Nosotros</a>
-        <a href="#services">Servicios</a>
         <a href="#contact">Contacto</a>
-        <!-- Modificamos este enlace para que invoque la función requestPassword -->
-        <a onclick="requestPassword()">Reporte Técnico</a>
     </nav>
 
- <!-- Sección de Nosotros -->
-<section id="about" class="about-section">
-    <h2>Nosotros</h2>
-    <div class="about-content">
-        <p>D&H Soluciones SAS nació con el propósito de ofrecer servicios técnicos especializados en ingeniería y tecnología, con un enfoque integral que garantiza soluciones a la medida de las necesidades de cada cliente. Nuestra misión es brindar un servicio de alta calidad, respaldado por la experiencia de nuestro equipo profesional y el compromiso con la innovación.</p>
-        <p><strong>Nuestros valores:</strong> Compromiso, excelencia, innovación, trabajo en equipo y responsabilidad social. Estos principios nos guían en cada proyecto, con el objetivo de superar las expectativas de nuestros clientes y generar un impacto positivo en la sociedad.</p>
-        <p>Contamos con una sólida trayectoria en diversos sectores industriales, incluyendo la ingeniería eléctrica, mantenimiento de equipos tecnológicos, automatización, y más. Trabajamos con los más altos estándares de calidad y seguridad, buscando siempre la eficiencia y la satisfacción total de nuestros clientes.</p>
-    </div>
-</section>
-
-
-   <!-- Sección de Servicios -->
-    <section id="services" class="services">
-        <h2>Nuestros Servicios</h2>
-        <div class="service-container">
-            <div class="service-item">
-                <h3>Cuartos Fríos</h3>
-                <img src="10.jpg" alt="Rack de almacenamiento en cuarto frío" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('cuartosFrios')"><i class="fas fa-thermometer-half"></i></button>
-                <p id="cuartosFrios">
-                    Mantenimiento preventivo y correctivo de sistemas de frío: optimizamos el rendimiento de racks, cuartos fríos y cavas para una conservación excepcional. Desde la instalación hasta el monitoreo, nuestro servicio garantiza condiciones óptimas y un funcionamiento continuo para la preservación segura de productos.
-                </p>
-            </div>
-            <div class="service-item">
-                <h3>Plantas Eléctricas</h3>
-                <img src="planta.jpg" alt="Planta eléctrica industrial" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('plantasElectricas')"><i class="fas fa-bolt"></i></button>
-                <p id="plantasElectricas">
-                    Soluciones de soporte técnico y mantenimiento para plantas de energía. Aseguramos la continuidad y seguridad de la operación de tus instalaciones.
-                </p>
-            </div>
-            <div class="service-item">
-                <h3>Electrobombas</h3>
-                <img src="8.jpg" alt="Electrobombas" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('motobombas')"><i class="fas fa-water"></i></button>
-                <p id="motobombas">Mantenimiento y reparación de electrobombas para uso industrial y comercial, garantizando un óptimo rendimiento y durabilidad.</p>
-            </div>
-            <div class="service-item">
-                <h3>Cableado Estructurado</h3>
-                <img src="9.jpg" alt="Cableado estructurado " style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('cableado')"><i class="fas fa-network-wired"></i></button>
-                <p id="cableado">Instalación de sistemas de cableado estructurado y conectividad, optimizados para soportar las demandas tecnológicas actuales y futuras.</p>
-            </div>
-            <div class="service-item">
-                <h3>Aires Acondicionados</h3>
-                <img src="7.jpg" alt="Aires acondicionados" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('aires')"><i class="fas fa-snowflake"></i></button>
-                <p id="aires">Soporte y mantenimiento para sistemas de aire acondicionado en diversas aplicaciones, asegurando un rendimiento óptimo.</p>
-            </div>
-            <div class="service-item">
-                <h3>Congeladores</h3>
-                <button onclick="toggleText('congeladores')"><i class="fas fa-icicles"></i></button>
-                <p id="congeladores">Reparación y soporte para congeladores industriales. Garantizamos eficiencia y cumplimiento de normas de conservación.</p>
-            </div>
+    <!-- Sección de Nosotros -->
+    <section id="about" class="about-section">
+        <h2>Nosotros</h2>
+        <div class="about-content">
+            <p>En C&G Refri Industrial S.A.S, somos expertos en soluciones integrales de refrigeración industrial. Brindamos servicios de mantenimiento, instalación y reparación de sistemas de frío con los más altos estándares de calidad.</p>
+            <p><strong>Nuestro objetivo:</strong> Garantizar la satisfacción de nuestros clientes mediante soluciones confiables y eficientes que se adapten a sus necesidades específicas.</p>
+            <p>Con un equipo altamente capacitado, estamos comprometidos con la innovación y la excelencia en cada proyecto.</p>
         </div>
     </section>
 
     <!-- Sección de Contacto -->
-    <section id="contact" class="contact" style="background-color: #004d99; color: #fff; padding: 40px 20px; text-align: center;">
+    <section id="contact" class="contact">
         <h2>Contáctanos</h2>
         <p>Estamos aquí para ayudarte. Llena el formulario para recibir más información sobre nuestros servicios.</p>
-        <form action="https://formspree.io/f/your-link-here" method="post" style="max-width: 500px; margin: auto; text-align: left;">
+        <form action="https://formspree.io/f/your-link-here" method="post">
             <label for="name">Nombre:</label>
-            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+            <input type="text" id="name" name="name" required>
             
             <label for="email">Correo Electrónico:</label>
-            <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+            <input type="email" id="email" name="email" required>
             
             <label for="message">Mensaje:</label>
-            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;"></textarea>
+            <textarea id="message" name="message" rows="4" required></textarea>
             
-            <button type="submit" style="background-color: #ffd700; color: #004d99; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Enviar</button>
+            <button type="submit">Enviar</button>
         </form>
+        <p><strong>Dirección:</strong> CL 3A#70C-30</p>
+        <p><strong>Teléfono:</strong> 3214133885 - 3212252409</p>
+        <p><strong>Correo:</strong> <a href="mailto:refriindustrialcyg@gmail.com" style="color: #ffd700;">refriindustrialcyg@gmail.com</a></p>
     </section>
 
     <!-- Botón flotante de WhatsApp -->
     <script type="text/javascript">
         (function () {
             var options = {
-                whatsapp: "+573212252409", // Reemplaza con tu número de WhatsApp
-                call_to_action: "Chatea con nosotros", // Texto del botón
+                whatsapp: "+573212252409", // Número de WhatsApp
+                call_to_action: "Contáctanos por WhatsApp", // Texto del botón
                 position: "right", // Posición del botón flotante
             };
             var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
