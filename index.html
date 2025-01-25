@@ -78,6 +78,7 @@
             text-align: center;
             background-color: #f0f8ff;
             position: relative;
+            display: none; /* Oculto por defecto */
         }
         .services h2 {
             color: #004d99;
@@ -147,25 +148,16 @@
         }
     </style>
     <script>
-        // Función para mostrar/ocultar la sección "Nosotros"
-        function toggleAboutSection() {
-            const aboutSection = document.getElementById("about");
-            aboutSection.style.display = (aboutSection.style.display === "none" || aboutSection.style.display === "") ? "block" : "none";
-        }
-
-        // Función para alternar la visibilidad del texto de servicios
-        function toggleText(id) {
-            const text = document.getElementById(id);
-
-            // Cerrar todos los demás textos
-            document.querySelectorAll('.service-item p').forEach(p => {
-                if (p.id !== id) {
-                    p.style.display = 'none';
+        // Función para mostrar/ocultar una sección y cerrar las demás
+        function toggleSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = section.style.display === 'block' ? 'none' : 'block';
+                } else {
+                    section.style.display = 'none';
                 }
             });
-
-            // Alternar visibilidad del texto seleccionado
-            text.style.display = (text.style.display === "none" || text.style.display === "") ? "block" : "none";
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -220,9 +212,9 @@
         <p>NIT 901715160-8</p>
     </header>
     <nav>
-        <a onclick="toggleAboutSection()">Nosotros</a>
-        <a href="#services">Servicios</a>
-        <a href="#contact">Contacto</a>
+        <a onclick="toggleSection('about')">Nosotros</a>
+        <a onclick="toggleSection('services')">Servicios</a>
+        <a onclick="toggleSection('contact')">Contacto</a>
         <!-- Modificamos este enlace para que invoque la función requestPassword -->
         <a onclick="requestPassword()">Reporte Técnico</a>
     </nav>
@@ -248,20 +240,6 @@
                 <p id="cuartosFrios">
                     Mantenimiento preventivo y correctivo de sistemas de frío: optimizamos el rendimiento de racks, cuartos fríos y cavas para una conservación excepcional. Desde la instalación hasta el monitoreo, nuestro servicio garantiza condiciones óptimas y un funcionamiento continuo para la preservación segura de productos.
                 </p>
-            </div>
-            <div class="service-item">
-                <h3>Plantas Eléctricas</h3>
-                <img src="planta.jpg" alt="Planta eléctrica industrial" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('plantasElectricas')"><i class="fas fa-bolt"></i></button>
-                <p id="plantasElectricas">
-                    Soluciones de soporte técnico y mantenimiento para plantas de energía. Aseguramos la continuidad y seguridad de la operación de tus instalaciones.
-                </p>
-            </div>
-            <div class="service-item">
-                <h3>Electrobombas</h3>
-                <img src="8.jpg" alt="Electrobombas" style="width: 100%; border-radius: 8px; margin-top: 10px;">
-                <button onclick="toggleText('motobombas')"><i class="fas fa-water"></i></button>
-                <p id="motobombas">Mantenimiento y reparación de electrobombas para uso industrial y comercial, garantizando un óptimo rendimiento y durabilidad.</p>
             </div>
             <div class="service-item">
                 <h3>Cableado Estructurado</h3>
