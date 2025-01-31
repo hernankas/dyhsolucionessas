@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba de Pantalla</title>
+    <title>REFRI INDUSTRIAL CYG SAS - NIT 901715160-8 - Soluciones Integrales en Ingeniería y Tecnología</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Estilos básicos */
@@ -37,11 +37,9 @@
             text-decoration: none;
             font-weight: bold;
             cursor: pointer;
-            transition: color 0.3s ease, background-color 0.3s ease;
         }
         nav a:hover {
             color: #ffd700;
-            background-color: #002f4b;
         }
 
         /* Estilos para la sección Nosotros */
@@ -147,24 +145,6 @@
                 transform: translateX(-5px);
             }
         }
-
-        @media (max-width: 768px) {
-            header {
-                text-align: center;
-                padding: 10px;
-            }
-            nav {
-                text-align: center;
-                padding: 10px;
-            }
-            .service-container {
-                flex-direction: column;
-            }
-            .service-item {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-        }
     </style>
     <script>
         // Función para mostrar/ocultar una sección y cerrar las demás
@@ -223,6 +203,7 @@
                 alert("Contraseña incorrecta. Inténtelo de nuevo.");
             }
         }
+
     </script>
 </head>
 <body>
@@ -238,18 +219,21 @@
         <a onclick="toggleSection('about')">Nosotros</a>
         <a onclick="toggleSection('services')">Servicios</a>
         <a onclick="toggleSection('contact')">Contacto</a>
+        <!-- Modificamos este enlace para que invoque la función requestPassword -->
         <a onclick="requestPassword()">Reporte Técnico</a>
     </nav>
 
-    <!-- Sección de Nosotros -->
-    <section id="about" class="about-section">
-        <h2>Nosotros</h2>
-        <div class="about-content">
-            <p>REFRI INDUSTRIAL S.A.S nació con el propósito de ofrecer servicios técnicos especializados en ingeniería y tecnología, con un enfoque integral que garantiza soluciones a la medida de las necesidades de cada cliente...</p>
-        </div>
-    </section>
+ <!-- Sección de Nosotros -->
+<section id="about" class="about-section">
+    <h2>Nosotros</h2>
+    <div class="about-content">
+        <p>REFRI INDUSTRIAL S.A.S nació con el propósito de ofrecer servicios técnicos especializados en ingeniería y tecnología, con un enfoque integral que garantiza soluciones a la medida de las necesidades de cada cliente. Nuestra misión es brindar un servicio de alta calidad, respaldado por la experiencia de nuestro equipo profesional y el compromiso con la innovación.</p>
+        <p><strong>Nuestros valores:</strong> Compromiso, excelencia, innovación, trabajo en equipo y responsabilidad social. Estos principios nos guían en cada proyecto, con el objetivo de superar las expectativas de nuestros clientes y generar un impacto positivo en la sociedad.</p>
+        <p>Contamos con una sólida trayectoria en diversos sectores industriales, incluyendo la ingeniería eléctrica, mantenimiento de equipos tecnológicos, automatización, y más. Trabajamos con los más altos estándares de calidad y seguridad, buscando siempre la eficiencia y la satisfacción total de nuestros clientes.</p>
+    </div>
+</section>
 
-    <!-- Sección de Servicios -->
+   <!-- Sección de Servicios -->
     <section id="services" class="services">
         <h2>Nuestros Servicios</h2>
         <div class="service-container">
@@ -257,13 +241,26 @@
                 <h3>Cuartos Fríos</h3>
                 <img src="10.jpg" alt="Rack de almacenamiento en cuarto frío" style="width: 100%; border-radius: 8px; margin-top: 10px;">
                 <button onclick="toggleText('cuartosFrios')"><i class="fas fa-thermometer-half"></i></button>
-                <p id="cuartosFrios">Mantenimiento preventivo y correctivo de sistemas de frío...</p>
+                <p id="cuartosFrios">
+                    Mantenimiento preventivo y correctivo de sistemas de frío: optimizamos el rendimiento de racks, cuartos fríos y cavas para una conservación excepcional. Desde la instalación hasta el monitoreo, nuestro servicio garantiza condiciones óptimas y un funcionamiento continuo para la preservación segura de productos.
+                </p>
             </div>
             <div class="service-item">
                 <h3>Automatización</h3>
                 <img src="9.jpg" alt="Automatización" style="width: 100%; border-radius: 8px; margin-top: 10px;">
                 <button onclick="toggleText('automatizacion')"><i class="fas fa-cogs"></i></button>
-                <p id="automatizacion">Realizamos la programación y automatización...</p>
+                <p id="automatizacion">Realizamos la programación y automatización de sus equipos para optimizar su rendimiento, asegurando eficiencia y adaptabilidad a las necesidades específicas de su operación.</p>
+            </div>
+            <div class="service-item">
+                <h3>Aires Acondicionados</h3>
+                <img src="7.jpg" alt="Aires acondicionados" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+                <button onclick="toggleText('aires')"><i class="fas fa-snowflake"></i></button>
+                <p id="aires">Soporte y mantenimiento para sistemas de aire acondicionado en diversas aplicaciones, asegurando un rendimiento óptimo.</p>
+            </div>
+            <div class="service-item">
+                <h3>Congeladores</h3>
+                <button onclick="toggleText('congeladores')"><i class="fas fa-icicles"></i></button>
+                <p id="congeladores">Reparación y soporte para congeladores industriales. Garantizamos eficiencia y cumplimiento de normas de conservación.</p>
             </div>
         </div>
     </section>
@@ -271,18 +268,35 @@
     <!-- Sección de Contacto -->
     <section id="contact" class="contact" style="background-color: #004d99; color: #fff; padding: 40px 20px; text-align: center;">
         <h2>Contáctanos</h2>
-        <form action="https://formspree.io/f/your-link-here" method="post">
+        <p>Estamos aquí para ayudarte. Llena el formulario para recibir más información sobre nuestros servicios.</p>
+        <form action="https://formspree.io/f/your-link-here" method="post" style="max-width: 500px; margin: auto; text-align: left;">
             <label for="name">Nombre:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+            
             <label for="email">Correo Electrónico:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;">
+            
             <label for="message">Mensaje:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-            <button type="submit">Enviar</button>
+            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px;"></textarea>
+            
+            <button type="submit" style="background-color: #ffd700; color: #004d99; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Enviar</button>
         </form>
     </section>
 
+    <!-- Botón flotante de WhatsApp -->
+    <script type="text/javascript">
+        (function () {
+            var options = {
+                whatsapp: "+573214133885", // Reemplaza con tu número de WhatsApp
+                call_to_action: "Chatea con nosotros", // Texto del botón
+                position: "right", // Posición del botón flotante
+            };
+            var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+            s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        })();
+    </script>
+
 </body>
 </html>
-
-
