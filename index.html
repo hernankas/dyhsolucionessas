@@ -19,11 +19,12 @@
             background-attachment: fixed;
         }
         header {
-            background: #004080;
+            background: rgba(0, 64, 128, 0.4); /* Fondo transparente */
             color: white;
             text-align: center;
             padding: 40px;
             position: relative;
+            backdrop-filter: blur(10px); /* Suaviza el fondo para mejor legibilidad */
         }
 
         header h1 {
@@ -35,24 +36,10 @@
             font-size: 1.5rem;
         }
 
-        .cta-button {
-            background-color: #FFD700;
-            color: #003366;
-            padding: 15px 30px;
-            text-transform: uppercase;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-
         nav {
             background: #003366;
             padding: 15px;
             text-align: center;
-            position: relative;
         }
 
         nav a {
@@ -158,8 +145,13 @@
                 padding: 8px;
             }
 
+            .servicio img {
+                max-width: 100%;
+            }
+
             .servicio {
                 flex-direction: column;
+                text-align: center;
             }
 
             footer {
@@ -172,6 +164,10 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                background-size: 40%;
+            }
+
             header h1 {
                 font-size: 1.5rem;
             }
@@ -191,6 +187,7 @@
             .whatsapp-button {
                 width: 85%;
             }
+
         }
 
     </style>
@@ -201,7 +198,6 @@
         <div class="hero-container">
             <h1>REFRI INDUSTRIAL CYG SAS</h1>
             <p>NIT: 901715160-8 | Soluciones Integrales en Ingeniería y Tecnología</p>
-            <button class="cta-button">Contacta con nosotros</button>
         </div>
     </header>
 
@@ -211,6 +207,12 @@
         <a href="#contacto" onclick="closeDropdowns()">Contáctanos</a>
         <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank" onclick="closeDropdowns()">Reporte Técnico</a>
     </nav>
+
+    <!-- Sección de "Quiénes Somos" que aparecerá al hacer clic en el enlace -->
+    <div id="quienes-somos-dropdown" style="display:none; padding: 20px;">
+        <h2>Quiénes Somos</h2>
+        <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
+    </div>
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
@@ -258,19 +260,17 @@
     </footer>
 
     <script>
+        // Función para mostrar u ocultar la sección "Quiénes Somos"
         function toggleDropdown(id) {
             var dropdown = document.getElementById(id);
             if (dropdown.style.display === "block") {
                 dropdown.style.display = "none";
             } else {
-                var allDropdowns = document.querySelectorAll('.dropdown-content');
-                allDropdowns.forEach(function (item) {
-                    item.style.display = "none";
-                });
                 dropdown.style.display = "block";
             }
         }
 
+        // Función para cerrar cualquier dropdown
         function closeDropdowns() {
             var allDropdowns = document.querySelectorAll('.dropdown-content');
             allDropdowns.forEach(function (item) {
