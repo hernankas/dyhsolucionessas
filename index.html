@@ -26,7 +26,7 @@
         }
 
         header {
-            background: url('your-image.jpg') no-repeat center center; /* Cambiar la imagen aquí */
+            background: url('your-image.jpg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
@@ -58,13 +58,15 @@
             top: 0;
             width: 100%;
             z-index: 100;
-            display: none;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            gap: 20px;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin: 5px 10px;
             font-size: 16px;
             font-weight: bold;
             text-transform: uppercase;
@@ -80,17 +82,6 @@
 
         nav.show {
             display: block;
-        }
-
-        .menu-toggle {
-            display: none;
-        }
-
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 200;
-            color: white;
         }
 
         section {
@@ -133,6 +124,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
         .servicio img {
@@ -142,13 +134,7 @@
         }
 
         .servicio .text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            text-align: center;
-            z-index: 10;
+            padding: 15px;
         }
 
         .servicio .text h3 {
@@ -180,6 +166,20 @@
             font-size: 18px;
             font-weight: bold;
             margin: 20px auto;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .hero-container h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
         }
 
         /* Media Queries for mobile */
@@ -294,17 +294,11 @@
     </div>
 
     <nav id="navbar">
-        <a href="#" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
+        <a href="#quienes-somos" onclick="closeDropdowns()">Quiénes Somos</a>
         <a href="#servicios" onclick="closeDropdowns()">Nuestros Servicios</a>
         <a href="#contacto" onclick="closeDropdowns()">Contáctanos</a>
         <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank" onclick="closeDropdowns()">Reporte Técnico</a>
     </nav>
-
-    <!-- Sección de "Quiénes Somos" -->
-    <div id="quienes-somos-dropdown" style="display:none; padding: 20px;">
-        <h2>Quiénes Somos</h2>
-        <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
-    </div>
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
@@ -379,4 +373,3 @@
     </script>
 </body>
 </html>
-
