@@ -19,53 +19,93 @@
             background-attachment: fixed;
         }
         header {
-            background: rgba(0, 64, 128, 0.8);
+            background: #004080;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 40px;
+            position: relative;
         }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.5rem;
+        }
+
+        .cta-button {
+            background-color: #FFD700;
+            color: #003366;
+            padding: 15px 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
         nav {
             background: #003366;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
+            position: relative;
         }
+
         nav a {
             color: white;
             text-decoration: none;
-            margin: 10px;
+            margin: 15px;
             font-size: 18px;
-            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background 0.3s ease;
         }
+
+        nav a:hover {
+            background: #FFD700;
+        }
+
         section {
-            padding: 20px;
-            margin: 20px;
-            background: rgba(0, 86, 179, 0.8);
+            padding: 40px 20px;
+            margin: 0 20px;
+            background-color: rgba(0, 86, 179, 0.8);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             color: white;
         }
+
         .servicio {
             display: flex;
-            align-items: center;
+            justify-content: space-between;
             gap: 20px;
-            margin-bottom: 20px;
-            flex-wrap: wrap; /* Permite que se acomode bien en pantallas pequeñas */
+            flex-wrap: wrap;
         }
+
         .servicio img {
-            width: 100%;
-            max-width: 250px; /* Tamaño máximo para las imágenes */
+            max-width: 100%;
             height: auto;
-            object-fit: cover;
             border-radius: 10px;
-            cursor: pointer;
         }
+
         footer {
             background: #004080;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 20px;
             margin-top: 20px;
         }
+
+        footer p {
+            font-size: 1rem;
+        }
+
         .whatsapp-button {
             display: block;
             width: 200px;
@@ -80,42 +120,50 @@
             margin: 20px auto;
         }
 
-        /* Estilo para el contenido desplegable */
-        .dropdown-content {
-            display: none;
-            background-color: #0056b3;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .dropdown-content a {
-            text-decoration: none;
-            color: white;
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
-        /* Media Queries para mejorar la experiencia en móviles */
+        .hero-container h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+
+        /* Media Queries for mobile */
         @media (max-width: 768px) {
             body {
-                background-size: 50%; /* Ajustar el tamaño del logo en pantallas medianas */
+                background-size: 50%;
             }
 
             header h1 {
-                font-size: 22px;
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1.2rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
             }
 
             nav a {
                 font-size: 16px;
-                margin: 5px;
-            }
-
-            .servicio img {
-                max-width: 100%;
+                margin: 10px;
+                padding: 8px;
             }
 
             .servicio {
                 flex-direction: column;
-                text-align: center;
+            }
+
+            footer {
+                font-size: 0.9rem;
             }
 
             .whatsapp-button {
@@ -124,43 +172,46 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                background-size: 40%; /* Ajustar aún más el tamaño del logo en pantallas pequeñas */
-            }
-
             header h1 {
-                font-size: 18px;
+                font-size: 1.5rem;
             }
 
-            nav a {
-                font-size: 14px;
+            header p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+            }
+
+            .servicio {
+                flex-direction: column;
             }
 
             .whatsapp-button {
-                width: 90%;
+                width: 85%;
             }
         }
+
     </style>
 </head>
 <body>
+
     <header>
-        <h1>REFRI INDUSTRIAL CYG SAS</h1>
-        <p>NIT: 901715160-8</p>
-        <p>Soluciones Integrales en Ingeniería y Tecnología</p>
+        <div class="hero-container">
+            <h1>REFRI INDUSTRIAL CYG SAS</h1>
+            <p>NIT: 901715160-8 | Soluciones Integrales en Ingeniería y Tecnología</p>
+            <button class="cta-button">Contacta con nosotros</button>
+        </div>
     </header>
-    
+
     <nav>
         <a href="#" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
         <a href="#servicios" onclick="closeDropdowns()">Nuestros Servicios</a>
         <a href="#contacto" onclick="closeDropdowns()">Contáctanos</a>
         <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank" onclick="closeDropdowns()">Reporte Técnico</a>
     </nav>
-    
-    <div id="quienes-somos-dropdown" class="dropdown-content">
-        <h2>Quiénes Somos</h2>
-        <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
-    </div>
-    
+
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="servicio">
@@ -168,7 +219,6 @@
             <div>
                 <h3>Cuartos Fríos</h3>
                 <p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada, garantizando eficiencia energética y control preciso de temperatura.</p>
-                <p>Mantenimiento preventivo y correctivo, optimización de racks y monitoreo de equipos.</p>
             </div>
         </div>
         <div class="servicio">
@@ -176,7 +226,6 @@
             <div>
                 <h3>Automatización</h3>
                 <p>Programación y automatización de equipos industriales, optimización de procesos y reducción de costos operativos.</p>
-                <p>Garantía de eficiencia y adaptabilidad en sistemas industriales.</p>
             </div>
         </div>
         <div class="servicio">
@@ -184,7 +233,6 @@
             <div>
                 <h3>Aires Acondicionados</h3>
                 <p>Soporte y mantenimiento especializado para sistemas de aire acondicionado en entornos industriales y comerciales.</p>
-                <p>Garantizamos rendimiento óptimo con soluciones adaptadas a cada necesidad.</p>
             </div>
         </div>
         <div class="servicio">
@@ -192,33 +240,29 @@
             <div>
                 <h3>Congeladores Industriales</h3>
                 <p>Instalación, reparación y soporte especializado para congeladores industriales.</p>
-                <p>Cumplimiento de normas de conservación y almacenamiento seguro.</p>
             </div>
         </div>
     </section>
-    
+
     <section id="contacto">
         <h2>Contacto</h2>
         <p>Teléfono: +57 3214133885 - 3174047208</p>
         <p>Email: refrindustrialcyg@gmail.com</p>
         <p>Dirección: CL 3A#70C-30 Bogotá D.C.</p>
         <a class="whatsapp-button" href="https://wa.me/573214133885" target="_blank">Contactar por WhatsApp</a>
-        <a class="whatsapp-button" href="https://wa.me/573174047208" target="_blank">Contactar por WhatsApp</a>
     </section>
-    
+
     <footer>
         <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
         <p>Dirección: CL 3A#70C-30 Bogotá D.C. | Teléfonos: 3214133885 / 3212252409 | Email: refrindustrialcyg@gmail.com</p>
     </footer>
 
     <script>
-        // Función para abrir y cerrar el contenido desplegable
         function toggleDropdown(id) {
             var dropdown = document.getElementById(id);
             if (dropdown.style.display === "block") {
                 dropdown.style.display = "none";
             } else {
-                // Cerrar todos los dropdowns antes de abrir el seleccionado
                 var allDropdowns = document.querySelectorAll('.dropdown-content');
                 allDropdowns.forEach(function (item) {
                     item.style.display = "none";
@@ -227,7 +271,6 @@
             }
         }
 
-        // Función para cerrar cualquier dropdown
         function closeDropdowns() {
             var allDropdowns = document.querySelectorAll('.dropdown-content');
             allDropdowns.forEach(function (item) {
