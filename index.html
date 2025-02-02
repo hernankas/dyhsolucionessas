@@ -12,11 +12,11 @@
             padding: 0;
             background-color: #87CEEB;
             color: white;
-            background-image: url('logo_empresa.png');
+            background-image: url('logo_empresa.png'); /* Aquí va la ruta de tu logo */
             background-repeat: no-repeat;
-            background-size: 25%;
-            background-position: center center;
-            background-attachment: fixed;
+            background-size: 70%; /* Tamaño grande del logo en el fondo */
+            background-position: center center; /* Coloca el logo en el centro */
+            background-attachment: fixed; /* Mantiene el logo fijo en el fondo */
         }
         header {
             background: rgba(0, 64, 128, 0.8);
@@ -35,7 +35,6 @@
             margin: 10px;
             font-size: 18px;
             cursor: pointer;
-            display: inline-block;
         }
         section {
             padding: 20px;
@@ -50,11 +49,11 @@
             align-items: center;
             gap: 20px;
             margin-bottom: 20px;
-            flex-wrap: wrap; /* Para que las imágenes se ajusten en móviles */
+            flex-wrap: wrap;
         }
         .servicio img {
             width: 100%;
-            max-width: 200px; /* Tamaño máximo para las imágenes */
+            max-width: 200px;
             height: auto;
             object-fit: cover;
             border-radius: 10px;
@@ -98,7 +97,7 @@
         /* Media Queries para mejorar la experiencia en móviles */
         @media (max-width: 768px) {
             body {
-                background-size: 40%; /* Aumentar el tamaño del logo en pantallas más pequeñas */
+                background-size: 50%; /* Ajustar el tamaño del logo en pantallas medianas */
             }
 
             header h1 {
@@ -125,6 +124,10 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                background-size: 40%; /* Ajustar aún más el tamaño del logo en pantallas pequeñas */
+            }
+
             header h1 {
                 font-size: 18px;
             }
@@ -234,5 +237,3 @@
     </script>
 </body>
 </html>
-
-
