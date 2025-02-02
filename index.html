@@ -18,21 +18,16 @@
             padding: 0;
             background-color: rgba(135, 206, 235, 0.8);
             color: white;
-            background-image: url('logo_empresa.png');
-            background-repeat: no-repeat;
-            background-size: 70%;
-            background-position: center center;
-            background-attachment: fixed;
         }
 
         header {
-            background: rgba(0, 64, 128, 0.4);
+            background: url('your-image.jpg') no-repeat center center;
+            background-size: cover;
             color: white;
             text-align: center;
-            padding: 40px;
+            padding: 40px 20px;
             position: relative;
             backdrop-filter: blur(10px);
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -42,30 +37,33 @@
         header h1 {
             font-size: 3rem;
             margin: 0;
+            z-index: 10;
         }
 
         header p {
             font-size: 1.5rem;
+            z-index: 10;
         }
 
         nav {
             background: rgba(0, 51, 102, 0.6);
-            padding: 10px; /* Reducir el padding */
+            padding: 10px;
             text-align: center;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
+            display: none; /* Oculta el menú inicialmente */
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin: 5px 10px; /* Reducir el margen */
-            font-size: 16px; /* Reducir el tamaño de la fuente */
+            margin: 5px 10px;
+            font-size: 16px;
             font-weight: bold;
             text-transform: uppercase;
-            padding: 8px 12px; /* Reducir el padding de los enlaces */
+            padding: 8px 12px;
             border-radius: 5px;
             display: inline-block;
             transition: background 0.3s ease;
@@ -75,13 +73,28 @@
             background: #FFD700;
         }
 
+        nav.show {
+            display: block; /* Muestra el menú cuando se pasa el mouse */
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 200;
+            color: white;
+        }
+
         section {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             padding: 40px;
-            margin-top: 80px; /* Espacio debajo del menú fijo */
+            margin-top: 80px;
             margin: 0;
             background-color: rgba(0, 86, 179, 0.6);
             border-radius: 10px;
@@ -173,7 +186,7 @@
             }
 
             nav a {
-                font-size: 14px; /* Reducir más el tamaño de la fuente en dispositivos móviles */
+                font-size: 14px;
                 margin: 5px;
                 padding: 6px 10px;
             }
@@ -193,6 +206,29 @@
 
             .whatsapp-button {
                 width: 80%;
+            }
+
+            .menu-toggle {
+                display: block; /* Muestra el menú hamburguesa en pantallas móviles */
+                cursor: pointer;
+                font-size: 30px;
+                color: white;
+            }
+
+            nav {
+                position: absolute;
+                top: 60px; /* Espacio debajo del menú hamburguesa */
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 51, 102, 0.9);
+                display: none;
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+            }
+
+            nav.show {
+                display: block;
             }
         }
 
@@ -220,6 +256,10 @@
             .whatsapp-button {
                 width: 85%;
             }
+
+            nav {
+                padding: 15px;
+            }
         }
 
     </style>
@@ -233,14 +273,19 @@
         </div>
     </header>
 
-    <nav>
+    <!-- Icono de menú hamburguesa -->
+    <div class="menu-toggle">
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+    </div>
+
+    <nav id="navbar">
         <a href="#" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
         <a href="#servicios" onclick="closeDropdowns()">Nuestros Servicios</a>
         <a href="#contacto" onclick="closeDropdowns()">Contáctanos</a>
         <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank" onclick="closeDropdowns()">Reporte Técnico</a>
     </nav>
 
-    <!-- Sección de "Quiénes Somos" que aparecerá al hacer clic en el enlace -->
+    <!-- Sección de "Quiénes Somos" -->
     <div id="quienes-somos-dropdown" style="display:none; padding: 20px;">
         <h2>Quiénes Somos</h2>
         <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
@@ -292,6 +337,11 @@
     </footer>
 
     <script>
+        function toggleMenu() {
+            var navbar = document.getElementById('navbar');
+            navbar.classList.toggle('show'); // Muestra u oculta el menú al hacer clic en el icono
+        }
+
         // Función para mostrar u ocultar la sección "Quiénes Somos"
         function toggleDropdown(id) {
             var dropdown = document.getElementById(id);
