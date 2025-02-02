@@ -26,11 +26,11 @@
         }
 
         header {
-            background: url('your-image.jpg') no-repeat center center; /* Imagen de fondo personalizada */
+            background: url('your-image.jpg') no-repeat center center; /* Cambiar la imagen aquí */
             background-size: cover;
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 80px 20px;
             position: relative;
             backdrop-filter: blur(10px);
             display: flex;
@@ -58,7 +58,7 @@
             top: 0;
             width: 100%;
             z-index: 100;
-            display: none; /* Oculta el menú inicialmente */
+            display: none;
         }
 
         nav a {
@@ -79,7 +79,7 @@
         }
 
         nav.show {
-            display: block; /* Muestra el menú cuando se pasa el mouse */
+            display: block;
         }
 
         .menu-toggle {
@@ -99,13 +99,12 @@
             align-items: center;
             flex-direction: column;
             padding: 40px;
-            margin-top: 80px; /* Espacio debajo del menú fijo */
+            margin-top: 120px; /* Evitar que el contenido se solape con el menú */
             margin: 0;
             background-color: rgba(0, 86, 179, 0.6);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             color: white;
-            height: 100vh;
             width: 100%;
             margin-bottom: 20px;
         }
@@ -122,14 +121,15 @@
             flex-wrap: wrap;
             width: 100%;
             max-width: 1200px;
+            margin-bottom: 30px;
         }
 
         .servicio img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
             border-radius: 10px;
             object-fit: cover;
-            width: 100%;
+            max-width: 300px; /* Limitar el tamaño de las imágenes */
         }
 
         footer {
@@ -214,7 +214,7 @@
             }
 
             .menu-toggle {
-                display: block; /* Muestra el menú hamburguesa en pantallas móviles */
+                display: block;
                 cursor: pointer;
                 font-size: 30px;
                 color: white;
@@ -222,7 +222,7 @@
 
             nav {
                 position: absolute;
-                top: 60px; /* Espacio debajo del menú hamburguesa */
+                top: 60px;
                 left: 0;
                 width: 100%;
                 background-color: rgba(0, 51, 102, 0.9);
@@ -348,22 +348,4 @@
         }
 
         // Función para mostrar u ocultar la sección "Quiénes Somos"
-        function toggleDropdown(id) {
-            var dropdown = document.getElementById(id);
-            if (dropdown.style.display === "block") {
-                dropdown.style.display = "none";
-            } else {
-                dropdown.style.display = "block";
-            }
-        }
-
-        // Función para cerrar cualquier dropdown
-        function closeDropdowns() {
-            var allDropdowns = document.querySelectorAll('.dropdown-content');
-            allDropdowns.forEach(function (item) {
-                item.style.display = "none";
-            });
-        }
-    </script>
-</body>
-</html>
+        function toggleDropdown(id)
