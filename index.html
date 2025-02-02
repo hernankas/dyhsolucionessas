@@ -25,7 +25,7 @@
         }
 
         header {
-            background-color: rgba(0, 51, 102, 0.8); /* Azul transparente para que se vea el logo */
+            background-color: rgba(0, 51, 102, 0.6); /* Azul transparente para que se vea el logo */
             color: #FFD700; /* Color del texto en amarillo suave */
             text-align: center;
             padding: 20px;
@@ -35,6 +35,7 @@
             align-items: center;
             flex-direction: column;
             opacity: 0.9; 
+            z-index: 10;
         }
 
         header h1 {
@@ -55,7 +56,7 @@
             padding: 15px;
             text-align: center;
             position: fixed;
-            top: 0;
+            top: 80px; /* Ajusté la posición del menú para que no tape el encabezado */
             width: 100%;
             z-index: 100;
             display: flex;
@@ -63,7 +64,6 @@
             flex-direction: row;
             gap: 20px;
             transition: transform 0.3s ease-in-out;
-            transform: translateY(0); /* El menú es visible por defecto */
         }
 
         nav a {
@@ -91,9 +91,250 @@
             padding: 40px;
             margin-top: 120px;
             margin: 0;
-            background-color: #003366; /* Azul igual que la página */
+            background-color: rgba(0, 51, 102, 0.6); /* Azul con transparencia para todo el contenido */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             color: #FFD700; /* Color amarillo suave */
             width: 100%;
-            margin-bottom: 20p
+            margin-bottom: 20px;
+            display: none; /* Oculto por defecto */
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .servicio {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 30px;
+        }
+
+        .servicio .card {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .servicio img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .servicio .text {
+            padding: 15px;
+        }
+
+        .servicio .text h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background: rgba(0, 64, 128, 0.8);
+            color: #FFD700;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        .whatsapp-button {
+            display: block;
+            width: 200px;
+            background: #25D366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px auto;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .hero-container h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+
+        /* Media Queries for mobile */
+        @media (max-width: 768px) {
+            body {
+                background-size: 50%;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1.2rem;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+            }
+
+            nav a {
+                font-size: 14px;
+                margin: 5px;
+                padding: 6px 10px;
+            }
+
+            .servicio img {
+                max-width: 100%;
+            }
+
+            .servicio {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            footer {
+                font-size: 0.9rem;
+            }
+
+            .whatsapp-button {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                background-size: 40%;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+            }
+
+            .servicio {
+                flex-direction: column;
+            }
+
+            .whatsapp-button {
+                width: 85%;
+            }
+
+            nav {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-container">
+            <p><strong>REFRI INDUSTRIAL CYG SAS</strong> - NIT: 901715160-8</p>
+        </div>
+    </header>
+
+    <nav id="navbar">
+        <a href="#quienes-somos" onclick="toggleSection('quienes-somos')">Quiénes Somos</a>
+        <a href="#servicios">Nuestros Servicios</a>
+        <a href="#contacto">Contáctanos</a>
+        <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank">Reporte Técnico</a>
+    </nav>
+
+    <section id="quienes-somos">
+        <h2>Quiénes Somos</h2>
+        <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
+    </section>
+
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="servicio">
+            <div class="card">
+                <img src="cuartos-frios.jpg" alt="Cuartos Fríos">
+                <div class="text">
+                    <h3>Cuartos Fríos</h3>
+                    <p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada, garantizando eficiencia energética y control preciso de temperatura.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="automatizacion.jpg" alt="Automatización">
+                <div class="text">
+                    <h3>Automatización</h3>
+                    <p>Programación y automatización de equipos industriales, optimización de procesos y reducción de costos operativos.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
+                <div class="text">
+                    <h3>Aires Acondicionados</h3>
+                    <p>Soporte y mantenimiento especializado para sistemas de aire acondicionado en entornos industriales y comerciales.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="congeladores.jpg" alt="Congeladores Industriales">
+                <div class="text">
+                    <h3>Congeladores Industriales</h3>
+                    <p>Instalación, reparación y soporte especializado para congeladores industriales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Teléfono: +57 3214133885 - 3174047208</p>
+        <p>Email: refrindustrialcyg@gmail.com</p>
+        <p>Dirección: CL 3A#70C-30 Bogotá D.C.</p>
+        <a class="whatsapp-button" href="https://wa.me/573214133885" target="_blank">Contactar por WhatsApp</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
+        <p>Dirección: CL 3A#70C-30 Bogotá D.C. | Teléfonos: 3214133885 / 3212252409 | Email: refrindustrialcyg@gmail.com</p>
+    </footer>
+
+    <script>
+        // Función para mostrar u ocultar la sección "Quiénes Somos"
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "block") {
+                section.style.display = "none";
+            } else {
+                section.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
