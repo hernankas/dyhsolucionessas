@@ -63,7 +63,6 @@
             flex-direction: row;
             gap: 20px;
             transition: transform 0.3s ease-in-out;
-            transform: translateY(-100%); /* El menú está oculto inicialmente */
         }
 
         nav a {
@@ -91,7 +90,7 @@
             padding: 40px;
             margin-top: 120px;
             margin: 0;
-            background-color: rgba(0, 86, 179, 0.6);
+            background-color: #003366; /* Azul igual que la página */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             color: #FFD700; /* Color amarillo suave */
@@ -221,29 +220,6 @@
             .whatsapp-button {
                 width: 80%;
             }
-
-            .menu-toggle {
-                display: block;
-                cursor: pointer;
-                font-size: 30px;
-                color: white;
-            }
-
-            nav {
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background-color: rgba(0, 51, 102, 0.9);
-                display: none;
-                flex-direction: column;
-                text-align: center;
-                padding: 10px;
-            }
-
-            nav.show {
-                display: block;
-            }
         }
 
         @media (max-width: 480px) {
@@ -287,11 +263,6 @@
             <p>NIT: 901715160-8 | Soluciones Integrales en Ingeniería y Tecnología</p>
         </div>
     </header>
-
-    <!-- Icono de menú hamburguesa -->
-    <div class="menu-toggle">
-        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
-    </div>
 
     <nav id="navbar">
         <a href="#quienes-somos" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
@@ -394,3 +365,4 @@
     </script>
 </body>
 </html>
+
