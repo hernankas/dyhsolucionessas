@@ -17,7 +17,7 @@
             margin: 0;
             padding: 0;
             background-color: rgba(135, 206, 235, 0.8);
-            color: #FFD700; /* Cambié el color de texto a amarillo suave */
+            color: #FFD700;
             background-image: url('logo_empresa.png');
             background-repeat: no-repeat;
             background-size: 70%;
@@ -28,16 +28,16 @@
         header {
             background: url('your-image.jpg') no-repeat center center;
             background-size: cover;
-            color: #FFD700; /* Cambié el color de texto a amarillo suave */
+            color: #FFD700;
             text-align: center;
-            padding: 20px 20px 20px 20px; /* Ajusté el padding superior */
+            padding: 20px;
             position: relative;
-            backdrop-filter: blur(10px); /* Hacerlo más transparente */
+            backdrop-filter: blur(10px); 
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Ajustado para que el texto esté pegado arriba */
+            align-items: center;
             flex-direction: column;
-            opacity: 0.7; /* Ajusté la transparencia del fondo */
+            opacity: 0.7; 
         }
 
         header h1 {
@@ -63,10 +63,12 @@
             justify-content: center;
             flex-direction: row;
             gap: 20px;
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%); /* El menú está oculto inicialmente */
         }
 
         nav a {
-            color: #FFD700; /* Cambié el color de texto a amarillo suave */
+            color: #FFD700;
             text-decoration: none;
             font-size: 16px;
             font-weight: bold;
@@ -93,7 +95,7 @@
             background-color: rgba(0, 86, 179, 0.6);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            color: #FFD700; /* Cambié el color de texto a amarillo suave */
+            color: #FFD700;
             width: 100%;
             margin-bottom: 20px;
         }
@@ -352,9 +354,25 @@
     </footer>
 
     <script>
+        let navbar = document.getElementById('navbar');
+        
+        // Mostrar el menú cuando el mouse pasa por encima del menú
+        navbar.addEventListener('mouseenter', function() {
+            navbar.style.transform = "translateY(0)";
+        });
+
+        // Ocultar el menú cuando el mouse sale del área del menú
+        navbar.addEventListener('mouseleave', function() {
+            navbar.style.transform = "translateY(-100%)";
+        });
+
+        // Función para mostrar el menú al hacer clic en el icono (para móviles)
         function toggleMenu() {
-            var navbar = document.getElementById('navbar');
-            navbar.classList.toggle('show');
+            if (navbar.style.transform === "translateY(0)") {
+                navbar.style.transform = "translateY(-100%)";
+            } else {
+                navbar.style.transform = "translateY(0)";
+            }
         }
 
         // Función para mostrar u ocultar la sección "Quiénes Somos"
@@ -377,4 +395,5 @@
     </script>
 </body>
 </html>
+
 
