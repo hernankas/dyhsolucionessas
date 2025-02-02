@@ -32,11 +32,12 @@
             text-align: center;
             padding: 80px 20px;
             position: relative;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); /* Hacerlo más transparente */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            opacity: 0.7; /* Ajustar transparencia del encabezado */
         }
 
         header h1 {
@@ -78,10 +79,6 @@
 
         nav a:hover {
             background: #FFD700;
-        }
-
-        nav.show {
-            display: block;
         }
 
         section {
@@ -275,6 +272,7 @@
             nav {
                 padding: 15px;
             }
+
         }
 
     </style>
@@ -294,11 +292,16 @@
     </div>
 
     <nav id="navbar">
-        <a href="#quienes-somos" onclick="closeDropdowns()">Quiénes Somos</a>
+        <a href="#quienes-somos" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
         <a href="#servicios" onclick="closeDropdowns()">Nuestros Servicios</a>
         <a href="#contacto" onclick="closeDropdowns()">Contáctanos</a>
         <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank" onclick="closeDropdowns()">Reporte Técnico</a>
     </nav>
+
+    <div id="quienes-somos-dropdown" style="display:none; padding: 20px;">
+        <h2>Quiénes Somos</h2>
+        <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
+    </div>
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
