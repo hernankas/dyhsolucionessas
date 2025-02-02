@@ -12,14 +12,9 @@
             padding: 0;
             background-color: #87CEEB;
             color: white;
-            background-image: url('logo_empresa.png'); /* Aquí va la ruta de tu logo */
-            background-repeat: no-repeat;
-            background-size: 25%; /* Tamaño del logo */
-            background-position: center center; /* Coloca el logo en el centro */
-            background-attachment: fixed; /* Mantiene el logo fijo en el fondo */
         }
         header {
-            background: rgba(0, 64, 128, 0.8); /* Fondo oscuro con transparencia */
+            background: #004080;
             color: white;
             text-align: center;
             padding: 20px;
@@ -39,7 +34,7 @@
         section {
             padding: 20px;
             margin: 20px;
-            background: rgba(0, 86, 179, 0.8); /* Fondo oscuro con transparencia */
+            background: #0056b3;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             color: white;
@@ -51,8 +46,8 @@
             margin-bottom: 20px;
         }
         .servicio img {
-            width: 200px;
-            height: 200px;
+            width: 200px; 
+            height: 200px; 
             object-fit: cover;
             border-radius: 10px;
             cursor: pointer;
@@ -77,6 +72,20 @@
             font-weight: bold;
             margin: 20px auto;
         }
+
+        /* Estilo para el contenido desplegable */
+        .dropdown-content {
+            display: none;
+            background-color: #0056b3;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .dropdown-content a {
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -86,16 +95,17 @@
     </header>
     
     <nav>
-        <a href="#quienes-somos">Quiénes Somos</a>
+        <a href="#" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
         <a href="#servicios">Nuestros Servicios</a>
         <a href="#contacto">Contáctanos</a>
         <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank">Reporte Técnico</a>
     </nav>
     
-    <section id="quienes-somos">
+    <!-- Sección de "Quiénes Somos" con contenido desplegable -->
+    <div id="quienes-somos-dropdown" class="dropdown-content">
         <h2>Quiénes Somos</h2>
         <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
-    </section>
+    </div>
     
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
@@ -145,6 +155,23 @@
     <footer>
         <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        // Función para abrir y cerrar el contenido desplegable
+        function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            } else {
+                // Ocultar otros dropdowns antes de mostrar el nuevo
+                var allDropdowns = document.querySelectorAll('.dropdown-content');
+                allDropdowns.forEach(function (item) {
+                    item.style.display = "none";
+                });
+                dropdown.style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
 
