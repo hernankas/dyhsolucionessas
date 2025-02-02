@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REFRI INDUSTRIAL CYG SAS</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             box-sizing: border-box;
@@ -36,7 +35,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            opacity: 1; /* Eliminar opacidad general para mostrar el color azul correctamente */
+            opacity: 1;
         }
 
         header h1 {
@@ -67,6 +66,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
+        /* Menú horizontal para pantallas grandes */
         nav .menu-items {
             display: flex;
             justify-content: space-around;
@@ -106,10 +106,29 @@
             transition: 0.4s;
         }
 
+        /* Menú vertical (hamburguesa) en pantallas pequeñas */
+        nav .menu-items {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            display: none; /* Ocultar el menú por defecto */
+        }
+
+        nav.show .menu-items {
+            display: flex;
+        }
+
+        nav a {
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
         /* Estilos para el dropdown "Quiénes Somos" */
         #quienes-somos-dropdown {
-            background: rgba(0, 51, 102, 0.7); /* Fondo azul con transparencia */
-            color: white; /* Letras blancas */
+            background: rgba(0, 51, 102, 0.7);
+            color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -126,16 +145,22 @@
             color: white;
         }
 
-        /* Media Queries para dispositivos móviles */
+        /* Media Queries for mobile */
         @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
             nav .menu-items {
                 display: none;
-                flex-direction: column;
                 width: 100%;
             }
 
             nav.show .menu-items {
                 display: flex;
+                flex-direction: column;
+                align-items: center;
             }
 
             .menu-toggle {
@@ -144,32 +169,89 @@
 
             nav a {
                 padding: 15px;
-                text-align: center;
                 width: 100%;
+                text-align: center;
                 border-top: 1px solid rgba(255, 255, 255, 0.2);
             }
+        }
 
-            nav a:hover {
-                background: #FFD700;
-            }
+        /* Estilos de las secciones de contenido */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
 
-            nav {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                z-index: 200;
-            }
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .servicios {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: rgba(0, 51, 102, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1rem;
+        }
+
+        footer {
+            background: rgba(0, 51, 102, 0.7);
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .whatsapp-button {
+            display: block;
+            width: 250px;
+            background: #25D366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px auto;
+            transition: background 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            background: #128C7E;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <div class="hero-container">
-            <h1>REFRI INDUSTRIAL CYG SAS</h1>
-            <p>NIT: 901715160-8 | Soluciones Integrales en Ingeniería y Tecnología</p>
-        </div>
+        <h1>REFRI INDUSTRIAL CYG SAS</h1>
+        <p>NIT: 901715160-8 | Soluciones Integrales en Ingeniería y Tecnología</p>
     </header>
 
     <!-- Menú de navegación -->
@@ -187,13 +269,49 @@
         </div>
     </nav>
 
-    <div id="quienes-somos-dropdown" style="display:none; padding: 20px;">
+    <!-- Sección Quiénes Somos -->
+    <div id="quienes-somos-dropdown" style="display:none;">
         <h2>Quiénes Somos</h2>
         <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
     </div>
 
-    <!-- Aquí van las demás secciones: servicios, contacto, etc. -->
-    
+    <!-- Sección Servicios -->
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="servicios">
+            <div class="card">
+                <img src="cuartos-frios.jpg" alt="Cuartos Fríos">
+                <h3>Cuartos Fríos</h3>
+                <p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada, garantizando eficiencia energética y control preciso de temperatura.</p>
+            </div>
+            <div class="card">
+                <img src="automatizacion.jpg" alt="Automatización">
+                <h3>Automatización</h3>
+                <p>Programación y automatización de equipos industriales, optimización de procesos y reducción de costos operativos.</p>
+            </div>
+            <div class="card">
+                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
+                <h3>Aires Acondicionados</h3>
+                <p>Soporte y mantenimiento especializado para sistemas de aire acondicionado en entornos industriales y comerciales.</p>
+            </div>
+            <div class="card">
+                <img src="congeladores.jpg" alt="Congeladores Industriales">
+                <h3>Congeladores Industriales</h3>
+                <p>Instalación, reparación y soporte especializado para congeladores industriales.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Teléfono: +57 3214133885 - 3174047208</p>
+        <p>Email: refrindustrialcyg@gmail.com</p>
+        <p>Dirección: CL 3A#70C-30 Bogotá D.C.</p>
+        <a class="whatsapp-button" href="https://wa.me/573214133885" target="_blank">Contactar por WhatsApp</a>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
         <p>Dirección: CL 3A#70C-30 Bogotá D.C. | Teléfonos: 3214133885 / 3212252409 | Email: refrindustrialcyg@gmail.com</p>
@@ -214,104 +332,6 @@
             }
         }
 
-        function closeDropdowns() {
-            var allDropdowns = document.querySelectorAll('.dropdown-content');
-            allDropdowns.forEach(function (item) {
-                item.style.display = "none";
-            });
-        }
-    </script>
-</body>
-
-
-    <header>
-        <div class="hero-container">
-            <h1>REFRI INDUSTRIAL CYG SAS</h1>
-            <p>NIT: 901715160-8 | Soluciones Integrales en Ingeniería y Tecnología</p>
-        </div>
-    </header>
-
-    <!-- Icono de menú hamburguesa -->
-    <div class="menu-toggle">
-        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
-    </div>
-
-    <nav id="navbar">
-        <a href="#quienes-somos" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
-        <a href="#servicios" onclick="closeDropdowns()">Nuestros Servicios</a>
-        <a href="#contacto" onclick="closeDropdowns()">Contáctanos</a>
-        <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank" onclick="closeDropdowns()">Reporte Técnico</a>
-    </nav>
-
-    <div id="quienes-somos-dropdown" style="display:none; padding: 20px;">
-        <h2>Quiénes Somos</h2>
-        <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
-    </div>
-
-    <section id="servicios">
-        <h2>Nuestros Servicios</h2>
-        <div class="servicio">
-            <div class="card">
-                <img src="cuartos-frios.jpg" alt="Cuartos Fríos">
-                <div class="text">
-                    <h3>Cuartos Fríos</h3>
-                    <p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada, garantizando eficiencia energética y control preciso de temperatura.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="automatizacion.jpg" alt="Automatización">
-                <div class="text">
-                    <h3>Automatización</h3>
-                    <p>Programación y automatización de equipos industriales, optimización de procesos y reducción de costos operativos.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
-                <div class="text">
-                    <h3>Aires Acondicionados</h3>
-                    <p>Soporte y mantenimiento especializado para sistemas de aire acondicionado en entornos industriales y comerciales.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="congeladores.jpg" alt="Congeladores Industriales">
-                <div class="text">
-                    <h3>Congeladores Industriales</h3>
-                    <p>Instalación, reparación y soporte especializado para congeladores industriales.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Teléfono: +57 3214133885 - 3174047208</p>
-        <p>Email: refrindustrialcyg@gmail.com</p>
-        <p>Dirección: CL 3A#70C-30 Bogotá D.C.</p>
-        <a class="whatsapp-button" href="https://wa.me/573214133885" target="_blank">Contactar por WhatsApp</a>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
-        <p>Dirección: CL 3A#70C-30 Bogotá D.C. | Teléfonos: 3214133885 / 3212252409 | Email: refrindustrialcyg@gmail.com</p>
-    </footer>
-
-    <script>
-        function toggleMenu() {
-            var navbar = document.getElementById('navbar');
-            navbar.classList.toggle('show');
-        }
-
-        // Función para mostrar u ocultar la sección "Quiénes Somos"
-        function toggleDropdown(id) {
-            var dropdown = document.getElementById(id);
-            if (dropdown.style.display === "block") {
-                dropdown.style.display = "none";
-            } else {
-                dropdown.style.display = "block";
-            }
-        }
-
-        // Función para cerrar cualquier dropdown
         function closeDropdowns() {
             var allDropdowns = document.querySelectorAll('.dropdown-content');
             allDropdowns.forEach(function (item) {
