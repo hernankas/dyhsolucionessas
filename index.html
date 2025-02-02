@@ -61,10 +61,16 @@
             width: 100%;
             z-index: 100;
             display: flex;
-            justify-content: center;
-            flex-direction: row;
-            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav .menu-items {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
         }
 
         nav a {
@@ -83,99 +89,21 @@
             background: #FFD700;
         }
 
-        section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 60px 20px;
-            margin-top: 120px;
-            background-color: rgba(0, 86, 179, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        /* Estilo para el ícono de hamburguesa */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 30px;
             color: white;
-            width: 100%;
-            margin-bottom: 30px;
         }
 
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .servicio {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            width: 100%;
-            max-width: 1200px;
-            margin-bottom: 30px;
-        }
-
-        .servicio .card {
-            position: relative;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .servicio .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .servicio img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        .servicio .text {
-            padding: 15px;
-        }
-
-        .servicio .text h3 {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #FFD700;
-        }
-
-        footer {
-            background: rgba(0, 64, 128, 0.8);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        footer p {
-            font-size: 1rem;
-        }
-
-        .whatsapp-button {
+        .menu-toggle span {
             display: block;
-            width: 250px;
-            background: #25D366;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            margin: 20px auto;
-            transition: background 0.3s ease;
-        }
-
-        .whatsapp-button:hover {
-            background: #128C7E;
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            margin: 6px 0;
+            transition: 0.4s;
         }
 
         /* Estilos para el dropdown "Quiénes Somos" */
@@ -198,80 +126,103 @@
             color: white;
         }
 
-        /* Media Queries for mobile */
+        /* Media Queries para dispositivos móviles */
         @media (max-width: 768px) {
-            body {
-                background-size: 50%;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            header p {
-                font-size: 1.2rem;
-            }
-
-            .cta-button {
-                padding: 12px 25px;
-            }
-
-            nav a {
-                font-size: 14px;
-                margin: 5px;
-                padding: 6px 10px;
-            }
-
-            .servicio img {
-                max-width: 100%;
-            }
-
-            .servicio {
+            nav .menu-items {
+                display: none;
                 flex-direction: column;
-                text-align: center;
+                width: 100%;
             }
 
-            footer {
-                font-size: 0.9rem;
-            }
-
-            .whatsapp-button {
-                width: 80%;
+            nav.show .menu-items {
+                display: flex;
             }
 
             .menu-toggle {
                 display: block;
-                cursor: pointer;
-                font-size: 30px;
-                color: white;
+            }
+
+            nav a {
+                padding: 15px;
+                text-align: center;
+                width: 100%;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            nav a:hover {
+                background: #FFD700;
             }
 
             nav {
-                position: absolute;
-                top: 60px;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
-                background-color: rgba(0, 51, 102, 0.9);
-                display: none;
-                flex-direction: column;
-                text-align: center;
-                padding: 10px;
-            }
-
-            nav.show {
-                display: block;
-            }
-
-            #quienes-somos-dropdown {
-                width: 90%;  /* Ajustamos el tamaño en móvil */
-                margin: 0 auto;
-                padding: 15px;
+                z-index: 200;
             }
         }
     </style>
 </head>
 
 <body>
+    <header>
+        <div class="hero-container">
+            <h1>REFRI INDUSTRIAL CYG SAS</h1>
+            <p>NIT: 901715160-8 | Soluciones Integrales en Ingeniería y Tecnología</p>
+        </div>
+    </header>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-items">
+            <a href="#quienes-somos" onclick="toggleDropdown('quienes-somos-dropdown')">Quiénes Somos</a>
+            <a href="#servicios" onclick="closeDropdowns()">Nuestros Servicios</a>
+            <a href="#contacto" onclick="closeDropdowns()">Contáctanos</a>
+            <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank" onclick="closeDropdowns()">Reporte Técnico</a>
+        </div>
+    </nav>
+
+    <div id="quienes-somos-dropdown" style="display:none; padding: 20px;">
+        <h2>Quiénes Somos</h2>
+        <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética para la industria. Con un equipo altamente calificado, ofrecemos mantenimiento, instalación y optimización de sistemas de frío y aire acondicionado. Nuestro compromiso es garantizar un servicio de calidad, con tecnología de vanguardia y un enfoque en la sostenibilidad.</p>
+    </div>
+
+    <!-- Aquí van las demás secciones: servicios, contacto, etc. -->
+    
+    <footer>
+        <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
+        <p>Dirección: CL 3A#70C-30 Bogotá D.C. | Teléfonos: 3214133885 / 3212252409 | Email: refrindustrialcyg@gmail.com</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var navbar = document.querySelector('nav');
+            navbar.classList.toggle('show');
+        }
+
+        function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            } else {
+                dropdown.style.display = "block";
+            }
+        }
+
+        function closeDropdowns() {
+            var allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(function (item) {
+                item.style.display = "none";
+            });
+        }
+    </script>
+</body>
+
 
     <header>
         <div class="hero-container">
