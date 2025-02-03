@@ -210,13 +210,12 @@
         }
         function navigateTo(sectionId) {
     closeMenu();
-    
-    // Ocultar todas las secciones antes de mostrar la seleccionada
-    document.querySelectorAll('section').forEach(section => {
-        section.style.display = 'none';
-    });
 
-    // Mostrar solo la sección seleccionada
+    // Ocultar solo "Quiénes Somos" y "Contacto", pero dejar "Nuestros Servicios" siempre visible
+    document.getElementById('quienes-somos').style.display = 'none';
+    document.getElementById('contacto').style.display = 'none';
+
+    // Mostrar la sección seleccionada
     document.getElementById(sectionId).style.display = 'block';
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
 }
