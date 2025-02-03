@@ -18,7 +18,7 @@
             color: white;
             background-image: url('logo_empresa.png');
             background-repeat: no-repeat;
-            background-size: 70%;
+            background-size: 60%;
             background-position: center center;
             background-attachment: fixed;
         }
@@ -92,11 +92,17 @@
             display: none;
             padding: 40px;
             text-align: center;
-            background: rgba(0, 86, 179, 0.5);
+            background: rgba(0, 86, 179, 0.8);
             margin: 20px auto;
             width: 80%;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #servicios {
+            text-align: center;
+            margin: 40px auto;
+            padding: 20px;
         }
 
         .servicio {
@@ -110,13 +116,13 @@
         }
 
         .servicio .card {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             color: black;
-            width: 280px;
+            width: 300px;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .servicio .card img {
@@ -161,7 +167,7 @@
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
         <a href="#quienes-somos" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="#servicios">Nuestros Servicios</a>
+        <a href="#servicios" onclick="closeMenu()">Nuestros Servicios</a>
         <a href="#contacto" onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
@@ -196,8 +202,11 @@
         function toggleMenu() {
             document.getElementById('menu').classList.toggle('show');
         }
-        function navigateTo(sectionId) {
+        function closeMenu() {
             document.getElementById('menu').classList.remove('show');
+        }
+        function navigateTo(sectionId) {
+            closeMenu();
             document.getElementById(sectionId).style.display = 'block';
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
