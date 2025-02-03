@@ -137,14 +137,25 @@
             padding: 20px;
         }
 
-        .whatsapp-button {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        .whatsapp-float img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .whatsapp-float img:hover {
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
@@ -159,7 +170,6 @@
     </style>
 </head>
 
-
 <body>
     <header>
         <h1>REFRI INDUSTRIAL CYG SAS</h1>
@@ -168,69 +178,55 @@
 
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
-        <a href="#quienes-somos" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="#servicios" onclick="closeMenu()">Nuestros Servicios</a>
-        <a href="#contacto" onclick="navigateTo('contacto')">Contáctanos</a>
+        <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
+        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
+        <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
     <section id="quienes-somos">
-    <h2>Quiénes Somos</h2>
-    <p>En <strong>REFRI INDUSTRIAL CYG SAS</strong>, nos especializamos en brindar soluciones innovadoras en refrigeración industrial, automatización y eficiencia energética. Nuestro compromiso es ofrecer productos y servicios de alta calidad que optimicen el rendimiento y la durabilidad de los sistemas de nuestros clientes.</p>
-    <p>Con un equipo de expertos altamente calificados y tecnología de vanguardia, garantizamos soluciones personalizadas para diversos sectores, incluyendo la industria alimentaria, farmacéutica y de manufactura. Nos esforzamos por cumplir con los más altos estándares de calidad y sostenibilidad.</p>
-    <p>En <strong>REFRI INDUSTRIAL CYG SAS</strong>, entendemos la importancia de la innovación y el servicio al cliente. Por ello, trabajamos de la mano con cada cliente para diseñar e implementar estrategias que maximicen su inversión y minimicen el impacto ambiental.</p>
-</section>
-
+        <h2>Quiénes Somos</h2>
+        <p>Somos una empresa especializada en refrigeración industrial, automatización y eficiencia energética...</p>
+    </section>
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="servicio">
-            <div class="card"><img src="cuartos-frios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p></div>
-            <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Programación y automatización de equipos industriales.</p></div>
-            <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Instalación y mantenimiento de sistemas de aire acondicionado industrial.</p></div>
-            <div class="card"><img src="congeladores.jpg" alt="Congeladores Industriales"><h3>Congeladores Industriales</h3><p>Reparación y optimización de sistemas de refrigeración industrial.</p></div>
+            <div class="card"><img src="cuartos-frios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseño e instalación.</p></div>
+            <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Programación y control.</p></div>
+            <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Mantenimiento e instalación.</p></div>
         </div>
     </section>
 
     <section id="contacto">
         <h2>Contáctanos</h2>
-        <p>Teléfono: +57 3214133885 - 3174047208</p>
+        <p>Teléfono: +57 3214133885</p>
         <p>Email: refrindustrialcyg@gmail.com</p>
-        <p>Dirección: CL 3A#70C-30 Bogotá D.C.</p>
-        <a class="whatsapp-button" href="https://wa.me/573214133885" target="_blank">Contactar por WhatsApp</a>
     </section>
+
+    <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
     <footer>
         <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
     </footer>
 
     <script>
-      function toggleMenu() {
-    let menu = document.getElementById('menu');
-    menu.classList.toggle('show');
-}
-
-function closeMenu() {
-    document.getElementById('menu').classList.remove('show');
-}
-
-function navigateTo(sectionId) {
-    closeMenu();
-
-    // Ocultar todas las secciones excepto "Nuestros Servicios"
-    document.querySelectorAll('section').forEach(section => {
-        if (section.id !== 'servicios') { // Mantiene "Nuestros Servicios" visible
-            section.style.display = 'none';
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('show');
         }
-    });
 
-    // Mostrar la sección seleccionada
-    let section = document.getElementById(sectionId);
-    if (section) {
-        section.style.display = 'block';
-        section.scrollIntoView({ behavior: 'smooth' });
-    }
-}
+        function closeMenu() {
+            document.getElementById('menu').classList.remove('show');
+        }
 
+        function navigateTo(sectionId) {
+            closeMenu();
+            document.querySelectorAll('section').forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
