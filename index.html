@@ -18,7 +18,7 @@
             color: white;
             background-image: url('logo_empresa.png');
             background-repeat: no-repeat;
-            background-size: 60%;
+            background-size: contain;
             background-position: center center;
             background-attachment: fixed;
         }
@@ -27,21 +27,15 @@
             background: rgba(0, 51, 102, 0.7);
             color: white;
             text-align: center;
-            padding: 80px 20px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            padding: 60px 20px;
         }
 
         header h1 {
-            font-size: 3rem;
-            margin: 0;
+            font-size: 2.5rem;
         }
 
         header p {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .menu-toggle {
@@ -88,7 +82,7 @@
             display: block;
         }
 
-        #quienes-somos, #contacto {
+        .content {
             display: none;
             padding: 40px;
             text-align: center;
@@ -100,9 +94,9 @@
         }
 
         #servicios {
+            display: block; /* Siempre visible */
             text-align: center;
-            margin: 40px auto;
-            padding: 20px;
+            padding: 40px;
         }
 
         .servicio {
@@ -110,7 +104,6 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -166,12 +159,12 @@
 
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
-        <a href="#quienes-somos" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="#servicios" onclick="closeMenu()">Nuestros Servicios</a>
-        <a href="#contacto" onclick="navigateTo('contacto')">Contáctanos</a>
+        <a href="#" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
+        <a href="#" onclick="navigateTo('servicios')">Nuestros Servicios</a>
+        <a href="#" onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
-    <section id="quienes-somos">
+    <section id="quienes-somos" class="content">
         <h2>Quiénes Somos</h2>
         <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética.</p>
     </section>
@@ -186,7 +179,7 @@
         </div>
     </section>
 
-    <section id="contacto">
+    <section id="contacto" class="content">
         <h2>Contáctanos</h2>
         <p>Teléfono: +57 3214133885 - 3174047208</p>
         <p>Email: refrindustrialcyg@gmail.com</p>
@@ -202,14 +195,14 @@
         function toggleMenu() {
             document.getElementById('menu').classList.toggle('show');
         }
-        function closeMenu() {
-            document.getElementById('menu').classList.remove('show');
-        }
+
         function navigateTo(sectionId) {
-            closeMenu();
+            document.querySelectorAll('.content').forEach(sec => sec.style.display = 'none');
             document.getElementById(sectionId).style.display = 'block';
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            toggleMenu();
         }
     </script>
 </body>
 </html>
+
