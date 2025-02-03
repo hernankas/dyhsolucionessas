@@ -44,7 +44,6 @@
             font-size: 1.5rem;
         }
 
-        /* Menú desplegable */
         .menu-toggle {
             position: fixed;
             top: 15px;
@@ -89,12 +88,13 @@
             display: block;
         }
 
-        #quienes-somos {
+        #quienes-somos, #contacto {
             display: none;
             padding: 40px;
             text-align: center;
             background: rgba(0, 86, 179, 0.5);
-            margin: 20px;
+            margin: 20px auto;
+            width: 80%;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -105,13 +105,14 @@
             flex-wrap: wrap;
             gap: 20px;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .servicio .card {
             background: rgba(255, 255, 255, 0.8);
             color: black;
-            width: calc(25% - 20px);
-            min-width: 250px;
+            width: 280px;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -159,10 +160,9 @@
 
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
-        <a href="#quienes-somos" onclick="toggleQuienesSomos()">Quiénes Somos</a>
+        <a href="#quienes-somos" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
         <a href="#servicios">Nuestros Servicios</a>
-        <a href="#contacto">Contáctanos</a>
-        <a href="URL_DE_LA_PAGINA_DEL_REPORTE" target="_blank">Reporte Técnico</a>
+        <a href="#contacto" onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
     <section id="quienes-somos">
@@ -180,19 +180,26 @@
         </div>
     </section>
 
+    <section id="contacto">
+        <h2>Contáctanos</h2>
+        <p>Teléfono: +57 3214133885 - 3174047208</p>
+        <p>Email: refrindustrialcyg@gmail.com</p>
+        <p>Dirección: CL 3A#70C-30 Bogotá D.C.</p>
+        <a class="whatsapp-button" href="https://wa.me/573214133885" target="_blank">Contactar por WhatsApp</a>
+    </section>
+
     <footer>
         <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
     </footer>
 
     <script>
         function toggleMenu() {
-            var menu = document.getElementById('menu');
-            menu.classList.toggle('show');
+            document.getElementById('menu').classList.toggle('show');
         }
-
-        function toggleQuienesSomos() {
-            var section = document.getElementById('quienes-somos');
-            section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+        function navigateTo(sectionId) {
+            document.getElementById('menu').classList.remove('show');
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
