@@ -100,18 +100,18 @@
         }
 
         .servicio {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            display: flex;
             justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
             padding: 20px;
         }
 
         .servicio .card {
             background: rgba(255, 255, 255, 0.8);
             color: black;
-            width: 100%;
-            max-width: 300px;
+            width: calc(25% - 20px);
+            min-width: 250px;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -138,6 +138,16 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .servicio {
+                flex-direction: column;
+                align-items: center;
+            }
+            .servicio .card {
+                width: 90%;
+            }
         }
     </style>
 </head>
