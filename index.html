@@ -159,24 +159,14 @@
 
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
-        <a href="#" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="#" onclick="navigateTo('servicios')">Nuestros Servicios</a>
-        <a href="#" onclick="navigateTo('contacto')">Contáctanos</a>
+        <a href="#quienes-somos">Quiénes Somos</a>
+        <a href="#servicios">Nuestros Servicios</a>
+        <a href="#contacto">Contáctanos</a>
     </div>
 
     <section id="quienes-somos" class="content">
         <h2>Quiénes Somos</h2>
         <p>REFRI INDUSTRIAL CYG SAS es una empresa especializada en soluciones de refrigeración, automatización y eficiencia energética.</p>
-    </section>
-
-    <section id="servicios">
-        <h2>Nuestros Servicios</h2>
-        <div class="servicio">
-            <div class="card"><img src="cuartos-frios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p></div>
-            <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Programación y automatización de equipos industriales.</p></div>
-            <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Instalación y mantenimiento de sistemas de aire acondicionado industrial.</p></div>
-            <div class="card"><img src="congeladores.jpg" alt="Congeladores Industriales"><h3>Congeladores Industriales</h3><p>Reparación y optimización de sistemas de refrigeración industrial.</p></div>
-        </div>
     </section>
 
     <section id="contacto" class="content">
@@ -187,22 +177,17 @@
         <a class="whatsapp-button" href="https://wa.me/573214133885" target="_blank">Contactar por WhatsApp</a>
     </section>
 
-    <footer>
-        <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
-    </footer>
-
     <script>
         function toggleMenu() {
             document.getElementById('menu').classList.toggle('show');
         }
 
-        function navigateTo(sectionId) {
-            document.querySelectorAll('.content').forEach(sec => sec.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-            toggleMenu();
-        }
+        // Ajustar zoom al 175% en computadoras de escritorio
+        window.onload = function() {
+            if (window.innerWidth > 1024) {
+                document.body.style.zoom = "175%";
+            }
+        };
     </script>
 </body>
 </html>
-
