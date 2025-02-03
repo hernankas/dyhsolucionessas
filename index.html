@@ -210,14 +210,17 @@
         function closeMenu() {
             document.getElementById('menu').classList.remove('show');
         }
-        function navigateTo(sectionId) {
+      function navigateTo(sectionId) {
     closeMenu();
 
-    // Ocultar solo "Quiénes Somos" y "Contacto", pero dejar "Nuestros Servicios" siempre visible
-    document.getElementById('quienes-somos').style.display = 'none';
-    document.getElementById('contacto').style.display = 'none';
+    // Ocultar solo las secciones de contenido sin afectar el menú ni la página principal
+    document.querySelectorAll('section').forEach(section => {
+        if (section.id !== 'servicios') { // Deja "Nuestros Servicios" visible siempre
+            section.style.display = 'none';
+        }
+    });
 
-    // Mostrar la sección seleccionada
+    // Mostrar solo la sección seleccionada
     document.getElementById(sectionId).style.display = 'block';
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
 }
