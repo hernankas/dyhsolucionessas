@@ -204,7 +204,7 @@
     </footer>
 
     <script>
-       function toggleMenu() {
+      function toggleMenu() {
     let menu = document.getElementById('menu');
     menu.classList.toggle('show');
 }
@@ -216,15 +216,21 @@ function closeMenu() {
 function navigateTo(sectionId) {
     closeMenu();
 
-    // Ocultar solo "Quiénes Somos" y "Contacto", pero dejar "Nuestros Servicios" siempre visible
-    document.getElementById('quienes-somos').style.display = 'none';
-    document.getElementById('contacto').style.display = 'none';
+    // Ocultar todas las secciones excepto "Nuestros Servicios"
+    document.querySelectorAll('section').forEach(section => {
+        if (section.id !== 'servicios') { // Mantiene "Nuestros Servicios" visible
+            section.style.display = 'none';
+        }
+    });
 
-   
-    // Mostrar solo la sección seleccionada
-    document.getElementById(sectionId).style.display = 'block';
-    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    // Mostrar la sección seleccionada
+    let section = document.getElementById(sectionId);
+    if (section) {
+        section.style.display = 'block';
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
 }
+
 
 </body>
 </html>
