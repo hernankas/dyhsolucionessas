@@ -209,10 +209,19 @@
             document.getElementById('menu').classList.remove('show');
         }
         function navigateTo(sectionId) {
-            closeMenu();
-            document.getElementById(sectionId).style.display = 'block';
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
+    closeMenu();
+    
+    // Ocultar todas las secciones antes de mostrar la seleccionada
+    document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // Mostrar solo la sección seleccionada
+    document.getElementById(sectionId).style.display = 'block';
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}
+
+        
     </script>
 </body>
 </html>
