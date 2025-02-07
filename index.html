@@ -42,7 +42,7 @@
         header h1 {
             font-size: 4rem;
             margin-bottom: 10px;
-            color: #FFA500; /* Naranja intenso */
+            color: #FFA500;
         }
 
         header p {
@@ -116,33 +116,28 @@
             text-align: center;
             margin: 40px auto;
             padding: 20px;
-            position: relative;
-            width: 100%;
-            overflow: hidden; /* Oculta lo que está fuera del área visible */
-        }
-
-        .servicio {
             display: flex;
-            gap: 20px;
-            animation: moveRightToLeft 20s linear infinite; /* Animación de desplazamiento de derecha a izquierda */
+            flex-wrap: wrap;
+            justify-content: center; /* Centra las tarjetas */
+            gap: 20px; /* Espacio entre tarjetas */
+            width: 100%;
         }
 
         .card {
             background: #003366; /* Fondo azul oscuro */
             color: white;
-            width: 300px;
+            width: 300px; /* Ancho de cada tarjeta */
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
             position: relative;
-            animation-play-state: running; /* Garantiza que la animación esté en marcha */
+            cursor: pointer; /* Indicamos que es interactivo */
         }
 
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            animation-play-state: paused; /* Detiene la animación cuando el cursor pasa por encima */
         }
 
         .card img {
@@ -159,12 +154,12 @@
         .card h3 {
             font-size: 1.5rem;
             margin: 10px 0;
-            color: #FFA500; /* Naranja brillante */
+            color: #FFA500;
         }
 
         .card p {
             font-size: 1rem;
-            color: #ddd; /* Gris claro */
+            color: #ddd;
         }
 
         footer {
@@ -196,24 +191,11 @@
         }
 
         @media (max-width: 768px) {
-            .servicio {
-                flex-direction: column;
-                align-items: center;
-            }
             .card {
-                width: 90%;
+                width: 90%; /* Tarjetas más pequeñas en pantallas pequeñas */
             }
         }
 
-        /* Animación de desplazamiento de derecha a izquierda */
-        @keyframes moveRightToLeft {
-            0% {
-                transform: translateX(100%); /* Empieza desde la derecha */
-            }
-            100% {
-                transform: translateX(-100%); /* Termina fuera de la izquierda */
-            }
-        }
     </style>
 </head>
 
@@ -244,41 +226,39 @@
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
-        <div class="servicio">
-            <div class="card">
-                <img src="rack.jpg" alt="Cuartos Fríos">
-                <div class="card-content">
-                    <h3>Cuartos Fríos</h3>
-                    <p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p>
-                </div>
+        <div class="card">
+            <img src="rack.jpg" alt="Cuartos Fríos">
+            <div class="card-content">
+                <h3>Cuartos Fríos</h3>
+                <p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p>
             </div>
-            <div class="card">
-                <img src="automatizacion.jpg" alt="Automatización">
-                <div class="card-content">
-                    <h3>Automatización</h3>
-                    <p>Programación y automatización de equipos industriales.</p>
-                </div>
+        </div>
+        <div class="card">
+            <img src="automatizacion.jpg" alt="Automatización">
+            <div class="card-content">
+                <h3>Automatización</h3>
+                <p>Programación y automatización de equipos industriales.</p>
             </div>
-            <div class="card">
-                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
-                <div class="card-content">
-                    <h3>Aires Acondicionados</h3>
-                    <p>Instalación y mantenimiento de sistemas de aire acondicionado industrial.</p>
-                </div>
+        </div>
+        <div class="card">
+            <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
+            <div class="card-content">
+                <h3>Aires Acondicionados</h3>
+                <p>Instalación y mantenimiento de sistemas de aire acondicionado industrial.</p>
             </div>
-            <div class="card">
-                <img src="congeladores.jpg" alt="Congeladores Industriales">
-                <div class="card-content">
-                    <h3>Congeladores Industriales</h3>
-                    <p>Reparación y optimización de sistemas de refrigeración industrial.</p>
-                </div>
+        </div>
+        <div class="card">
+            <img src="congeladores.jpg" alt="Congeladores Industriales">
+            <div class="card-content">
+                <h3>Congeladores Industriales</h3>
+                <p>Reparación y optimización de sistemas de refrigeración industrial.</p>
             </div>
-            <div class="card">
-                <img src="mantenimiento.jpg" alt="Mantenimiento Preventivo">
-                <div class="card-content">
-                    <h3>Mantenimiento Preventivo</h3>
-                    <p>Servicio de mantenimiento preventivo para garantizar la eficiencia y prolongar la vida útil de sus equipos.</p>
-                </div>
+        </div>
+        <div class="card">
+            <img src="mantenimiento.jpg" alt="Mantenimiento Preventivo">
+            <div class="card-content">
+                <h3>Mantenimiento Preventivo</h3>
+                <p>Servicio de mantenimiento preventivo para garantizar la eficiencia y prolongar la vida útil de sus equipos.</p>
             </div>
         </div>
     </section>
@@ -316,4 +296,3 @@
 
 </body>
 </html>
-
