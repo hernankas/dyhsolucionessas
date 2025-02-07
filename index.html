@@ -23,37 +23,38 @@
         }
 
         header {
-            background: rgba(0, 51, 102, 0.7);
+            background-image: url('ciudad.jpg'); /* Ruta de la imagen */
+            background-repeat: no-repeat;
+            background-size: cover; /* Ajusta la imagen al tamaño completo del recuadro */
+            background-position: center center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 80px 20px;
+            padding: 100px 20px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-image: url('ciudad.jpg'); /* Ruta de la imagen */
-            background-repeat: no-repeat;
-            background-size: 40%; /* Ajusta el tamaño de la imagen */
-            background-position: center center;
-            background-attachment: fixed;
-            opacity: 0.2; /* Marca de agua sutil */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Agrega sombra a las letras para mayor visibilidad */
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 4rem; /* Aumenta el tamaño de las letras */
             margin-bottom: 10px;
+            color: #FFD700; /* Color dorado brillante */
         }
 
         header p {
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Aumenta el tamaño del subtítulo */
             margin-bottom: 10px;
+            color: #FFD700; /* Color dorado brillante */
         }
 
         header .subtitulo {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-top: 15px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9); /* Color blanco con opacidad */
         }
 
         .menu-toggle {
@@ -210,7 +211,7 @@
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="servicio">
-            <div class="card"><img src="cuartos-frios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p></div>
+            <div class="card"><img src="rack.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p></div>
             <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Programación y automatización de equipos industriales.</p></div>
             <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Instalación y mantenimiento de sistemas de aire acondicionado industrial.</p></div>
             <div class="card"><img src="congeladores.jpg" alt="Congeladores Industriales"><h3>Congeladores Industriales</h3><p>Reparación y optimización de sistemas de refrigeración industrial.</p></div>
@@ -251,4 +252,3 @@
 
 </body>
 </html>
-
