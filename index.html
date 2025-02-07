@@ -16,11 +16,6 @@
             font-family: Arial, sans-serif;
             background-color: rgba(135, 206, 235, 0.8);
             color: white;
-            background-image: url('logo_empresa.png');
-            background-repeat: no-repeat;
-            background-size: 60%;
-            background-position: center center;
-            background-attachment: fixed;
         }
 
         header {
@@ -28,14 +23,6 @@
             color: white;
             text-align: center;
             padding: 80px 20px;
-        }
-
-        header h1 {
-            font-size: 3rem;
-        }
-
-        header p {
-            font-size: 1.5rem;
         }
 
         .menu-toggle {
@@ -59,7 +46,6 @@
             width: 250px;
             border-radius: 5px;
             text-align: left;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
         }
 
@@ -90,7 +76,32 @@
             margin: 20px auto;
             width: 80%;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #servicios {
+            display: block;
+        }
+
+        .servicio {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .servicio .card {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .servicio .card img {
+            width: 100%;
+            border-radius: 10px;
         }
 
         .whatsapp-float {
@@ -106,19 +117,6 @@
             width: 100%;
             height: auto;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .whatsapp-float img:hover {
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 768px) {
-            .servicio {
-                flex-direction: column;
-                align-items: center;
-            }
         }
     </style>
 </head>
@@ -140,34 +138,41 @@
 
     <section id="quienes-somos">
         <h2>Quiénes Somos</h2>
-        <p><strong>REFRI INDUSTRIAL CYG SAS</strong> es una empresa líder en soluciones integrales de refrigeración industrial, automatización y eficiencia energética.</p>
+        <p>Somos una empresa especializada en soluciones de refrigeración industrial y eficiencia energética.</p>
     </section>
 
     <section id="mision">
         <h2>Misión</h2>
-        <p>Nuestra misión es ofrecer soluciones innovadoras y sostenibles en refrigeración industrial, automatización y eficiencia energética. Nos comprometemos con la calidad y la excelencia, brindando un servicio que garantice la satisfacción de nuestros clientes y contribuya al desarrollo del sector industrial.</p>
+        <p>Proveer soluciones eficientes en refrigeración y automatización, optimizando los procesos industriales.</p>
     </section>
 
     <section id="vision">
         <h2>Visión</h2>
-        <p>Aspiramos a ser reconocidos como la empresa líder en el sector de refrigeración industrial y automatización en Colombia y Latinoamérica, destacándonos por nuestra innovación, responsabilidad ambiental y excelencia en el servicio.</p>
+        <p>Ser líderes en el sector de refrigeración industrial a nivel nacional.</p>
     </section>
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
-        <p>Ofrecemos una variedad de soluciones para la industria:</p>
         <div class="servicio">
             <div class="card">
+                <img src="cuartos-frios.jpg" alt="Cuartos Fríos">
                 <h3>Cuartos Fríos</h3>
-                <p>Diseño e instalación de cuartos fríos a medida.</p>
+                <p>Diseño e instalación de cuartos fríos.</p>
             </div>
             <div class="card">
+                <img src="automatizacion.jpg" alt="Automatización">
                 <h3>Automatización</h3>
-                <p>Implementación de sistemas de automatización y control.</p>
+                <p>Implementación de sistemas de automatización.</p>
             </div>
             <div class="card">
+                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
                 <h3>Aires Acondicionados</h3>
                 <p>Mantenimiento y reparación de sistemas de climatización.</p>
+            </div>
+            <div class="card">
+                <img src="congeladores.jpg" alt="Congeladores">
+                <h3>Congeladores</h3>
+                <p>Instalación y mantenimiento de congeladores industriales.</p>
             </div>
         </div>
     </section>
@@ -191,22 +196,14 @@
             document.getElementById('menu').classList.toggle('show');
         }
 
-        function closeMenu() {
-            document.getElementById('menu').classList.remove('show');
-        }
-
         function navigateTo(sectionId) {
-            closeMenu();
-            document.querySelectorAll('section').forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            let section = document.getElementById(sectionId);
+            if (section) {
+                document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+                section.style.display = 'block';
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
         }
-
-        // Muestra la sección "Quiénes Somos" por defecto
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("quienes-somos").style.display = "block";
-        });
     </script>
-
 </body>
 </html>
