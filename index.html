@@ -12,14 +12,15 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: rgba(135, 206, 235, 0.8);
-            color: white;
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
             background-image: url('logo_empresa.png');
             background-repeat: no-repeat;
             background-size: 60%;
             background-position: center center;
             background-attachment: fixed;
+            transition: background-color 0.3s ease-in-out;
         }
 
         header {
@@ -30,36 +31,39 @@
             background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.5s ease-in-out;
         }
 
         header h1 {
             font-size: 4rem;
             margin-bottom: 10px;
-            color: #FFA500;
+            color: #00FFCC;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
         header p {
             font-size: 1.8rem;
             margin-bottom: 10px;
-            color: #FFA500;
+            color: #00FFCC;
         }
 
         header .subtitulo {
             font-size: 1.5rem;
             margin-top: 15px;
-            color: #FFA500;
+            color: #00FFCC;
         }
 
         .menu-toggle {
             position: fixed;
-            top: 15px;
+            top: 20px;
             right: 20px;
             font-size: 30px;
             cursor: pointer;
@@ -67,6 +71,11 @@
             background: none;
             border: none;
             z-index: 1000;
+            transition: color 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: #00FFCC;
         }
 
         .menu {
@@ -80,6 +89,7 @@
             text-align: left;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
+            transition: transform 0.3s ease-in-out;
         }
 
         .menu a {
@@ -93,12 +103,13 @@
         }
 
         .menu a:hover {
-            background: #FFD700;
+            background: #00FFCC;
             color: black;
         }
 
         .menu.show {
             display: block;
+            transform: translateX(0);
         }
 
         #quienes-somos, #contacto, #mision, #vision {
@@ -110,21 +121,22 @@
             width: 80%;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease;
         }
 
-        /* Mover el título "Nuestros Servicios" y centrarlo */
         #servicios-title {
             text-align: center;
-            font-size: 2rem;
-            color: #FFA500; /* Naranja */
-            margin-bottom: 30px; /* Más espacio debajo del título */
+            font-size: 2.5rem;
+            color: #00FFCC;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
 
         #servicios {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px; /* Espacio entre las tarjetas */
+            gap: 20px;
             padding: 20px;
             margin-top: 20px;
         }
@@ -134,17 +146,18 @@
             color: white;
             width: 300px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
             overflow: hidden;
             position: relative;
             cursor: pointer;
             padding: 20px;
+            transform: scale(1);
         }
 
         .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             background-color: #005A8C;
             filter: brightness(1.2);
         }
@@ -154,6 +167,11 @@
             height: 200px;
             object-fit: cover;
             border-radius: 10px;
+            transition: opacity 0.3s ease;
+        }
+
+        .card img:hover {
+            opacity: 0.8;
         }
 
         .card-content {
@@ -162,9 +180,10 @@
         }
 
         .card h3 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin: 15px 0;
-            color: #FFA500;
+            color: #00FFCC;
+            text-transform: uppercase;
         }
 
         .card p {
@@ -173,7 +192,7 @@
         }
 
         footer {
-            background: rgba(0, 64, 128, 0.7);
+            background: rgba(0, 64, 128, 0.8);
             color: white;
             text-align: center;
             padding: 20px;
@@ -186,6 +205,7 @@
             width: 60px;
             height: 60px;
             z-index: 1000;
+            transition: transform 0.3s ease;
         }
 
         .whatsapp-float img {
@@ -193,7 +213,6 @@
             height: auto;
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
         }
 
         .whatsapp-float img:hover {
@@ -202,7 +221,10 @@
 
         @media (max-width: 768px) {
             .card {
-                width: 90%; /* Tarjetas más pequeñas en pantallas pequeñas */
+                width: 90%;
+            }
+            header h1 {
+                font-size: 2.5rem;
             }
         }
 
@@ -244,7 +266,7 @@
     <section id="servicios">
         <h2 id="servicios-title">Nuestros Servicios</h2>
         <div class="card">
-            <img src="rack.jpg" alt="sitemas de rack">
+            <img src="rack.jpg" alt="sistemas de rack">
             <div class="card-content">
                 <h3>Sistemas Rack</h3>
                 <p>Mantenimiento y Reparación de Sistemas de Rack</p>
@@ -319,4 +341,4 @@
     </script>
 
 </body>
-</html>
+        </html>
