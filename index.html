@@ -128,19 +128,42 @@
             margin: 0 auto;
         }
 
-        .servicio .card {
+        .card {
             background: rgba(255, 255, 255, 0.9);
             color: black;
             width: 300px;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto suave de hover */
+            overflow: hidden;
+            position: relative;
         }
 
-        .servicio .card img {
+        .card:hover {
+            transform: translateY(-10px); /* Efecto de elevar la tarjeta al pasar el ratón */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+        }
+
+        .card img {
             width: 100%;
-            border-radius: 10px;
+            height: 200px;
+            object-fit: cover; /* Ajusta la imagen dentro de su contenedor */
+        }
+
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            color: #FFA500; /* Naranja brillante */
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #333; /* Gris oscuro para texto */
         }
 
         footer {
@@ -176,7 +199,7 @@
                 flex-direction: column;
                 align-items: center;
             }
-            .servicio .card {
+            .card {
                 width: 90%;
             }
         }
@@ -211,11 +234,41 @@
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="servicio">
-            <div class="card"><img src="rack.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p></div>
-            <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Programación y automatización de equipos industriales.</p></div>
-            <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Instalación y mantenimiento de sistemas de aire acondicionado industrial.</p></div>
-            <div class="card"><img src="congeladores.jpg" alt="Congeladores Industriales"><h3>Congeladores Industriales</h3><p>Reparación y optimización de sistemas de refrigeración industrial.</p></div>
-            <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento Preventivo"><h3>Mantenimiento Preventivo</h3><p>Servicio de mantenimiento preventivo para garantizar la eficiencia y prolongar la vida útil de sus equipos.</p></div>
+            <div class="card">
+                <img src="rack.jpg" alt="Cuartos Fríos">
+                <div class="card-content">
+                    <h3>Cuartos Fríos</h3>
+                    <p>Diseño, fabricación e instalación de cuartos fríos con tecnología avanzada.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="automatizacion.jpg" alt="Automatización">
+                <div class="card-content">
+                    <h3>Automatización</h3>
+                    <p>Programación y automatización de equipos industriales.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
+                <div class="card-content">
+                    <h3>Aires Acondicionados</h3>
+                    <p>Instalación y mantenimiento de sistemas de aire acondicionado industrial.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="congeladores.jpg" alt="Congeladores Industriales">
+                <div class="card-content">
+                    <h3>Congeladores Industriales</h3>
+                    <p>Reparación y optimización de sistemas de refrigeración industrial.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="mantenimiento.jpg" alt="Mantenimiento Preventivo">
+                <div class="card-content">
+                    <h3>Mantenimiento Preventivo</h3>
+                    <p>Servicio de mantenimiento preventivo para garantizar la eficiencia y prolongar la vida útil de sus equipos.</p>
+                </div>
+            </div>
         </div>
     </section>
 
