@@ -16,6 +16,11 @@
             font-family: Arial, sans-serif;
             background-color: rgba(135, 206, 235, 0.8);
             color: white;
+            background-image: url('logo_empresa.png');
+            background-repeat: no-repeat;
+            background-size: 60%;
+            background-position: center center;
+            background-attachment: fixed;
         }
 
         header {
@@ -23,6 +28,20 @@
             color: white;
             text-align: center;
             padding: 80px 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.5rem;
         }
 
         .menu-toggle {
@@ -46,6 +65,7 @@
             width: 250px;
             border-radius: 5px;
             text-align: left;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
         }
 
@@ -68,7 +88,7 @@
             display: block;
         }
 
-        section {
+        #quienes-somos, #contacto {
             display: none;
             padding: 40px;
             text-align: center;
@@ -76,10 +96,13 @@
             margin: 20px auto;
             width: 80%;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         #servicios {
-            display: block;
+            text-align: center;
+            margin: 40px auto;
+            padding: 20px;
         }
 
         .servicio {
@@ -88,6 +111,8 @@
             flex-wrap: wrap;
             gap: 20px;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .servicio .card {
@@ -97,11 +122,19 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .servicio .card img {
             width: 100%;
             border-radius: 10px;
+        }
+
+        footer {
+            background: rgba(0, 64, 128, 0.7);
+            color: white;
+            text-align: center;
+            padding: 20px;
         }
 
         .whatsapp-float {
@@ -117,6 +150,22 @@
             width: 100%;
             height: auto;
             border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .whatsapp-float img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .servicio {
+                flex-direction: column;
+                align-items: center;
+            }
+            .servicio .card {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -130,50 +179,28 @@
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
         <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
-        <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
         <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
         <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
-    <section id="quienes-somos">
+       <section id="quienes-somos">
         <h2>Quiénes Somos</h2>
-        <p>Somos una empresa especializada en soluciones de refrigeración industrial y eficiencia energética.</p>
+        <p><strong>REFRI INDUSTRIAL CYG SAS</strong> es una empresa líder en soluciones integrales de refrigeración industrial, automatización y eficiencia energética. Nos especializamos en diseñar, implementar y optimizar sistemas que garantizan un desempeño eficiente y sostenible en diversos sectores.</p>
+
+        <p>Con años de experiencia en el mercado, hemos consolidado un equipo altamente capacitado que trabaja con tecnología de vanguardia para ofrecer soluciones a la medida de cada cliente. Nuestro compromiso es brindar productos y servicios que no solo cumplan con los más altos estándares de calidad, sino que también optimicen el consumo energético y reduzcan costos operativos.</p>
+
+        <p>Atendemos a industrias como la alimentaria, farmacéutica, logística y manufacturera, ofreciendo desde la fabricación e instalación de cuartos fríos hasta la automatización de procesos industriales. Nos enfocamos en la innovación, la sostenibilidad y el acompañamiento continuo para asegurar la máxima eficiencia en cada proyecto.</p>
+
+        <p>En <strong>REFRI INDUSTRIAL CYG SAS</strong>, creemos en el poder de la ingeniería aplicada para mejorar los procesos productivos y garantizar un futuro más eficiente y sostenible. Estamos comprometidos con la excelencia y la satisfacción total de nuestros clientes.</p>
     </section>
 
-    <section id="mision">
-        <h2>Misión</h2>
-        <p>Proveer soluciones eficientes en refrigeración y automatización, optimizando los procesos industriales.</p>
-    </section>
-
-    <section id="vision">
-        <h2>Visión</h2>
-        <p>Ser líderes en el sector de refrigeración industrial a nivel nacional.</p>
-    </section>
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="servicio">
-            <div class="card">
-                <img src="cuartos-frios.jpg" alt="Cuartos Fríos">
-                <h3>Cuartos Fríos</h3>
-                <p>Diseño e instalación de cuartos fríos.</p>
-            </div>
-            <div class="card">
-                <img src="automatizacion.jpg" alt="Automatización">
-                <h3>Automatización</h3>
-                <p>Implementación de sistemas de automatización.</p>
-            </div>
-            <div class="card">
-                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
-                <h3>Aires Acondicionados</h3>
-                <p>Mantenimiento y reparación de sistemas de climatización.</p>
-            </div>
-            <div class="card">
-                <img src="congeladores.jpg" alt="Congeladores">
-                <h3>Congeladores</h3>
-                <p>Instalación y mantenimiento de congeladores industriales.</p>
-            </div>
+            <div class="card"><img src="cuartos-frios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseño e instalación.</p></div>
+            <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Programación y control.</p></div>
+            <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Mantenimiento e instalación.</p></div>
         </div>
     </section>
 
@@ -196,14 +223,17 @@
             document.getElementById('menu').classList.toggle('show');
         }
 
+        function closeMenu() {
+            document.getElementById('menu').classList.remove('show');
+        }
+
         function navigateTo(sectionId) {
-            let section = document.getElementById(sectionId);
-            if (section) {
-                document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-                section.style.display = 'block';
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
+            closeMenu();
+            document.querySelectorAll('section').forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
     </script>
+
 </body>
 </html>
