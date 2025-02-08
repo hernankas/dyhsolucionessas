@@ -124,43 +124,42 @@
             transition: transform 0.3s ease-in-out, opacity 0.3s ease;
         }
 
-        #servicios-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #00FFCC;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
+       #servicios-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #00FFCC;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    width: 100%;
+}
 
-        #servicios {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            margin-top: 20px;
-        }
+#servicios {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .card {
-            background: #003366;
-            color: white;
-            width: 300px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            padding: 20px;
-            transform: scale(1);
-        }
+/* Ajuste para PC */
+@media (min-width: 1024px) {
+    #servicios {
+        flex-direction: row; /* Alinea los elementos en fila en pantallas grandes */
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
 
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            background-color: #005A8C;
-            filter: brightness(1.2);
-        }
+    #servicios-title {
+        position: relative; /* Evita que se superponga */
+        text-align: center;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+}
 
       .card {
     width: 300px; /* Ancho fijo para cada tarjeta */
