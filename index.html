@@ -234,7 +234,14 @@
         transform: scale(2); /* Escala al 200% */
         transform-origin: top center; /* Mantiene el punto de escala */
         position: relative;
-            }
+
+        .card img {
+    width: 100%; /* La imagen ocupará el 100% del contenedor */
+    height: auto; /* Mantiene la proporción original */
+    object-fit: contain; /* Ajusta la imagen sin recortarla */
+    max-height: 200px; /* Altura máxima para evitar que crezca demasiado */
+
+           }
         }
 
     </style>
