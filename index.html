@@ -133,33 +133,39 @@
     width: 100%;
 }
 
+/* Ajuste general de la sección de servicios */
 #servicios {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 20px;
     padding: 20px;
     margin-top: 20px;
-    flex-direction: column;
-    align-items: center;
 }
 
-/* Ajuste para PC */
+/* Solo en computadoras */
 @media (min-width: 1024px) {
     #servicios {
-        flex-direction: row; /* Alinea los elementos en fila en pantallas grandes */
-        max-width: 1200px;
-        margin: auto;
-        padding: 20px;
+        max-width: 1200px; /* Mantiene el ancho óptimo */
+        margin: auto; /* Centra la sección */
+        flex-direction: row; /* Asegura que los elementos sigan en fila */
+        align-items: stretch; /* Mantiene la altura uniforme */
+    }
+
+    .card {
+        width: calc(33.33% - 40px); /* Distribuye las tarjetas en 3 columnas */
+        min-width: 280px; /* Evita que se encojan demasiado */
     }
 
     #servicios-title {
-        position: relative; /* Evita que se superponga */
-        text-align: center;
         width: 100%;
-        margin-bottom: 40px;
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative; /* Evita solapamientos */
     }
 }
+
 
       .card {
     width: 300px; /* Ancho fijo para cada tarjeta */
