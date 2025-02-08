@@ -162,9 +162,9 @@
             filter: brightness(1.2);
         }
 
-       .card {
-    width: 300px; /* Tamaño fijo para todas las tarjetas */
-    height: 380px; /* Ajustado para dar espacio al texto */
+      .card {
+    width: 300px; /* Ancho fijo para cada tarjeta */
+    height: 380px; /* Altura fija para que el contenido no se desborde */
     background: #003366;
     color: white;
     border-radius: 15px;
@@ -174,16 +174,17 @@
     position: relative;
     cursor: pointer;
     display: flex;
-    flex-direction: column; /* Asegura que la imagen y el contenido estén bien alineados */
+    flex-direction: column;
 }
 
 .card img {
-    width: 100%; /* Que ocupe el ancho completo */
-    height: 180px; /* Ajuste exacto para evitar deformaciones */
-    object-fit: cover; /* Se ajusta sin deformar */
+    width: 100%;  /* La imagen se ajusta al ancho de la tarjeta */
+    height: 180px;  /* Fijamos una altura exacta */
+    object-fit: contain;  /* La imagen se ajusta al contenedor sin recortar ni deformarse */
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
+
 
 .card-content {
     flex: 1; /* Hace que el contenido se expanda uniformemente */
