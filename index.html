@@ -133,7 +133,7 @@
     width: 100%;
 }
 
-/* Ajuste general de la sección de servicios */
+/* Sección "Nuestros Servicios" - Siempre centrada */
 #servicios {
     display: flex;
     flex-wrap: wrap;
@@ -142,27 +142,32 @@
     gap: 20px;
     padding: 20px;
     margin-top: 20px;
+    width: 100%;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* Solo en computadoras */
+/* Asegurar que el título "Nuestros Servicios" se mantenga centrado */
+#servicios-title {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #00FFCC;
+    margin-bottom: 30px;
+}
+
+/* Solo en computadoras (pantallas grandes) */
 @media (min-width: 1024px) {
     #servicios {
-        max-width: 1200px; /* Mantiene el ancho óptimo */
-        margin: auto; /* Centra la sección */
+        max-width: 1200px;
+        margin: auto;
         flex-direction: row; /* Asegura que los elementos sigan en fila */
-        align-items: stretch; /* Mantiene la altura uniforme */
+        align-items: stretch;
     }
 
     .card {
         width: calc(33.33% - 40px); /* Distribuye las tarjetas en 3 columnas */
-        min-width: 280px; /* Evita que se encojan demasiado */
-    }
-
-    #servicios-title {
-        width: 100%;
+        min-width: 280px;
         text-align: center;
-        margin-bottom: 30px;
-        position: relative; /* Evita solapamientos */
     }
 }
 
