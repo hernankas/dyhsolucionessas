@@ -242,6 +242,13 @@
             object-fit: contain; /* Ajusta la imagen sin recortarla */
             max-height: 200px; /* Altura máxima para evitar que crezca demasiado */
 
+                  @media (min-width: 1024px) { /* Aplica solo en computadoras */
+            #servicios-title {
+                position: absolute; /* Evita que ocupe espacio */
+                top: -50px; /* Ajusta la posición más arriba */
+                left: 50%;
+                transform: translateX(-50%); /* Centra horizontalmente */
+                width: max-content; /* Ajusta el ancho al texto */
            }
         }
 
