@@ -226,10 +226,9 @@
             header h1 {
                 font-size: 2.5rem;
 
-                @media (min-width: 1024px) { /* Aplica solo en computadoras */
-        #servicios {
-            transform: scale(2); /* Aumenta al 200% */
-            transform-origin: center; /* Mantiene el centro de la escala */
+                @media (min-width: 1024px) { /* Solo en pantallas grandes */
+    #servicios {
+        zoom: 2; /* Escala la sección al 200% */
             }
         }
 
