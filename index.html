@@ -128,11 +128,13 @@
         }
 
         .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
+    width: 100%;  /* Se ajusta al ancho del contenedor */
+    height: 200px;  /* Altura fija para uniformidad */
+    object-fit: contain;  /* Ajusta la imagen sin recortarla */
+    background-color: white; /* Fondo blanco en caso de imágenes con transparencia */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
         }
 
         .card-content {
