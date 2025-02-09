@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REFRI INDUSTRIAL CYG SAS</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
         * {
             box-sizing: border-box;
@@ -16,8 +12,8 @@
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f7f7f7; /* Fondo claro */
+            font-family: 'Roboto', sans-serif;
+            background-color: #F4F4F9; /* Fondo neutro */
             color: #333;
             transition: background-color 0.3s ease-in-out;
         }
@@ -29,41 +25,38 @@
             background-attachment: fixed;
             color: white;
             text-align: center;
-            padding: 120px 20px;
+            padding: 100px 20px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 2s ease-out;
         }
 
         header h1 {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
+            font-size: 4rem;
+            margin-bottom: 10px;
             color: #00FFCC;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            animation: bounceIn 1s ease;
+            letter-spacing: 3px;
+            animation: fadeIn 2s ease-in-out;
         }
 
         header p {
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             color: #00FFCC;
-            font-weight: 600;
-            animation: fadeIn 3s ease-out;
+            animation: fadeIn 3s ease-in-out;
         }
 
         header .subtitulo {
             font-size: 1.5rem;
             margin-top: 15px;
             color: #00FFCC;
-            animation: fadeIn 4s ease-out;
         }
 
-        /* Animations */
+        /* Efecto de fade in */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -73,12 +66,7 @@
             }
         }
 
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); }
-            60% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
+        /* Menú */
         .menu-toggle {
             position: fixed;
             top: 20px;
@@ -103,9 +91,9 @@
             right: 20px;
             background: rgba(0, 51, 102, 0.9);
             width: 250px;
-            border-radius: 10px;
+            border-radius: 5px;
             text-align: left;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             transition: transform 0.3s ease-in-out;
         }
@@ -130,59 +118,51 @@
             transform: translateX(0);
         }
 
-        /* Secciones */
+        /* Estilos para las secciones */
         section {
             padding: 60px 20px;
             text-align: center;
             background: #ffffff;
-            margin: 20px auto;
+            margin: 20px 0;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1.5s ease-in-out;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease;
         }
 
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #00FFCC;
-            font-weight: 600;
-        }
-
-        /* Tarjetas de servicio */
+        /* Tarjetas de los servicios */
         .service-cards {
             display: flex;
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .card {
             width: 300px;
-            height: 400px;
+            height: 380px;
             background: #003366;
             color: white;
             border-radius: 15px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             text-align: center;
-            transform-origin: center;
-            animation: fadeIn 2s ease-in-out;
         }
 
         .card img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
         }
 
         .card-content {
             flex: 1;
             padding: 15px;
+            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -190,7 +170,6 @@
 
         .card h3 {
             font-size: 1.6rem;
-            margin-bottom: 10px;
             color: #00FFCC;
         }
 
@@ -201,15 +180,21 @@
 
         .card:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Ajuste para pantallas grandes */
+        @media (min-width: 1024px) {
+            .service-cards {
+                justify-content: space-between;
+            }
         }
 
         footer {
-            background: #003366;
+            background: rgba(0, 64, 128, 0.8);
             color: white;
             text-align: center;
             padding: 20px;
-            font-size: 1.2rem;
         }
 
         .whatsapp-float {
@@ -233,6 +218,7 @@
             transform: scale(1.1);
         }
 
+        /* Ajuste para dispositivos pequeños */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2.5rem;
@@ -277,10 +263,10 @@
     </section>
 
     <section id="servicios">
-        <h2>Nuestros Servicios</h2>
+        <h2 id="servicios-title">Nuestros Servicios</h2>
         <div class="service-cards">
             <div class="card">
-                <img src="images/rack.jpg" alt="Sistemas Rack">
+                <img src="images/rack.jpg" alt="sistemas de rack">
                 <div class="card-content">
                     <h3>Sistemas Rack</h3>
                     <p>Garantizamos el óptimo funcionamiento de tus sistemas de rack con mantenimiento especializado.</p>
@@ -303,6 +289,16 @@
         </div>
     </section>
 
+    <section id="contacto">
+        <h2>Contáctanos</h2>
+        <p>Teléfono: +57 3214133885</p>
+        <p>Email: refrindustrialcyg@gmail.com</p>
+    </section>
+
+    <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
     <footer>
         <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
     </footer>
@@ -319,4 +315,4 @@
         }
     </script>
 </body>
-</html>
+                    </html>
