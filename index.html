@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,310 +8,353 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
+        }body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #A8DADC; /* Fondo azul claro */
+        color: #ffffff;
+        background-image: url('logo_empresa.png');
+        background-repeat: no-repeat;
+        background-size: 60%;
+        background-position: center center;
+        background-attachment: fixed;
+        transition: background-color 0.3s ease-in-out;
+    }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #F4F4F9; /* Fondo neutro */
-            color: #333;
-            transition: background-color 0.3s ease-in-out;
-        }
+    header {
+        background-image: url('ciudad.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        color: white;
+        text-align: center;
+        padding: 120px 20px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.5s ease-in-out;
+    }
 
-        header {
-            background-image: url('images/ciudad.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
+    header h1 {
+        font-size: 4rem;
+        margin-bottom: 10px;
+        color: #00FFCC;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
 
-        header h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            color: #00FFCC;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: fadeIn 2s ease-in-out;
-        }
+    header p {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        color: #00FFCC;
+    }
 
-        header p {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #00FFCC;
-            animation: fadeIn 3s ease-in-out;
-        }
+    header .subtitulo {
+        font-size: 1.5rem;
+        margin-top: 15px;
+        color: #00FFCC;
+    }
 
-        header .subtitulo {
-            font-size: 1.5rem;
-            margin-top: 15px;
-            color: #00FFCC;
-        }
+    .menu-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+        color: white;
+        background: none;
+        border: none;
+        z-index: 1000;
+        transition: color 0.3s ease;
+    }
 
-        /* Efecto de fade in */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+    .menu-toggle:hover {
+        color: #00FFCC;
+    }
 
-        /* Menú */
-        .menu-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 30px;
-            cursor: pointer;
-            color: white;
-            background: none;
-            border: none;
-            z-index: 1000;
-            transition: color 0.3s ease;
-        }
+    .menu {
+        display: none;
+        position: fixed;
+        top: 50px;
+        right: 20px;
+        background: rgba(0, 51, 102, 0.9);
+        width: 250px;
+        border-radius: 5px;
+        text-align: left;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+    }
 
-        .menu-toggle:hover {
-            color: #00FFCC;
-        }
+    .menu a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 15px;
+        font-size: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        transition: background 0.3s ease;
+    }
 
-        .menu {
-            display: none;
-            position: fixed;
-            top: 50px;
-            right: 20px;
-            background: rgba(0, 51, 102, 0.9);
-            width: 250px;
-            border-radius: 5px;
-            text-align: left;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            transition: transform 0.3s ease-in-out;
-        }
+    .menu a:hover {
+        background: #00FFCC;
+        color: black;
+    }
 
-        .menu a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            font-size: 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            transition: background 0.3s ease;
-        }
+    .menu.show {
+        display: block;
+        transform: translateX(0);
+    }
 
-        .menu a:hover {
-            background: #00FFCC;
-            color: black;
-        }
+    #quienes-somos, #contacto, #mision, #vision {
+        display: none;
+        padding: 40px;
+        text-align: center;
+        background: rgba(0, 86, 179, 0.8);
+        margin: 20px auto;
+        width: 80%;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+    }
 
-        .menu.show {
-            display: block;
-            transform: translateX(0);
-        }
+   #servicios-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #00FFCC;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+        width: 100%;
+    }
 
-        /* Estilos para las secciones */
-        section {
-            padding: 60px 20px;
-            text-align: center;
-            background: #ffffff;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease;
-        }
+    /* Sección "Nuestros Servicios" - Siempre centrada */
+    #servicios {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        margin-top: 20px;
+        width: 100%;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
 
-        /* Tarjetas de los servicios */
-        .service-cards {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+    /* Asegurar que el título "Nuestros Servicios" se mantenga centrado */
+    #servicios-title {
+        width: 100%;
+        text-align: center;
+        font-size: 2.5rem;
+        color: #00FFCC;
+        margin-bottom: 30px;
+    }
+
+    /* Solo en computadoras (pantallas grandes) */
+    @media (min-width: 1024px) {
+        #servicios {
+            max-width: 1200px;
+            margin: auto;
+            flex-direction: row; /* Asegura que los elementos sigan en fila */
+            align-items: stretch;
         }
 
         .card {
-            width: 300px;
-            height: 380px;
-            background: #003366;
-            color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
+            width: calc(33.33% - 40px); /* Distribuye las tarjetas en 3 columnas */
+            min-width: 280px;
             text-align: center;
         }
+    }
 
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
+    .card {
+        width: 300px; /* Ancho fijo para cada tarjeta */
+        height: 380px; /* Altura fija para que el contenido no se desborde */
+        background: #003366;
+        color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card img {
+        width: 100%;  /* La imagen se ajusta al ancho de la tarjeta */
+        height: 180px;  /* Fijamos una altura exacta */
+        object-fit: contain;  /* La imagen se ajusta al contenedor sin recortar ni deformarse */
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+    .card-content {
+        flex: 1; /* Hace que el contenido se expanda uniformemente */
+        padding: 15px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+        color: #00FFCC;
+    }
+
+    .card p {
+        font-size: 1rem;
+        color: #ddd;
+    }
+
+    footer {
+        background: rgba(0, 64, 128, 0.8);
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+    }
+
+    .whatsapp-float img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .whatsapp-float img:hover {
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            width: 90%;
         }
-
-        .card-content {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        header h1 {
+            font-size: 2.5rem;
         }
+    }
+</style>
 
-        .card h3 {
-            font-size: 1.6rem;
-            color: #00FFCC;
-        }
-
-        .card p {
-            font-size: 1rem;
-            color: #ddd;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Ajuste para pantallas grandes */
-        @media (min-width: 1024px) {
-            .service-cards {
-                justify-content: space-between;
-            }
-        }
-
-        footer {
-            background: rgba(0, 64, 128, 0.8);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-float img {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .whatsapp-float img:hover {
-            transform: scale(1.1);
-        }
-
-        /* Ajuste para dispositivos pequeños */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            .card {
-                width: 90%;
-            }
-        }
-    </style>
-</head>
-
-<body>
+</head><body>
     <header>
         <h1>REFRI INDUSTRIAL CYG SAS</h1>
         <p>NIT: 901715160-8</p>
         <p class="subtitulo">Soluciones Integrales en Ingeniería y Tecnología</p>
-    </header>
+    </header><button class="menu-toggle" onclick="toggleMenu()">☰</button>
+<div class="menu" id="menu">
+    <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
+    <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
+    <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
+    <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
+    <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
+</div>
 
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <div class="menu" id="menu">
-        <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
-        <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
-        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
-        <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
-    </div>
+<section id="quienes-somos">
+    <h2>Quiénes Somos</h2>
+    <p><strong>REFRI INDUSTRIAL CYG SAS</strong> es una empresa líder en soluciones integrales de refrigeración industrial, automatización y eficiencia energética. Nos especializamos en diseñar, implementar y optimizar sistemas que garantizan un desempeño eficiente y sostenible en diversos sectores.</p>
+    <p>Con años de experiencia en el mercado, hemos consolidado un equipo altamente capacitado que trabaja con tecnología de vanguardia para ofrecer soluciones a la medida de cada cliente.</p>
+</section>
 
-    <section id="quienes-somos">
-        <h2>Quiénes Somos</h2>
-        <p><strong>REFRI INDUSTRIAL CYG SAS</strong> es una empresa líder en soluciones integrales de refrigeración industrial, automatización y eficiencia energética. Nos especializamos en diseñar, implementar y optimizar sistemas que garantizan un desempeño eficiente y sostenible en diversos sectores.</p>
-    </section>
+<section id="mision">
+    <h2>Misión</h2>
+    <p>Proveer soluciones integrales en refrigeración, automatización y eficiencia energética para industrias, brindando productos y servicios de alta calidad, optimizando costos y garantizando la sostenibilidad.</p>
+</section>
 
-    <section id="mision">
-        <h2>Misión</h2>
-        <p>Proveer soluciones integrales en refrigeración, automatización y eficiencia energética para industrias, brindando productos y servicios de alta calidad, optimizando costos y garantizando la sostenibilidad.</p>
-    </section>
+<section id="vision">
+    <h2>Visión</h2>
+    <p>Ser la empresa líder en innovación y eficiencia en soluciones industriales, contribuyendo al desarrollo de procesos productivos más sostenibles y energéticamente eficientes en toda la región.</p>
+</section>
 
-    <section id="vision">
-        <h2>Visión</h2>
-        <p>Ser la empresa líder en innovación y eficiencia en soluciones industriales, contribuyendo al desarrollo de procesos productivos más sostenibles y energéticamente eficientes en toda la región.</p>
-    </section>
-
-    <section id="servicios">
-        <h2 id="servicios-title">Nuestros Servicios</h2>
-        <div class="service-cards">
-            <div class="card">
-                <img src="images/rack.jpg" alt="sistemas de rack">
-                <div class="card-content">
-                    <h3>Sistemas Rack</h3>
-                    <p>Garantizamos el óptimo funcionamiento de tus sistemas de rack con mantenimiento especializado.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="images/automatizacion.jpg" alt="Automatización">
-                <div class="card-content">
-                    <h3>Automatización</h3>
-                    <p>Implementamos soluciones avanzadas de automatización para maximizar la eficiencia industrial.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="images/aires-acondicionados.jpg" alt="Aires Acondicionados">
-                <div class="card-content">
-                    <h3>Aires Acondicionados</h3>
-                    <p>Brindamos soluciones de climatización con instalación y mantenimiento de equipos.</p>
-                </div>
-            </div>
+<section id="servicios">
+    <h2 id="servicios-title">Nuestros Servicios</h2>
+    <div class="card">
+        <img src="rack.jpg" alt="sistemas de rack">
+        <div class="card-content">
+            <h3>Sistemas Rack</h3>
+            <p>Garantizamos el óptimo funcionamiento de tus sistemas de rack con mantenimiento preventivo y correctivo especializado. Nuestro equipo técnico realiza diagnósticos precisos, optimización del rendimiento y reparaciones eficientes para asegurar la continuidad operativa de tus instalaciones industriales."</p>
         </div>
-    </section>
+    </div>
+    <div class="card">
+        <img src="automatizacion.jpg" alt="Automatización">
+        <div class="card-content">
+            <h3>Automatización</h3>
+            <p>Transformamos tus procesos industriales con soluciones de automatización avanzadas, diseñadas para maximizar la eficiencia, reducir costos operativos y mejorar la seguridad. Implementamos tecnología de vanguardia para optimizar la producción y garantizar el control preciso de tus sistemas.</p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
+        <div class="card-content">
+            <h3>Aires Acondicionados</h3>
+            <p>Brindamos soluciones integrales en instalación, mantenimiento y reparación de sistemas de aire acondicionado. Garantizamos un rendimiento óptimo y eficiencia energética para espacios comerciales e industriales, asegurando confort y calidad del aire.</p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="congeladores.jpg" alt="Congeladores Industriales">
+        <div class="card-content">
+            <h3>Congeladores Industriales</h3>
+            <p>Brindamos soluciones de alto rendimiento en instalación, mantenimiento y optimización de sistemas de congelación industrial. Nuestra tecnología avanzada garantiza eficiencia energética, fiabilidad operativa y el máximo desempeño en entornos exigentes.</p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="mantenimiento.jpg" alt="Mantenimiento Preventivo">
+        <div class="card-content">
+            <h3>Mantenimiento Preventivo</h3>
+            <p>Preservamos el óptimo funcionamiento de sus equipos mediante un mantenimiento preventivo meticuloso y programado. Nuestros procedimientos garantizan una mayor vida útil, eficiencia energética y reducción de costos operativos, asegurando la continuidad de sus procesos industriales sin interrupciones.</p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="cuartosfrios.jpg" alt="Fabricación de Cuartos Fríos">
+        <div class="card-content">
+            <h3>Fabricación de Cuartos Fríos</h3>
+            <p>Diseñamos y fabricamos cuartos fríos a medida, garantizando un control preciso de la temperatura y máxima eficiencia energética. Utilizamos materiales de alta calidad y tecnología avanzada para optimizar la conservación de productos en entornos industriales y comerciales.</p>
+        </div>
+    </div>
+</section>
 
-    <section id="contacto">
-        <h2>Contáctanos</h2>
-        <p>Teléfono: +57 3214133885</p>
-        <p>Email: refrindustrialcyg@gmail.com</p>
-    </section>
+<section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>Teléfono: +57 3214133885-3174047208</p>
+    <p>Email: refrindustrialcyg@gmail.com</p>
+</section>
 
-    <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
+<a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
 
-    <footer>
-        <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
-    </footer>
+<footer>
+    <p>&copy; 2025 REFRI INDUSTRIAL CYG SAS - Todos los derechos reservados.</p>
+</footer>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('menu').classList.toggle('show');
-        }
+<script>
+    function toggleMenu() {
+        document.getElementById('menu').classList.toggle('show');
+    }
 
-        function navigateTo(sectionId) {
-            document.querySelectorAll('section').forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+    function closeMenu() {
+        document.getElementById('menu').classList.remove('show');
+    }
+
+    function navigateTo(sectionId) {
+        closeMenu();
+        document.querySelectorAll('section').forEach(section => section.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'block';
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
 </body>
-                    </html>
+    </html>
