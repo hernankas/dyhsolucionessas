@@ -83,17 +83,19 @@
             top: 0;
             left: 0;
             background: rgba(0, 51, 102, 0.9);
-            width: 100%;
-            height: 100vh;
-            justify-content: center;
+            width: 250px;
+            height: auto;
+            justify-content: flex-start;
             align-items: center;
             flex-direction: column;
             z-index: 1000;
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .menu a {
-            margin: 20px 0;
-            font-size: 1.5rem;
+            margin: 10px 0;
+            font-size: 1.2rem;
             color: white;
         }
 
@@ -186,7 +188,45 @@
                 flex-direction: column;
                 justify-content: space-around;
                 align-items: center;
+                width: 100%;
             }
+        }
+
+        /* Estilos del área de contacto */
+        #contacto {
+            background: #003366;
+            color: white;
+            padding: 40px;
+            margin: 40px auto;
+            border-radius: 10px;
+            width: 80%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        #contacto h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00FFCC;
+        }
+
+        #contacto p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        #contacto .contact-info {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        #contacto .contact-info a {
+            color: #00FFCC;
+            text-decoration: none;
+        }
+
+        #contacto .contact-info a:hover {
+            color: white;
         }
     </style>
 </head>
@@ -278,8 +318,11 @@
 
     <section id="contacto">
         <h2>Contáctanos</h2>
-        <p>Teléfono: +57 3214133885-3174047208</p>
-        <p>Email: refrindustrialcyg@gmail.com</p>
+        <p>Estamos aquí para ayudarte. Si tienes alguna consulta o necesitas más información, no dudes en contactarnos.</p>
+        <div class="contact-info">
+            <p><strong>Teléfono:</strong> <a href="tel:+573214133885">+57 3214133885</a></p>
+            <p><strong>Email:</strong> <a href="mailto:refrindustrialcyg@gmail.com">refrindustrialcyg@gmail.com</a></p>
+        </div>
     </section>
 
     <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
@@ -304,4 +347,4 @@
     </script>
 
 </body>
-    </html>
+            </html>
