@@ -27,7 +27,6 @@
             text-align: center;
             padding: 100px 20px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            transition: background-color 0.5s ease-in-out;
         }
 
         header h1 {
@@ -74,7 +73,6 @@
             background: none;
             border: none;
             cursor: pointer;
-            z-index: 1001;
         }
 
         .menu {
@@ -88,9 +86,11 @@
             justify-content: flex-start;
             align-items: center;
             flex-direction: column;
-            z-index: 1000;
             padding: 20px;
             border-radius: 10px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .menu a {
@@ -101,6 +101,7 @@
 
         .menu.show {
             display: flex;
+            opacity: 1;
         }
 
         .card-container {
@@ -108,7 +109,6 @@
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
             padding: 20px;
-            margin-top: 20px;
         }
 
         .card {
@@ -146,14 +146,12 @@
             right: 20px;
             width: 60px;
             height: 60px;
-            z-index: 1000;
         }
 
         .whatsapp-float img {
             width: 100%;
             height: auto;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         footer {
@@ -347,4 +345,4 @@
     </script>
 
 </body>
-            </html>
+                </html>
