@@ -125,96 +125,94 @@
         }
 
        #servicios-title {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #00FFCC;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-    width: 100%;
-}
+            text-align: center;
+            font-size: 2.5rem;
+            color: #00FFCC;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            width: 100%;
+        }
 
-/* Sección "Nuestros Servicios" - Siempre centrada */
-#servicios {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-    margin-top: 20px;
-    width: 100%;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
+        /* Sección "Nuestros Servicios" - Siempre centrada */
+        #servicios {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
 
-/* Asegurar que el título "Nuestros Servicios" se mantenga centrado */
-#servicios-title {
-    width: 100%;
-    text-align: center;
-    font-size: 2.5rem;
-    color: #00FFCC;
-    margin-bottom: 30px;
-}
+        /* Asegurar que el título "Nuestros Servicios" se mantenga centrado */
+        #servicios-title {
+            width: 100%;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #00FFCC;
+            margin-bottom: 30px;
+        }
 
-/* Solo en computadoras (pantallas grandes) */
-@media (min-width: 1024px) {
-    #servicios {
-        max-width: 1200px;
-        margin: auto;
-        flex-direction: row; /* Asegura que los elementos sigan en fila */
-        align-items: stretch;
-    }
+        /* Solo en computadoras (pantallas grandes) */
+        @media (min-width: 1024px) {
+            #servicios {
+                max-width: 1200px;
+                margin: auto;
+                flex-direction: row; /* Asegura que los elementos sigan en fila */
+                align-items: stretch;
+            }
 
-    .card {
-        width: calc(33.33% - 40px); /* Distribuye las tarjetas en 3 columnas */
-        min-width: 280px;
-        text-align: center;
-    }
-}
+            .card {
+                width: calc(33.33% - 40px); /* Distribuye las tarjetas en 3 columnas */
+                min-width: 280px;
+                text-align: center;
+            }
+        }
 
+        .card {
+            width: 300px; /* Ancho fijo para cada tarjeta */
+            height: 380px; /* Altura fija para que el contenido no se desborde */
+            background: #003366;
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
 
-      .card {
-    width: 300px; /* Ancho fijo para cada tarjeta */
-    height: 380px; /* Altura fija para que el contenido no se desborde */
-    background: #003366;
-    color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-}
+        .card img {
+            width: 100%;  /* La imagen se ajusta al ancho de la tarjeta */
+            height: 180px;  /* Fijamos una altura exacta */
+            object-fit: contain;  /* La imagen se ajusta al contenedor sin recortar ni deformarse */
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
 
-.card img {
-    width: 100%;  /* La imagen se ajusta al ancho de la tarjeta */
-    height: 180px;  /* Fijamos una altura exacta */
-    object-fit: contain;  /* La imagen se ajusta al contenedor sin recortar ni deformarse */
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
+        .card-content {
+            flex: 1; /* Hace que el contenido se expanda uniformemente */
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
+        .card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: #00FFCC;
+        }
 
-.card-content {
-    flex: 1; /* Hace que el contenido se expanda uniformemente */
-    padding: 15px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.card h3 {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
-    color: #00FFCC;
-}
-
-.card p {
-    font-size: 1rem;
-    color: #ddd;
-}
+        .card p {
+            font-size: 1rem;
+            color: #ddd;
+        }
 
         footer {
             background: rgba(0, 64, 128, 0.8);
@@ -250,45 +248,8 @@
             }
             header h1 {
                 font-size: 2.5rem;
-
-               @media (min-width: 1024px) { /* Solo en computadoras */
-    #servicios {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transform: scale(2); /* Escala al 200% */
-        transform-origin: top center; /* Mantiene el punto de escala */
-        position: relative;
-
-
-             .card img {
-            width: 100%; /* La imagen ocupará el 100% del contenedor */
-            height: auto; /* Mantiene la proporción original */
-            object-fit: contain; /* Ajusta la imagen sin recortarla */
-            max-height: 200px; /* Altura máxima para evitar que crezca demasiado */
-
-                  @media (min-width: 1024px) { /* Aplica solo en computadoras */
-            #servicios-title {
-                position: absolute; /* Evita que ocupe espacio */
-                top: -50px; /* Ajusta la posición más arriba */
-                left: 50%;
-                transform: translateX(-50%); /* Centra horizontalmente */
-                width: max-content; /* Ajusta el ancho al texto */
-           }
+            }
         }
-
-                  /* Asegurar que la sección de servicios esté bien alineada */
-    @media (min-width: 1024px) { 
-        #servicios {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-    }
     </style>
 </head>
 
@@ -302,9 +263,9 @@
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
         <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
         <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
         <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
+        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
         <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
@@ -402,4 +363,4 @@
     </script>
 
 </body>
-</html>
+        </html>
