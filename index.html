@@ -72,6 +72,7 @@
             text-decoration: none;
             font-size: 18px;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .menu a:hover {
@@ -191,33 +192,33 @@
 
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
-        <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
-        <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
-        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
-        <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
+        <a onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
+        <a onclick="navigateTo('mision')">Misión</a>
+        <a onclick="navigateTo('vision')">Visión</a>
+        <a onclick="navigateTo('servicios')">Nuestros Servicios</a>
+        <a onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
-        <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Mantenimiento y optimización de sistemas de refrigeración.</p></div>
-        <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Integración de tecnología avanzada en procesos industriales.</p></div>
-        <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Instalación, mantenimiento y reparación de sistemas de climatización.</p></div>
-        <div class="card"><img src="congeladores.jpg" alt="Congeladores Industriales"><h3>Congeladores Industriales</h3><p>Reparación y optimización de sistemas de congelación industrial.</p></div>
-        <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento Preventivo"><h3>Mantenimiento Preventivo</h3><p>Diagnóstico y ajuste de equipos industriales para prevenir fallos.</p></div>
-        <div class="card"><img src="cuartosfrios.jpg" alt="Fabricación de Cuartos Fríos"><h3>Fabricación de Cuartos Fríos</h3><p>Diseño y construcción de espacios de almacenamiento refrigerado.</p></div>
+        <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Mantenimiento, instalación y optimización de sistemas de refrigeración industrial de alto rendimiento.</p></div>
+        <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Soluciones de control y monitoreo automatizado para eficiencia en procesos industriales.</p></div>
+        <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Instalación, mantenimiento y reparación de equipos de climatización para empresas e industrias.</p></div>
+        <div class="card"><img src="congeladores.jpg" alt="Congeladores Industriales"><h3>Congeladores Industriales</h3><p>Reparación y mantenimiento de sistemas de congelación de alta capacidad.</p></div>
+        <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento Preventivo"><h3>Mantenimiento Preventivo</h3><p>Diagnóstico y ajuste de sistemas industriales para prevenir fallos y optimizar su funcionamiento.</p></div>
+        <div class="card"><img src="cuartosfrios.jpg" alt="Fabricación de Cuartos Fríos"><h3>Fabricación de Cuartos Fríos</h3><p>Diseño y construcción de espacios de almacenamiento refrigerado para industrias.</p></div>
     </section>
 
-    <a href="https://wa.me/573214133885" class="whatsapp-float">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
-
     <script>
-        function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
+        function toggleMenu() { 
+            document.getElementById('menu').classList.toggle('show'); 
+        }
+
         function navigateTo(sectionId) {
             document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
+            document.getElementById('menu').classList.remove('show');
         }
     </script>
 </body>
-                                                                                                                                                                                                    </html>
+</html>
