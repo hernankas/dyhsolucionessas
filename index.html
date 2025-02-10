@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REFRI INDUSTRIAL CYG SAS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -13,133 +12,165 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #E9F6F7;
-            color: #333;
-            transition: background-color 0.3s ease-in-out;
+            font-family: Arial, sans-serif;
+            background-color: rgba(135, 206, 235, 0.8);
+            color: white;
+            background-image: url('logo_empresa.png');
+            background-repeat: no-repeat;
+            background-size: 60%;
+            background-position: center center;
+            background-attachment: fixed;
         }
 
         header {
-            background-image: url('titulo.jpg');
+            background-image: url('ciudad.jpg');
+            background-repeat: no-repeat;
             background-size: cover;
-            background-position: center;
+            background-position: center center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
             padding: 100px 20px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 10px;
-            color: #00FFCC;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            color: #FFA500;
         }
 
         header p {
             font-size: 1.8rem;
             margin-bottom: 10px;
+            color: #FFA500;
         }
 
-        nav {
-            background: rgba(0, 51, 102, 0.9);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #00FFCC;
+        header .subtitulo {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #FFA500;
         }
 
         .menu-toggle {
+            position: fixed;
+            top: 15px;
+            right: 20px;
             font-size: 30px;
+            cursor: pointer;
             color: white;
             background: none;
             border: none;
-            cursor: pointer;
+            z-index: 1000;
         }
 
         .menu {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 50px;
+            right: 20px;
             background: rgba(0, 51, 102, 0.9);
             width: 250px;
-            height: auto;
-            justify-content: flex-start;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            border-radius: 10px;
+            border-radius: 5px;
+            text-align: left;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.5s ease;
         }
 
         .menu a {
-            margin: 10px 0;
-            font-size: 1.2rem;
+            display: block;
             color: white;
+            text-decoration: none;
+            padding: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: #FFD700;
+            color: black;
         }
 
         .menu.show {
-            display: flex;
-            opacity: 1;
+            display: block;
         }
 
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+        #quienes-somos, #contacto, #mision, #vision {
+            display: none;
+            padding: 40px;
+            text-align: center;
+            background: rgba(0, 86, 179, 0.8);
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #servicios {
+            text-align: center;
+            margin: 40px auto;
             padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centra las tarjetas */
+            gap: 20px; /* Espacio entre tarjetas */
+            width: 100%;
         }
 
         .card {
             background: #003366;
             color: white;
+            width: 300px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
+            padding: 20px;
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-15px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background-color: #005A8C;
+            filter: brightness(1.2);
         }
 
         .card img {
-    width: 100%;  /* Se ajusta al ancho del contenedor */
-    height: 200px;  /* Altura fija para uniformidad */
-    object-fit: contain;  /* Ajusta la imagen sin recortarla */
-    background-color: white; /* Fondo blanco en caso de imágenes con transparencia */
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .card-content {
             padding: 15px;
             text-align: center;
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            margin: 15px 0;
+            color: #FFA500;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #ddd;
+        }
+
+        footer {
+            background: rgba(0, 64, 128, 0.7);
+            color: white;
+            text-align: center;
+            padding: 20px;
         }
 
         .whatsapp-float {
@@ -148,109 +179,50 @@
             right: 20px;
             width: 60px;
             height: 60px;
+            z-index: 1000;
         }
 
         .whatsapp-float img {
             width: 100%;
             height: auto;
             border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
         }
 
-        footer {
-            background: rgba(0, 64, 128, 0.8);
-            color: white;
-            text-align: center;
-            padding: 20px;
+        .whatsapp-float img:hover {
+            transform: scale(1.1);
         }
 
-        /* Estilo para dispositivos móviles */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            .card-container {
-                padding: 10px;
-            }
-
-            nav {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .menu {
-                display: none;
-                flex-direction: column;
-                justify-content: space-around;
-                align-items: center;
-                width: 100%;
+            .card {
+                width: 90%; /* Tarjetas más pequeñas en pantallas pequeñas */
             }
         }
 
-        /* Estilos del área de contacto */
-        #contacto {
-            background: #003366;
-            color: white;
-            padding: 40px;
-            margin: 40px auto;
-            border-radius: 10px;
-            width: 80%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        #contacto h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #00FFCC;
-        }
-
-        #contacto p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-
-        #contacto .contact-info {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        #contacto .contact-info a {
-            color: #00FFCC;
-            text-decoration: none;
-        }
-
-        #contacto .contact-info a:hover {
-            color: white;
-        }
     </style>
 </head>
-<body>
 
+<body>
     <header>
         <h1>REFRI INDUSTRIAL CYG SAS</h1>
         <p>NIT: 901715160-8</p>
+        <p class="subtitulo">Soluciones Integrales en Ingeniería y Tecnología</p>
     </header>
 
-    <nav>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <div class="menu" id="menu">
-            <a href="#quienes-somos" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-            <a href="#mision" onclick="navigateTo('mision')">Misión</a>
-            <a href="#vision" onclick="navigateTo('vision')">Visión</a>
-            <a href="#servicios" onclick="navigateTo('servicios')">Servicios</a>
-            <a href="#contacto" onclick="navigateTo('contacto')">Contáctanos</a>
-        </div>
-    </nav>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="menu" id="menu">
+        <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
+        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
+        <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
+        <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
+        <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
+    </div>
 
     <section id="quienes-somos">
         <h2>Quiénes Somos</h2>
         <p><strong>REFRI INDUSTRIAL CYG SAS</strong> es una empresa líder en soluciones integrales de refrigeración industrial, automatización y eficiencia energética. Nos especializamos en diseñar, implementar y optimizar sistemas que garantizan un desempeño eficiente y sostenible en diversos sectores.</p>
+        <p>Con años de experiencia en el mercado, hemos consolidado un equipo altamente capacitado que trabaja con tecnología de vanguardia para ofrecer soluciones a la medida de cada cliente.</p>
     </section>
 
     <section id="mision">
@@ -265,64 +237,81 @@
 
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
-        <div class="card-container">
-            <div class="card">
-                <img src="rack.jpg" alt="Sistemas de Rack">
-                <div class="card-content">
-                    <h3>Sistemas Rack</h3>
-                    <p>Garantizamos el óptimo funcionamiento de tus sistemas de rack con mantenimiento preventivo y correctivo especializado.</p>
-                </div>
-            </div>
+        <div class="card">
+            <img src="rack.jpg" alt="sitemas de rack">
+            <div class="card-content">
+                <h3>Sistemas Rack</h3>
+                <p>Mantenimiento y Reparación de Sistemas de Rack
 
-            <div class="card">
-                <img src="automatizacion.jpg" alt="Automatización">
-                <div class="card-content">
-                    <h3>Automatización</h3>
-                    <p>Transformamos tus procesos industriales con soluciones de automatización avanzadas, diseñadas para maximizar la eficiencia.</p>
-                </div>
-            </div>
+Ofrecemos mantenimiento preventivo y correctivo para sistemas de racks industriales, incluyendo:
 
-            <div class="card">
-                <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
-                <div class="card-content">
-                    <h3>Aires Acondicionados</h3>
-                    <p>Brindamos soluciones integrales en instalación, mantenimiento y reparación de sistemas de aire acondicionado.</p>
-                </div>
+Mantenimiento: Inspección y ajuste de componentes para evitar fallas.
+Reparación: Solución de problemas en sistemas eléctricos y mecánicos.
+Configuración y Programación: Optimización y ajuste de parámetros para un rendimiento eficiente..</p>
             </div>
+        </div>
+        <div class="card">
+            <img src="automatizacion.jpg" alt="Automatización">
+            <div class="card-content">
+                <h3>Automatización</h3>
+                <p>diseñamos e implementamos soluciones de automatización industrial para optimizar tus procesos. Ofrecemos:
 
-            <div class="card">
-                <img src="congeladores.jpg" alt="Congeladores Industriales">
-                <div class="card-content">
-                    <h3>Congeladores Industriales</h3>
-                    <p>Soluciones de alto rendimiento en instalación, mantenimiento y optimización de sistemas de congelación industrial.</p>
-                </div>
+Control de Equipos: Integración de sistemas de control avanzados para mejorar la eficiencia operativa.
+Optimización: Programación y configuración de sistemas automatizados para garantizar un rendimiento seguro y preciso.
+Mantenimiento: Supervisión y ajustes para mantener el sistema funcionando de manera continua y eficiente.</p>
             </div>
+        </div>
+        <div class="card">
+            <img src="aires-acondicionados.jpg" alt="Aires Acondicionados">
+            <div class="card-content">
+                <h3>Aires Acondicionados</h3>
+                <p>ofrecemos servicios completos para sistemas de aire acondicionado industrial:
 
-            <div class="card">
-                <img src="mantenimiento.jpg" alt="Mantenimiento Preventivo">
-                <div class="card-content">
-                    <h3>Mantenimiento Preventivo</h3>
-                    <p>Preservamos el óptimo funcionamiento de sus equipos mediante un mantenimiento preventivo meticuloso y programado.</p>
-                </div>
+Instalación: Montaje y configuración de equipos de aire acondicionado de alto rendimiento.
+Mantenimiento: Limpieza, ajuste y verificación para maximizar la eficiencia y prolongar la vida útil del sistema.
+Reparación: Diagnóstico y solución de fallas en componentes clave para garantizar un funcionamiento óptimo..</p>
             </div>
+        </div>
+        <div class="card">
+            <img src="congeladores.jpg" alt="Congeladores Industriales">
+            <div class="card-content">
+                <h3>Congeladores Industriales</h3>
+                <p>Revisión y ajuste de componentes para evitar fallas y mejorar la eficiencia energética.
+Reparación: Solución de problemas como fugas de gas, fallos en compresores y termostatos.
+Optimización: Ajustes para maximizar el rendimiento y garantizar temperaturas constantes y seguras..</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="mantenimiento.jpg" alt="Mantenimiento Preventivo">
+            <div class="card-content">
+                <h3>Mantenimiento Preventivo</h3>
+                <p>ofrecemos servicios de mantenimiento preventivo para asegurar el funcionamiento óptimo de tus equipos industriales:
 
-            <div class="card">
-                <img src="cuartosfrios.jpg" alt="Fabricación de Cuartos Fríos">
-                <div class="card-content">
-                    <h3>Fabricación de Cuartos Fríos</h3>
-                    <p>Diseñamos y fabricamos cuartos fríos a medida, garantizando un control preciso de la temperatura y eficiencia energética.</p>
-                </div>
+Inspección Regular: Revisión exhaustiva de sistemas y componentes para detectar posibles fallas.
+Ajustes y Limpieza: Optimización de equipos mediante ajustes, limpieza y calibraciones periódicas.
+Prevención de Fallas: Identificación y corrección de problemas antes de que causen paradas costosas.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="cuartosfrios.jpg" alt="Fabricación de Cuartos Fríos">
+            <div class="card-content">
+                <h3>Fabricación de Cuartos Fríos</h3>
+                <p>diseñamos y fabricamos cuartos fríos a medida, adaptados a las necesidades de tu industria:
+
+Diseño Personalizado: Soluciones de cuartos fríos de acuerdo con los requisitos específicos de temperatura y capacidad.
+Instalación Completa: Montaje y configuración de sistemas de refrigeración eficientes y duraderos.
+Optimización Energética: Sistemas diseñados para maximizar la eficiencia energética y reducir costos operativos.
+Confía en nuestros expertos para la fabricación de cuartos fríos que garanticen el almacenamiento seguro y eficiente de tus productos.
+
+.</p>
             </div>
         </div>
     </section>
 
     <section id="contacto">
         <h2>Contáctanos</h2>
-        <p>Estamos aquí para ayudarte. Si tienes alguna consulta o necesitas más información, no dudes en contactarnos.</p>
-        <div class="contact-info">
-            <p><strong>Teléfono:</strong> <a href="tel:+573214133885">+57 3214133885</a></p>
-            <p><strong>Email:</strong> <a href="mailto:refrindustrialcyg@gmail.com">refrindustrialcyg@gmail.com</a></p>
-        </div>
+        <p>Teléfono: +57 3214133885</p>
+        <p>Email: refrindustrialcyg@gmail.com</p>
     </section>
 
     <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
@@ -334,194 +323,21 @@
     </footer>
 
     <script>
-        // Función para alternar el menú
         function toggleMenu() {
             document.getElementById('menu').classList.toggle('show');
         }
 
-        // Función para hacer scroll hasta la sección deseada
-        function navigateTo(sectionId) {
+        function closeMenu() {
             document.getElementById('menu').classList.remove('show');
-            document.querySelector(`#${sectionId}`).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function navigateTo(sectionId) {
+            closeMenu();
+            document.querySelectorAll('section').forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
     </script>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página con ChatBot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0A192F;
-            color: #F0F4F8;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Bienvenido a REFRI INDUSTRIAL CYG SAS</h1>
-        <p>Soluciones en refrigeración y automatización</p>
-    </header>
-
-    <section>
-        <h2>Nuestros Servicios</h2>
-        <p>Ofrecemos soluciones de refrigeración industrial, automatización y mantenimiento preventivo.</p>
-    </section>
-
-    <!-- INICIO DEL CHATBOT -->
-    <div id="chat-toggle" onclick="toggleChat()">💬</div>
-    <div id="chat-container">
-        <div id="chat-header" onclick="toggleChat()">Asistente Virtual</div>
-        <div id="chat-box">
-            <p><strong>Bot:</strong> Hola, ¿cómo puedo ayudarte?</p>
-        </div>
-        <div id="chat-input-container">
-            <input type="text" id="user-input" placeholder="Escribe un mensaje...">
-            <button id="send-btn" onclick="sendMessage()">Enviar</button>
-        </div>
-    </div>
-
-    <script>
-        function toggleChat() {
-            let chatContainer = document.getElementById("chat-container");
-            chatContainer.style.display = (chatContainer.style.display === "none" || chatContainer.style.display === "") ? "block" : "none";
-        }
-
-        function sendMessage() {
-            let input = document.getElementById("user-input");
-            let chatBox = document.getElementById("chat-box");
-            let userMessage = input.value.trim();
-
-            if (userMessage === "") return;
-
-            chatBox.innerHTML += `<p class="user-message"><strong>Tú:</strong> ${userMessage}</p>`;
-            input.value = "";
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            let botResponse = getBotResponse(userMessage);
-            setTimeout(() => {
-                chatBox.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>`;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 1000);
-        }
-
-        function getBotResponse(message) {
-            let response;
-            message = message.toLowerCase();
-
-            if (message.includes("hola") || message.includes("buenos días")) {
-                response = "¡Hola! ¿En qué puedo ayudarte?";
-            } else if (message.includes("servicios") || message.includes("qué ofrecen")) {
-                response = "Ofrecemos soluciones de refrigeración industrial, automatización y eficiencia energética.";
-            } else if (message.includes("contacto") || message.includes("teléfono")) {
-                response = "Puedes contactarnos al +57 3214133885 o por email a refrindustrialcyg@gmail.com.";
-            } else if (message.includes("gracias")) {
-                response = "¡De nada! 😊 ¿Necesitas algo más?";
-            } else {
-                response = "Lo siento, no entendí tu pregunta. ¿Puedes reformularla?";
-            }
-
-            return response;
-        }
-    </script>
-
-    <style>
-        #chat-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 320px;
-            background: #112240;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            color: white;
-            display: none;
-        }
-
-        #chat-header {
-            background: #00FFCC;
-            color: #112240;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 10px 10px 0 0;
-            cursor: pointer;
-        }
-
-        #chat-box {
-            max-height: 250px;
-            overflow-y: auto;
-            padding: 10px;
-            border-bottom: 1px solid #00FFCC;
-        }
-
-        #chat-box p {
-            background: #00FFCC;
-            color: #112240;
-            padding: 8px;
-            border-radius: 8px;
-            margin: 5px 0;
-            max-width: 80%;
-        }
-
-        .user-message {
-            background: #FFD700;
-            color: black;
-            text-align: right;
-            margin-left: auto;
-        }
-
-        #chat-input-container {
-            display: flex;
-            padding: 10px;
-        }
-
-        #user-input {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        #send-btn {
-            background: #00FFCC;
-            color: #112240;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-left: 5px;
-            font-weight: bold;
-        }
-
-        #send-btn:hover {
-            background: #FFD700;
-        }
-
-        #chat-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #00FFCC;
-            color: #112240;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-    </style>
-
 
 </body>
-                
+</html>
