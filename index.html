@@ -199,6 +199,25 @@
         <a onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
+    <!-- Sección Quiénes Somos -->
+    <section id="quienes-somos">
+        <h2>Quiénes Somos</h2>
+        <p>Somos una empresa líder en el sector de refrigeración industrial, ofreciendo soluciones a medida para diferentes tipos de industrias.</p>
+    </section>
+
+    <!-- Sección Misión -->
+    <section id="mision">
+        <h2>Misión</h2>
+        <p>Brindamos soluciones de refrigeración industrial con la más alta calidad y tecnología, comprometidos con la satisfacción de nuestros clientes.</p>
+    </section>
+
+    <!-- Sección Visión -->
+    <section id="vision">
+        <h2>Visión</h2>
+        <p>Ser la empresa de refrigeración industrial más innovadora y reconocida en el mercado, garantizando excelencia y servicio al cliente.</p>
+    </section>
+
+    <!-- Sección Servicios -->
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseño, mantenimiento y optimización de sistemas de refrigeración industrial.</p></div>
@@ -209,17 +228,40 @@
         <div class="card"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Fabricación de Cuartos Fríos</h3><p>Diseño y construcción de espacios de refrigeración personalizados.</p></div>
     </section>
 
-    <a href="https://wa.me/573214133885" class="whatsapp-float"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
+    <!-- Sección Contacto -->
+    <section id="contacto">
+        <h2>Contáctanos</h2>
+        <p>¿Tienes alguna pregunta o necesitas más información? Estamos disponibles para ayudarte. Puedes enviarnos un mensaje directamente por WhatsApp:</p>
+        <p><a href="https://wa.me/573214133885" target="_blank">Enviar mensaje vía WhatsApp</a></p>
+    </section>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
     <script>
         function toggleMenu() { 
-            document.getElementById('menu').classList.toggle('show'); 
+            var menu = document.getElementById('menu');
+            if (menu) {
+                menu.classList.toggle('show');
+            }
         }
+
         function navigateTo(sectionId) {
+            // Ocultar todas las secciones activas
             document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            document.getElementById('menu').classList.remove('show');
+            // Mostrar la sección correspondiente
+            var section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+            // Cerrar el menú
+            var menu = document.getElementById('menu');
+            if (menu) {
+                menu.classList.remove('show');
+            }
         }
     </script>
 </body>
-    </html>
+</html>
