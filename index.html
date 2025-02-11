@@ -135,12 +135,12 @@
 
         /* Estilo de la tarjeta con la sombra sutil */
         .card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);  /* Fondo inicial */
             width: 300px;
             height: auto;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra inicial */
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transición suave */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease; /* Transición suave */
             overflow: hidden;
             cursor: pointer;
             padding: 20px;
@@ -151,16 +151,33 @@
         /* Resaltar la tarjeta cuando entra en la vista */
         .card.in-view {
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más fuerte cuando está visible */
-            background: rgba(255, 255, 255, 0.2); /* Fondo más claro */
+            background: rgba(0, 51, 102, 0.6); /* Fondo azul más claro al estar visible */
+            border: 2px solid #FFA500; /* Contorno naranja al estar visible */
         }
 
         /* Efecto al hacer hover (más suave) */
         .card:hover {
             transform: translateY(-5px); /* La tarjeta sube un poco */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más fuerte */
-            background: rgba(255, 255, 255, 0.3); /* Fondo más claro al pasar el ratón */
+            background: rgba(0, 51, 102, 0.7); /* Fondo azul más claro al pasar el ratón */
+            border: 2px solid #FFA500; /* Contorno naranja al hacer hover */
         }
 
+        /* Al hacer clic, la tarjeta se expande */
+        .card.expanded {
+            transform: scale(1.5); /* Se agranda */
+            width: 70vw; /* Ancho ajustado al 70% de la pantalla */
+            height: 70vh; /* Alto ajustado al 70% de la pantalla */
+            position: fixed; /* Queda fija en la pantalla */
+            top: 15vh; /* Ajuste para que se vea centrada */
+            left: 15vw; /* Ajuste para que se vea centrada */
+            z-index: 9999; /* Se coloca por encima de otros elementos */
+            border-radius: 10px;
+            border: 2px solid #FFA500; /* Contorno naranja cuando está expandida */
+            transition: transform 0.3s ease;
+        }
+
+        /* Estilo para la imagen */
         .card img {
             width: 100%;
             height: auto;
@@ -329,6 +346,24 @@
                 menu.classList.remove('show');
             }
         }
+
+        // Función para manejar el clic en los ítems de servicio
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Si la tarjeta ya está expandida, la colapsamos
+                if (card.classList.contains('expanded')) {
+                    card.classList.remove('expanded');
+                } else {
+                    // Colapsar todas las tarjetas
+                    document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+                    // Expandir la tarjeta clickeada
+                    card.classList.add('expanded');
+                }
+            });
+        });
     </script>
 </body>
 </html>
+
+
+
