@@ -47,7 +47,7 @@
             color: white;
             background: none;
             border: none;
-            z-index: 1001; /* Aseguramos que el ícono del menú siempre esté encima */
+            z-index: 1000;
         }
 
         .menu {
@@ -60,7 +60,6 @@
             padding-top: 60px;
             transition: left 0.3s ease-in-out;
             box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000; /* Aseguramos que el menú esté encima de todo */
         }
 
         .menu.show {
@@ -230,7 +229,7 @@
         <div class="card"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseñamos y construimos cuartos fríos a medida para diversas aplicaciones industriales.</p></div>
     </section>
 
-    <!-- Sección Contacto -->
+    <!-- Sección de Contacto -->
     <section id="contacto">
         <h2>Contáctanos</h2>
         <p>Teléfono: +57 3214133885-3174047208</p>
@@ -245,9 +244,7 @@
     <script>
         function toggleMenu() { 
             var menu = document.getElementById('menu');
-            if (menu) {
-                menu.classList.toggle('show');
-            }
+            menu.classList.toggle('show');
         }
 
         function navigateTo(sectionId) {
@@ -260,6 +257,7 @@
             var section = document.getElementById(sectionId);
             if (section) {
                 section.classList.add('active');
+                section.scrollIntoView({ behavior: 'smooth' });  // Desplazamiento suave a la sección
             }
 
             // Cerrar el menú
@@ -267,13 +265,7 @@
             if (menu) {
                 menu.classList.remove('show');
             }
-
-            // Desplazar hasta la sección (solo para 'contacto')
-            if (sectionId === 'contacto') {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
         }
     </script>
 </body>
 </html>
-
