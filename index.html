@@ -133,33 +133,14 @@
             z-index: 10; /* Asegura que esté por encima de las tarjetas */
         }
 
-        /* Definir la animación de palpitación */
-        @keyframes pulsar {
-            0% {
-                transform: scale(1); /* Tamaño normal */
-            }
-            50% {
-                transform: scale(1.1); /* Aumenta un poco el tamaño */
-            }
-            100% {
-                transform: scale(1); /* Vuelve al tamaño original */
-            }
-        }
-
-        /* Estilo de la tarjeta de servicio con la animación de pulsación */
-        .card.pulsar {
-            animation: pulsar 1s infinite; /* La animación se repite infinitamente */
-            transform: scale(1.05); /* También se agranda ligeramente para mayor énfasis */
-            background: rgba(255, 255, 255, 0.2); /* Color de fondo más visible */
-        }
-
+        /* Estilo de la tarjeta con la sombra sutil */
         .card {
             background: rgba(255, 255, 255, 0.1);
             width: 300px;
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra inicial */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Transición suave */
             overflow: hidden;
             cursor: pointer;
             padding: 20px;
@@ -167,15 +148,17 @@
             position: relative;
         }
 
-        .card.expanded {
-            transform: scale(1.2);
-            width: 90vw;
-            height: 80vh;
-            position: fixed;
-            top: 10vh;
-            left: 5vw;
-            z-index: 9999;
-            border-radius: 10px;
+        /* Resaltar la tarjeta cuando entra en la vista */
+        .card.in-view {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más fuerte cuando está visible */
+            background: rgba(255, 255, 255, 0.2); /* Fondo más claro */
+        }
+
+        /* Efecto al hacer hover (más suave) */
+        .card:hover {
+            transform: translateY(-5px); /* La tarjeta sube un poco */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más fuerte */
+            background: rgba(255, 255, 255, 0.3); /* Fondo más claro al pasar el ratón */
         }
 
         .card img {
@@ -306,11 +289,11 @@
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Cuando la tarjeta entra en la mitad de la pantalla, agrega la clase 'pulsar'
-                    entry.target.classList.add('pulsar');
+                    // Cuando la tarjeta entra en la vista, agrega la clase 'in-view'
+                    entry.target.classList.add('in-view');
                 } else {
-                    // Cuando la tarjeta sale de la vista, remueve la clase 'pulsar'
-                    entry.target.classList.remove('pulsar');
+                    // Cuando la tarjeta sale de la vista, remueve la clase 'in-view'
+                    entry.target.classList.remove('in-view');
                 }
             });
         }, {
@@ -346,21 +329,6 @@
                 menu.classList.remove('show');
             }
         }
-
-        // Función para manejar el clic en los ítems de servicio
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Si la tarjeta ya está expandida, la colapsamos
-                if (card.classList.contains('expanded')) {
-                    card.classList.remove('expanded');
-                } else {
-                    // Colapsar todas las tarjetas
-                    document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
-                    // Expandir la tarjeta clickeada
-                    card.classList.add('expanded');
-                }
-            });
-        });
     </script>
 </body>
 </html>
