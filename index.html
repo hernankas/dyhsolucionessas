@@ -123,18 +123,25 @@
         .card {
             background: rgba(255, 255, 255, 0.1);
             width: 300px;
+            height: auto;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: 0.3s;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
             overflow: hidden;
             cursor: pointer;
             padding: 20px;
             backdrop-filter: blur(5px);
         }
 
-        .card:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.2);
+        .card.expanded {
+            transform: scale(1.5);
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            border-radius: 0;
         }
 
         .card img {
@@ -272,6 +279,21 @@
                 menu.classList.remove('show');
             }
         }
+
+        // Función para manejar el clic en los ítems de servicio
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Si la tarjeta ya está expandida, la colapsamos
+                if (card.classList.contains('expanded')) {
+                    card.classList.remove('expanded');
+                } else {
+                    // Colapsar todas las tarjetas
+                    document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+                    // Expandir la tarjeta clickeada
+                    card.classList.add('expanded');
+                }
+            });
+        });
     </script>
 </body>
 </html>
