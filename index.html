@@ -16,7 +16,7 @@
             background: linear-gradient(135deg, #003366, #005A8C, #0084C8);
             color: white;
             text-align: center;
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Permite desplazamiento suave */
         }
 
         header {
@@ -265,6 +265,11 @@
             var menu = document.getElementById('menu');
             if (menu) {
                 menu.classList.remove('show');
+            }
+
+            // Desplazar hasta la sección (solo para 'contacto')
+            if (sectionId === 'contacto') {
+                section.scrollIntoView({ behavior: 'smooth' });
             }
         }
     </script>
