@@ -153,33 +153,17 @@
             position: relative;
         }
 
-        /* Resaltar la tarjeta cuando entra en la vista */
-        .card.in-view {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más fuerte cuando está visible */
-            background: rgba(0, 51, 102, 0.6); /* Fondo azul más claro al estar visible */
-            border: 2px solid #FFA500; /* Contorno naranja al estar visible */
-        }
-
-        /* Efecto al hacer hover (más suave) */
-        .card:hover {
-            transform: translateY(-5px); /* La tarjeta sube un poco */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más fuerte */
-            background: rgba(0, 51, 102, 0.7); /* Fondo azul más claro al pasar el ratón */
-            border: 2px solid #FFA500; /* Contorno naranja al hacer hover */
-        }
-
         /* Al hacer clic, la tarjeta se expande */
         .card.expanded {
             transform: scale(1.5); /* Se agranda */
-            width: 70vw; /* Ancho ajustado al 70% de la pantalla */
-            height: 70vh; /* Alto ajustado al 70% de la pantalla */
+            width: 100vw; /* Ancho ajustado al 100% de la pantalla */
+            height: 100vh; /* Alto ajustado al 100% de la pantalla */
             position: fixed; /* Queda fija en la pantalla */
-            top: 15vh; /* Ajuste para que se vea centrada */
-            left: 15vw; /* Ajuste para que se vea centrada */
+            top: 0; /* Ajuste para que se vea centrada */
+            left: 0; /* Ajuste para que se vea centrada */
             z-index: 9999; /* Se coloca por encima de otros elementos */
-            border-radius: 10px;
-            border: 2px solid #FFA500; /* Contorno naranja cuando está expandida */
-            transition: transform 0.3s ease;
+            border-radius: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra más fuerte cuando está expandida */
         }
 
         /* Estilo para la imagen */
@@ -189,6 +173,11 @@
             object-fit: contain;
             max-height: 100%;
             border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .card img:hover {
+            transform: scale(1.05); /* Efecto de zoom */
         }
 
         .card h3 {
@@ -208,108 +197,48 @@
             margin-top: 30px;
         }
 
-        /* Botón flotante de llamadas */
-        .llamadas-float {
-            position: fixed;
-            bottom: 80px; /* Ajustamos la distancia a la parte inferior */
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            z-index: 1000;
-            border-radius: 50%;
-            background: rgba(255, 165, 0, 0.7); /* Fondo naranja semi-transparente */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil */
-            transition: 0.3s ease-in-out;
-            cursor: pointer;
-        }
-
-        .llamadas-float:hover {
-            background: rgba(255, 165, 0, 1); /* Fondo más opaco */
-            transform: scale(1.1); /* Efecto de agrandamiento */
-        }
-
-        .llamadas-float img {
-            width: 30px;
-            height: 30px;
-            object-fit: contain;
-            filter: invert(1); /* Cambia el color del ícono a blanco */
-        }
-
-        /* Efecto de enfoque en la imagen del botón */
-        .llamadas-float img:hover {
-            filter: invert(0.8); /* Mantiene el color blanco, pero lo suaviza */
-        }
-
-        /* Botón flotante de WhatsApp */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 150px; /* Ajustamos la distancia para que esté alineado correctamente */
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            z-index: 1000;
-        }
-
-        .whatsapp-float img {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: 0.3s ease-in-out;
-        }
-
-        .whatsapp-float img:hover {
-            transform: scale(1.1);
-        }
-
-        /* Cuadro flotante con teléfono y WhatsApp */
+        /* Botones flotantes (Llamadas y WhatsApp) */
         .menu-flotante {
             position: fixed;
-            bottom: 20px;
-            right: 100px;
-            width: 80px;
-            background: rgba(0, 51, 102, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            padding: 15px 0;
+            bottom: 20px; /* Asegura que los botones no estén demasiado abajo */
+            right: 20px; /* Posiciona los botones a la derecha */
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            z-index: 1000;
         }
 
         .menu-flotante a {
-            display: flex;
-            align-items: center;
+            display: block;
+            background: rgba(255, 165, 0, 0.7); /* Fondo de los botones */
+            padding: 15px;
+            border-radius: 50%; /* Botones redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+            transition: 0.3s ease-in-out;
+            width: 70px; /* Tamaño de los botones */
+            height: 70px;
             justify-content: center;
-            background: rgba(255, 165, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
-            gap: 10px;
-            width: 60px;
-            text-align: center;
+            align-items: center;
         }
 
         .menu-flotante a:hover {
-            background: rgba(255, 165, 0, 1);
-            transform: scale(1.05);
+            background: rgba(255, 165, 0, 1); /* Fondo más oscuro al pasar el ratón */
+            transform: scale(1.1); /* Efecto de agrandamiento */
         }
 
         .menu-flotante img {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
         }
 
-        .menu-flotante span {
-            font-size: 12px;
-            font-weight: bold;
+        /* Estilos para el icono de WhatsApp y llamada */
+        .menu-flotante .whatsapp {
+            background: #25D366; /* Fondo verde de WhatsApp */
+        }
+
+        .menu-flotante .llamadas {
+            background: #34b7f1; /* Fondo azul para llamada */
         }
     </style>
 </head>
@@ -351,12 +280,12 @@
     <!-- Sección de Nuestros Servicios -->
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
-        <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseñamos, mantenemos y optimizamos sistemas de refrigeración industriales eficientes.</p></div>
-        <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Implementamos soluciones tecnológicas para optimizar los procesos industriales.</p></div>
-        <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Ofrecemos instalación y mantenimiento de sistemas de climatización industrial.</p></div>
-        <div class="card"><img src="congeladores.jpg" alt="Congeladores"><h3>Congeladores Industriales</h3><p>Proveemos soluciones avanzadas para la conservación de productos industriales.</p></div>
-        <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento"><h3>Mantenimiento Preventivo</h3><p>Realizamos mantenimiento preventivo para asegurar el correcto funcionamiento de los equipos.</p></div>
-        <div class="card"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseñamos y construimos cuartos fríos a medida para diversas aplicaciones industriales.</p></div>
+        <div class="card" onclick="this.classList.toggle('expanded')"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseñamos, mantenemos y optimizamos sistemas de refrigeración industriales eficientes.</p></div>
+        <div class="card" onclick="this.classList.toggle('expanded')"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Implementamos soluciones tecnológicas para optimizar los procesos industriales.</p></div>
+        <div class="card" onclick="this.classList.toggle('expanded')"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Ofrecemos instalación y mantenimiento de sistemas de climatización industrial.</p></div>
+        <div class="card" onclick="this.classList.toggle('expanded')"><img src="congeladores.jpg" alt="Congeladores"><h3>Congeladores Industriales</h3><p>Proveemos soluciones avanzadas para la conservación de productos industriales.</p></div>
+        <div class="card" onclick="this.classList.toggle('expanded')"><img src="mantenimiento.jpg" alt="Mantenimiento"><h3>Mantenimiento Preventivo</h3><p>Realizamos mantenimiento preventivo para asegurar el correcto funcionamiento de los equipos.</p></div>
+        <div class="card" onclick="this.classList.toggle('expanded')"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseñamos y construimos cuartos fríos a medida para diversas aplicaciones industriales.</p></div>
     </section>
 
     <!-- Sección de Contacto -->
@@ -366,15 +295,13 @@
         <p>Email: refrindustrialcyg@gmail.com</p>
     </section>
 
-    <!-- Menú flotante con teléfono y WhatsApp -->
+    <!-- Botones flotantes -->
     <div class="menu-flotante">
-        <a href="tel:+573214133885">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Phone_icon_%28Simplicity%29.svg/1024px-Phone_icon_%28Simplicity%29.svg.png" alt="Llámanos">
-            <span>+57 3214133885</span>
+        <a href="tel:+573214133885" class="llamadas">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Telephone_icon_%28SVG%29.svg" alt="Llamar">
         </a>
-        <a href="https://wa.me/573214133885" target="_blank">
+        <a href="https://wa.me/573214133885" class="whatsapp" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            <span>WhatsApp</span>
         </a>
     </div>
 
@@ -403,4 +330,4 @@
     </script>
 
 </body>
-                               </html>
+</html>
