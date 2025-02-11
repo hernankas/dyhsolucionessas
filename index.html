@@ -16,6 +16,7 @@
             background: linear-gradient(135deg, #003366, #005A8C, #0084C8);
             color: white;
             text-align: center;
+            scroll-behavior: smooth;
         }
 
         header {
@@ -192,46 +193,46 @@
 
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
-        <a onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-        <a onclick="navigateTo('mision')">Misión</a>
-        <a onclick="navigateTo('vision')">Visión</a>
-        <a onclick="navigateTo('servicios')">Nuestros Servicios</a>
-        <a onclick="navigateTo('contacto')">Contáctanos</a>
+        <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
+        <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
+        <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
+        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
+        <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
     </div>
 
     <!-- Sección Quiénes Somos -->
     <section id="quienes-somos">
         <h2>Quiénes Somos</h2>
-        <p>Somos una empresa líder en el sector de refrigeración industrial, ofreciendo soluciones a medida para diferentes tipos de industrias.</p>
+        <p>Somos una empresa especializada en soluciones de refrigeración industrial, ofreciendo un servicio confiable y adaptado a las necesidades de cada cliente.</p>
     </section>
 
     <!-- Sección Misión -->
     <section id="mision">
         <h2>Misión</h2>
-        <p>Brindamos soluciones de refrigeración industrial con la más alta calidad y tecnología, comprometidos con la satisfacción de nuestros clientes.</p>
+        <p>Nos dedicamos a proporcionar soluciones de refrigeración de alta calidad, siempre buscando la innovación y el compromiso con la satisfacción de nuestros clientes.</p>
     </section>
 
     <!-- Sección Visión -->
     <section id="vision">
         <h2>Visión</h2>
-        <p>Ser la empresa de refrigeración industrial más innovadora y reconocida en el mercado, garantizando excelencia y servicio al cliente.</p>
+        <p>Aspiramos a ser la empresa líder en el sector de la refrigeración industrial, reconocidos por nuestra innovación, calidad y el excelente servicio a nuestros clientes.</p>
     </section>
 
     <!-- Sección Servicios -->
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
-        <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseño, mantenimiento y optimización de sistemas de refrigeración industrial.</p></div>
-        <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Implementación de tecnologías inteligentes para optimizar procesos industriales.</p></div>
-        <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Instalación, mantenimiento y reparación de sistemas de climatización industriales.</p></div>
-        <div class="card"><img src="congeladores.jpg" alt="Congeladores"><h3>Congeladores Industriales</h3><p>Soluciones avanzadas para el almacenamiento y conservación de productos.</p></div>
-        <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento"><h3>Mantenimiento Preventivo</h3><p>Inspección y ajustes periódicos para evitar fallos en equipos industriales.</p></div>
-        <div class="card"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Fabricación de Cuartos Fríos</h3><p>Diseño y construcción de espacios de refrigeración personalizados.</p></div>
+        <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseñamos, mantenemos y optimizamos sistemas de refrigeración industriales eficientes.</p></div>
+        <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Implementamos soluciones tecnológicas para optimizar los procesos industriales.</p></div>
+        <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Ofrecemos instalación y mantenimiento de sistemas de climatización industrial.</p></div>
+        <div class="card"><img src="congeladores.jpg" alt="Congeladores"><h3>Congeladores Industriales</h3><p>Proveemos soluciones avanzadas para la conservación de productos industriales.</p></div>
+        <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento"><h3>Mantenimiento Preventivo</h3><p>Realizamos mantenimiento preventivo para asegurar el correcto funcionamiento de los equipos.</p></div>
+        <div class="card"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseñamos y construimos cuartos fríos a medida para diversas aplicaciones industriales.</p></div>
     </section>
 
     <!-- Sección Contacto -->
     <section id="contacto">
         <h2>Contáctanos</h2>
-        <p>¿Tienes alguna pregunta o necesitas más información? Estamos disponibles para ayudarte. Puedes enviarnos un mensaje directamente por WhatsApp:</p>
+        <p>¿Tienes alguna pregunta o necesitas más información? Contáctanos fácilmente por WhatsApp.</p>
         <p><a href="https://wa.me/573214133885" target="_blank">Enviar mensaje vía WhatsApp</a></p>
     </section>
 
@@ -249,13 +250,17 @@
         }
 
         function navigateTo(sectionId) {
-            // Ocultar todas las secciones activas
-            document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+            // Ocultar todas las secciones
+            document.querySelectorAll('section').forEach(function(section) {
+                section.classList.remove('active');
+            });
+
             // Mostrar la sección correspondiente
             var section = document.getElementById(sectionId);
             if (section) {
                 section.classList.add('active');
             }
+
             // Cerrar el menú
             var menu = document.getElementById('menu');
             if (menu) {
