@@ -16,8 +16,7 @@
             background: linear-gradient(135deg, #003366, #005A8C, #0084C8);
             color: white;
             text-align: center;
-            scroll-behavior: smooth;
-            position: relative; /* Asegura que el menú esté encima de otros elementos */
+            scroll-behavior: smooth; /* Permite desplazamiento suave */
         }
 
         header {
@@ -48,7 +47,7 @@
             color: white;
             background: none;
             border: none;
-            z-index: 10000; /* Asegura que el botón de menú también esté por encima */
+            z-index: 1000;
         }
 
         .menu {
@@ -61,7 +60,7 @@
             padding-top: 60px;
             transition: left 0.3s ease-in-out;
             box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 9999; /* Asegura que el menú esté por encima de todo */
+            z-index: 9999;
         }
 
         .menu.show {
@@ -133,6 +132,26 @@
             z-index: 10; /* Asegura que esté por encima de las tarjetas */
         }
 
+        /* Definir la animación de palpitación */
+        @keyframes pulsar {
+            0% {
+                transform: scale(1); /* Tamaño normal */
+            }
+            50% {
+                transform: scale(1.1); /* Aumenta un poco el tamaño */
+            }
+            100% {
+                transform: scale(1); /* Vuelve al tamaño original */
+            }
+        }
+
+        /* Estilo de la tarjeta de servicio con la animación de pulsación */
+        .card:hover {
+            animation: pulsar 1s infinite; /* La animación se repite infinitamente mientras el ratón esté sobre la tarjeta */
+            transform: scale(1.05); /* También se agranda ligeramente para mayor énfasis */
+            background: rgba(255, 255, 255, 0.2); /* Color de fondo más visible */
+        }
+
         .card {
             background: rgba(255, 255, 255, 0.1);
             width: 300px;
@@ -148,21 +167,21 @@
         }
 
         .card.expanded {
-            transform: scale(1.2); /* Ajustamos el tamaño para que no sea tan grande */
-            width: 90vw; /* Usamos un 90% del ancho de la pantalla */
-            height: 80vh; /* Usamos un 80% del alto de la pantalla */
+            transform: scale(1.2);
+            width: 90vw;
+            height: 80vh;
             position: fixed;
-            top: 10vh; /* Deja espacio desde la parte superior */
-            left: 5vw; /* Deja un pequeño margen desde la izquierda */
+            top: 10vh;
+            left: 5vw;
             z-index: 9999;
-            border-radius: 10px; /* Mantiene bordes redondeados */
+            border-radius: 10px;
         }
 
         .card img {
-            width: 100%; /* Hace que la imagen ocupe todo el contenedor */
+            width: 100%;
             height: auto;
-            object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
-            max-height: 100%; /* Evita que la imagen se distorsione o quede demasiado grande */
+            object-fit: contain;
+            max-height: 100%;
             border-radius: 10px;
         }
 
@@ -210,16 +229,15 @@
             }
 
             .card.expanded {
-                width: 100vw; /* En pantallas móviles, ocupa todo el ancho */
-                height: 100vh; /* En pantallas móviles, ocupa toda la altura */
+                width: 100vw;
+                height: 100vh;
             }
         }
 
-        /* En pantallas grandes, limita la expansión al 70% */
         @media (min-width: 1024px) {
             .card.expanded {
-                width: 70vw;  /* En pantallas grandes, ocupa el 70% del ancho */
-                height: 70vh; /* En pantallas grandes, ocupa el 70% de la altura */
+                width: 70vw;
+                height: 70vh;
             }
         }
     </style>
@@ -325,3 +343,4 @@
     </script>
 </body>
 </html>
+
