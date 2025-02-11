@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REFRI INDUSTRIAL CYG SAS</title>
     <style>
+      
+      /* Estilo para el botón de llamadas */
+.llamadas-float {
+    position: fixed;
+    bottom: 90px; /* Coloca este botón encima del de WhatsApp */
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+}
+
+/* Estilo de la imagen del botón de llamadas */
+.llamadas-float img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease-in-out;
+}
+
+/* Efecto al hacer hover en el botón de llamadas */
+.llamadas-float img:hover {
+    transform: scale(1.1);
+}
+
+/* Mantener el estilo del botón de WhatsApp flotante */
+.whatsapp-float img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease-in-out;
+}
+
+.whatsapp-float img:hover {
+    transform: scale(1.1);
+}
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -295,6 +333,11 @@
         <p>Teléfono: +57 3214133885-3174047208</p>
         <p>Email: refrindustrialcyg@gmail.com</p>
     </section>
+  
+  <!-- Botón Flotante de Llamadas -->
+<a href="tel:+573214133885" class="llamadas-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Phone_icon_%28Simplicity%29.svg/1024px-Phone_icon_%28Simplicity%29.svg.png" alt="Llámanos">
+</a>
 
     <!-- Botón Flotante de WhatsApp -->
     <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
@@ -364,6 +407,5 @@
     </script>
 </body>
 </html>
-
 
 
