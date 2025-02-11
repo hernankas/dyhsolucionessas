@@ -6,29 +6,43 @@
     <title>REFRI INDUSTRIAL CYG SAS</title>
     <style>
       
-      /* Estilo para el botón de llamadas */
-.llamadas-float {
-    position: fixed;
-    bottom: 90px; /* Coloca este botón encima del de WhatsApp */
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    z-index: 1000;
-}
+    <style>
+    /* Estilo del botón de llamadas flotante */
+    .llamadas-float {
+        position: fixed;
+        bottom: 90px; /* Colocando este botón encima del de WhatsApp */
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        z-index: 1000;
+        border-radius: 50%;
+        background: rgba(255, 165, 0, 0.7); /* Fondo naranja semi-transparente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+    }
 
-/* Estilo de la imagen del botón de llamadas */
-.llamadas-float img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: 0.3s ease-in-out;
-}
+    /* Efecto cuando el ratón pasa sobre el botón */
+    .llamadas-float:hover {
+        background: rgba(255, 165, 0, 1); /* Fondo más opaco */
+        transform: scale(1.1); /* Efecto de agrandamiento */
+    }
 
-/* Efecto al hacer hover en el botón de llamadas */
-.llamadas-float img:hover {
-    transform: scale(1.1);
-}
+    /* Estilo para la imagen del botón */
+    .llamadas-float img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        filter: invert(1); /* Cambia el color del ícono a blanco */
+    }
+
+    /* Efecto de enfoque en la imagen del botón */
+    .llamadas-float img:hover {
+        filter: invert(0.8); /* Mantiene el color blanco, pero lo suaviza */
+    }
 
 /* Mantener el estilo del botón de WhatsApp flotante */
 .whatsapp-float img {
@@ -334,11 +348,10 @@
         <p>Email: refrindustrialcyg@gmail.com</p>
     </section>
   
-  <!-- Botón Flotante de Llamadas -->
+ <!-- Botón de llamadas flotante -->
 <a href="tel:+573214133885" class="llamadas-float">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Phone_icon_%28Simplicity%29.svg/1024px-Phone_icon_%28Simplicity%29.svg.png" alt="Llámanos">
 </a>
-
     <!-- Botón Flotante de WhatsApp -->
     <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
