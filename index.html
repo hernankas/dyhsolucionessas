@@ -5,57 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REFRI INDUSTRIAL CYG SAS</title>
     <style>
-      
-    <style>
-     /* Estilo del botón de llamadas flotante */
-    .llamadas-float {
-        position: fixed;
-        bottom: 150px; /* Colocamos el botón por debajo del de WhatsApp */
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        z-index: 1000;
-        border-radius: 50%;
-        background: rgba(255, 165, 0, 0.7); /* Fondo naranja semi-transparente */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil */
-        transition: 0.3s ease-in-out;
-        cursor: pointer;
-    }
-
-    /* Efecto cuando el ratón pasa sobre el botón */
-    .llamadas-float:hover {
-        background: rgba(255, 165, 0, 1); /* Fondo más opaco */
-        transform: scale(1.1); /* Efecto de agrandamiento */
-    }
-
-    /* Estilo para la imagen del botón */
-    .llamadas-float img {
-        width: 30px;
-        height: 30px;
-        object-fit: contain;
-        filter: invert(1); /* Cambia el color del ícono a blanco */
-    }
-
-    /* Efecto de enfoque en la imagen del botón */
-    .llamadas-float img:hover {
-        filter: invert(0.8); /* Mantiene el color blanco, pero lo suaviza */
-    }
-/* Mantener el estilo del botón de WhatsApp flotante */
-.whatsapp-float img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: 0.3s ease-in-out;
-}
-
-.whatsapp-float img:hover {
-    transform: scale(1.1);
-}
-
+        /* Estilo global */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -69,8 +19,10 @@
             text-align: center;
             scroll-behavior: smooth;
             position: relative;
+            padding-bottom: 0; /* Eliminamos el espacio adicional en la parte inferior */
         }
 
+        /* Estilo del header */
         header {
             background: url('titulo.jpg') center/cover no-repeat;
             padding: 80px 20px;
@@ -90,6 +42,7 @@
             color: #FFD700;
         }
 
+        /* Menú lateral */
         .menu-toggle {
             position: fixed;
             top: 20px;
@@ -134,6 +87,7 @@
             color: black;
         }
 
+        /* Sección */
         section {
             display: none;
             padding: 50px 20px;
@@ -254,9 +208,45 @@
             margin-top: 30px;
         }
 
+        /* Botón flotante de llamadas */
+        .llamadas-float {
+            position: fixed;
+            bottom: 80px; /* Ajustamos la distancia a la parte inferior */
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            z-index: 1000;
+            border-radius: 50%;
+            background: rgba(255, 165, 0, 0.7); /* Fondo naranja semi-transparente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .llamadas-float:hover {
+            background: rgba(255, 165, 0, 1); /* Fondo más opaco */
+            transform: scale(1.1); /* Efecto de agrandamiento */
+        }
+
+        .llamadas-float img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            filter: invert(1); /* Cambia el color del ícono a blanco */
+        }
+
+        /* Efecto de enfoque en la imagen del botón */
+        .llamadas-float img:hover {
+            filter: invert(0.8); /* Mantiene el color blanco, pero lo suaviza */
+        }
+
+        /* Botón flotante de WhatsApp */
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
+            bottom: 150px; /* Ajustamos la distancia para que esté alineado correctamente */
             right: 20px;
             width: 60px;
             height: 60px;
@@ -275,22 +265,51 @@
             transform: scale(1.1);
         }
 
-        @media (max-width: 768px) {
-            .card {
-                width: 90%;
-            }
-
-            .card.expanded {
-                width: 100vw;
-                height: 100vh;
-            }
+        /* Cuadro flotante con teléfono y WhatsApp */
+        .menu-flotante {
+            position: fixed;
+            bottom: 20px;
+            right: 100px;
+            width: 80px;
+            background: rgba(0, 51, 102, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
         }
 
-        @media (min-width: 1024px) {
-            .card.expanded {
-                width: 70vw;
-                height: 70vh;
-            }
+        .menu-flotante a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 165, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            gap: 10px;
+            width: 60px;
+            text-align: center;
+        }
+
+        .menu-flotante a:hover {
+            background: rgba(255, 165, 0, 1);
+            transform: scale(1.05);
+        }
+
+        .menu-flotante img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .menu-flotante span {
+            font-size: 12px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -329,7 +348,7 @@
         <p>Aspiramos a ser la empresa líder en el sector de la refrigeración industrial, reconocidos por nuestra innovación, calidad y el excelente servicio a nuestros clientes.</p>
     </section>
 
-    <!-- Sección Servicios -->
+    <!-- Sección de Nuestros Servicios -->
     <section id="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseñamos, mantenemos y optimizamos sistemas de refrigeración industriales eficientes.</p></div>
@@ -346,78 +365,42 @@
         <p>Teléfono: +57 3214133885-3174047208</p>
         <p>Email: refrindustrialcyg@gmail.com</p>
     </section>
-  
- <!-- Botón de llamadas flotante -->
-<a href="tel:+573214133885" class="llamadas-float">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Phone_icon_%28Simplicity%29.svg/1024px-Phone_icon_%28Simplicity%29.svg.png" alt="Llámanos">
-</a>
-    <!-- Botón Flotante de WhatsApp -->
-    <a href="https://wa.me/573214133885" class="whatsapp-float" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
+
+    <!-- Menú flotante con teléfono y WhatsApp -->
+    <div class="menu-flotante">
+        <a href="tel:+573214133885">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Phone_icon_%28Simplicity%29.svg/1024px-Phone_icon_%28Simplicity%29.svg.png" alt="Llámanos">
+            <span>+57 3214133885</span>
+        </a>
+        <a href="https://wa.me/573214133885" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            <span>WhatsApp</span>
+        </a>
+    </div>
 
     <script>
-        // Configuración del IntersectionObserver
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Cuando la tarjeta entra en la vista, agrega la clase 'in-view'
-                    entry.target.classList.add('in-view');
-                } else {
-                    // Cuando la tarjeta sale de la vista, remueve la clase 'in-view'
-                    entry.target.classList.remove('in-view');
-                }
-            });
-        }, {
-            threshold: 0.5 // 50% visible en la pantalla
-        });
-
-        // Seleccionamos todas las tarjetas de servicio y las observamos
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
-        });
-
         function toggleMenu() { 
             var menu = document.getElementById('menu');
             menu.classList.toggle('show');
         }
 
         function navigateTo(sectionId) {
-            // Ocultar todas las secciones
             document.querySelectorAll('section').forEach(function(section) {
                 section.classList.remove('active');
             });
 
-            // Mostrar la sección correspondiente
             var section = document.getElementById(sectionId);
             if (section) {
                 section.classList.add('active');
-                section.scrollIntoView({ behavior: 'smooth' });  // Desplazamiento suave a la sección
+                section.scrollIntoView({ behavior: 'smooth' });
             }
 
-            // Cerrar el menú
             var menu = document.getElementById('menu');
             if (menu) {
                 menu.classList.remove('show');
             }
         }
-
-        // Función para manejar el clic en los ítems de servicio
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Si la tarjeta ya está expandida, la colapsamos
-                if (card.classList.contains('expanded')) {
-                    card.classList.remove('expanded');
-                } else {
-                    // Colapsar todas las tarjetas
-                    document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
-                    // Expandir la tarjeta clickeada
-                    card.classList.add('expanded');
-                }
-            });
-        });
     </script>
+
 </body>
-</html>
-
-
+                               </html>
