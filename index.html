@@ -16,7 +16,8 @@
             background: linear-gradient(135deg, #003366, #005A8C, #0084C8);
             color: white;
             text-align: center;
-            scroll-behavior: smooth; /* Permite desplazamiento suave */
+            scroll-behavior: smooth;
+            position: relative;
         }
 
         header {
@@ -146,8 +147,8 @@
         }
 
         /* Estilo de la tarjeta de servicio con la animación de pulsación */
-        .card:hover {
-            animation: pulsar 1s infinite; /* La animación se repite infinitamente mientras el ratón esté sobre la tarjeta */
+        .card.pulsar {
+            animation: pulsar 1s infinite; /* La animación se repite infinitamente */
             transform: scale(1.05); /* También se agranda ligeramente para mayor énfasis */
             background: rgba(255, 255, 255, 0.2); /* Color de fondo más visible */
         }
@@ -301,6 +302,26 @@
     </a>
 
     <script>
+        // Configuración del IntersectionObserver
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Cuando la tarjeta entra en la mitad de la pantalla, agrega la clase 'pulsar'
+                    entry.target.classList.add('pulsar');
+                } else {
+                    // Cuando la tarjeta sale de la vista, remueve la clase 'pulsar'
+                    entry.target.classList.remove('pulsar');
+                }
+            });
+        }, {
+            threshold: 0.5 // 50% visible en la pantalla
+        });
+
+        // Seleccionamos todas las tarjetas de servicio y las observamos
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+
         function toggleMenu() { 
             var menu = document.getElementById('menu');
             menu.classList.toggle('show');
@@ -343,4 +364,3 @@
     </script>
 </body>
 </html>
-
