@@ -1,657 +1,399 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>REFRI INDUSTRIAL CYG SAS</title>
-
-<style>
-
-    /* Estilo global */
-
-    * {
-
-        box-sizing: border-box;
-
-        margin: 0;
-
-        padding: 0;
-
-        font-family: 'Poppins', sans-serif;
-
-    }
-
-
-
-    body {
-
-        background: linear-gradient(135deg, #003366, #005A8C, #0084C8);
-
-        color: white;
-
-        text-align: center;
-
-        scroll-behavior: smooth;
-
-        position: relative;
-
-        padding-bottom: 0; /* Eliminamos el espacio adicional en la parte inferior */
-
-    }
-
-
-
-    header {
-
-        background: url('titulo.jpg') center/cover no-repeat;
-
-        padding: 80px 20px;
-
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-
-        border-bottom: 4px solid #FFA500;
-
-    }
-
-
-
-    header h1 {
-
-        font-size: 3rem;
-
-        color: #FFA500;
-
-        text-transform: uppercase;
-
-    }
-
-
-
-    header p {
-
-        font-size: 1.4rem;
-
-        margin-top: 10px;
-
-        color: #FFD700;
-
-    }
-
-
-
-    .menu-toggle {
-
-        position: fixed;
-
-        top: 20px;
-
-        left: 20px;
-
-        font-size: 30px;
-
-        cursor: pointer;
-
-        color: white;
-
-        background: none;
-
-        border: none;
-
-        z-index: 1000;
-
-    }
-
-
-
-    .menu {
-
-        position: fixed;
-
-        top: 0;
-
-        left: -280px;
-
-        width: 280px;
-
-        height: 100%;
-
-        background: rgba(0, 51, 102, 0.95);
-
-        padding-top: 60px;
-
-        transition: left 0.3s ease-in-out;
-
-        box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
-
-        z-index: 9999;
-
-    }
-
-
-
-    .menu.show {
-
-        left: 0;
-
-    }
-
-
-
-    .menu a {
-
-        display: block;
-
-        padding: 15px;
-
-        color: white;
-
-        text-decoration: none;
-
-        font-size: 18px;
-
-        transition: 0.3s;
-
-        cursor: pointer;
-
-    }
-
-
-
-    .menu a:hover {
-
-        background: #FFA500;
-
-        color: black;
-
-    }
-
-
-
-    section {
-
-        display: none;
-
-        padding: 50px 20px;
-
-        background: rgba(255, 255, 255, 0.1);
-
-        margin: 20px auto;
-
-        width: 90%;
-
-        border-radius: 15px;
-
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-
-    }
-
-
-
-    section.active {
-
-        display: block;
-
-        animation: fadeIn 0.5s ease-in-out;
-
-    }
-
-
-
-    @keyframes fadeIn {
-
-        from {
-
-            opacity: 0;
-
-            transform: translateY(50px); /* Desliza desde abajo */
-
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REFRI INDUSTRIAL CYG SAS</title>
+
+    <style>
+        /* 1. Estilo Global: Se aplican a todos los elementos */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
         }
 
-        to {
-
-            opacity: 1;
-
-            transform: translateY(0);
-
+        /* 2. Estilo del cuerpo (Body) */
+        body {
+            background: linear-gradient(135deg, #003366, #005A8C, #0084C8);
+            color: white;
+            text-align: center;
+            scroll-behavior: smooth;
+            position: relative;
+            padding-bottom: 0;
         }
 
-    }
-
-
-
-    h2 {
-
-        font-size: 2rem;
-
-        color: #FFA500;
-
-        margin-bottom: 15px;
-
-    }
-
-
-
-    #servicios {
-
-        display: flex;
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-        gap: 20px;
-
-        position: relative;
-
-    }
-
-
-
-    #servicios h2 {
-
-        position: absolute;
-
-        top: 20px;
-
-        left: 50%;
-
-        transform: translateX(-50%);
-
-        font-size: 2rem;
-
-        color: #FFA500;
-
-        z-index: 10;
-
-    }
-
-
-
-    /* Estilo de la tarjeta con la sombra sutil y borde naranja */
-
-    .card {
-
-        background: rgba(255, 255, 255, 0.1);
-
-        width: 300px;
-
-        height: auto;
-
-        border-radius: 15px;
-
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease;
-
-        overflow: hidden;
-
-        cursor: pointer;
-
-        padding: 20px;
-
-        backdrop-filter: blur(5px);
-
-        position: relative;
-
-        border: 2px solid transparent; /* Borde transparente por defecto */
-
-    }
-
-
-
-    .card:hover, .card.in-view {
-
-        border: 2px solid #FFA500; /* Línea naranja al hacer hover o al estar en la vista */
-
-        transform: scale(1.05); /* Aumenta el tamaño de la tarjeta */
-
-    }
-
-
-
-    .card img {
-
-        width: 100%;
-
-        height: auto;
-
-        object-fit: contain;
-
-        max-height: 100%;
-
-        border-radius: 10px;
-
-        transition: transform 0.3s ease;
-
-    }
-
-
-
-    .card img:hover {
-
-        transform: scale(1.05); /* Efecto de zoom */
-
-    }
-
-
-
-    .card h3 {
-
-        font-size: 1.6rem;
-
-        color: #FFA500;
-
-        margin-top: 15px;
-
-    }
-
-
-
-    .card p {
-
-        font-size: 1rem;
-
-        color: #ddd;
-
-    }
-
-
-
-    footer {
-
-        background: rgba(0, 64, 128, 0.8);
-
-        padding: 20px;
-
-        margin-top: 30px;
-
-    }
-
-
-
-    .menu-flotante {
-
-        position: fixed;
-
-        bottom: 20px;
-
-        right: 20px;
-
-        z-index: 1000;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        gap: 10px;
-
-    }
-
-
-
-    .menu-flotante a {
-
-        display: block;
-
-        background: rgba(255, 165, 0, 0.7); /* Fondo de los botones */
-
-        padding: 15px;
-
-        border-radius: 50%; /* Botones redondeados */
-
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
-
-        transition: 0.3s ease-in-out;
-
-        width: 70px; /* Tamaño de los botones */
-
-        height: 70px;
-
-        justify-content: center;
-
-        align-items: center;
-
-    }
-
-
-
-    .menu-flotante a:hover {
-
-        background: rgba(255, 165, 0, 1);
-
-        transform: scale(1.1); /* Efecto de agrandamiento */
-
-    }
-
-
-
-    .menu-flotante img {
-
-        width: 35px;
-
-        height: 35px;
-
-    }
-
-
-
-    .menu-flotante .whatsapp {
-
-        background: #25D366;
-
-    }
-
-
-
-    .menu-flotante .llamadas {
-
-        background: #34b7f1;
-
-    }
-
-
-
-</style>
-
-</head><body><header>
-
-    <h1>REFRI INDUSTRIAL CYG SAS</h1>
-
-    <p>NIT: 901715160-8</p>
-
-    <p>Soluciones Integrales en Ingeniería y Tecnología</p>
-
-</header>
-
-
-
-<button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-<div class="menu" id="menu">
-
-    <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
-
-    <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
-
-    <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
-
-    <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
-
-    <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
-
-</div>
-
-
-
-<!-- Sección Quiénes Somos -->
-
-<section id="quienes-somos">
-
-    <h2>Quiénes Somos</h2>
-
-    <p>Somos una empresa especializada en soluciones de refrigeración industrial, ofreciendo un servicio confiable y adaptado a las necesidades de cada cliente.</p>
-
-</section>
-
-
-
-<!-- Sección Misión -->
-
-<section id="mision">
-
-    <h2>Misión</h2>
-
-    <p>Nos dedicamos a proporcionar soluciones de refrigeración de alta calidad, siempre buscando la innovación y el compromiso con la satisfacción de nuestros clientes.</p>
-
-</section>
-
-
-
-<!-- Sección Visión -->
-
-<section id="vision">
-
-    <h2>Visión</h2>
-
-    <p>Aspiramos a ser la empresa líder en el sector de la refrigeración industrial, reconocidos por nuestra innovación, calidad y el excelente servicio a nuestros clientes.</p>
-
-</section>
-
-
-
-<!-- Sección de Nuestros Servicios -->
-
-<section id="servicios">
-
-    <h2>Nuestros Servicios</h2>
-
-    <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseñamos, mantenemos y optimizamos sistemas de refrigeración industriales eficientes.</p></div>
-
-    <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Implementamos soluciones tecnológicas para optimizar los procesos industriales.</p></div>
-
-    <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Ofrecemos instalación y mantenimiento de sistemas de climatización industrial.</p></div>
-
-    <div class="card"><img src="congeladores.jpg" alt="Congeladores"><h3>Congeladores Industriales</h3><p>Proveemos soluciones avanzadas para la conservación de productos industriales.</p></div>
-
-    <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento"><h3>Mantenimiento Preventivo</h3><p>Realizamos mantenimiento preventivo para asegurar el correcto funcionamiento de los equipos.</p></div>
-
-    <div class="card"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseñamos y construimos cuartos fríos a medida para diversas aplicaciones industriales.</p></div>
-
-</section>
-
-
-
-<!-- Sección de Contacto -->
-
-<section id="contacto">
-
-    <h2>Contáctanos</h2>
-
-    <p>Teléfono: +57 3214133885-3174047208</p>
-
-    <p>Email: refrindustrialcyg@gmail.com</p>
-
-</section>
-
-
-
-<!-- Botones flotantes -->
-
-<div class="menu-flotante">
-
-    <a href="tel:+573214133885" class="llamadas">
-
-       <img src="telefono.png" alt="Llamar">
-
-    </a>
-
-    <a href="https://wa.me/573214133885" class="whatsapp" target="_blank">
-
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-
-    </a>
-
-</div>
-
-
-
-<script>
-
-    function toggleMenu() { 
-
-        var menu = document.getElementById('menu');
-
-        menu.classList.toggle('show');
-
-    }
-
-
-
-    function navigateTo(sectionId) {
-
-        document.querySelectorAll('section').forEach(function(section) {
-
-            section.classList.remove('active');
-
-        });
-
-
-
-        var section = document.getElementById(sectionId);
-
-        if (section) {
-
-            section.classList.add('active');
-
-            section.scrollIntoView({ behavior: 'smooth' });
-
+        /* 3. Estilo para el header */
+        header {
+            background: url('titulo.jpg') center/cover no-repeat;
+            padding: 80px 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            border-bottom: 4px solid #FFA500;
         }
 
-
-
-        var menu = document.getElementById('menu');
-
-        if (menu) {
-
-            menu.classList.remove('show');
-
+        /* 4. Estilo del título del header */
+        header h1 {
+            font-size: 3rem;
+            color: #FFA500;
+            text-transform: uppercase;
         }
 
-    }
+        /* 5. Estilo para los párrafos del header */
+        header p {
+            font-size: 1.4rem;
+            margin-top: 10px;
+            color: #FFD700;
+        }
 
+        /* 6. Estilo para el botón del menú */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            background: none;
+            border: none;
+            z-index: 1000;
+        }
 
+        /* 7. Estilo para el menú lateral */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: rgba(0, 51, 102, 0.95);
+            padding-top: 60px;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+        }
 
-    // Intersection Observer para el efecto de entrar en la vista
+        /* 8. Menú visible */
+        .menu.show {
+            left: 0;
+        }
 
-    const observer = new IntersectionObserver((entries, observer) => {
+        /* 9. Estilo para los enlaces del menú */
+        .menu a {
+            display: block;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
 
-        entries.forEach(entry => {
+        /* 10. Estilo de hover para los enlaces del menú */
+        .menu a:hover {
+            background: #FFA500;
+            color: black;
+        }
 
-            if (entry.isIntersecting) {
+        /* 11. Estilo para las secciones */
+        section {
+            display: none;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px auto;
+            width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
 
-                entry.target.classList.add('in-view');
+        /* 12. Estilo de las secciones activas */
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-            } else {
-
-                entry.target.classList.remove('in-view');
-
+        /* 13. Animación para el fade-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
             }
 
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 14. Estilo para los títulos de las secciones */
+        h2 {
+            font-size: 2rem;
+            color: #FFA500;
+            margin-bottom: 15px;
+        }
+
+        /* 15. Estilo de los servicios */
+        #servicios {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        /* 16. Título de los servicios */
+        #servicios h2 {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #FFA500;
+            z-index: 10;
+        }
+
+        /* 17. Estilo de las tarjetas de servicios */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        /* 18. Hover para las tarjetas */
+        .card:hover,
+        .card.in-view {
+            border: 2px solid #FFA500;
+            transform: scale(1.05);
+        }
+
+        /* 19. Estilo de las imágenes dentro de las tarjetas */
+        .card img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            max-height: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        /* 20. Hover para las imágenes */
+        .card img:hover {
+            transform: scale(1.05);
+        }
+
+        /* 21. Estilo para los títulos dentro de las tarjetas */
+        .card h3 {
+            font-size: 1.6rem;
+            color: #FFA500;
+            margin-top: 15px;
+        }
+
+        /* 22. Estilo para los párrafos dentro de las tarjetas */
+        .card p {
+            font-size: 1rem;
+            color: #ddd;
+        }
+
+        /* 23. Estilo para el footer */
+        footer {
+            background: rgba(0, 64, 128, 0.8);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        /* 24. Estilo para el menú flotante */
+        .menu-flotante {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 25. Estilo para los enlaces dentro del menú flotante */
+        .menu-flotante a {
+            display: block;
+            background: rgba(255, 165, 0, 0.7);
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: 0.3s ease-in-out;
+            width: 70px;
+            height: 70px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 26. Hover para los botones flotantes */
+        .menu-flotante a:hover {
+            background: rgba(255, 165, 0, 1);
+            transform: scale(1.1);
+        }
+
+        /* 27. Estilo de las imágenes dentro del menú flotante */
+        .menu-flotante img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* 28. Estilo específico para el botón de WhatsApp */
+        .menu-flotante .whatsapp {
+            background: #25D366;
+        }
+
+        /* 29. Estilo específico para el botón de llamadas */
+        .menu-flotante .llamadas {
+            background: #34b7f1;
+        }
+
+        /* 30. Estilo del tooltip */
+        .menu-flotante .llamadas {
+            position: relative;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* 31. Mostrar el tooltip al hacer hover */
+        .menu-flotante .llamadas:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- 32. Header con el título y descripción de la empresa -->
+    <header>
+        <h1>REFRI INDUSTRIAL CYG SAS</h1>
+        <p>NIT: 901715160-8</p>
+        <p>Soluciones Integrales en Ingeniería y Tecnología</p>
+    </header>
+
+    <!-- 33. Botón de menú -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <!-- 34. Menú lateral -->
+    <div class="menu" id="menu">
+        <a href="javascript:void(0);" onclick="navigateTo('quienes-somos')">Quiénes Somos</a>
+        <a href="javascript:void(0);" onclick="navigateTo('mision')">Misión</a>
+        <a href="javascript:void(0);" onclick="navigateTo('vision')">Visión</a>
+        <a href="javascript:void(0);" onclick="navigateTo('servicios')">Nuestros Servicios</a>
+        <a href="javascript:void(0);" onclick="navigateTo('contacto')">Contáctanos</a>
+    </div>
+
+    <!-- 35. Secciones de la página (Quiénes Somos, Misión, Visión, etc.) -->
+    <section id="quienes-somos">
+        <h2>Quiénes Somos</h2>
+        <p>Somos una empresa especializada en soluciones de refrigeración industrial, ofreciendo un servicio confiable y adaptado a las necesidades de cada cliente.</p>
+    </section>
+
+    <section id="mision">
+        <h2>Misión</h2>
+        <p>Nos dedicamos a proporcionar soluciones de refrigeración de alta calidad, siempre buscando la innovación y el compromiso con la satisfacción de nuestros clientes.</p>
+    </section>
+
+    <section id="vision">
+        <h2>Visión</h2>
+        <p>Aspiramos a ser la empresa líder en el sector de la refrigeración industrial, reconocidos por nuestra innovación, calidad y el excelente servicio a nuestros clientes.</p>
+    </section>
+
+    <!-- 36. Sección de nuestros servicios -->
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="card"><img src="rack.jpg" alt="Sistemas Rack"><h3>Sistemas Rack</h3><p>Diseñamos, mantenemos y optimizamos sistemas de refrigeración industriales eficientes.</p></div>
+        <div class="card"><img src="automatizacion.jpg" alt="Automatización"><h3>Automatización</h3><p>Implementamos soluciones tecnológicas para optimizar los procesos industriales.</p></div>
+        <div class="card"><img src="aires-acondicionados.jpg" alt="Aires Acondicionados"><h3>Aires Acondicionados</h3><p>Ofrecemos instalación y mantenimiento de sistemas de climatización industrial.</p></div>
+        <div class="card"><img src="congeladores.jpg" alt="Congeladores"><h3>Congeladores Industriales</h3><p>Proveemos soluciones avanzadas para la conservación de productos industriales.</p></div>
+        <div class="card"><img src="mantenimiento.jpg" alt="Mantenimiento"><h3>Mantenimiento Preventivo</h3><p>Realizamos mantenimiento preventivo para asegurar el correcto funcionamiento de los equipos.</p></div>
+        <div class="card"><img src="cuartosfrios.jpg" alt="Cuartos Fríos"><h3>Cuartos Fríos</h3><p>Diseñamos y construimos cuartos fríos a medida para diversas aplicaciones industriales.</p></div>
+    </section>
+
+    <!-- 37. Sección de contacto -->
+    <section id="contacto">
+        <h2>Contáctanos</h2>
+        <p>Teléfono: +57 3214133885-3174047208</p>
+        <p>Email: refrindustrialcyg@gmail.com</p>
+    </section>
+
+    <!-- 38. Menú flotante con iconos de llamada y WhatsApp -->
+    <div class="menu-flotante">
+        <a href="tel:+573214133885" class="llamadas">
+            <img src="telefono.png" alt="Llamar">
+            <span class="tooltip">Llámanos</span> <!-- Texto emergente -->
+        </a>
+        <a href="https://wa.me/573214133885" class="whatsapp" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        </a>
+    </div>
+
+    <script>
+        /* 39. Función para mostrar y ocultar el menú */
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('show');
+        }
+
+        /* 40. Función para navegar a las secciones */
+        function navigateTo(sectionId) {
+            document.querySelectorAll('section').forEach(function (section) {
+                section.classList.remove('active');
+            });
+
+            var section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            var menu = document.getElementById('menu');
+            if (menu) {
+                menu.classList.remove('show');
+            }
+        }
+
+        /* 41. Intersection Observer para el efecto de entrar en la vista */
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
         });
+    </script>
 
-    }, { threshold: 0.5 });
+</body>
 
-
-
-    document.querySelectorAll('.card').forEach(card => {
-
-        observer.observe(card);
-
-    });
-
-</script>
-
-</body></html>
-
-        
+</html>
